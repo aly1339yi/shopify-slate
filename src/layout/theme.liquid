@@ -10,7 +10,7 @@
         <link rel="canonical" href="{{ canonical_url }}" />
 
         {% if settings.favicon != blank %}
-        <link rel="icon" href="{{ settings.favicon | img_url: '64x' }}">
+        <link rel="icon" href="{{ settings.favicon | img_url: '180x' }}">
         {% endif %}
 
         {% capture seo_title %}
@@ -46,9 +46,12 @@
     </head>
 
 
+    {% capture body_class %}
+        template-{{ template | handle }}  template-name-{{ template.name | handle }} {% if template.suffix %} template-suffix-{{ template.suffix | handle }}{% endif %}
+    {% endcapture %}
 
-    <body >
 
+    <body class="{{ body_class }}">
 
         {% include 'header' %}
 

@@ -12,9 +12,16 @@ body {
 	// }
 
 
+  @include screen('small-medium'){
+    color: red;
+  }
+
+  
 }
 
 
 .main {
 
 }
+
+

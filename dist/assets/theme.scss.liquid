@@ -738,7 +738,6 @@ $palette-black: #000000;
 $palette-white: #ffffff;
 
 
-
 $color: (
 
     'primary' $palette-purple,
@@ -760,18 +759,41 @@ $font-size: (
     null
 );
 
-$breakpoint: (
 
-    'small' 768px,
 
-    'medium' 992px,
+$breakpoint-small: 576px;
+$breakpoint-medium: 768px;
+$breakpoint-large: 992px;
+$breakpoint-extra-large: 1200px;
+$breakpoint-nav: 576px;
 
-    'large' 1200px,
 
-    'nav' 768px,
+$range: (
+
+    'small-down' '(max-width: #{$breakpoint-small - 1})',
+    'small-up' '(min-width: #{$breakpoint-small})',
+    'medium-down' '(max-width: #{$breakpoint-medium - 1})',
+    'medium-up' '(min-width: #{$breakpoint-medium})',
+    'large-down' '(max-width: #{$breakpoint-large - 1})',
+    'large-up' '(min-width: #{$breakpoint-large})',
+    'extra-large-down' '(max-width: #{$breakpoint-extra-large - 1})',
+    'extra-large-up' '(min-width: #{$breakpoint-extra-large})', 
+
+    'small-medium' '(min-width: #{$breakpoint-small}) and (max-width: #{$breakpoint-medium - 1})',
+    'medium-large' '(min-width: #{$breakpoint-medium}) and (max-width: #{$breakpoint-large - 1})',
+    'large-extra-large' '(min-width: #{$breakpoint-large}) and (max-width: #{$breakpoint-extra-large - 1})'
 
     null
 
+
+);
+
+
+$grid-gutter: (
+
+    'normal' 30px,
+
+    null
 );
 
 
@@ -833,33 +855,43 @@ $navbar-nav-height: (
   }
 }
 
-// MEDIA QUERY max-width
-@mixin mq-lt($width) {
-   @if type-of($width) == number{
-    @media(max-width: $width - 1) {
-       @content;
-    }
-  }
-  @else {
-     @media(max-width: list-get($breakpoint, $width) - 1){
-      @content;
-    }
+// // MEDIA QUERY max-width
+// @mixin mq-lt($width) {
+//    @if type-of($width) == number{
+//     @media only screen and (max-width: $width - 1) {
+//        @content;
+//     }
+//   }
+//   @else {
+//      @media only screen and (max-width: list-get($breakpoint, $width) - 1){
+//       @content;
+//     }
+//   }
+// }
+
+// // MEDIA QUERY min-width
+// @mixin mq-gteq($width) {
+//    @if type-of($width) == number{
+//     @media only screen and (min-width: $width ) {
+//        @content;
+//     }
+//   }
+//   @else {
+//      @media only screen and (min-width: list-get($breakpoint, $width)){
+//       @content;
+//     }
+//   }
+// }
+
+
+@mixin screen($keyword) {
+  @media only screen and #{list-get($range, $keyword)}{
+    @content;
   }
 }
 
-// MEDIA QUERY min-width
-@mixin mq-gteq($width) {
-   @if type-of($width) == number{
-    @media(min-width: $width ) {
-       @content;
-    }
-  }
-  @else {
-     @media(min-width: list-get($breakpoint, $width)){
-      @content;
-    }
-  }
-}
+
+
 
 // VENDOR PREFIX
 @mixin css3-prefix($property, $value) {
@@ -969,29 +1001,29 @@ $navbar-nav-height: (
   text-overflow: ellipsis;
 }
 
-.shown-small {
-  @include mq-gteq(small) {
-    display: none !important;
-  }
-}
+// .shown-small {
+//   @include mq-gteq(small) {
+//     display: none !important;
+//   }
+// }
 
-.shown-medium {
-  @include mq-gteq(medium) {
-    display: none !important;
-  }
-}
+// .shown-medium {
+//   @include mq-gteq(medium) {
+//     display: none !important;
+//   }
+// }
 
-.hidden-small {
-  @include mq-lt(small) {
-    display: none !important;
-  }
-}
+// .hidden-small {
+//   @include mq-lt(small) {
+//     display: none !important;
+//   }
+// }
 
-.hidden-medium {
-  @include mq-lt(medium) {
-    display: none !important;
-  }
-}
+// .hidden-medium {
+//   @include mq-lt(medium) {
+//     display: none !important;
+//   }
+// }
 
 .clearfix:after {
   content: " ";
@@ -1680,12 +1712,20 @@ body {
 	// }
 
 
+  @include screen('small-medium'){
+    color: red;
+  }
+
+  
 }
 
 
 .main {
 
 }
+
+
+
 
 
 

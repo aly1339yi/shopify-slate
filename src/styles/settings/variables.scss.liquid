@@ -10,7 +10,6 @@ $palette-black: #000000;
 $palette-white: #ffffff;
 
 
-
 $color: (
 
     'primary' $palette-purple,
@@ -32,18 +31,41 @@ $font-size: (
     null
 );
 
-$breakpoint: (
 
-    'small' 768px,
 
-    'medium' 992px,
+$breakpoint-small: 576px;
+$breakpoint-medium: 768px;
+$breakpoint-large: 992px;
+$breakpoint-extra-large: 1200px;
+$breakpoint-nav: 576px;
 
-    'large' 1200px,
 
-    'nav' 768px,
+$range: (
+
+    'small-down' '(max-width: #{$breakpoint-small - 1})',
+    'small-up' '(min-width: #{$breakpoint-small})',
+    'medium-down' '(max-width: #{$breakpoint-medium - 1})',
+    'medium-up' '(min-width: #{$breakpoint-medium})',
+    'large-down' '(max-width: #{$breakpoint-large - 1})',
+    'large-up' '(min-width: #{$breakpoint-large})',
+    'extra-large-down' '(max-width: #{$breakpoint-extra-large - 1})',
+    'extra-large-up' '(min-width: #{$breakpoint-extra-large})', 
+
+    'small-medium' '(min-width: #{$breakpoint-small}) and (max-width: #{$breakpoint-medium - 1})',
+    'medium-large' '(min-width: #{$breakpoint-medium}) and (max-width: #{$breakpoint-large - 1})',
+    'large-extra-large' '(min-width: #{$breakpoint-large}) and (max-width: #{$breakpoint-extra-large - 1})'
 
     null
 
+
+);
+
+
+$grid-gutter: (
+
+    'normal' 30px,
+
+    null
 );
 
 

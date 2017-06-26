@@ -13,33 +13,43 @@
   }
 }
 
-// MEDIA QUERY max-width
-@mixin mq-lt($width) {
-   @if type-of($width) == number{
-    @media(max-width: $width - 1) {
-       @content;
-    }
-  }
-  @else {
-     @media(max-width: list-get($breakpoint, $width) - 1){
-      @content;
-    }
+// // MEDIA QUERY max-width
+// @mixin mq-lt($width) {
+//    @if type-of($width) == number{
+//     @media only screen and (max-width: $width - 1) {
+//        @content;
+//     }
+//   }
+//   @else {
+//      @media only screen and (max-width: list-get($breakpoint, $width) - 1){
+//       @content;
+//     }
+//   }
+// }
+
+// // MEDIA QUERY min-width
+// @mixin mq-gteq($width) {
+//    @if type-of($width) == number{
+//     @media only screen and (min-width: $width ) {
+//        @content;
+//     }
+//   }
+//   @else {
+//      @media only screen and (min-width: list-get($breakpoint, $width)){
+//       @content;
+//     }
+//   }
+// }
+
+
+@mixin screen($keyword) {
+  @media only screen and #{list-get($range, $keyword)}{
+    @content;
   }
 }
 
-// MEDIA QUERY min-width
-@mixin mq-gteq($width) {
-   @if type-of($width) == number{
-    @media(min-width: $width ) {
-       @content;
-    }
-  }
-  @else {
-     @media(min-width: list-get($breakpoint, $width)){
-      @content;
-    }
-  }
-}
+
+
 
 // VENDOR PREFIX
 @mixin css3-prefix($property, $value) {
