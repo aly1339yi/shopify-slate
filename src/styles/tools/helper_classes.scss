@@ -1,0 +1,86 @@
+.shown-small {
+  @include mq-gteq(small) {
+    display: none !important;
+  }
+}
+
+.shown-medium {
+  @include mq-gteq(medium) {
+    display: none !important;
+  }
+}
+
+.hidden-small {
+  @include mq-lt(small) {
+    display: none !important;
+  }
+}
+
+.hidden-medium {
+  @include mq-lt(medium) {
+    display: none !important;
+  }
+}
+
+.clearfix:after {
+  content: " ";
+  display: block;
+  clear: both;
+}
+
+.hidden-before-images-ready {
+  opacity: 0;
+}
+
+.img-fullwidth {
+  display: block;
+  width: 100%;
+}
+
+.block-fullwidth {
+  display: block;
+  width: 100%;
+}
+
+.media-centered-cover {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  /* The following will size the video to fit the full container. Not necessary, just nice.*/
+  min-width: 101%;
+  min-height: 101%;
+  @include transform(translate(-50%,-50%));
+}
+
+.height-100vh {
+  height: 100vh;
+}
+
+.text-nowrap-ellipsis {
+  @include text-nowrap-ellipsis;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.display-table {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+.display-table-cell {
+  display: table-cell;
+  width: 100%;
+  height: 100%;
+  vertical-align: middle;
+}

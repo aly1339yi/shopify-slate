@@ -1,0 +1,88 @@
+<footer class="footer">
+
+	<div class="footer-image-wrapper">
+
+		{% if template.name == 'index' %}
+			<img src="{{ 'footer_home.png' | asset_url }}" class="img-fullwidth">
+
+		{% elsif template.name == 'collection' or template.name == 'product' %}
+			<img src="{{ 'footer_shop.png' | asset_url }}" class="img-fullwidth">
+
+		{% elsif template.name == 'page' %}
+
+			{% if template.suffix == 'about' %}
+				<img src="{{ 'footer_static.png' | asset_url }}" class="img-fullwidth">
+			{% else %}
+				<img src="{{ 'footer_static.png' | asset_url }}" class="img-fullwidth">
+			{% endif %}
+
+		{% elsif template.name == 'cart' %}
+			<img src="{{ 'footer_bag.png' | asset_url }}" class="img-fullwidth">
+		{% else %}
+			<img src="{{ 'footer_home.png' | asset_url }}" class="img-fullwidth">
+		{% endif %}
+
+	</div>
+
+
+
+
+
+	<div class="footer-cols-wrapper">
+
+
+		<div class="footer-col">
+
+			<div class="footer-subscribe">
+
+				<form action="//morgan-lane.us7.list-manage.com/subscribe/post-json?u=b7c6060aff1a3eac45fbd3933&amp;id=0b1d546d9e" autocomplete="off" method="post" name="mc-embedded-subscribe-form" class="subscribe-form footer-subscribe-form clearfix" novalidate>
+					<div class="subscribe-fields-wrapper clearfix">
+						<input type="email" placeholder="Subscribe to the newsletter" name="EMAIL">
+						<button type="submit" value="subscribe" name="subscribe" class="subscribe-form-subscribe"></button>
+					</div>
+					<div class="mc-response-wrapper">
+						<div class="mc-response"></div>
+					</div>
+				</form>
+
+			</div>
+
+		</div>
+
+
+		<div class="footer-col">
+
+			<ul class="footer-nav-list clearfix">
+
+				<!-- <li><a href="/blogs/press">Press</a></li> -->
+				<li><a href="/pages/return-policy">Return Policy</a></li>
+				<li><a href="/pages/contact-2017">Contact</a></li>
+				<li><a href="/pages/terms-and-condition">Terms and Conditions</a></li>
+				<li><a href="/pages/stockists-2017">Stockists</a></li>
+
+			</ul>
+
+		</div>
+
+
+		<div class="footer-col">
+
+			<ul class="footer-social-list social-list clearfix">
+
+				<li><a href="https://instagram.com/morgan_lane" target="_blank">&#xe100;</a></li>
+				<li><a href="https://www.facebook.com/MorganLaneNY" target="_blank">&#xe027;</a></li>
+				<li><a href="https://twitter.com/Morgan_LaneNY" target="_blank">&#xe086;</a></li>
+				<li><a href="https://pinterest.com/MorganLaneNY/morgan-lane" target="_blank">&#xe064;</a></li>
+
+			</ul>
+
+		</div>
+
+
+
+
+
+	</div>
+
+
+</footer>

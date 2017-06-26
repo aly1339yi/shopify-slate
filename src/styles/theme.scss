@@ -1,0 +1,42 @@
+@import url('vendor/royalslider.css');
+@import url('vendor/rs-default.css');
+
+
+@import url('settings/variables.scss.liquid');
+
+@import url('tools/mixins.scss');
+@import url('tools/helper_classes.scss');
+
+
+@import url('global/normalize.scss');
+@import url('global/base.scss');
+
+
+@import url('_components/layout.scss');
+@import url('_components/header.scss');
+@import url('_components/footer.scss');
+@import url('_components/minicart.scss');
+@import url('_components/grid.scss');
+@import url('_components/popup.scss');
+@import url('_components/slider-carousel.scss');
+@import url('_components/btn.scss');
+@import url('_components/dropdown.scss');
+@import url('_components/rte.scss');
+@import url('_components/social-list.scss');
+@import url('_components/table.scss');
+@import url('_components/other.scss');
+
+
+
+@import url('_templates/_index.scss');
+@import url('_templates/_collection.scss');
+@import url('_templates/_prodcut.scss');
+@import url('_templates/list-collections.scss');
+@import url('_templates/cart.scss');
+@import url('_templates/page.scss');
+@import url('_templates/search.scss');
+@import url('_templates/blog.scss');
+@import url('_templates/article.scss');
+@import url('_templates/customers.scss');
+
+

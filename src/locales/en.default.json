@@ -1,0 +1,79 @@
+{
+  "cart": {
+    "item_count_html": "You have <span class=js-cart-count>{{ count }}<\/span> items in your bag.",
+    "sub_total": "Subtotal:",
+    "checkout": "Checkout",
+    "continue_shopping": "Continue Shopping",
+    "continue_shopping_link": "\/collections\/all",
+    "gift_note": "Add a message",
+    "empty": "Your Bag is Empty"
+  },
+  "list_collections": {
+    "product_count": "{{ count }} products"
+  },
+  "breadcrumbs": {
+    "home": "Home",
+    "search": "Search",
+    "signin": "Sign In",
+    "signup": "Sign Up",
+    "account": "Account"
+  },
+  "collection": {
+    "empty_collection": "There are no products in this collection.",
+    "empty_collection_cta": "Shop all products",
+    "empty_collection_cta_link": "\/",
+    "sort": "Sort by",
+    "remove_all_filters": "Remove all filters",
+    "no_filter_results_html": "No products matched your selection.<br>Try removing some filters."
+  },
+  "pagination": {
+    "load_more": "Load more"
+  },
+  "product": {
+    "quantity": "Quantity",
+    "add_to_cart": "Add to bag",
+    "sold_out": "Sold Out",
+    "variant_sold_out": "Option Sold Out",
+    "select_options": "Select {{ option }}",
+    "related_products": "You May Also Like"
+  },
+  "newsletter": {
+    "title": "Get updates from us",
+    "email_placeholder": "Your Email",
+    "subscribe": "Join"
+  },
+  "article": {
+    "back": "Back"
+  },
+  "accounts": {
+    "email_field": "Your Email",
+    "password_field": "Password",
+    "sign_in_button": "Sign In",
+    "sign_in_title": "Please Sign In",
+    "forgot_password": "Forgot password?",
+    "sign_up_title": "Register",
+    "sign_up_button": "Create Account",
+    "first_name_field": "Your First Name",
+    "last_name_field": "Your Last Name",
+    "create_password_field": "Create a password",
+    "continue_as_guest": "Continue as guest",
+    "reset_password_title": "Reset Password",
+    "reset_password_button": "Reset Password",
+    "password_reset_success": "A reset email has been sent.",
+    "shop_now": "Shop Now",
+    "shop_now_link": "\/",
+    "sign_out": "Sign Out"
+  },
+  "search": {
+    "page_title": "Search",
+    "input_placeholder": "Search",
+    "title_html": "Search <span class='text--m'>({{ count }})",
+    "no_results": "No results for '{{ terms }}' ",
+    "search_submit": "Search"
+  },
+  "404": {
+    "title": "Page not found",
+    "go_back": "Return Home",
+    "go_back_url": "\/"
+  }
+}

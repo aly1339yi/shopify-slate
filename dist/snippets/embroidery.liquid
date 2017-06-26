@@ -1,0 +1,260 @@
+<div class="embroidery">
+
+    <div class="embroidery-remove"></div>
+
+    <div class="embroidery-text-input-wrapper embroidery-option">
+        <div class="embroidery-option-name">Custom Embroidery:</div>
+        <input type="text" maxlength="12" placeholder="Your Text Here" data-text-default="Morgan" class="embroidery-text-input">
+    </div>
+
+    <div class="embroidery-drawer">
+
+        <div class="embroidery-option embroidery-font-option clearfix">
+            <div class="embroidery-option-name">Font:</div>
+
+            <div class="embroidery-option-values-wrapper embroidery-font-option-values-wrapper clearfix">
+                <div class="embroidery-option-value embroidery-font-option-value" rv-each-option="embroideryFontOptions.options" rv-data-option-value="option.font_name" rv-data-font-family="option.font_family" rv-class-selected="index | eq 0">
+                    <div class="embroidery-font-option-value-icon" rv-style-background-image="option.font_icon_1"></div>
+                    <div class="embroidery-font-option-value-icon" rv-style-background-image="option.font_icon_2"></div>
+                    <div class="embroidery-font-option-value-preview" rv-style-background-image="option.font_preview"></div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="embroidery-option embroidery-color-option">
+
+            <div class="embroidery-option-name">Text Color:</div>
+
+            <div class="embroidery-color-option-dropdown dropdown">
+                <div class="dropdown-selected-value dropdown-header dropdown-color-me" rv-text="embroideryColorOptions.default.color_name"></div>
+                <div class="dropdown-menu dropdown-color-me embroidery-option-values-wrapper embroidery-color-option-values-wrapper clearfix">
+                    <div class="dropdown-value embroidery-option-value embroidery-color-option-value js-color-the-dropdown" rv-each-option="embroideryColorOptions.options" rv-data-option-value="option.color_name" rv-data-color-hex="option.color_hex" rv-text="option.color_name" rv-class-selected="index | eq 0"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+{% comment %}
+
+
+		<div class="embroidery-notice">Custom text will appear on one line.</div>{% endcomment %}
+
+</div>
+
+<script type="text/javascript">
+
+
+   $('.mobile-product-gallery').waitForImages(function() {
+       var mpgData = $('.mobile-product-gallery').royalSlider({
+
+           loop: true,
+           autoHeight:true,
+           arrowsNav: false
+
+       }).data('royalSlider');
+   });
+
+    //Has Embroidery Checkbox
+    var hasEmbroidery = false;
+
+   //  $('.embroidery-drawer').on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd',function(event){
+   //      $(this).addClass('open');
+   //      $(this).off('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd');
+   //  });
+
+
+    $(document).on('click', '.embroidery-text-input', function(){
+
+        if(hasEmbroidery === false){
+
+            hasEmbroidery = true;
+
+            $('body').addClass('embroidery-active');
+
+            setTimeout(function(){
+               $('.embroidery-drawer').addClass('open');
+            }, 200);
+
+            $(this).val($(this).data('text-default')).trigger('keyup');
+
+        }
+
+
+        if($('.desktop-product-gallery-wrapper').is(':visible')){
+            var offset = $('.desktop-product-gallery-image-wrapper:last-child').offset().top - $('.desktop-navbar').outerHeight();
+            $('body').animate({ scrollTop: offset }, 600,'easeOutCubic',function(){
+            });
+        }
+
+        if($('.mobile-product-gallery-wrapper').is(':visible')){
+            mpgData.goTo(mpgData.numSlides - 1);
+        }
+
+
+    });
+
+
+
+    $(document).on('click', '.embroidery-remove', function(){
+
+        hasEmbroidery = false;
+
+        $('.embroidery-text-input').val('').trigger('keyup');
+
+        $('.embroidery-option-value:first-child').trigger('click');
+
+        $('.embroidery-color-option-dropdown').removeClass('open');
+
+        $('body').removeClass('embroidery-active');
+
+        $('.embroidery-drawer').removeClass('open');
+
+
+        if($('.desktop-product-gallery-wrapper').is(':visible') && $('html.mod-no-mobile').length){
+            $('body').animate({ scrollTop: 0 }, 600,'easeOutCubic');
+        }
+
+
+        if($('.mobile-product-gallery-wrapper').is(':visible')){
+            mpgData.goTo(0);
+        }
+
+
+    });
+
+
+
+
+
+    //Embroidery Text Input
+    var embroideryTextValue = $('.embroidery-text-input').val();
+
+    $(document).on('keyup', '.embroidery-text-input', function(){
+        embroideryTextValue = $(this).val();
+        $('.embroidery-preview').text( embroideryTextValue );
+    });
+
+
+
+    //Embroidery Position Option
+    var embroideryFontOptions = {
+        options:[
+                    {
+                        font_name:'Script 1',
+                        font_family: 'JasonVandenbergFourthLight',
+                        font_icon_1: 'url({{ 'script-1.png' | asset_url }})',
+                        font_icon_2: 'url({{ 'script-1-pink.png' | asset_url }})',
+                        font_preview: 'url({{ 'font_preview_script_1.jpg' | asset_url }})'
+                    },
+                    {
+                        font_name:'Karin',
+                        font_family: 'ChaparralProLight_10158',
+                        font_icon_1: 'url({{ 'Chaparral-pro-light.png' | asset_url }})',
+                        font_icon_2: 'url({{ 'Chaparral-pro-light-pink.png' | asset_url }})',
+                        font_preview: 'url({{ 'font_preview_karin.jpg' | asset_url }})'
+                    },
+                    {
+                        font_name:'Serif 3',
+                        font_family: 'BKANT',
+                        font_icon_1: 'url({{ 'Book-Antiqua.png' | asset_url }})',
+                        font_icon_2: 'url({{ 'book-antiqua-pink.png' | asset_url }})',
+                        font_preview: 'url({{ 'font_preview_serif_3.jpg' | asset_url }})'
+                    },
+                    {
+                        font_name:'Easy Script',
+                        font_family: 'Lucida Handwrit',
+                        font_icon_1: 'url({{ 'Lucinda-Handwriting.png' | asset_url }})',
+                        font_icon_2: 'url({{ 'Lucinda-Handwriting-pink.png' | asset_url }})',
+                        font_preview: 'url({{ 'font_preview_easy_script.jpg' | asset_url }})'
+                    },
+                ]
+    }
+
+    rivets.bind($('.embroidery-font-option'), {embroideryFontOptions: embroideryFontOptions});
+    var embroideryFontValue = $('.embroidery-font-option-value.selected').data('option-value');
+
+    $(document).on('click', '.embroidery-font-option-value', function(){
+
+        $(this).addClass('selected').siblings().removeClass('selected');
+
+        embroideryFontValue = $(this).data('option-value');
+
+        $('.embroidery-preview').css('font-family', $(this).data('font-family'));
+
+    });
+
+
+
+    //Embroidery Color Option
+    var embroideryColorOptions = {
+        options:[
+                    {
+                        color_name:'Pink',
+                        color_hex: '#ff8aa1'
+                    },
+                    {
+                        color_name:'Red',
+                        color_hex: '#f60109'
+                    },
+
+                    {
+                        color_name:'Grey',
+                        color_hex: '#C6C6C6'
+                    },
+                    {
+                        color_name:'White',
+                        color_hex: '#FFFFFF'
+                    },
+                    {
+                        color_name:'Blue',
+                        color_hex: '#00264b'
+                    },
+                    {
+                        color_name:'Black',
+                        color_hex: '#000000'
+                    },
+
+                ],
+
+        default:{
+            color_name:'Pink',
+            color_hex: '#ff8aa1'
+        }
+    }
+
+    rivets.bind($('.embroidery-color-option'), {embroideryColorOptions: embroideryColorOptions});
+    var embroideryColorValue = $('.embroidery-color-option-value:first-child').data('option-value');
+
+
+    $(document).on('click', '.embroidery-color-option-value', function(){
+
+      // dropdown close
+      $(this).parents('.embroidery-color-option-dropdown ').removeClass('open');
+      // BKG reset
+      $('.embroidery-color-option-dropdown >div').css('background-color', 'white');
+
+      embroideryColorValue = $(this).data('option-value');
+      $(this).addClass('selected').siblings().removeClass('selected');
+      $('.embroidery-color-option-dropdown .dropdown-selected-value').text($(this).data('option-value'));
+      $('.embroidery-preview').css('color', $(this).data('color-hex'));
+    });
+
+
+
+    $('.embroidery-color-option-dropdown .dropdown-selected-value').click(function() {
+      $(this).parent().toggleClass('open');
+    });
+
+
+
+
+
+
+
+
+
+</script>

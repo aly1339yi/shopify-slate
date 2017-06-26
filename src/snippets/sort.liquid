@@ -1,0 +1,42 @@
+<!-- <div class="collection-sort single-dropdown dropdown">
+	<div class="collection-sort-toggle single-dropdown__toggle dropdown__toggle">sort by</div>
+	<ul class="collection-sort-menu single-dropdown__menu dropdown__menu">
+		<li><a href="{{collection.url}}/?sort_by=price-descending">price high to low</a></li>
+		<li><a href="{{collection.url}}/?sort_by=price-ascending">price low to high</a></li>
+		<li><a href="{{collection.url}}/?best-selling">best sellers</a></li>
+		<li><a href="{{collection.url}}/?sort_by=created-descending">newest</a></li>
+	</ul>
+</div>
+ -->
+
+
+<div>
+  <label for="sort-by">Sort by</label> 
+  <select id="sort-by" class="collection-sort">
+    <option value="manual">Featured</option>
+    <option value="price-ascending">Price: Low to High</option>
+    <option value="price-descending">Price: High to Low</option>
+    <option value="title-ascending">A-Z</option>
+    <option value="title-descending">Z-A</option>
+    <option value="created-ascending">Oldest to Newest</option>
+    <option value="created-descending">Newest to Oldest</option>
+    <option value="best-selling">Best Selling</option>
+  </select>
+</div>
+<script>
+Shopify.queryParams = {};
+if (location.search.length) {
+  for (var aKeyValue, i = 0, aCouples = location.search.substr(1).split('&'); i < aCouples.length; i++) {
+    aKeyValue = aCouples[i].split('=');
+    if (aKeyValue.length > 1) {
+      Shopify.queryParams[decodeURIComponent(aKeyValue[0])] = decodeURIComponent(aKeyValue[1]);
+    }
+  }
+}
+jQuery('#sort-by')
+  .val('{{ collection.sort_by | default: collection.default_sort_by | escape }}')
+  .bind('change', function() {
+    Shopify.queryParams.sort_by = jQuery(this).val();
+    location.search = jQuery.param(Shopify.queryParams).replace(/\+/g, '%20');
+  });
+</script>

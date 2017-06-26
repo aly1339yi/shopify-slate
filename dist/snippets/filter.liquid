@@ -1,0 +1,153 @@
+{% comment %}
+{% if current_tags %}
+<div class="collection-filter-wrapper">
+	<a href="{{collection.url}}" class="reset-filter">reset</a>
+</div>
+{% endif %}
+{% endcomment %}
+
+<!-- color filter -->
+{% comment %}
+{% assign collection_has_color_tag = false %}
+{% for tag in collection.all_tags %}
+	{% if tag contains 'color-' %}
+		{% assign collection_has_color_tag = true %}
+	{%break%}
+	{% endif %}
+{% endfor %}
+
+
+{% if collection_has_color_tag %}
+
+<div class="collection-filter-wrapper collection-color-filter-wrapper dropdown js-dropdown-hover">
+	<div class="collection-filter-header dropdown-header js-dropdown-header-click">color</div>
+	<ul class="collection-filter-menu dropdown-menu dropdown-color-me clearfix">
+
+		{% assign current_has_color_tag = false %}
+		{% for tag in current_tags %}
+			{% if tag contains 'color-' %}
+				{% assign current_has_color_tag = true %}
+			{%break%}
+			{% endif %}
+		{% endfor %}
+
+	    {% for tag in collection.all_tags %}
+			{% if tag contains 'color-' %}
+			{% assign tag_array = tag | split: '-' %}
+			{% assign color_name = tag_array[1] %}
+			{% assign color_hex = tag_array[2] %}
+			{% if current_tags contains tag %}
+			<li class="active js-color-the-dropdown" data-color-hex="{{color_hex}}">
+			  {{ color_name | link_to_remove_tag: tag }}
+			</li>
+			{% else %}
+				{% if current_has_color_tag %}
+					<li class="js-color-the-dropdown" data-color-hex="{{color_hex}}">
+					{{ color_name | link_to_tag: tag }}
+					</li>
+				{% else %}
+					<li class="js-color-the-dropdown" data-color-hex="{{color_hex}}">
+					{{ color_name | link_to_add_tag: tag }}
+					</li>
+				{% endif %}
+			{% endif %}
+	    {% endif %}
+	    {% endfor %}
+	</ul>
+
+</div>
+
+{% endif %}
+{% endcomment %}
+<!-- end color filter -->
+
+
+<!-- size filter -->
+
+
+{% assign collection_has_size_tag = false %}
+{% for tag in collection.all_tags %}
+	{% if tag contains 'size-' %}
+		{% assign collection_has_size_tag = true %}
+	{%break%}
+	{% endif %}
+{% endfor %}
+
+{% if collection_has_size_tag %}
+
+<div class="collection-filter-wrapper collection-size-filter-wrapper dropdown js-dropdown-hover">
+	<div class="collection-filter-header dropdown-header js-dropdown-header-click">size</div>
+	<ul class="collection-filter-menu dropdown-menu clearfix">
+
+		{% assign current_has_size_tag = true %}
+		{% for tag in current_tags %}
+			{% if tag contains 'size-' %}
+				{% assign current_has_size_tag = true %}
+			{%break%}
+			{% endif %}
+		{% endfor %}
+
+	    {% for tag in collection.all_tags %}
+			{% if tag contains 'size-' %}
+			{% if current_tags contains tag %}
+			<li class="active {{tag}}">
+			  {{ tag | remove: "size-" | replace: '-', ' ' | link_to_remove_tag: tag }}
+			</li>
+			{% else %}
+				{% if current_has_size_tag %}
+					<li class="{{tag}}">
+					{{ tag | remove: "size-" | replace: '-', ' ' | link_to_tag: tag }}
+					</li>
+				{% else %}
+					<li class="{{tag}}">
+					{{ tag | remove: "size-" | replace: '-', ' ' | link_to_add_tag: tag }}
+					</li>
+				{% endif %}
+			{% endif %}
+	    {% endif %}
+	    {% endfor %}
+	</ul>
+
+</div>
+
+{% endif %}
+
+<!-- end size filter -->
+
+
+<!-- sort -->
+
+<div class="collection-filter-wrapper dropdown js-dropdown-hover">
+	<div class="collection-filter-header dropdown-header js-dropdown-header-click">sort by</div>
+	<ul class="collection-filter-menu dropdown-menu clearfix">
+		<li><a href="{{collection.url}}/?sort_by=created-descending">New Arrivals</a></li>
+		<li><a href="{{collection.url}}/?sort_by=best-selling">Best Sellers</a></li>
+		<li><a href="{{collection.url}}/?sort_by=price-descending">Price High to Low</a></li>
+		<li><a href="{{collection.url}}/?sort_by=price-ascending">Price Low to High</a></li>
+	</ul>
+</div>
+
+<!-- end sort -->
+
+
+
+
+
+{% if current_tags %}
+
+
+<ul class="collection-current-tags-wrapper clearfix">
+
+	{% for tag in current_tags %}
+	{% assign tag_array = tag | split: '-' %}
+	{% assign tag_name = tag_array[1] %}
+	<li>
+		{{ tag_name | link_to_remove_tag: tag }}
+	</li>
+
+	{% endfor %}
+
+</ul>
+
+
+{% endif %}

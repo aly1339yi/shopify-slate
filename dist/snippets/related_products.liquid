@@ -1,0 +1,36 @@
+
+<!-- grid -->
+
+<section class="related-products clearfix">
+    
+    <div class="related-products-title">
+        <div class="display-table">
+            <div class="display-table-cell">
+                <div class="text-nowrap-ellipsis">These are cute too...</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="related-products-grid clearfix">
+
+        {% for product in collection.products limit:4 %}
+
+        <div class="related-products-grid-item">
+
+            {% include 'product-card', item: product %}
+            
+        </div>
+
+        {% endfor %}
+
+        
+    </div>
+
+</section>
+
+
+
+
+
+
+

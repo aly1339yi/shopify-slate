@@ -1,0 +1,150 @@
+
+<div class="mini-cart-overlay fullscreen-overlay js-body-remove-class" data-body-class="mini-cart-open"></div>
+
+
+
+<div class="mini-cart" data-cart-view="data-cart-view">
+
+    <div class="mini-cart-header clearfix" >
+
+        <div class="mini-cart-close js-body-remove-class" data-body-class="mini-cart-open"></div>
+
+        <div class="mini-cart-bag">
+            <div class="mini-cart-icon" data-cart-view="data-cart-view" rv-class-mini-cart-empty="cart.item_count | eq 0"></div>
+            <div class="mini-cart-text">Bag</div>
+        </div>
+    </div>
+
+    <div class="mini-cart-body">
+
+        <div class="mini-cart-item clearfix" rv-each-item="cart.items" rv-hide="item.handle | eq 'embroidery'">
+
+            <div class="mini-cart-item-image">
+                <a rv-href="item.url">
+                <img rv-src="item.image | product_image_size 'large'" rv-alt="item.title" class="img-fullwidth">
+                </a>
+            </div>
+
+            <div class="mini-cart-item-details">
+
+            <div class="mini-cart-item-title text-nowrap-ellipsis">
+                <a rv-href="item.url" rv-text="item.product_title | lower"></a>
+            </div>
+
+            <div class="mini-cart-item-price-wrapper">
+                <span class="mini-cart-line-price" rv-text="item.line_price | money Currency.currentCurrency"></span>
+                <span class="mini-cart-line-price" rv-unless="item.propertyArray | empty">+ <span rv-text="item.quantity | times 2000 | money Currency.currentCurrency"></span></span>
+            </div>
+
+
+           <div class="mini-cart-item-options-quantity">
+
+            <ul class="mini-cart-item-options" rv-unless="item.variant_options | array_first | includes 'Default'">
+                <li rv-each-option="item.variant_options" rv-text="option"></li>
+            </ul>
+
+
+            <div class="mini-cart-item-quantity-wrapper">
+                <span class="mini-cart-item-quantity-update" rv-data-line-number="index | plus 1" rv-data-item-quantity="item.quantity | minus 1">&#150;</span>
+                <span class="mini-cart-item-quantity-number" rv-text="item.quantity"></span>
+                <span class="mini-cart-item-quantity-update" rv-data-line-number="index | plus 1" rv-data-item-quantity="item.quantity | plus 1">&#43;</span>
+            </div>
+
+
+           </div>
+
+
+
+
+            <div class="mini-cart-item-properties-wrapper" rv-unless="item.propertyArray | empty">
+                <div class="mini-cart-item-properties-title">Embroidery</div>
+                <ul class="mini-cart-item-properties">
+                    <li rv-each-property="item.propertyArray"><span>{property.name}: </span><span>{property.value}</span></li>
+                </ul>
+            </div>
+
+
+
+
+            </div>
+
+{% comment %}
+            <div class="mini-cart-item-remove" rv-data-item-line-number="index | plus 1">&times;</div>{% endcomment %}
+
+        </div>
+
+
+    </div>
+
+
+    <div class="mini-cart-empty-notice" rv-unless="cart.item_count | gt 0">
+        <div class="display-table">
+            <div class="display-table-cell">
+                <div>Your Bag is Empty</div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="mini-cart-footer" rv-if="cart.item_count | gt 0">
+
+        <div class="mini-cart-total-price-wrapper clearfix">
+            <div class="mini-cart-total-title">Subtotal</div>
+            <div class="mini-cart-total-price" rv-text="cart.total_price | money Currency.currentCurrency"></div>
+        </div>
+
+
+
+
+        <a href="/cart" class="mini-cart-checkout btn btn-dark">Checkout</a>
+
+    </div>
+
+
+
+
+</div>
+
+
+
+
+<script type="text/javascript">
+
+
+    $(function() {
+
+
+        $(document).on('click', '.mini-cart-item-quantity-update', function(event){
+
+            var miniCartLineNumber = $(this).attr('data-line-number');
+            var miniCartItemQuantity = $(this).attr('data-item-quantity');
+
+            CartJS.updateItem(miniCartLineNumber, miniCartItemQuantity, {},{
+                "success": function(data, textStatus, jqXHR) {
+                    //Calculate the embroidery quantity
+                    var miniCartEmbroideryTotalQuantity = 0;
+                    $.each( data.items, function( index, item ) {
+                        if(item.properties){
+                            miniCartEmbroideryTotalQuantity+=item.quantity;
+                        }
+                    });
+
+                    //Update embroidery quantity in the cart
+                    CartJS.updateItemById(1713889604, miniCartEmbroideryTotalQuantity);
+
+                },
+                "error": function(jqXHR, textStatus, errorThrown) {
+                    console.log('Error: ' + errorThrown);
+                }
+            });
+
+
+        });
+
+
+
+
+    });
+
+</script>
