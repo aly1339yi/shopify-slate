@@ -1,83 +1,83 @@
 <div class="mini-cart" data-cart-view="data-cart-view">
 
-    <div class="mini-cart__header ">
-        <div class="mini-cart__close"></div>
-    </div>
-    
-    <div class="mini-cart__body">
+  <div class="mini-cart__header ">
+    <div class="mini-cart__close"></div>
+  </div>
+  
+  <div class="mini-cart__body">
 
-        <div class="mini-cart-item" rv-each-item="cart.items" rv-hide="item.handle | eq 'embroidery'">
+    <div class="mini-cart-item" rv-each-item="cart.items" rv-hide="item.handle | eq 'embroidery'">
 
-            <div class="mini-cart-item__image">
-                <a rv-href="item.url">
-                    <img rv-src="item.image | product_image_size 'large'" rv-alt="item.title">
-                </a>
-            </div>
+      <div class="mini-cart-item__image">
+        <a rv-href="item.url">
+          <img rv-src="item.image | product_image_size 'large'" rv-alt="item.title">
+        </a>
+      </div>
 
-            <div class="mini-cart-item__details">
+      <div class="mini-cart-item__details">
 
-                {% comment %}
-                    Item title
-                {% endcomment %}
-                <div class="  mini-cart-item__title">
-                    <a rv-href="item.url" rv-text="item.product_title | lower"></a>
-                </div>
-
-                {% comment %}
-                    Item price
-                {% endcomment %}
-                <div class="mini-cart-item__price" rv-text="item.line_price | money Currency.currentCurrency"></div>
-
-
-                {% comment %}
-                    Item options, in its own line.
-                {% endcomment %}
-                <ul class="mini-cart-item__options" rv-unless="item.variant_options | array_first | includes 'Default'">
-                    <li rv-each-option="item.variant_options" rv-text="option"></li>
-                </ul>
-             
-
-                {% comment %}
-                    Item properties, in its own line.
-                {% endcomment %}
-                <ul class="mini-cart-item__properties" rv-unless="item.propertyArray | empty">
-                    <li rv-each-property="item.propertyArray"><span>{property.name}: </span><span>{property.value}</span></li>
-                </ul>
-
-
-                {% comment %}
-                    Item quantity
-                {% endcomment %}
-                <div class="mini-cart-item__quantity  qty-selectors">
-
-                    <span class="qty-selectors__btn qty-selectors__btn--minus" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | minus 1">&#150;</span>
-
-                    <span class="qty-selectors__qty" rv-text="item.quantity"></span>
-
-                    <span class="qty-selectors__btn qty-selectors__btn--plus" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | plus 1">&#43;</span>
-
-                </div>
-
-                
-
-            </div>
-         
-        </div>
-    </div>
-
-    <div class="mini-cart__empty" rv-unless="cart.item_count | gt 0">
-        <div>{{ 'cart.empty' | t }}</div>
-    </div>
-
-    <div class="mini-cart__footer  drawer__footer" rv-if="cart.item_count | gt 0">
-
-        <div class="mini-cart-totals">
-            <div class="mini-cart-totals__label">{{ 'cart.sub_total' | t }}</div>
-            <div class="mini-cart-totals__price" rv-text="cart.total_price | money Currency.currentCurrency"></div>
+        {% comment %}
+          Item title
+        {% endcomment %}
+        <div class="  mini-cart-item__title">
+          <a rv-href="item.url" rv-text="item.product_title | lower"></a>
         </div>
 
-        <a href="/cart" class="mini-cart__checkout  button  button--primary">{{ 'cart.checkout' | t }}</a>
+        {% comment %}
+          Item price
+        {% endcomment %}
+        <div class="mini-cart-item__price" rv-text="item.line_price | money Currency.currentCurrency"></div>
 
+
+        {% comment %}
+          Item options, in its own line.
+        {% endcomment %}
+        <ul class="mini-cart-item__options" rv-unless="item.variant_options | array_first | includes 'Default'">
+          <li rv-each-option="item.variant_options" rv-text="option"></li>
+        </ul>
+       
+
+        {% comment %}
+          Item properties, in its own line.
+        {% endcomment %}
+        <ul class="mini-cart-item__properties" rv-unless="item.propertyArray | empty">
+          <li rv-each-property="item.propertyArray"><span>{property.name}: </span><span>{property.value}</span></li>
+        </ul>
+
+
+        {% comment %}
+          Item quantity
+        {% endcomment %}
+        <div class="mini-cart-item__quantity  qty-selectors">
+
+          <span class="qty-selectors__btn qty-selectors__btn--minus" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | minus 1">&#150;</span>
+
+          <span class="qty-selectors__qty" rv-text="item.quantity"></span>
+
+          <span class="qty-selectors__btn qty-selectors__btn--plus" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | plus 1">&#43;</span>
+
+        </div>
+
+        
+
+      </div>
+     
     </div>
+  </div>
+
+  <div class="mini-cart__empty" rv-unless="cart.item_count | gt 0">
+    <div>{{ 'cart.empty' | t }}</div>
+  </div>
+
+  <div class="mini-cart__footer  drawer__footer" rv-if="cart.item_count | gt 0">
+
+    <div class="mini-cart-totals">
+      <div class="mini-cart-totals__label">{{ 'cart.sub_total' | t }}</div>
+      <div class="mini-cart-totals__price" rv-text="cart.total_price | money Currency.currentCurrency"></div>
+    </div>
+
+    <a href="/cart" class="mini-cart__checkout button button--primary">{{ 'cart.checkout' | t }}</a>
+
+  </div>
 
 </div>

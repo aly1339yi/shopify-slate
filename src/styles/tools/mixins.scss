@@ -13,39 +13,62 @@
   }
 }
 
-// // MEDIA QUERY max-width
-// @mixin mq-lt($width) {
-//    @if type-of($width) == number{
-//     @media only screen and (max-width: $width - 1) {
-//        @content;
-//     }
-//   }
-//   @else {
-//      @media only screen and (max-width: list-get($breakpoint, $width) - 1){
-//       @content;
-//     }
-//   }
-// }
-
-// // MEDIA QUERY min-width
-// @mixin mq-gteq($width) {
-//    @if type-of($width) == number{
-//     @media only screen and (min-width: $width ) {
-//        @content;
-//     }
-//   }
-//   @else {
-//      @media only screen and (min-width: list-get($breakpoint, $width)){
-//       @content;
-//     }
-//   }
-// }
-
-
-@mixin screen($keyword) {
-  @media only screen and #{list-get($range, $keyword)}{
-    @content;
+// MEDIA QUERY max-width
+@mixin mq-lt($value) {
+   @if type-of($value) == number{
+    @media only screen and (max-width: $value - 1) {
+       @content;
+    }
   }
+  @else {
+     @media only screen and (max-width: list-get($breakpoint, $value) - 1){
+      @content;
+    }
+  }
+}
+
+// MEDIA QUERY min-width
+@mixin mq-gteq($value) {
+   @if type-of($value) == number{
+    @media only screen and (min-width: $value ) {
+       @content;
+    }
+  }
+  @else {
+     @media only screen and (min-width: list-get($breakpoint, $value)){
+      @content;
+    }
+  }
+}
+
+
+// MEDIA QUERY All-in-One
+@mixin screen($range:null, $min:null, $max:null) {
+
+  @if ($range){
+    @media only screen and #{list-get($breakpoint-range, $range)}{
+      @content;
+    }
+  }
+
+  @else{
+    $query: "only screen and all" !default;
+
+    @if $min and $max {
+      $query: "only screen and (min-width: #{$min}) and (max-width: #{$max})";
+    }
+    @else if $min {
+      $query: "only screen and (min-width: #{$min})"; 
+    }
+    @else if $max {
+      $query: "only screen and (max-width: #{$max})";  
+    }
+    @media #{$query} { 
+      @content;
+    }
+
+  }
+
 }
 
 

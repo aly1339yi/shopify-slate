@@ -1,6 +1,6 @@
 /* =========================================================================
-   #VARIABLES
-   ========================================================================= */
+  #Color
+========================================================================= */
 
 
 $palette-purple: #5c6ac4;
@@ -12,99 +12,134 @@ $palette-white: #ffffff;
 
 $color: (
 
-    'primary' $palette-purple,
+  'primary' $palette-purple,
 
 
-    'bullet' transparent,
+  'bullet' transparent,
 
-    'bullet-selected' $palette-black,
+  'bullet-selected' $palette-black,
 
-    null
+  null
 
 );
+
+
+ /* =========================================================================
+   #Font Size
+   ========================================================================= */
 
 
 $font-size: (
 
-    'normal' 1.4rem,
+  'normal' 1.4rem,
 
-    null
+  null
 );
 
 
+ /* =========================================================================
+   #Responsive
+   ========================================================================= */
 
 $breakpoint-small: 576px;
 $breakpoint-medium: 768px;
 $breakpoint-large: 992px;
 $breakpoint-extra-large: 1200px;
+
 $breakpoint-nav: 576px;
 
 
-$range: (
+$breakpoint-range: (
 
-    'small-down' '(max-width: #{$breakpoint-small - 1})',
-    'small-up' '(min-width: #{$breakpoint-small})',
-    'medium-down' '(max-width: #{$breakpoint-medium - 1})',
-    'medium-up' '(min-width: #{$breakpoint-medium})',
-    'large-down' '(max-width: #{$breakpoint-large - 1})',
-    'large-up' '(min-width: #{$breakpoint-large})',
-    'extra-large-down' '(max-width: #{$breakpoint-extra-large - 1})',
-    'extra-large-up' '(min-width: #{$breakpoint-extra-large})', 
+  'small-down' '(max-width: #{$breakpoint-small - 1})',
+  'small-up' '(min-width: #{$breakpoint-small})',
+  'medium-down' '(max-width: #{$breakpoint-medium - 1})',
+  'medium-up' '(min-width: #{$breakpoint-medium})',
+  'large-down' '(max-width: #{$breakpoint-large - 1})',
+  'large-up' '(min-width: #{$breakpoint-large})',
+  'extra-large-down' '(max-width: #{$breakpoint-extra-large - 1})',
+  'extra-large-up' '(min-width: #{$breakpoint-extra-large})', 
 
-    'small-medium' '(min-width: #{$breakpoint-small}) and (max-width: #{$breakpoint-medium - 1})',
-    'medium-large' '(min-width: #{$breakpoint-medium}) and (max-width: #{$breakpoint-large - 1})',
-    'large-extra-large' '(min-width: #{$breakpoint-large}) and (max-width: #{$breakpoint-extra-large - 1})'
+  'small-medium' '(min-width: #{$breakpoint-small}) and (max-width: #{$breakpoint-medium - 1})',
+  'medium-large' '(min-width: #{$breakpoint-medium}) and (max-width: #{$breakpoint-large - 1})',
+  'large-extra-large' '(min-width: #{$breakpoint-large}) and (max-width: #{$breakpoint-extra-large - 1})'
 
-    null
+  null
 
 
 );
+
+$breakpoint: (
+
+  'small' 576px,
+  'medium' 768px,
+  'large' 992px,
+  'extra-large' 1200px,
+
+  'nav' 576px,
+
+  null
+
+);
+
+
+ /* =========================================================================
+   #Grid
+   ========================================================================= */
 
 
 $grid-gutter: (
 
-    'normal' 30px,
+  'normal' 30px,
 
-    null
+  null
+  
 );
 
 
+
+ /* =========================================================================
+   #Z-Index
+   ========================================================================= */
 
 $z-index: (
 
-    'navbar' 100,
+  'navbar' 100,
 
-    'fullscreen-overlay' 200,
+  'fullscreen-overlay' 200,
 
-    'mini-cart' 300,
+  'mini-cart' 300,
 
-    null
+  null
 
 
 );
 
 
+ /* =========================================================================
+   #Other
+   ========================================================================= */
 
 
 $navbar-banner-height: (
 
-    'desktop' 20px,
+  'desktop' 20px,
 
-    'mobile' 18px,
+  'mobile' 18px,
 
-    null
+  null
 
 );
 
 $navbar-nav-height: (
 
-    'desktop' 80px,
+  'desktop' 80px,
 
-    'desktop-condensed' 40px,
+  'desktop-condensed' 40px,
 
-    'mobile' 50px,
+  'mobile' 50px,
 
-    null
+  null
 
 );
 

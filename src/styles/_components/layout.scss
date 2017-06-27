@@ -12,11 +12,19 @@ body {
 	// }
 
 
-  @include screen('small-medium'){
+  @include screen($range:'medium-up'){
     color: red;
   }
 
-  
+  @include screen($min: 640px, $max: 2400px){
+    color: green;
+  }
+  @include screen($max: 5600px){
+    color: green;
+  }
+  @include screen($min: 123px){
+    color: green;
+  }
 }
 
 
