@@ -1,29 +1,5 @@
 <footer class="footer">
 
-	<div class="footer-image-wrapper">
-
-		{% if template.name == 'index' %}
-			<img src="{{ 'footer_home.png' | asset_url }}" class="img-fullwidth">
-
-		{% elsif template.name == 'collection' or template.name == 'product' %}
-			<img src="{{ 'footer_shop.png' | asset_url }}" class="img-fullwidth">
-
-		{% elsif template.name == 'page' %}
-
-			{% if template.suffix == 'about' %}
-				<img src="{{ 'footer_static.png' | asset_url }}" class="img-fullwidth">
-			{% else %}
-				<img src="{{ 'footer_static.png' | asset_url }}" class="img-fullwidth">
-			{% endif %}
-
-		{% elsif template.name == 'cart' %}
-			<img src="{{ 'footer_bag.png' | asset_url }}" class="img-fullwidth">
-		{% else %}
-			<img src="{{ 'footer_home.png' | asset_url }}" class="img-fullwidth">
-		{% endif %}
-
-	</div>
-
 
 
 
@@ -69,10 +45,10 @@
 
 			<ul class="footer-social-list social-list clearfix">
 
-				<li><a href="https://instagram.com/morgan_lane" target="_blank">&#xe100;</a></li>
-				<li><a href="https://www.facebook.com/MorganLaneNY" target="_blank">&#xe027;</a></li>
-				<li><a href="https://twitter.com/Morgan_LaneNY" target="_blank">&#xe086;</a></li>
-				<li><a href="https://pinterest.com/MorganLaneNY/morgan-lane" target="_blank">&#xe064;</a></li>
+				<li><a href="https://instagram.com/morgan_lane" target="_blank" class="socicon-instagram"></a></li>
+				<li><a href="https://www.facebook.com/MorganLaneNY" target="_blank" class="socicon-facebook"></a></li>
+				<li><a href="https://twitter.com/Morgan_LaneNY" target="_blank" class="socicon-twitter"></a></li>
+				<li><a href="https://pinterest.com/MorganLaneNY/morgan-lane" target="_blank" class="socicon-pinterest"></a></li>
 
 			</ul>
 

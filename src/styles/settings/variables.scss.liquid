@@ -1,23 +1,23 @@
 /* =========================================================================
-  #Color
+  Color
 ========================================================================= */
 
 
-$palette-purple: #5c6ac4;
+$color-purple : #5c6ac4;
 
-$palette-black: #000000;
+$color-black  : #000000;
 
-$palette-white: #ffffff;
+$color-white  : #ffffff;
 
 
 $color: (
 
-  'primary' $palette-purple,
+  'primary'         $color-purple,
 
 
-  'bullet' transparent,
+  'bullet'          transparent,
 
-  'bullet-selected' $palette-black,
+  'bullet-selected' $color-black,
 
   null
 
@@ -25,45 +25,73 @@ $color: (
 
 
  /* =========================================================================
-   #Font Size
+   Font Size
    ========================================================================= */
 
+$font-size-normal   : 1.4rem;
+
+$font-size-xx-small : 0.9rem;
+
+$font-size-x-small  : 1.0rem;
+
+$font-size-small    : 1.2rem;
+
+$font-size-medium   : 1.4rem;
+
+$font-size-large    : 1.4rem;
+
+$font-size-x-large  : 1.4rem;
+
+$font-size-xx-large : 1.4rem;
 
 $font-size: (
 
-  'normal' 1.4rem,
+  'body' $font-size-normal,
+
+  'h1'   1.3rem,
+
+  'h2'   1.4rem,
+
+  'h3'   1.8rem,
+
+  'h4'   2.4rem,
+
+  'h5'   3rem,
+  
+  'h6'   3rem,
 
   null
+
 );
 
 
  /* =========================================================================
-   #Responsive
+   Responsive
    ========================================================================= */
 
-$breakpoint-small: 576px;
-$breakpoint-medium: 768px;
-$breakpoint-large: 992px;
-$breakpoint-extra-large: 1200px;
+$breakpoint-small   : 576px;
+$breakpoint-medium  : 768px;
+$breakpoint-large   : 992px;
+$breakpoint-x-large : 1200px;
 
-$breakpoint-nav: 576px;
+$breakpoint-nav     : 576px;
 
 
 $breakpoint-range: (
 
-  'small-down' '(max-width: #{$breakpoint-small - 1})',
-  'small-up' '(min-width: #{$breakpoint-small})',
-  'medium-down' '(max-width: #{$breakpoint-medium - 1})',
-  'medium-up' '(min-width: #{$breakpoint-medium})',
-  'large-down' '(max-width: #{$breakpoint-large - 1})',
-  'large-up' '(min-width: #{$breakpoint-large})',
-  'extra-large-down' '(max-width: #{$breakpoint-extra-large - 1})',
-  'extra-large-up' '(min-width: #{$breakpoint-extra-large})', 
-
-  'small-medium' '(min-width: #{$breakpoint-small}) and (max-width: #{$breakpoint-medium - 1})',
-  'medium-large' '(min-width: #{$breakpoint-medium}) and (max-width: #{$breakpoint-large - 1})',
-  'large-extra-large' '(min-width: #{$breakpoint-large}) and (max-width: #{$breakpoint-extra-large - 1})'
-
+  'small-down'    '(max-width: #{$breakpoint-small - 1})',
+  'small-up'      '(min-width: #{$breakpoint-small})',
+  'medium-down'   '(max-width: #{$breakpoint-medium - 1})',
+  'medium-up'     '(min-width: #{$breakpoint-medium})',
+  'large-down'    '(max-width: #{$breakpoint-large - 1})',
+  'large-up'      '(min-width: #{$breakpoint-large})',
+  'x-large-down'  '(max-width: #{$breakpoint-x-large - 1})',
+  'x-large-up'    '(min-width: #{$breakpoint-x-large})',
+  
+  'small-medium'  '(min-width: #{$breakpoint-small})  and  (max-width: #{$breakpoint-medium - 1})',
+  'medium-large'  '(min-width: #{$breakpoint-medium}) and  (max-width: #{$breakpoint-large - 1})',
+  'large-x-large' '(min-width: #{$breakpoint-large})  and  (max-width: #{$breakpoint-x-large - 1})'
+  
   null
 
 
@@ -71,12 +99,12 @@ $breakpoint-range: (
 
 $breakpoint: (
 
-  'small' 576px,
-  'medium' 768px,
-  'large' 992px,
-  'extra-large' 1200px,
+  'small'   576px,
+  'medium'  768px,
+  'large'   992px,
+  'x-large' 1200px,
 
-  'nav' 576px,
+  'nav'     576px,
 
   null
 
@@ -84,7 +112,7 @@ $breakpoint: (
 
 
  /* =========================================================================
-   #Grid
+   Grid
    ========================================================================= */
 
 
@@ -99,16 +127,16 @@ $grid-gutter: (
 
 
  /* =========================================================================
-   #Z-Index
+   Z-Index
    ========================================================================= */
 
 $z-index: (
 
-  'navbar' 100,
+  'navbar'             100,
 
   'fullscreen-overlay' 200,
 
-  'mini-cart' 300,
+  'mini-cart'          300,
 
   null
 
@@ -117,7 +145,7 @@ $z-index: (
 
 
  /* =========================================================================
-   #Other
+   Other
    ========================================================================= */
 
 
@@ -125,7 +153,7 @@ $navbar-banner-height: (
 
   'desktop' 20px,
 
-  'mobile' 18px,
+  'mobile'  18px,
 
   null
 
@@ -133,11 +161,11 @@ $navbar-banner-height: (
 
 $navbar-nav-height: (
 
-  'desktop' 80px,
+  'desktop'           80px,
 
   'desktop-condensed' 40px,
 
-  'mobile' 50px,
+  'mobile'            50px,
 
   null
 

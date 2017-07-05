@@ -1,25 +1,64 @@
 /* =========================================================================
-  #Grid Basic
+  Grid Basic
 ========================================================================= */
 
-.grid {
+.grid{
+  
   @include clearfix();
-
-  margin: 0;
-  padding: 0;
-
+  margin: auto - (list-get($grid-gutter, 'normal') / 2);
+  
 }
 
-.grid__item {
+.grid-item {
+
   float: left;
-
   width: 100%;
+  padding: auto (list-get($grid-gutter, 'normal') / 2);
 
 }
+
+
+.row{
+  @extend .grid;
+}
+
+.col{
+  @extend .grid-item;
+}
+
+
+.flex-container{
+
+  @include flexbox();
+
+  @include flexflow(row wrap);
+
+  @include justify-content(flex-start);
+
+  @include align-items(flex-start);
+
+  html.mod-no-flexbox &{
+
+    @include clearfix();
+
+    >.flex-item{
+      float: left;
+    }
+
+  }
+
+}
+
+.flex-item{
+
+
+}
+
+
 
 
 /* =========================================================================
-  #Grid Columns Width Classes
+  Grid Columns Width Classes
 ========================================================================= */
 
 @mixin grid-column-generator($breakpoint: '') {
@@ -154,7 +193,7 @@
 ========================================================================= */
 
 @mixin grid-uniform-clearfix($breakpoint: '') {
-  .grid--uniform {
+  .grid-uniform {
     .#{$breakpoint}one-half:nth-child(2n+1),
     .#{$breakpoint}one-third:nth-child(3n+1),
     .#{$breakpoint}one-quarter:nth-child(4n+1),
@@ -189,9 +228,9 @@
   $item-key: nth($item, 1);
 
   @include screen($range: $item-key) {
-    @include grid-column-generator('#{$item-key}--');
-    @include grid-uniform-clearfix('#{$item-key}--');
-    @include grid-push-generator('#{$item-key}--');
+    @include grid-column-generator('#{$item-key}-');
+    @include grid-uniform-clearfix('#{$item-key}-');
+    @include grid-push-generator('#{$item-key}-');
   }
   
   

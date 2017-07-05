@@ -1,0 +1,25 @@
+
+
+.video-cover {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  /* The following will size the video to fit the full container. Not necessary, just nice.*/
+  min-width: 101%;
+  min-height: 101%;
+  @include transform(translate(-50%,-50%));
+}
+
+
+
+
+
+#admin_bar_iframe{
+	display: none !important;
+}
+#shopify-theme-controls{
+	display: none !important;
+}
+.shopify-preview-bar{
+	display: none !important;
+}

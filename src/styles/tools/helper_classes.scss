@@ -1,3 +1,78 @@
+/* ========================================================================
+   Position
+   ========================================================================= */
+
+.position-relative {
+  position: relative;
+}
+
+.position-absolute{
+  position: absolute;
+}
+
+.position-absolute-full{
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.position-absolute-top-left{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.position-absolute-top-right{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.position-absolute-bottom-left{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.position-absolute-bottom-right{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+
+/* ========================================================================
+   Display, Box Model
+   ========================================================================= */
+
+.display-inline-block{
+  display: inline-block;
+}
+
+.display-table {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+.display-table-cell {
+  display: table-cell;
+  width: 100%;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.block-fullwidth {
+  display: block;
+  width: 100%;
+}
+
+.height-100vh {
+  height: 100vh;
+}
+
 .shown-small {
   @include mq-gteq(small) {
     display: none !important;
@@ -28,33 +103,17 @@
   clear: both;
 }
 
-.hidden-before-images-ready {
-  opacity: 0;
+.float-left{
+  float: left;
 }
 
-.img-fullwidth {
-  display: block;
-  width: 100%;
+.float-right{
+  float: right;
 }
 
-.block-fullwidth {
-  display: block;
-  width: 100%;
-}
-
-.media-centered-cover {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  /* The following will size the video to fit the full container. Not necessary, just nice.*/
-  min-width: 101%;
-  min-height: 101%;
-  @include transform(translate(-50%,-50%));
-}
-
-.height-100vh {
-  height: 100vh;
-}
+/* ========================================================================
+   Typography
+   ========================================================================= */
 
 .text-nowrap-ellipsis {
   @include text-nowrap-ellipsis;
@@ -64,23 +123,16 @@
   text-align: center;
 }
 
-.position-relative {
-  position: relative;
+
+/* ========================================================================
+   Misc
+   ========================================================================= */
+
+.hidden-before-images-ready {
+  opacity: 0;
 }
 
 .overflow-hidden {
   overflow: hidden;
 }
 
-.display-table {
-  display: table;
-  width: 100%;
-  height: 100%;
-}
-
-.display-table-cell {
-  display: table-cell;
-  width: 100%;
-  height: 100%;
-  vertical-align: middle;
-}

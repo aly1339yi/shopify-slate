@@ -1,8 +1,7 @@
-/* =========================================================================
-   #MIXINS
+/* ========================================================================
+   list-get Mimic map-get
    ========================================================================= */
 
-// list-get MIMIC map-get
 @function list-get($list, $key) {
    @each $item in $list{
     $item-key: nth($item, 1);
@@ -13,7 +12,12 @@
   }
 }
 
-// MEDIA QUERY max-width
+/* ========================================================================
+   Media Query
+   ========================================================================= */
+
+ /* max-width */
+
 @mixin mq-lt($value) {
    @if type-of($value) == number{
     @media only screen and (max-width: $value - 1) {
@@ -27,7 +31,8 @@
   }
 }
 
-// MEDIA QUERY min-width
+ /* min-width */
+
 @mixin mq-gteq($value) {
    @if type-of($value) == number{
     @media only screen and (min-width: $value ) {
@@ -42,7 +47,8 @@
 }
 
 
-// MEDIA QUERY All-in-One
+ /* all in one (new) */
+
 @mixin screen($range:null, $min:null, $max:null) {
 
   @if ($range){
@@ -72,37 +78,10 @@
 }
 
 
+/* ========================================================================
+   Flexbox
+   ========================================================================= */
 
-
-// VENDOR PREFIX
-@mixin css3-prefix($property, $value) {
-  -webkit-#{$property}: #{$value};
-  -khtml-#{$property}: #{$value};
-  -moz-#{$property}: #{$value};
-  -ms-#{$property}: #{$value};
-  -o-#{$property}: #{$value};
-  #{$property}: #{$value};
-}
-
-// TRANSITION
-@mixin transition($property: all, $duration: 400ms, $function: ease-in-out, $delay:0s) {
-  $properties: $property $duration $function $delay;
-  @include css3-prefix( 'transition', $properties);
-}
-
-// TRANSFORM
-@mixin transform($params) {
-   @include css3-prefix( 'transform', $params);
-}
-
-// ROTATE
-@mixin rotate($deg: 0, $m11: 0, $m12: 0, $m21: 0, $m22: 0) {
-   @include css3-prefix( 'transform', rotate($deg + deg));
-  filter: progid:DXImageTransform.Microsoft.Matrix( M11=#{$m11}, M12=#{$m12}, M21=#{$m21}, M22=#{$m22}, sizingMethod= 'auto expand');
-  zoom: 1;
-}
-
-// FLEXBOX
 @mixin flexbox() {
   display: -webkit-box;
   display: -moz-box;
@@ -110,40 +89,47 @@
   display: -webkit-flex;
   display: flex;
 }
+
 @mixin flexflow($values) {
   -webkit-flex-flow: $values;
   -moz-flex-flow: $values;
   -ms-flex-flow: $values;
   flex-flow: $values;
 }
+
 @mixin justify-content($value) {
   -webkit-justify-content: $value;
   justify-content: $value;
 }
+
 @mixin align-items($value) {
   -webkit-align-items: $value;
   align-items: $value;
 }
 
-// INPUT PLACEHOLDER
+
+/* ========================================================================
+   Input Placeholder
+   ========================================================================= */
+
 @mixin input-placeholder {
   &::-webkit-input-placeholder {
     @content
   }
-
   &:-moz-placeholder {
     @content
   }
-
   &::-moz-placeholder {
     @content
   }
-
   &:-ms-input-placeholder {
     @content
   }
 }
 
+/* ========================================================================
+   Quantity Query
+   ========================================================================= */
 
 @mixin has-nth($expression, $element: '*') {
   &:nth-last-child(#{$expression}):first-child,
@@ -166,7 +152,63 @@
    }
 }
 
-//CLEARFIX
+/* ========================================================================
+   Vendor Prefix
+   ========================================================================= */
+
+@mixin css3-prefix($property, $value) {
+  -webkit-#{$property}: #{$value};
+  -khtml-#{$property}: #{$value};
+  -moz-#{$property}: #{$value};
+  -ms-#{$property}: #{$value};
+  -o-#{$property}: #{$value};
+  #{$property}: #{$value};
+}
+
+/* ========================================================================
+   Transition
+   ========================================================================= */
+
+@mixin transition($property: all, $duration: 400ms, $function: ease-in-out, $delay:0s) {
+  $properties: $property $duration $function $delay;
+  @include css3-prefix( 'transition', $properties);
+}
+
+/* ========================================================================
+   Transform
+   ========================================================================= */
+
+@mixin transform($params) {
+   @include css3-prefix( 'transform', $params);
+}
+
+/* ========================================================================
+   Rotate
+   ========================================================================= */
+
+@mixin rotate($deg: 0, $m11: 0, $m12: 0, $m21: 0, $m22: 0) {
+   @include css3-prefix( 'transform', rotate($deg + deg));
+  filter: progid:DXImageTransform.Microsoft.Matrix( M11=#{$m11}, M12=#{$m12}, M21=#{$m21}, M22=#{$m22}, sizingMethod= 'auto expand');
+  zoom: 1;
+}
+
+
+/* ========================================================================
+   Other
+   ========================================================================= */
+
+
+/* max-width */
+
+@mixin max-width($width){
+  max-width: $width;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* clearfix */
+
 @mixin clearfix() {
   &:after {
     content: " ";
@@ -176,8 +218,13 @@
 }
 
 
+/* text nowrap ellipsis */
+
 @mixin text-nowrap-ellipsis {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+
+

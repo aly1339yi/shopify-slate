@@ -3,8 +3,7 @@
 
 body {
 
-
-	font-size: list-get($font-size, 'normal');
+	font-size: list-get($font-size, 'body');
 
 	// padding-top: list-get($navbar-nav-height, 'desktop');
 	// @include mq-lt(small) {
@@ -31,5 +30,3 @@ body {
 .main {
 
 }
-
-

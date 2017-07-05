@@ -1,0 +1,156 @@
+ /* =========================================================================
+   Royal Slider
+   ========================================================================= */
+
+.royalSlider{
+	width: 100%;
+}
+
+
+.rsDefault,
+.rsDefault .rsOverflow,
+.rsDefault .rsSlide,
+.rsDefault .rsVideoFrameHolder,
+.rsDefault .rsThumbs {
+	background: transparent;
+	color: #000;
+}
+
+
+.rsOverflow{
+	transition: none !important;
+}
+
+
+.rsDefault .rsBullets{
+	background: transparent;
+	width: auto;
+	right: 20px;
+	left: auto;
+}
+
+
+.rsDefault .rsBullet{
+    width: 20px;
+    height: 40px;
+	padding: 6px 0px 6px;
+}
+
+.rsDefault .rsBullet span{
+    width: 10px;
+    height: 10px;
+    background-color: transparent;
+	border: 2px solid list-get($color, bullet);
+}
+
+.rsDefault .rsBullet.rsNavSelected span{
+	background-color: list-get($color, bullet-selected);
+}
+
+
+
+
+.rsImg-focus-left-top{
+	margin-left: 0 !important;
+	margin-top: 0 !important;
+}
+.rsImg-focus-left-center{
+	margin-left: 0 !important;
+}
+.rsImg-focus-left-bottom{
+	margin-left: 0 !important;
+	margin-bottom: 0 !important;
+}
+
+.rsImg-focus-center-top{
+	margin-top: 0 !important;
+}
+.rsImg-focus-center-center{
+
+}
+.rsImg-focus-center-bottom{
+	margin-bottom: 0 !important;
+}
+
+.rsImg-focus-right-top{
+	margin-right: 0 !important;
+	margin-top: 0 !important;
+}
+.rsImg-focus-right-center{
+	margin-right: 0 !important;
+}
+.rsImg-focus-right-bottom{
+	margin-right: 0 !important;
+	margin-bottom: 0 !important;
+}
+
+
+
+ /* =========================================================================
+   Owl Carousel
+   ========================================================================= */
+
+.owl-carousel-wrapper{
+	position: relative;	
+}
+
+.owl-carousel{
+	@include screen(medium-up){
+	width: calc(100% - 120px);
+	margin: auto;
+	}
+}
+
+.owl-carousel-nav{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    width: 60px;
+    cursor: pointer;
+}
+
+.owl-carousel-nav-prev{
+	left: 0;
+}
+.owl-carousel-nav-next{
+	right: 0;
+}
+
+
+.owl-carousel-nav-icon{
+	position: absolute;
+	top: 50%;
+    left: 50%;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    margin: -25px 0 0 -25px;
+    overflow: hidden;
+	cursor: pointer;
+}
+
+
+.owl-carousel-nav-icon-prev{
+	background: url( {{ '' | asset_url }} ) no-repeat center center;
+	background-size: 20px;
+	html.device-no-mobile & {
+		@include transition($duration:300ms);
+		&:hover{
+			@include transform(translateX(-5px));
+		}
+	}
+}
+
+
+
+.owl-carousel-nav-icon-next{
+	background: url( {{ '' | asset_url }} ) no-repeat center center;
+	background-size: 20px;
+	html.device-no-mobile & {
+		@include transition($duration:300ms);
+		&:hover{
+			@include transform(translateX(5px));
+		}
+	}	
+}

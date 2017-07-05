@@ -1,0 +1,45 @@
+.btn{
+
+	display: inline-block;
+
+	height: 40px;
+	line-height: 40px;
+	padding: 0 50px;
+
+	font-size: 14px;
+	text-transform: uppercase;
+	cursor: pointer;
+	
+	html.device-no-mobile & {
+		@include transition($duration:300ms);
+		&:hover{
+
+		}
+	}
+
+}
+
+
+.btn-solid{
+
+}
+
+.btn-hollow-pure{
+
+}
+
+.btn-hollow-invert{
+
+}
+
+.btn-small{
+
+}
+
+.btn-regular{
+
+}
+
+.btn-large{
+
+}
