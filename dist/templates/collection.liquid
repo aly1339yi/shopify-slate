@@ -1,0 +1,59 @@
+<div>
+
+
+
+
+	{% if collection.all_products.size > 0 %}
+
+
+	{% paginate collection.products by settings.product_pagination_limit %}
+
+	<div class="collection-grid" id="pagination-load-more-target">
+
+
+		{% for product in collection.products %}
+
+		{% if settings.hide_sold_out_products and product.available == false %}
+		{% else %}
+
+		<div class="collection-grid-item">
+
+			{% include 'product-card', item: product %}
+
+		</div>
+
+		{% endif %}
+		{% endfor %}
+
+	</div>
+
+
+	{% capture product_cta_text %}{{ 'pagination.product_cta_text' | t }}{% endcapture %}
+
+	{% include 'pagination', namespace: 'product' ,cta_text: product_cta_text %}
+
+	{% endpaginate %}
+
+
+
+
+	{% else %}
+
+		<h1>empty collection</h1>
+
+	{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>

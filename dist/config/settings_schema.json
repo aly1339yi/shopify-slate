@@ -7,146 +7,7 @@
     "theme_documentation_url": "http://blackandblackcreative.com",
     "theme_support_url": "http://blackandblackcreative.com"
   },
-  {
-    "name": "Typography",
-    "settings": [
-      {
-        "type": "select",
-        "id": "type_base_size",
-        "label": "Base size",
-        "default": "16px",
-        "options": [
-          {
-            "value": "14px",
-            "label": "14px"
-          },
-          {
-            "value": "15px",
-            "label": "15px"
-          },
-          {
-            "value": "16px",
-            "label": "16px"
-          },
-          {
-            "value": "17px",
-            "label": "17px"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "Colors",
-    "settings": [
-      {
-        "type": "header",
-        "content": "General colors"
-      },
-      {
-        "type": "color",
-        "id": "color_primary",
-        "label": "Primary color",
-        "default": "#000",
-        "info": "Used for text links, and primary buttons"
-      },
-      {
-        "type": "color",
-        "id": "color_body_text",
-        "label": "Text color",
-        "default": "#000",
-        "info": "Color used for content and paragraph text"
-      }
-    ]
-  },
-  {
-    "name": "Social media",
-    "settings": [
-      {
-        "type": "header",
-        "content": "Social sharing options"
-      },
-      {
-        "type": "checkbox",
-        "id": "social_sharing_blog",
-        "label": "Enable sharing for blog articles",
-        "default": true
-      },
-      {
-        "type": "checkbox",
-        "id": "share_facebook",
-        "label": "Share on Facebook",
-        "default": true
-      },
-      {
-        "type": "checkbox",
-        "id": "share_twitter",
-        "label": "Tweet on Twitter",
-        "default": true
-      },
-      {
-        "type": "checkbox",
-        "id": "share_pinterest",
-        "label": "Pin on Pinterest",
-        "default": true
-      },
-      {
-        "type": "header",
-        "content": "Sharing links"
-      },
-      {
-        "type": "text",
-        "id": "social_twitter_link",
-        "label": "Twitter link"
-      },
-      {
-        "type": "text",
-        "id": "social_facebook_link",
-        "label": "Facebook link"
-      },
-      {
-        "type": "text",
-        "id": "social_pinterest_link",
-        "label": "Pinterest link"
-      },
-      {
-        "type": "text",
-        "id": "social_instagram_link",
-        "label": "Instagram link"
-      },
-      {
-        "type": "text",
-        "id": "social_snapchat_link",
-        "label": "Snapchat link"
-      },
-      {
-        "type": "text",
-        "id": "social_tumblr_link",
-        "label": "Tumblr link"
-      },
-      {
-        "type": "text",
-        "id": "social_youtube_link",
-        "label": "Youtube link"
-      },
-      {
-        "type": "text",
-        "id": "social_vimeo_link",
-        "label": "Vimeo link"
-      }
-    ]
-  },
-  {
-    "name": "Cart",
-    "settings": [
-      {
-        "type": "checkbox",
-        "id": "cart_notes_enable",
-        "label": "Enable cart notes",
-        "default": true
-      }
-    ]
-  },
+
   {
     "name": "Favicon",
     "settings": [
@@ -157,5 +18,85 @@
         "info": "Will be scaled down to 32 x 32px"
       }
     ]
+  },
+
+  {
+    "name": "Top Banner",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "top_banner_enable",
+        "label": "Enable",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "top_banner_desktop_text",
+        "label": "Desktop Top Banner Text",
+        "default": "Free Shipping"
+      },
+      {
+        "type": "text",
+        "id": "top_banner_mobile_text",
+        "label": "Mobile Top Banner Text",
+        "default": "Free Shipping"
+      },
+      {
+        "type": "color",
+        "id": "top_banner_text_color",
+        "label": "Top Banner Text Color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "top_banner_bkg_color",
+        "label": "Top Banner Background Color",
+        "default": "#000000"
+      }
+    ]
+  },
+
+  {
+    "name": "Collection",
+    "settings": [
+
+      {
+        "type": "header",
+        "content": "Hide Sold Out Products"
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_sold_out_products",
+        "label": "Enable",
+        "default": false
+      }
+
+    ]
+  },
+
+
+  {
+    "name": "Pagination",
+    "settings": [
+      {
+        "type": "number",
+        "id": "product_pagination_limit",
+        "label": "Product Pagination Limit",
+        "info": "Shopify's maximum is 50",
+        "default": 24
+      },
+      {
+        "type": "number",
+        "id": "article_pagination_limit",
+        "label": "Article Pagination Limit",
+        "info": "Shopify's maximum is 50",
+        "default": 24
+      }
+
+    ]
   }
+
+
+
+  
 ]
