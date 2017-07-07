@@ -1,17 +1,32 @@
 {
 
   "collection": {
-    "empty_collection": "There are no products in this collection.",
+    "empty_collection_notice": "There are no products in this collection.",
     "empty_collection_cta": "Shop all products",
     "empty_collection_cta_link": "\/",
-    "sort": "Sort by",
+    "sort_btn": "Sort by",
     "remove_all_filters": "Remove all filters",
     "no_filter_results_html": "No products matched your selection.<br>Try removing some filters."
   },
 
   "pagination": {
-    "product_cta_text": "More Styles",
-    "article_cta_text": "Load More"
+    "product_btn": "More Styles",
+    "article_btn": "Load More"
+  },
+
+
+
+
+
+  "cart": {
+    "total_label": "Subtotal:",
+    "checkout_btn": "Checkout",
+    "continue_shopping_btn": "Continue Shopping",
+    "empty_cart_notice": "Your Bag is Empty"
   }
+
+
+
+
 
 }

@@ -4,31 +4,35 @@
     
 {% comment %}
 
-    <div class="pagination-list-wrapper">
+  <div class="pagination-list-wrapper">
 
-        <ul class="pagination-list">
-            <li>
-                <a href="{{ paginate.previous.url }}">&lt;</a>
-            </li>
-            {% for part in paginate.parts %}  
-                <li  {% if part.title == paginate.current_page %}class="active" {%endif%}>
-                {{ part.title | link_to: part.url}}
-                </li>  
-            {% endfor %}
-            <li>
-                <a href="{{ paginate.next.url }}">&gt;</a>
-            </li>
-        </ul>
+  <ul class="pagination-list">
 
-    </div>
+    <li>
+    <a href="{{ paginate.previous.url }}">&lt;</a>
+    </li>
+
+    {% for part in paginate.parts %}  
+    <li  {% if part.title == paginate.current_page %}class="active" {%endif%}>
+    {{ part.title | link_to: part.url}}
+    </li>  
+    {% endfor %}
+
+    <li>
+    <a href="{{ paginate.next.url }}">&gt;</a>
+    </li>
+    
+  </ul>
+
+  </div>
 
 {% endcomment %}
 
-    <div class="pagination-load-more-wrapper">
+  <div class="pagination-load-more-wrapper">
 
-        <a href="{{ paginate.next.url }}" class="pagination-load-more btn js-pagination-load-more">{{ cta_text }}</a>
+    <a href="{{ paginate.next.url }}" class="pagination-load-more btn js-pagination-load-more">{{ load_more_btn_text }}</a>
 
-    </div>
+  </div>
 
 
 

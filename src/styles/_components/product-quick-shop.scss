@@ -1,0 +1,29 @@
+
+
+
+.product-quick-shop-image{
+	&.active{
+		border: 1px solid green;
+	}
+}
+
+
+
+.product-option-value{
+
+
+
+	
+
+	cursor: pointer;
+
+
+	&:not(.selected):hover{
+		opacity: 0.5;
+	}
+
+
+	&.selected{
+		border: 1px solid green;
+	}	
+}

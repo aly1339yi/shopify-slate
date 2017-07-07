@@ -11,22 +11,30 @@ body {
 	// }
 
 
-  @include screen($range:'medium-up'){
-    color: red;
-  }
+  // @include screen($range:'medium-up'){
+  //   color: red;
+  // }
 
-  @include screen($min: 640px, $max: 2400px){
-    color: green;
-  }
-  @include screen($max: 5600px){
-    color: green;
-  }
-  @include screen($min: 123px){
-    color: green;
-  }
+  // @include screen($min: 640px, $max: 2400px){
+  //   color: green;
+  // }
+  // @include screen($max: 5600px){
+  //   color: green;
+  // }
+  // @include screen($min: 123px){
+  //   color: green;
+  // }
 }
 
 
 .main {
 
+}
+
+
+
+
+
+.container{
+  padding: 0 (list-get($grid-gutter, 'normal') / 2);
 }

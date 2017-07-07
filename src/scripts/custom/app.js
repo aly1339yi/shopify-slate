@@ -173,4 +173,125 @@ $(document).ready(function() {
   }
 
 
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////// SHOP /////////////////////////////////////
+//////////////////////////////////////// SHOP /////////////////////////////////////
+//////////////////////////////////////// SHOP /////////////////////////////////////
+
+//////////////////////////////////////// SHOP /////////////////////////////////////
+//////////////////////////////////////// SHOP /////////////////////////////////////
+//////////////////////////////////////// SHOP /////////////////////////////////////
+
+//////////////////////////////////////// SHOP /////////////////////////////////////
+//////////////////////////////////////// SHOP /////////////////////////////////////
+//////////////////////////////////////// SHOP /////////////////////////////////////
+
+
+
+
+
+
+
+$(document).on('click', '.js-product-quick-shop-option-value', function(){
+
+  var $this = $(this);
+
+  // visual state update
+  $this.addClass('selected').siblings().removeClass('selected');
+
+  var isColor = $this.data('is-color-option-value') || false;
+
+  var $optionValue = $this.data('product-option-value');
+
+  var optionsSize = $this.data('product-options-size');
+
+  var $quickShop = $this.parents('.product-quick-shop');
+
+  var $productImages = $quickShop.find('.product-quick-shop-image');
+
+  var $selectedEle = $quickShop.find('.selected');
+
+  var $addToCart = $quickShop.find('.product-add-to-cart')
+
+
+
+  if(isColor){
+
+    
+    $productImages.removeClass('active').filter('[data-alt-handle="' + $optionValue + '"]').addClass('active');
+
+  }
+
+  if($selectedEle.length == optionsSize ){
+
+
+
+    $addToCart.removeAttr('disabled').text('Add to Bag');
+
+
+  }
+
+
+
+});
+
+
+
+
+
+
+$(document).on('click', '.js-product-quick-shop-add-to-cart', function(){
+
+
+    var variantID = $(this).data('current-variant-id');
+
+     CartJS.addItem(variantID, 1, {}, {
+
+         "success": function(data, textStatus, jqXHR) {
+
+          //Open Mini Cart
+          setTimeout(function(){
+            $('body').addClass('mini-cart-open');
+
+            setTimeout(function(){
+              $('body').removeClass('mini-cart-open');
+            }, 2000);
+
+          }, 200);
+
+         },
+
+         "error": function(jqXHR, textStatus, errorThrown) {
+
+         }
+
+     });
+
+
+});
+
+
+$(document).on('cart.requestComplete', function(event, data) {
+
+
+
+
+});
+
+
+
+
+
+
+
+
 });

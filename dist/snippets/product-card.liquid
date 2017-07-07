@@ -1,22 +1,22 @@
-<div class="product-card{% unless product.available %} product-sold-out{% endunless %}">
-	<a href="{{ item.url | within: collection }}">
+
+
+<div class="product-card">
+
+	<a href="{{ product.url | within: collection }}">
 
 		<div class="product-card-image-wrapper">
-			{% assign image_size = item.images | size %}
-			<img src="{{ item.featured_image | product_img_url: '600x', format: 'pjpg' }}" data-src-alt="{{ item.images[1] | product_img_url: '600x', format: 'pjpg' }}" class="product-card-image img-fullwidth {% if image_size > 1 %} js-product-card-image-swap{% endif %}">
+			{% assign image_size = product.images | size %}
+			<img src="{{ product.featured_image | product_img_url: '850x', format: 'pjpg' }}" data-src-alt="{{ product.images[1] | product_img_url: '600x', format: 'pjpg' }}" class="product-card-image img-fullwidth {% if image_size > 1 %} js-product-card-image-swap{% endif %}">
 		</div>
 
 		<div class="product-card-details">
 
-			<div class="product-card-title">{{ item.title }}</div>
+			<div class="product-card-title">{{ product.title }}</div>
 
-			<div class="product-card-price-wrapper">
-
-				{% if item.price < item.compare_at_price %}<span class="product-card-compare-at-price">{{ item.compare_at_price | money }}</span>{% endif %}<span class="product-card-price" itemprop="price">{{ item.price | money }}</span><span class="product-card-sold-out-notice"> Sold Out</span>
-
-			</div>
+			<div class="product-card-price">{{ product_price }}</div>
 
 		</div>
 
 	</a>
+	
 </div>

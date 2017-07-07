@@ -5,7 +5,7 @@
 .grid{
   
   @include clearfix();
-  margin: auto - (list-get($grid-gutter, 'normal') / 2);
+  margin: 0 list-get($grid-gutter, 'normal') / -2;
   
 }
 
@@ -13,7 +13,8 @@
 
   float: left;
   width: 100%;
-  padding: auto (list-get($grid-gutter, 'normal') / 2);
+  padding: 0 (list-get($grid-gutter, 'normal') / 2);
+  margin-bottom: list-get($grid-gutter, 'normal');
 
 }
 

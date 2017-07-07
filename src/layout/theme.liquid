@@ -47,7 +47,7 @@
 
 
     {% capture body_class %}
-        template-{{ template | handle }}  template-name-{{ template.name | handle }} {% if template.suffix %} template-suffix-{{ template.suffix | handle }}{% endif %}
+        template-{{ template | handle }} template-name-{{ template.name | handle }}{% if template.suffix %} template-suffix-{{ template.suffix | handle }}{% endif %}
     {% endcapture %}
 
 

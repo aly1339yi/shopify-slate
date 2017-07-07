@@ -1,4 +1,4 @@
-<div>
+<div class="collection-container container">
 
 
 
@@ -8,7 +8,7 @@
 
 	{% paginate collection.products by settings.product_pagination_limit %}
 
-	<div class="collection-grid" id="pagination-load-more-target">
+	<div class="collection-grid grid" id="pagination-load-more-target">
 
 
 		{% for product in collection.products %}
@@ -16,9 +16,13 @@
 		{% if settings.hide_sold_out_products and product.available == false %}
 		{% else %}
 
-		<div class="collection-grid-item">
+		<div class="collection-grid-item grid-item large-up-one-quarter medium-up-one-third medium-down-one-half">
 
-			{% include 'product-card', item: product %}
+			{% include 'product-base-data', product: product %}
+
+			{% include 'product-card', product: product %}
+
+			{% include 'product-quick-shop', product: product %}
 
 		</div>
 
@@ -28,9 +32,9 @@
 	</div>
 
 
-	{% capture product_cta_text %}{{ 'pagination.product_cta_text' | t }}{% endcapture %}
+	{% capture product_load_more_btn_text %}{{ 'pagination.product_btn' | t }}{% endcapture %}
 
-	{% include 'pagination', namespace: 'product' ,cta_text: product_cta_text %}
+	{% include 'pagination', namespace: 'product' , load_more_btn_text: product_load_more_btn_text %}
 
 	{% endpaginate %}
 
@@ -42,15 +46,6 @@
 		<h1>empty collection</h1>
 
 	{% endif %}
-
-
-
-
-
-
-
-
-
 
 
 

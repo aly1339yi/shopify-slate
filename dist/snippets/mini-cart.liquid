@@ -50,11 +50,11 @@
         {% endcomment %}
         <div class="mini-cart-item-quantity  qty-selectors">
 
-          <span class="qty-selectors-btn qty-selectors-btn--minus" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | minus 1">&#150;</span>
+          <span class="qty-selectors-btn qty-selectors-btn-minus" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | minus 1">&#150;</span>
 
           <span class="qty-selectors-qty" rv-text="item.quantity"></span>
 
-          <span class="qty-selectors-btn qty-selectors-btn--plus" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | plus 1">&#43;</span>
+          <span class="qty-selectors-btn qty-selectors-btn-plus" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | plus 1">&#43;</span>
 
         </div>
 
@@ -66,17 +66,17 @@
   </div>
 
   <div class="mini-cart-empty" rv-unless="cart.item_count | gt 0">
-    <div>{{ 'cart.empty' | t }}</div>
+    <div>{{ 'cart.empty_cart_notice' | t }}</div>
   </div>
 
   <div class="mini-cart-footer  drawer-footer" rv-if="cart.item_count | gt 0">
 
     <div class="mini-cart-totals">
-      <div class="mini-cart-totals-label">{{ 'cart.sub_total' | t }}</div>
+      <div class="mini-cart-totals-label">{{ 'cart.total_label' | t }}</div>
       <div class="mini-cart-totals-price" rv-text="cart.total_price | money Currency.currentCurrency"></div>
     </div>
 
-    <a href="/cart" class="mini-cart-checkout button button--primary">{{ 'cart.checkout' | t }}</a>
+    <a href="/cart" class="mini-cart-checkout button button-primary">{{ 'cart.checkout_btn' | t }}</a>
 
   </div>
 
