@@ -1,244 +1,307 @@
 $(document).ready(function() {
 
 
-  //Pagination AJAX Load More
+    //Pagination AJAX Load More
 
-  var paginationIsLoading = false;
+    var paginationIsLoading = false;
 
-  $(document).on('click', '.js-pagination-load-more', function(event) {
+    $(document).on('click', '.js-pagination-load-more', function(event) {
 
-    event.preventDefault();
+        event.preventDefault();
 
-    var $ajaxWrapper = $('#pagination-load-more-target');
+        var $ajaxWrapper = $('#pagination-load-more-target');
 
-    var ajaxURL = $(this).attr('href');
+        var ajaxURL = $(this).attr('href');
 
-    $.ajax({
-        url: ajaxURL,
-        dataType: "html"
-      })
+        $.ajax({
+                url: ajaxURL,
+                dataType: "html"
+            })
 
-      .done(function(data) {
+            .done(function(data) {
 
-        console.log('load');
+                console.log('load');
 
-        // loadmore button update
-        var $pagination = $(data).find('.pagination-load-more');
+                // loadmore button update
+                var $pagination = $(data).find('.pagination-load-more');
 
-        $('.pagination-load-more-wrapper').html($pagination);
+                $('.pagination-load-more-wrapper').html($pagination);
 
-        var ajaxURLNext = $('.pagination-load-more').attr('href');
+                var ajaxURLNext = $('.pagination-load-more').attr('href');
 
-        if (!ajaxURLNext) {
-          $('.pagination-load-more-wrapper').remove();
-        }
+                if (!ajaxURLNext) {
+                    $('.pagination-load-more-wrapper').remove();
+                }
 
-        // append the new items
-        var $items = $(data).find('#pagination-load-more-target > *');
+                // append the new items
+                var $items = $(data).find('#pagination-load-more-target > *');
 
-        $items.css('opacity', '0');
+                $items.css('opacity', '0');
 
-        $ajaxWrapper.append($items);
+                $ajaxWrapper.append($items);
 
-        // show the new items
-        var $itemsWaitForImages = $items.length >= 3 ? $items.eq(2) : $items;
-        $itemsWaitForImages.waitForImages(function() {
-          $items.animate({
-            opacity: '1'
-          }, 400);
+                // show the new items
+                var $itemsWaitForImages = $items.length >= 3 ? $items.eq(2) : $items;
+                $itemsWaitForImages.waitForImages(function() {
+                    $items.animate({
+                        opacity: '1'
+                    }, 400);
+                });
+
+                //set the flag
+                paginationIsLoading = false;
+
+            });
+    });
+
+
+    //////////////////////////////////////// HOMEPAGE PAGE /////////////////////////////////////
+
+    if ($('.template-index').length) {
+
+        $('.homepage-hero-slider-wrapper').waitForImages(function() {
+
+            var dhhsData = $('.desktop-homepage-hero-slider').royalSlider({
+                imageScaleMode: 'fill',
+                controlNavigation: 'bullets',
+                arrowsNav: true,
+                arrowsNavAutoHide: false,
+                arrowsNavHideOnTouch: true,
+                loop: true,
+                transitionType: 'fade',
+                addActiveClass: true,
+                autoPlay: {
+                    enabled: true,
+                    pauseOnHover: false,
+                    stopAtAction: false,
+                    delay: 3000
+                }
+            }).data('royalSlider');
+
         });
 
-        //set the flag
-        paginationIsLoading = false;
 
-      });
-  });
+        $('.mobile-homepage-hero-slider').waitForImages(function() {
 
+                var mhhsData = $('.mobile-homepage-hero-slider').royalSlider({
+                    controlNavigation: 'bullets',
+                    arrowsNav: false,
+                    arrowsNavAutoHide: true,
+                    arrowsNavHideOnTouch: true,
+                    loop: true,
+                    transitionType: 'move',
+                    addActiveClass: true,
+                    autoHeight:true,
+                }).data('royalSlider');
 
-  //////////////////////////////////////// HOMEPAGE PAGE /////////////////////////////////////
+        });
 
-  if ($('.template-index').length) {
-
-    $('.homepage-hero-slider-wrapper').waitForImages(function() {
-
-      var dhhsData = $('.desktop-homepage-hero-slider').royalSlider({
-        imageScaleMode: 'fill',
-        controlNavigation: 'bullets',
-        arrowsNav: true,
-        arrowsNavAutoHide: false,
-        arrowsNavHideOnTouch: true,
-        loop: true,
-        transitionType: 'fade',
-        addActiveClass: true,
-        autoPlay: {
-          enabled: true,
-          pauseOnHover: false,
-          stopAtAction: false,
-          delay: 3000
-        }
-      }).data('royalSlider');
-
-    });
-
-
-    $('.mobile-homepage-hero-slider').waitForImages(function() {
-
-        var mhhsData = $('.mobile-homepage-hero-slider').royalSlider({
-          controlNavigation: 'bullets',
-          arrowsNav: false,
-          arrowsNavAutoHide: true,
-          arrowsNavHideOnTouch: true,
-          loop: true,
-          transitionType: 'move',
-          addActiveClass: true,
-          autoHeight:true,
-        }).data('royalSlider');
-
-    });
-
-  }
-
-
-  //////////////////////////////////////// COLLECTION PAGE /////////////////////////////////////
-
-  if ($('.template-collection').length) {
-
-    // if ($('html.mod-no-mobile').length) {
-
-    //   $(window).scroll($.throttle(250, function() {
-    //     var limit = 3 * $(window).height();
-    //     if ($(document).height() - $('body').scrollTop() < limit) {
-    //       if(!paginationIsLoading){
-    //         paginationIsLoading = true;
-    //         $('.pagination-load-more').trigger('click');
-    //       }
-    //     }
-
-    //   }));
-
-    // }
-
-
-    // $(".size-p").insertAfter($(".size-pp"));
-    // $(".size-s").insertAfter($(".size-p"));
-    // $(".size-m").insertAfter($(".size-s"));
-    // $(".size-l").insertAfter($(".size-m"));
-    // $(".size-onesize").insertAfter($(".size-onesize").parent().children().last());
-
-  }
-
-  //////////////////////////////////////// PRODUCT PAGE /////////////////////////////////////
-
-  if ($('.template-product').length) {
-
-    if(!$('.embroidery').length){
-      $('.mobile-product-gallery').waitForImages(function() {
-         var mpgData = $('.mobile-product-gallery').royalSlider({
-
-            loop: true,
-            autoHeight:true,
-            arrowsNav: false
-
-         }).data('royalSlider');
-      });
     }
 
 
-    $('.desktop-product-gallery').waitForImages(function() {
+    //////////////////////////////////////// COLLECTION PAGE /////////////////////////////////////
 
-      var deskImageHeight = $('.desktop-product-gallery-image:first-child').outerHeight();
-      $(window).resize(function() {
-        deskImageHeight = $('.desktop-product-gallery-image:first-child').outerHeight();
-      });
-      $(window).scroll($.throttle(250, function() {
-        var bodyScrollTop = $('body').scrollTop();
-        var imageIndex0 = Math.floor(bodyScrollTop / deskImageHeight);
-        $('.desktop-product-gallery-index').removeClass('active').eq(imageIndex0).addClass('active');
-      }));
+    if ($('.template-collection').length) {
+
+        // if ($('html.mod-no-mobile').length) {
+
+        //   $(window).scroll($.throttle(250, function() {
+        //     var limit = 3 * $(window).height();
+        //     if ($(document).height() - $('body').scrollTop() < limit) {
+        //       if(!paginationIsLoading){
+        //         paginationIsLoading = true;
+        //         $('.pagination-load-more').trigger('click');
+        //       }
+        //     }
+
+        //   }));
+
+        // }
 
 
-      if($('html.mod-no-mobile').length){
+        // $(".size-p").insertAfter($(".size-pp"));
+        // $(".size-s").insertAfter($(".size-p"));
+        // $(".size-m").insertAfter($(".size-s"));
+        // $(".size-l").insertAfter($(".size-m"));
+        // $(".size-onesize").insertAfter($(".size-onesize").parent().children().last());
 
-        $('.product-shopping-col-right, .product-page-sidebar').stick_in_parent({
-          offset_top: 80,
-          recalc_every: 1,
+    }
+
+    //////////////////////////////////////// PRODUCT PAGE /////////////////////////////////////
+
+    if ($('.template-product').length) {
+
+        if(!$('.embroidery').length){
+            $('.mobile-product-gallery').waitForImages(function() {
+                 var mpgData = $('.mobile-product-gallery').royalSlider({
+
+                        loop: true,
+                        autoHeight:true,
+                        arrowsNav: false
+
+                 }).data('royalSlider');
+            });
+        }
+
+
+        $('.desktop-product-gallery').waitForImages(function() {
+
+            var deskImageHeight = $('.desktop-product-gallery-image:first-child').outerHeight();
+            $(window).resize(function() {
+                deskImageHeight = $('.desktop-product-gallery-image:first-child').outerHeight();
+            });
+            $(window).scroll($.throttle(250, function() {
+                var bodyScrollTop = $('body').scrollTop();
+                var imageIndex0 = Math.floor(bodyScrollTop / deskImageHeight);
+                $('.desktop-product-gallery-index').removeClass('active').eq(imageIndex0).addClass('active');
+            }));
+
+
+            if($('html.mod-no-mobile').length){
+
+                $('.product-shopping-col-right, .product-page-sidebar').stick_in_parent({
+                    offset_top: 80,
+                    recalc_every: 1,
+                });
+
+
+            }
+
         });
 
 
-      }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////// SHOP /////////////////////////////////////
+//////////////////////////////////////// SHOP /////////////////////////////////////
+//////////////////////////////////////// SHOP /////////////////////////////////////
+
+//////////////////////////////////////// SHOP /////////////////////////////////////
+//////////////////////////////////////// SHOP /////////////////////////////////////
+//////////////////////////////////////// SHOP /////////////////////////////////////
+
+//////////////////////////////////////// SHOP /////////////////////////////////////
+//////////////////////////////////////// SHOP /////////////////////////////////////
+//////////////////////////////////////// SHOP /////////////////////////////////////
+
+
+
+function updateQuickShopImage ($productImages, optionValue) {
+
+    $productImages.removeClass('active')
+    .filter('[data-alt-handle="' + optionValue + '"]').addClass('active');
+
+}
+
+function updateAddToCartBtn ($addToCartBtn) {
+
+    //$addToCartBtn.removeAttr('disabled').text('Add to Bag');
+
+}
+
+function checkVariantInventory(){
+
+}
+
+function updatePrice(){
+
+}
+
+
+
+function getVariantID ($selected, variants) {
+
+    var variantID = null;
+
+    var option1 = null;
+    var option2 = null;
+    var option3 = null;
+
+    $selected.each(function() {
+
+        var optionPosition = $(this).data('product-option-position');
+        var optionValue = $(this).data('product-option-value');
+
+        switch (optionPosition) {
+            case 1:
+                option1 = optionValue;
+                break;
+            case 2:
+                option2 = optionValue;
+                break;
+            case 3:
+                option3 = optionValue;
+                break;
+        }
 
     });
 
+    $.each( variants, function( index, variant ) {
+        if( variant.option1 == option1 && variant.option2 == option2 && variant.option3 == option3 ){
+            variantID = variant.id;
+            return false;
+        }
+    });
 
-  }
+    return variantID;
 
-
-
-
-
-
-
-
-
-
-
-
-//////////////////////////////////////// SHOP /////////////////////////////////////
-//////////////////////////////////////// SHOP /////////////////////////////////////
-//////////////////////////////////////// SHOP /////////////////////////////////////
-
-//////////////////////////////////////// SHOP /////////////////////////////////////
-//////////////////////////////////////// SHOP /////////////////////////////////////
-//////////////////////////////////////// SHOP /////////////////////////////////////
-
-//////////////////////////////////////// SHOP /////////////////////////////////////
-//////////////////////////////////////// SHOP /////////////////////////////////////
-//////////////////////////////////////// SHOP /////////////////////////////////////
-
-
-
+}
 
 
 
 
 $(document).on('click', '.js-product-quick-shop-option-value', function(){
 
-  var $this = $(this);
+    var $this = $(this);
 
-  // visual state update
-  $this.addClass('selected').siblings().removeClass('selected');
+    // visual state update
+    $this.addClass('selected').siblings().removeClass('selected');
 
-  var isColor = $this.data('is-color-option-value') || false;
+    var isColor = $this.data('is-color-option-value') || false;
 
-  var $optionValue = $this.data('product-option-value');
+    var optionValue = $this.data('product-option-value');
 
-  var optionsSize = $this.data('product-options-size');
+    var optionsSize = $this.data('product-options-size');
 
-  var $quickShop = $this.parents('.product-quick-shop');
+    var $quickShop = $this.parents('.product-quick-shop');
 
-  var $productImages = $quickShop.find('.product-quick-shop-image');
+    var $productImages = $quickShop.find('.product-quick-shop-image');
 
-  var $selectedEle = $quickShop.find('.selected');
+    var $selected = $quickShop.find('.selected');
 
-  var $addToCart = $quickShop.find('.product-add-to-cart')
+    var product= JSON.parse($quickShop.find('.product-json').html());
 
+    var variants = product.variants;
 
-
-  if(isColor){
-
-    
-    $productImages.removeClass('active').filter('[data-alt-handle="' + $optionValue + '"]').addClass('active');
-
-  }
-
-  if($selectedEle.length == optionsSize ){
+    var $addToCartBtn = $quickShop.find('.product-add-to-cart');
 
 
+    if(isColor){
+        updateQuickShopImage($productImages, optionValue);
+    }
 
-    $addToCart.removeAttr('disabled').text('Add to Bag');
+    if($selected.length == optionsSize ){
 
+        var variantID = getVariantID($selected, variants);
+        $addToCartBtn.attr('data-variant-id', variantID);
 
-  }
+        // var variantQty = getVariantQty(variantID, variants);
+        // var variantQty = getVariantQty(variantID, variants);
+
+        // updateAddToCartBtn();
+
+    }
 
 
 
@@ -252,29 +315,29 @@ $(document).on('click', '.js-product-quick-shop-option-value', function(){
 $(document).on('click', '.js-product-quick-shop-add-to-cart', function(){
 
 
-    var variantID = $(this).data('current-variant-id');
+    var variantID = $(this).attr('data-variant-id');
 
-     CartJS.addItem(variantID, 1, {}, {
+    CartJS.addItem(variantID, 1, {}, {
 
-         "success": function(data, textStatus, jqXHR) {
+    "success": function(data, textStatus, jqXHR) {
 
-          //Open Mini Cart
-          setTimeout(function(){
+        //Open Mini Cart
+        setTimeout(function(){
             $('body').addClass('mini-cart-open');
 
             setTimeout(function(){
-              $('body').removeClass('mini-cart-open');
+            $('body').removeClass('mini-cart-open');
             }, 2000);
 
-          }, 200);
+        }, 200);
 
-         },
+    },
 
-         "error": function(jqXHR, textStatus, errorThrown) {
+    "error": function(jqXHR, textStatus, errorThrown) {
 
-         }
+    }
 
-     });
+    });
 
 
 });
@@ -289,6 +352,18 @@ $(document).on('cart.requestComplete', function(event, data) {
 
 
 
+
+//////////////////////////////////////// SHOP /////////////////////////////////////
+//////////////////////////////////////// SHOP /////////////////////////////////////
+//////////////////////////////////////// SHOP /////////////////////////////////////
+
+//////////////////////////////////////// SHOP /////////////////////////////////////
+//////////////////////////////////////// SHOP /////////////////////////////////////
+//////////////////////////////////////// SHOP /////////////////////////////////////
+
+//////////////////////////////////////// SHOP /////////////////////////////////////
+//////////////////////////////////////// SHOP /////////////////////////////////////
+//////////////////////////////////////// SHOP /////////////////////////////////////
 
 
 

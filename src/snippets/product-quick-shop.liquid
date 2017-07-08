@@ -15,11 +15,11 @@
 
 			    {% if alt_handle != color_name and alt_handle != 'swatch' %}
 			   
-				  		{% assign color_name = alt_handle %}
+		  		{% assign color_name = alt_handle %}
 
-							<img src="{{ image.src | img_url: '850x', format: 'pjpg' }}" alt="{{ alt_handle }}" data-alt-handle="{{ alt_handle }}" class="product-quick-shop-image{% if alt_handle == default_color_option_value %} active{% endif %}">
+				<img src="{{ image.src | img_url: '850x', format: 'pjpg' }}" alt="{{ alt_handle }}" data-alt-handle="{{ alt_handle }}" class="product-quick-shop-image{% if alt_handle == default_color_option_value %} active{% endif %}">
 
-				  {% endif %}
+			  {% endif %}
 
 
 			{% endfor %}
@@ -37,42 +37,41 @@
 
 				{% for option in product.options_with_values %}
 
-					{% assign is_color_option = false %}
-					{% assign option_name_handle = option.name | handle %}
-	        {% if option_name_handle == color_option_name %}
-	            {% assign is_color_option = true %}
-	        {% endif %}
+				{% assign is_color_option = false %}
+				{% assign option_name_handle = option.name | handle %}
+		        {% if option_name_handle == color_option_name %}
+		            {% assign is_color_option = true %}
+		        {% endif %}
 
-				  <div class="product-option product-quick-shop-option">
+				<div class="product-option product-quick-shop-option">
 
-				    <div class="product-option-name product-quick-shop-option-name">{{ option.name }}</div>
+					<div class="product-option-name product-quick-shop-option-name">{{ option.name }}</div>
 
-				    <div class="product-option-values product-quick-shop-option-values">
+					<div class="product-option-values product-quick-shop-option-values">
 
-				      {% for value in option.values %}
+						{% for value in option.values %}
 
-				        <div class="product-option-value product-quick-shop-option-value js-product-quick-shop-option-value{% if value == default_color_option_value %} selected{% endif %}"
-				        		 data-product-options-size="{{ product.options.size }}"
-				             data-product-option-position="{{ option.position }}"
-				        		 data-is-color-option-value="{{ is_color_option }}"
-										 data-product-option-value="{{ value }}"
+						<div class="product-option-value product-quick-shop-option-value js-product-quick-shop-option-value{% if value == default_color_option_value %} selected{% endif %}"
+						data-product-options-size="{{ product.options.size }}"
+						data-product-option-position="{{ option.position }}"
+						data-is-color-option-value="{{ is_color_option }}"
+						data-product-option-value="{{ value }}"
+						>{{ value }}</div>
 
-				        >{{ value }}</div>
+						{% endfor %}
 
-				      {% endfor %}
-
-				    </div>
+					</div>
 
 
-				  </div>
+				</div>
 
 				{% endfor %}
 
 				</div>
 
 
-       {% assign current_variant_id =  product.selected_or_first_available_variant.id %}
-        <button type="button" disabled class="product-add-to-cart product-quick-shop-add-to-cart js-product-quick-shop-add-to-cart btn" data-current-variant-id="{{ current_variant_id }}">Choose Size</button>
+				{% assign variant_id =  product.selected_or_first_available_variant.id %}
+				<button type="button" disabled class="product-add-to-cart product-quick-shop-add-to-cart js-product-quick-shop-add-to-cart btn" data-variant-id="{{ variant_id }}">Choose Size</button>
 
 
 
@@ -88,7 +87,7 @@
 
 
 
-
+	<script class="product-json" type="application/json">{{ product | json }}</script> 
 
 
 </div>
