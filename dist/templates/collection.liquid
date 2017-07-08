@@ -8,7 +8,7 @@
 
 	{% paginate collection.products by settings.product_pagination_limit %}
 
-	<div class="collection-grid grid" id="pagination-load-more-target">
+	<div class="collection-grid grid grid-uniform" id="pagination-load-more-target">
 
 
 		{% for product in collection.products %}
@@ -16,7 +16,7 @@
 		{% if settings.hide_sold_out_products and product.available == false %}
 		{% else %}
 
-		<div class="collection-grid-item grid-item large-up-one-quarter medium-up-one-third medium-down-one-half">
+		<div class="collection-grid-item grid-item large-up-one-quarter medium-large-one-third medium-down-one-half">
 
 			{% include 'product-base-data', product: product %}
 
