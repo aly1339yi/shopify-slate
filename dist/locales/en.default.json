@@ -9,13 +9,21 @@
     "no_filter_results_html": "No products matched your selection.<br>Try removing some filters."
   },
 
+  "product": {
+
+    "choose_size_btn_text": "Choose size",
+    "add_to_cart_btn_text": "Add to bag",
+    "pre_order_btn_text": "Pre-order",
+    "sold_out_btn_text": "Sold out",
+    "quantity_label": "Quantity",
+    "option_label": "Select {{ option_name }}",
+    "related_products_title": "You May Also Like"
+  },
+
   "pagination": {
     "product_btn": "More Styles",
     "article_btn": "Load More"
   },
-
-
-
 
 
   "cart": {

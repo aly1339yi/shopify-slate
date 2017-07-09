@@ -64,24 +64,21 @@
 {% comment %}        {% include 'popup' %}{% endcomment %}
 
 
-        <script src="{{ '_theme.js' | asset_url }}" defer></script>
+        <script src="{{ '_theme.js' | asset_url }}"></script>
 
         <script>
 
-            var cartJson = {{ cart | json }};
+            CartJS.init({{ cart | json }}, {
 
-            $(function() {
-
-                CartJS.init(cartJson, {
-
-                    "dataAPI": true,
-                    "requestBodyClass": "cartjs-loading",
-                    "moneyFormat": "{{ shop.money_format }}",
-                    "moneyWithCurrencyFormat": "{{ shop.money_with_currency_format }}"
-                    
-                });
+                "dataAPI": true,
+                "requestBodyClass": "cartjs-loading",
+                "moneyFormat": "{{ shop.money_format }}",
+                "moneyWithCurrencyFormat": "{{ shop.money_with_currency_format }}"
                 
             });
+
+            Shopify.money_format = "{{ shop.money_format }}"; 
+                
 
         </script>
 

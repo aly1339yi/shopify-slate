@@ -1,27 +1,46 @@
 {% comment %}
-    Sale
+    "Color" Option Settings
 {% endcomment %}
-{% assign is_sale = false %}
-{% if product.price < product.compare_at_price %}
-    {% assign is_sale = true %}
-{% endif %}
+
+{% assign color_option_name_handle = 'color' %}
+{% assign color_option_position = 1 %}
+{% assign color_swatch_name = 'swatch' %}
 
 
-{% capture product_price %}
 
-{% if is_sale %}
+{% comment %}
+    Does Product Has Variant on Sale ?
+{% endcomment %}
 
-    <del class="product-price  product-price-compare-at">
-        {{ product.compare_at_price | money | remove: ".00" }}
+{% assign has_variant_on_sale = false %}
+
+{% for variant in product.variants %}
+    {% if variant.price < variant.compare_at_price %}
+        {% assign has_variant_on_sale = true %}
+        {% break %}
+    {% endif %}
+{% endfor %}
+
+
+{% comment %}
+    Generate Product Card Price Html
+{% endcomment %}
+
+{% capture product_card_price %}
+
+{% if has_variant_on_sale %}
+
+    <del class="product-price product-price-compare-at">
+        {{ product.compare_at_price_max | money }}
     </del>
 
-    <ins class="product-price  product-price-on-sale">
-        {{ product.price | money | remove: ".00" }}
+    <ins class="product-price product-price-on-sale">
+        {% if product.price_varies %}From {% endif %}{{ product.price_min | money }}
     </ins>
 
 {% else %}
 
- 	<span class="product-price">{% if product.price_varies %}From {% endif %}{{ product.price | money | remove: ".00" }}</span>
+    <span class="product-price">{% if product.price_varies %}From {% endif %}{{ product.price_min | money }}</span>
 
 {% endif %}
 
@@ -29,66 +48,114 @@
 
 
 
-
 {% comment %}
-    "Color" Option
+    Get Default Variant
+
+    If product has variant on sale, get the most expensive one ????
 {% endcomment %}
 
-{% assign color_option_name = 'color' %}
-{% assign color_option_position = 1 %}
-{% assign color_swatch_name = 'swatch' %}
+{% assign default_variant = product.selected_or_first_available_variant %}
 
-
-{% comment %}
-    Swatch & Color Featured Image
-{% endcomment %}
-{% assign swatch_src_count  = 0 %}
-{% assign swatch_srcs = "" %}
-
-
-{% for image in product.images %}
-
-    {% assign alt_handle = image.alt | downcase %}
-
-    {% if alt_handle == 'swatch' %}
+{% if has_variant_on_sale %}
     
-        {% assign swatch_src_count = swatch_src_count | plus: 1 %}
+    {% for variant in product.variants %}
+        {% if variant.compare_at_price == variant.compare_at_price_max %}
+            {% assign default_variant = variant %}
+            {% break %}
+        {% endif %}
+    {% endfor %}
 
-        {% capture swatch_srcs %}{{ swatch_srcs }}{% unless swatch_srcs == blank %},{% endunless %}{{ image.src | img_url: '25x', format: 'pjpg' }}{% endcapture %}
-
-    {% endif %}
-
-{% endfor %}
-
-
-{% assign swatch_src_array = swatch_srcs | split: "," %}
-
-
+{% endif %}
 
 
 {% comment %}
-    Default Color
+    Get Default Option123
 {% endcomment %}
 
-{% assign default_color_option_value = "" %}		
+{% assign default_option1 = default_variant.option1 %}
+{% assign default_option2 = default_variant.option2 %}
+{% assign default_option3 = default_variant.option3 %}
 
-{% for option in product.options_with_values %}
-	{% assign option_name_handle = option.name | handle %}
-	{% if option_name_handle == color_option_name %}
-		{% assign default_color_option_value = option.selected_value %}
-		{% break %}
-	{% endif %}		
+
+{% comment %}
+    Generate Product Price Html
+{% endcomment %}
+
+
+{% capture product_price %}
+
+{% if default_variant.price < default_variant.compare_at_price %}
+
+    <del class="product-price product-price-compare-at">
+        {{ default_variant.compare_at_price | money }}
+    </del>
+
+    <ins class="product-price product-price-on-sale">
+        {{ default_variant.price | money }}
+    </ins>
+
+{% else %}
+
+    <span class="product-price">{{ default_variant.price | money }}</span>
+
+{% endif %}
+
+{% endcapture %}
+
+
+{% comment %}
+    has Color Option?
+{% endcomment %}
+
+{% assign hasColorOption = false %}
+
+{% for option in product.options %}
+    {% assign option_name_handle = option | handle %}
+    {% if option_name_handle == color_option_name_handle %}
+        {% assign hasColorOption = true %}
+        {% break %}
+    {% endif %}
 {% endfor %}
 
 
 
+{% if hasColorOption %}
+    
+    {% comment %}
+        Generate Swatch Bkg Image Src Array
+    {% endcomment %}
+
+    {% assign swatch_src_count  = 0 %}
+    {% assign swatch_srcs = "" %}
+
+    {% for image in product.images %}
+
+        {% assign alt_handle = image.alt | downcase %}
+
+        {% if alt_handle == 'swatch' %}
+        
+            {% assign swatch_src_count = swatch_src_count | plus: 1 %}
+
+            {% capture swatch_srcs %}{{ swatch_srcs }}{% unless swatch_srcs == blank %},{% endunless %}{{ image.src | img_url: '25x', format: 'pjpg' }}{% endcapture %}
+
+        {% endif %}
+
+    {% endfor %}
+
+    {% assign swatch_src_array = swatch_srcs | split: "," %}
 
 
 
+    {% comment %}
+        Get Default Color
+    {% endcomment %}
+
+    {% capture optionKey %}option{{ color_option_position }}{% endcapture %}
+
+    {% assign default_color = default_variant.[optionKey] %}
 
 
-
-
+{% endif %}
 
 
 

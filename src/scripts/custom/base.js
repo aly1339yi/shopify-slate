@@ -1,4 +1,3 @@
-$(document).ready(function() {
 
 
    $('.js-wait-for-image-wrapper').waitForImages(function() {
@@ -173,6 +172,67 @@ $(document).ready(function() {
 
    $('.js-product-card-image-swap').hover(imageSourceSwap, imageSourceSwap);
 
+
+
+
+    //PAGINATION LOAD MORE AJAX
+
+    var paginationIsLoading = false;
+
+    $(document).on('click', '.js-pagination-load-more', function(event) {
+
+        event.preventDefault();
+
+        var $ajaxWrapper = $('#pagination-load-more-target');
+
+        var ajaxURL = $(this).attr('href');
+
+        $.ajax({
+                url: ajaxURL,
+                dataType: "html"
+            })
+
+            .done(function(data) {
+
+                console.log('load');
+
+                // loadmore button update
+                var $pagination = $(data).find('.pagination-load-more');
+
+                $('.pagination-load-more-wrapper').html($pagination);
+
+                var ajaxURLNext = $('.pagination-load-more').attr('href');
+
+                if (!ajaxURLNext) {
+                    $('.pagination-load-more-wrapper').remove();
+                }
+
+                // append the new items
+                var $items = $(data).find('#pagination-load-more-target > *');
+
+                $items.css('opacity', '0');
+
+                $ajaxWrapper.append($items);
+
+                // show the new items
+                var $itemsWaitForImages = $items.length >= 3 ? $items.eq(2) : $items;
+                $itemsWaitForImages.waitForImages(function() {
+                    $items.animate({
+                        opacity: '1'
+                    }, 400);
+                });
+
+                //set the flag
+                paginationIsLoading = false;
+
+            });
+    });
+
+
+
+
+
+
    // PRODUCT IMAGE FULLSCREEN
 
    $(document).on('click', '.js-product-image-fullscreen', function() {
@@ -190,4 +250,13 @@ $(document).ready(function() {
       });
    }
 
-});
+
+
+
+
+
+
+
+
+
+

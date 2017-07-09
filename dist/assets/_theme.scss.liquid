@@ -3608,13 +3608,15 @@ body {
 	cursor: pointer;
 
 
-	&:not(.selected):hover{
+	&:not(.selected-value):hover{
 		opacity: 0.5;
 	}
 
-
-	&.selected{
-		border: 1px solid green;
+	&.active-value{
+		outline: 2px solid red;
+	}
+	&.selected-value{
+		border: 2px solid green;
 	}	
 }
 
