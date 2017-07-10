@@ -14,7 +14,7 @@
 
 				    {% assign alt_handle = image.alt | downcase %}
 				    
-				    {% if alt_handle != color_name and alt_handle != 'swatch' %}
+				    {% if alt_handle != color_name and alt_handle != color_swatch_alt_handle %}
 
 					{% assign next_index = forloop.index0 | plus: 1 %}
 				    {% assign next_alt_handle = product.images[next_index].alt | downcase %}
@@ -23,10 +23,10 @@
 				    	{% assign has_swap_image = true %}	
 				    {% endif %}
 
-					<img src="{{ image.src | img_url: '850x', format: 'pjpg' }}" alt="{{ alt_handle }}"
+					<img src="{{ image.src | img_url: product_quick_shop_image_size, format: 'pjpg' }}" alt="{{ alt_handle }}"
 					class="product-quick-shop-image{% if has_swap_image %} js-product-image-swap{% endif %}{% if alt_handle == default_color %} active{% endif %}"
 					data-alt-handle="{{ alt_handle }}"
-					{% if has_swap_image %}data-swap-image-src="{{ product.images[next_index] | product_img_url: '850x', format: 'pjpg' }}"{% endif %}
+					{% if has_swap_image %}data-swap-image-src="{{ product.images[next_index] | product_img_url: product_quick_shop_image_size, format: 'pjpg' }}"{% endif %}
 					>
 
 			  		{% assign color_name = alt_handle %}
@@ -39,7 +39,7 @@
 
 				{% assign image_length = product.images | size %}
 
-				<img src="{{ product.images[0] | img_url: '850x', format: 'pjpg' }}" class="active product-quick-shop-image{% if image_length > 1 %} js-product-image-swap{% endif %}" {% if image_length > 1 %}data-swap-image-src="{{ product.images[1] | product_img_url: '850x', format: 'pjpg' }}{% endif %}">
+				<img src="{{ product.images[0] | img_url: product_quick_shop_image_size, format: 'pjpg' }}" class="active product-quick-shop-image{% if image_length > 1 %} js-product-image-swap{% endif %}" {% if image_length > 1 %}data-swap-image-src="{{ product.images[1] | product_img_url: product_quick_shop_image_size, format: 'pjpg' }}{% endif %}">
 
 			{% endif %}
 
@@ -57,7 +57,8 @@
 
 				<div class="product-quick-shop-price">{{ product_price }}</div>
 
-				
+				{% unless has_only_default_variant %}
+
 				<div class="product-options product-quick-shop-options">
 
 				{% for option in product.options_with_values %}
@@ -97,14 +98,17 @@
 
 				</div>
 
+				{% endunless %}
 
-				{% assign variant_id =  product.selected_or_first_available_variant.id %}
-				<button type="button" disabled class="product-add-to-cart product-quick-shop-add-to-cart js-product-quick-shop-add-to-cart btn" data-variant-id="{{ variant_id }}"
-				data-choose-size-btn-text="{{ 'product.choose_size_btn_text' | t }}"
-				data-add-to-cart-btn-text="{{ 'product.add_to_cart_btn_text' | t }}"
-				data-pre-order-btn-text="{{ 'product.pre_order_btn_text' | t }}"
-				data-sold-out-btn-text="{{ 'product.sold_out_btn_text' | t }}"
-				>{{ 'product.choose_size_btn_text' | t }}</button>
+				<button {% if default_btn_disabled %}disabled{% endif %}
+				type="button"
+				class="product-add-to-cart product-quick-shop-add-to-cart js-product-quick-shop-add-to-cart btn" 
+				data-variant-id="{{ default_variant.id }}"
+				data-choose-size-btn-text="{{ choose_size_btn_text }}"
+				data-add-to-cart-btn-text="{{ add_to_cart_btn_text }}"
+				data-pre-order-btn-text="{{ pre_order_btn_text }}"
+				data-sold-out-btn-text="{{ sold_out_btn_text }}"
+				>{{ default_btn_text }}</button>
 
 
 

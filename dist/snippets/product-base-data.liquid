@@ -1,25 +1,92 @@
 {% comment %}
-    "Color" Option Settings
+    Settings
 {% endcomment %}
 
 {% assign color_option_name_handle = 'color' %}
+{% assign color_swatch_alt_handle = 'swatch' %}
 {% assign color_option_position = 1 %}
-{% assign color_swatch_name = 'swatch' %}
+
+{% assign product_card_image_size = "850x" %}
+{% assign product_quick_shop_image_size = "850x" %}
+
+
+{% comment %}
+    Get Default Variant
+
+    If product has variant on sale, get the most expensive one ????
+{% endcomment %}
+
+{% assign default_variant = product.selected_or_first_available_variant %}
+
+{% if has_variant_on_sale %}
+    
+    {% for variant in product.variants %}
+        {% if variant.compare_at_price == variant.compare_at_price_max %}
+            {% assign default_variant = variant %}
+            {% break %}
+        {% endif %}
+    {% endfor %}
+
+{% endif %}
+
+
+{% comment %}
+    Get Default Variant Option123
+{% endcomment %}
+
+{% assign default_option1 = default_variant.option1 %}
+{% assign default_option2 = default_variant.option2 %}
+{% assign default_option3 = default_variant.option3 %}
+
+
+{% comment %}
+    Has Only Default Variant (Default Title) ?
+{% endcomment %}
+
+{% assign has_only_default_variant = product.has_only_default_variant %}
 
 
 
 {% comment %}
-    Does Product Has Variant on Sale ?
+    Generate Text for Add to Cart Button 
 {% endcomment %}
 
-{% assign has_variant_on_sale = false %}
+{% capture choose_size_btn_text %}
+    {{ 'product.choose_size_btn_text' | t }}
+{% endcapture %}
+{% capture add_to_cart_btn_text %}
+    {{ 'product.add_to_cart_btn_text' | t }}
+{% endcapture %}
+{% capture pre_order_btn_text %}
+    {{ 'product.pre_order_btn_text' | t }}
+{% endcapture %}
+{% capture sold_out_btn_text %}
+    {{ 'product.sold_out_btn_text' | t }}
+{% endcapture %}
 
-{% for variant in product.variants %}
-    {% if variant.price < variant.compare_at_price %}
-        {% assign has_variant_on_sale = true %}
-        {% break %}
+{% assign default_btn_disabled = true %}
+{% assign default_btn_text = choose_size_btn_text %}
+
+{% if has_only_default_variant %}
+    
+    {% if default_variant.available %}
+
+        {% assign default_btn_disabled = false %}
+        
+        {% if default_variant.inventory_quantity > 0 %}
+            {% assign default_btn_text = add_to_cart_btn_text %}
+        {% else %}
+            {% assign default_btn_text = pre_order_btn_text %}
+        {% endif %}
+
+    {% else %}
+
+            {% assign default_btn_text = sold_out_btn_text %}
+
     {% endif %}
-{% endfor %}
+
+{% endif %}
+
 
 
 {% comment %}
@@ -49,35 +116,6 @@
 
 
 {% comment %}
-    Get Default Variant
-
-    If product has variant on sale, get the most expensive one ????
-{% endcomment %}
-
-{% assign default_variant = product.selected_or_first_available_variant %}
-
-{% if has_variant_on_sale %}
-    
-    {% for variant in product.variants %}
-        {% if variant.compare_at_price == variant.compare_at_price_max %}
-            {% assign default_variant = variant %}
-            {% break %}
-        {% endif %}
-    {% endfor %}
-
-{% endif %}
-
-
-{% comment %}
-    Get Default Option123
-{% endcomment %}
-
-{% assign default_option1 = default_variant.option1 %}
-{% assign default_option2 = default_variant.option2 %}
-{% assign default_option3 = default_variant.option3 %}
-
-
-{% comment %}
     Generate Product Price Html
 {% endcomment %}
 
@@ -101,6 +139,22 @@
 {% endif %}
 
 {% endcapture %}
+
+
+
+{% comment %}
+    has Variant on Sale ?
+{% endcomment %}
+
+{% assign has_variant_on_sale = false %}
+
+{% for variant in product.variants %}
+    {% if variant.price < variant.compare_at_price %}
+        {% assign has_variant_on_sale = true %}
+        {% break %}
+    {% endif %}
+{% endfor %}
+
 
 
 {% comment %}
@@ -133,7 +187,7 @@
 
         {% assign alt_handle = image.alt | downcase %}
 
-        {% if alt_handle == 'swatch' %}
+        {% if alt_handle == color_swatch_alt_handle %}
         
             {% assign swatch_src_count = swatch_src_count | plus: 1 %}
 
