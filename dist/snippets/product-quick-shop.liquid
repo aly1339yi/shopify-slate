@@ -10,16 +10,24 @@
 			{% if hasColorOption %}
 
 				{% assign color_name = "" %}
+				{% assign color_name_count = 0 %}
 
 				{% for image in product.images %}
 
 				    {% assign alt_handle = image.alt | downcase %}
 
-				    {% if alt_handle != color_name and alt_handle != 'swatch' %}
-				   
-			  		{% assign color_name = alt_handle %}
+				    {% assign next_index = forloop.index0 | plus: 1 %}
 
-					<img src="{{ image.src | img_url: '850x', format: 'pjpg' }}" alt="{{ alt_handle }}" data-alt-handle="{{ alt_handle }}" class="product-quick-shop-image{% if alt_handle == default_color %} active{% endif %}">
+				    {% if alt_handle != color_name and alt_handle != 'swatch' %}
+
+					<img src="{{ image.src | img_url: '850x', format: 'pjpg' }}" alt="{{ alt_handle }}"
+					class="product-quick-shop-image js-product-image-swap{% if alt_handle == default_color %} active{% endif %}"
+					data-alt-handle="{{ alt_handle }}"
+					{% if color_images_count_array[color_name_count] != '1' %}data-src-alt="{{ product.images[next_index] | product_img_url: '600x', format: 'pjpg' }}"{% endif %}
+					>
+
+			  		{% assign color_name = alt_handle %}
+			  		{% assign color_name_count = 0 %}
 
 				  {% endif %}
 
@@ -92,7 +100,7 @@
 				data-add-to-cart-btn-text="{{ 'product.add_to_cart_btn_text' | t }}"
 				data-pre-order-btn-text="{{ 'product.pre_order_btn_text' | t }}"
 				data-sold-out-btn-text="{{ 'product.sold_out_btn_text' | t }}"
-				>{{ 'product.choose_size_btn' | t }}</button>
+				>{{ 'product.choose_size_btn_text' | t }}</button>
 
 
 

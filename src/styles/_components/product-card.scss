@@ -1,0 +1,6 @@
+.product-card-image{
+	display: none;
+	&.active{
+		display: initial;
+	}
+}

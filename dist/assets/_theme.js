@@ -2934,7 +2934,7 @@ $(document).ready(function() {
 
    };
 
-   $('.js-product-card-image-swap').hover(imageSourceSwap, imageSourceSwap);
+   $('.js-product-image-swap').hover(imageSourceSwap, imageSourceSwap);
 
 
 
@@ -3055,8 +3055,7 @@ $(document).ready(function() {
 
 
 
-
-function updateQuickShopImage ($images, optionValue) {
+function updateVariantImage ($images, optionValue) {
 
     $images.removeClass('active')
     .filter('[data-alt-handle="' + optionValue + '"]').addClass('active');
@@ -3156,12 +3155,30 @@ function getAddToCartBtnStatus (variant) {
 
 
 
+$(document).on('click', '.js-product-card-option-value', function(){
+
+    var $this = $(this);
+
+    $this.addClass('selected-value active-value').siblings().removeClass('selected-value active-value');
+
+    var optionValue = $this.data('product-option-value');
+
+    var $card = $this.parents('.product-card');
+
+    var $productImages = $card.find('.product-card-image');
+
+    updateVariantImage($productImages, optionValue);
+});
+
+
+
 
 $(document).on('click', '.js-product-quick-shop-option-value', function(){
 
     var $this = $(this);
 
     // visual state update
+
     $this.addClass('selected-value active-value').siblings().removeClass('selected-value active-value');
 
     var isColor = $this.data('is-color-option-value') || false;
@@ -3189,7 +3206,9 @@ $(document).on('click', '.js-product-quick-shop-option-value', function(){
     
     if(isColor){
 
-        updateQuickShopImage($productImages, optionValue);
+        // update variant image
+
+        updateVariantImage($productImages, optionValue);
 
     }
 
@@ -3201,7 +3220,7 @@ $(document).on('click', '.js-product-quick-shop-option-value', function(){
 
         $addToCartBtn.attr('data-variant-id', variantData.id);
 
-        // update price
+        // update variant price
 
         var variantPriceHtml = generateVariantPriceHtml(variantData);
 
@@ -3211,7 +3230,7 @@ $(document).on('click', '.js-product-quick-shop-option-value', function(){
 
     if($selectedValues.length == optionsSize ){
 
-        // update button
+        // update add to cart button
 
         var btnStatus = getAddToCartBtnStatus(variantData);
         var btnText = $addToCartBtn.data(btnStatus+'-btn-text');

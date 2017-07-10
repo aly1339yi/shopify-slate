@@ -4,19 +4,94 @@
 
 	<a href="{{ product.url | within: collection }}">
 
-		<div class="product-card-image-wrapper">
-			{% assign image_size = product.images | size %}
-			<img src="{{ product.featured_image | product_img_url: '850x', format: 'pjpg' }}" data-src-alt="{{ product.images[1] | product_img_url: '600x', format: 'pjpg' }}" class="product-card-image img-fullwidth {% if image_size > 1 %} js-product-card-image-swap{% endif %}">
-		</div>
+	<div class="product-card-image-wrapper">
 
-		<div class="product-card-details">
 
-			<div class="product-card-title">{{ product.title }}</div>
+		{% if hasColorOption %}
 
-			<div class="product-card-price">{{ product_card_price }}</div>
+			{% assign color_name = "" %}
+			{% assign color_name_count = 0 %}
 
-		</div>
+			{% for image in product.images %}
 
+			    {% assign alt_handle = image.alt | downcase %}
+
+			    {% assign next_index = forloop.index0 | plus: 1 %}
+
+			    {% if alt_handle != color_name and alt_handle != 'swatch' %}
+
+				<img src="{{ image.src | img_url: '850x', format: 'pjpg' }}" alt="{{ alt_handle }}"
+				class="product-card-image js-product-card-image-swap{% if alt_handle == default_color %} active{% endif %}"
+				data-alt-handle="{{ alt_handle }}"
+				{% if color_images_count_array[color_name_count] != '1' %}data-src-alt="{{ product.images[next_index] | product_img_url: '600x', format: 'pjpg' }}"{% endif %}
+				>
+
+		  		{% assign color_name = alt_handle %}
+		  		{% assign color_name_count = 0 %}
+
+			  {% endif %}
+
+			{% endfor %}
+
+		{% else %}
+
+			<img src="{{ product.featured_image | img_url: '850x', format: 'pjpg' }}" class="product-card-image">
+
+		{% endif %}
+
+
+
+
+
+	</div>
 	</a>
+
+	<div class="product-card-details">
+
+		<div class="product-card-title">{{ product.title }}</div>
+
+		<div class="product-card-price">{{ product_card_price }}</div>
+
+		<div class="product-options product-card-options">
+
+		{% for option in product.options_with_values %}
+
+			{% assign is_color_option = false %}
+			{% assign option_name_handle = option.name | handle %}
+	        {% if option_name_handle == color_option_name_handle %}
+	            {% assign is_color_option = true %}
+	        {% endif %}
+
+	        {% if is_color_option %}
+
+			<div class="product-option product-card-option">
+
+				<div class="product-option-values product-card-option-values">
+
+					{% for value in option.values %}
+
+					<div class="product-option-value product-card-option-value js-product-card-option-value{% if value == default_option1 or value == default_option2 or value == default_option3 %} active-value{% endif %}{% if value == default_color %} selected-value{% endif %}"
+					data-product-option-value="{{ value }}"
+					{% if is_color_option %}
+					style="background:url({{ swatch_src_array[forloop.index0] }}) no-repeat center center; background-size: cover;"
+					{% endif %}
+					>{{ value }}</div>
+
+					{% endfor %}
+
+				</div>
+
+			</div>
+
+
+			{% endif %}
+
+		{% endfor %}
+
+		</div>
+
+	</div>
+
+
 	
 </div>

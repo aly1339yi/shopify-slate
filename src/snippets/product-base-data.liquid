@@ -123,6 +123,7 @@
     
     {% comment %}
         Generate Swatch Bkg Image Src Array
+        [url,url,url]
     {% endcomment %}
 
     {% assign swatch_src_count  = 0 %}
@@ -143,6 +144,53 @@
     {% endfor %}
 
     {% assign swatch_src_array = swatch_srcs | split: "," %}
+
+
+
+
+    {% comment %}
+        Generate Color Images Count Array
+        [2,1,3,2,3]
+    {% endcomment %}
+
+
+
+    {% assign color_name = '' %}
+    {% assign single_color_images_count = 0 %}
+
+    {% assign color_images_count  = '' %}
+
+    {% for image in product.images %}
+
+        {% assign alt_handle = image.alt | downcase %}
+
+        {% if alt_handle != color_name and color_name != blank %}          
+
+        {% capture color_images_count %}{{ color_images_count }}{% unless color_images_count == blank %},{% endunless %}{{ single_color_images_count }}{% endcapture %}
+
+        {% assign single_color_images_count  = 1 %}
+
+        {% else %}
+
+            {% assign single_color_images_count = single_color_images_count | plus: 1 %}
+
+        {% endif %}
+
+        {% assign color_name = alt_handle %}
+        
+
+    {% endfor %}
+
+
+    {% assign color_images_count_array = color_images_count | split: "," %}
+
+
+    <div class="count">
+        
+        {% for count in color_images_count_array %}
+            <div>{{ count }}</div>
+        {% endfor %}
+    </div>
 
 
 

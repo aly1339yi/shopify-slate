@@ -170,7 +170,7 @@
 
    };
 
-   $('.js-product-card-image-swap').hover(imageSourceSwap, imageSourceSwap);
+   $('.js-product-image-swap').hover(imageSourceSwap, imageSourceSwap);
 
 
 
