@@ -1,4 +1,3 @@
-
 <div class="product-quick-shop">
 	
 	<div class="row">
@@ -10,24 +9,27 @@
 			{% if hasColorOption %}
 
 				{% assign color_name = "" %}
-				{% assign color_name_count = 0 %}
 
 				{% for image in product.images %}
 
 				    {% assign alt_handle = image.alt | downcase %}
-
-				    {% assign next_index = forloop.index0 | plus: 1 %}
-
+				    
 				    {% if alt_handle != color_name and alt_handle != 'swatch' %}
 
+					{% assign next_index = forloop.index0 | plus: 1 %}
+				    {% assign next_alt_handle = product.images[next_index].alt | downcase %}
+				    {% assign has_swap_image = false %}
+				    {% if next_alt_handle == alt_handle %}
+				    	{% assign has_swap_image = true %}	
+				    {% endif %}
+
 					<img src="{{ image.src | img_url: '850x', format: 'pjpg' }}" alt="{{ alt_handle }}"
-					class="product-quick-shop-image js-product-image-swap{% if alt_handle == default_color %} active{% endif %}"
+					class="product-quick-shop-image{% if has_swap_image %} js-product-image-swap{% endif %}{% if alt_handle == default_color %} active{% endif %}"
 					data-alt-handle="{{ alt_handle }}"
-					{% if color_images_count_array[color_name_count] != '1' %}data-src-alt="{{ product.images[next_index] | product_img_url: '600x', format: 'pjpg' }}"{% endif %}
+					{% if has_swap_image %}data-swap-image-src="{{ product.images[next_index] | product_img_url: '850x', format: 'pjpg' }}"{% endif %}
 					>
 
 			  		{% assign color_name = alt_handle %}
-			  		{% assign color_name_count = 0 %}
 
 				  {% endif %}
 
@@ -35,7 +37,9 @@
 
 			{% else %}
 
-				<img src="{{ product.featured_image | img_url: '850x', format: 'pjpg' }}" class="product-quick-shop-image">
+				{% assign image_length = product.images | size %}
+
+				<img src="{{ product.images[0] | img_url: '850x', format: 'pjpg' }}" class="active product-quick-shop-image{% if image_length > 1 %} js-product-image-swap{% endif %}" {% if image_length > 1 %}data-swap-image-src="{{ product.images[1] | product_img_url: '850x', format: 'pjpg' }}{% endif %}">
 
 			{% endif %}
 

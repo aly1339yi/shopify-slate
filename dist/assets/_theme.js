@@ -2928,9 +2928,9 @@ $(document).ready(function() {
    var imageSourceSwap = function() {
 
       var $this = $(this);
-      var sourceAlt = $this.data('src-alt');
-      $this.data('src-alt', $this.attr('src'));
-      $this.attr('src', sourceAlt);
+      var swapImageSrc = $this.attr('data-swap-image-src');
+      $this.attr('data-swap-image-src', $this.attr('src'));
+      $this.attr('src', swapImageSrc);
 
    };
 
@@ -3168,6 +3168,7 @@ $(document).on('click', '.js-product-card-option-value', function(){
     var $productImages = $card.find('.product-card-image');
 
     updateVariantImage($productImages, optionValue);
+    
 });
 
 
@@ -3224,7 +3225,7 @@ $(document).on('click', '.js-product-quick-shop-option-value', function(){
 
         var variantPriceHtml = generateVariantPriceHtml(variantData);
 
-        $('.product-quick-shop-price').html(variantPriceHtml);
+        $price.html(variantPriceHtml);
 
     }
 

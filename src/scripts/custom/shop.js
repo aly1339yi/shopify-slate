@@ -113,6 +113,7 @@ $(document).on('click', '.js-product-card-option-value', function(){
     var $productImages = $card.find('.product-card-image');
 
     updateVariantImage($productImages, optionValue);
+    
 });
 
 
@@ -169,7 +170,7 @@ $(document).on('click', '.js-product-quick-shop-option-value', function(){
 
         var variantPriceHtml = generateVariantPriceHtml(variantData);
 
-        $('.product-quick-shop-price').html(variantPriceHtml);
+        $price.html(variantPriceHtml);
 
     }
 

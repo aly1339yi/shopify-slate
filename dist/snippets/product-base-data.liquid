@@ -153,8 +153,6 @@
         [2,1,3,2,3]
     {% endcomment %}
 
-
-
     {% assign color_name = '' %}
     {% assign single_color_images_count = 0 %}
 
@@ -178,19 +176,9 @@
 
         {% assign color_name = alt_handle %}
         
-
     {% endfor %}
 
-
     {% assign color_images_count_array = color_images_count | split: "," %}
-
-
-    <div class="count">
-        
-        {% for count in color_images_count_array %}
-            <div>{{ count }}</div>
-        {% endfor %}
-    </div>
 
 
 
