@@ -73,7 +73,7 @@
 
    if ($('html.mod-mobile').length) {
 
-      $('.js-dropdown-header-click').click(function() {
+      $('.js-dropdown-toggle').click(function() {
 
          var $dropdown = $(this).parent();
 
@@ -83,17 +83,6 @@
       });
 
    }
-
-   // COLOR THE DROPDOWN
-   $(document).on('mouseenter', '.js-color-the-dropdown', function(){
-     $(this).parents('.dropdown').find('.dropdown-color-me').css('background-color', $(this).data('color-hex'));
-     // $('.embroidery-preview').css('color', $(this).data('color-hex'));
-   });
-
-   $(document).on('mouseleave', '.js-color-the-dropdown', function(){
-     $(this).parents('.dropdown').find('.dropdown-color-me').css('background-color', 'white');
-   });
-
 
 
 
@@ -157,8 +146,6 @@
 
 
 
-
-
    // IMAGE SWAP
 
    var imageSourceSwap = function() {
@@ -171,7 +158,6 @@
    };
 
    $('.js-product-image-swap').hover(imageSourceSwap, imageSourceSwap);
-
 
 
 
@@ -227,8 +213,6 @@
 
             });
     });
-
-
 
 
 

@@ -2837,7 +2837,7 @@ $(document).ready(function() {
 
    if ($('html.mod-mobile').length) {
 
-      $('.js-dropdown-header-click').click(function() {
+      $('.js-dropdown-toggle').click(function() {
 
          var $dropdown = $(this).parent();
 
@@ -2847,17 +2847,6 @@ $(document).ready(function() {
       });
 
    }
-
-   // COLOR THE DROPDOWN
-   $(document).on('mouseenter', '.js-color-the-dropdown', function(){
-     $(this).parents('.dropdown').find('.dropdown-color-me').css('background-color', $(this).data('color-hex'));
-     // $('.embroidery-preview').css('color', $(this).data('color-hex'));
-   });
-
-   $(document).on('mouseleave', '.js-color-the-dropdown', function(){
-     $(this).parents('.dropdown').find('.dropdown-color-me').css('background-color', 'white');
-   });
-
 
 
 
@@ -2921,8 +2910,6 @@ $(document).ready(function() {
 
 
 
-
-
    // IMAGE SWAP
 
    var imageSourceSwap = function() {
@@ -2935,7 +2922,6 @@ $(document).ready(function() {
    };
 
    $('.js-product-image-swap').hover(imageSourceSwap, imageSourceSwap);
-
 
 
 
@@ -2995,8 +2981,6 @@ $(document).ready(function() {
 
 
 
-
-
    // PRODUCT IMAGE FULLSCREEN
 
    $(document).on('click', '.js-product-image-fullscreen', function() {
@@ -3038,6 +3022,13 @@ $(document).ready(function() {
     //////////////////////////////////////// COLLECTION PAGE /////////////////////////////////////
 
     if ($('.template-collection').length) {
+
+
+		$(".size-s").insertAfter($(".size-xs"));
+		$(".size-m").insertAfter($(".size-s"));
+		$(".size-l").insertAfter($(".size-m"));
+		$(".size-xl").insertAfter($(".size-l"));
+		$(".size-onesize").insertAfter($(".size-onesize").parent().children().last());
 
 
     }

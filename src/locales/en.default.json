@@ -1,12 +1,18 @@
 {
 
   "collection": {
-    "empty_collection_notice": "There are no products in this collection.",
-    "empty_collection_cta": "Shop all products",
-    "empty_collection_cta_link": "\/",
-    "sort_btn": "Sort by",
-    "remove_all_filters": "Remove all filters",
-    "no_filter_results_html": "No products matched your selection.<br>Try removing some filters."
+
+    "empty_notice_title": "There are no products in this collection.",
+    "empty_notice_cta": "Shop all products",
+    "empty_notice_cta_link": "\/",
+
+    "no_results_notice_html": "No products matched your selection.<br>Try removing some filters.",
+
+    "remove_all_filters_btn_text": "Remove all filters",
+
+    "sort_btn": "Sort by"
+    
+    
   },
 
   "product": {
@@ -15,14 +21,20 @@
     "add_to_cart_btn_text": "Add to bag",
     "pre_order_btn_text": "Pre-order",
     "sold_out_btn_text": "Sold out",
+
     "quantity_label": "Quantity",
+
     "option_label": "Select {{ option_name }}",
+
     "related_products_title": "You May Also Like"
+
   },
 
   "pagination": {
+
     "product_btn": "More Styles",
     "article_btn": "Load More"
+
   },
 
 

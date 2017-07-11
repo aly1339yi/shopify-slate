@@ -1,0 +1,17 @@
+
+
+.dropdown-menu {
+	@include transition();
+	// @include invisible;
+}
+
+.dropdown {
+	position: relative;
+	&.open{
+		.dropdown-header {}
+
+		.dropdown-menu {
+			@include visible;
+		}
+	}
+}

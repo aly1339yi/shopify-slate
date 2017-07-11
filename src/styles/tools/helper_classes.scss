@@ -44,8 +44,30 @@
 
 
 /* ========================================================================
-   Display, Box Model
+   Visual, Display, Box Model
    ========================================================================= */
+
+ /* eg:large-up-display-none */
+
+@mixin display-none-class($breakpoint: '') {
+  .#{$breakpoint}-display-none{display:none !important;}
+}
+
+@each $item in $breakpoint-range {
+  $item-key: nth($item, 1);
+  @include screen($range: $item-key) {
+    @include display-none-class('#{$item-key}');
+  }
+}
+
+
+.display-none{
+  display: none !important;
+}
+
+.display-block{
+  display: block;
+}
 
 .display-inline-block{
   display: inline-block;
@@ -73,29 +95,38 @@
   height: 100vh;
 }
 
-.shown-small {
-  @include mq-gteq(small) {
-    display: none !important;
-  }
+.invisible{
+  @include invisible;
 }
 
-.shown-medium {
-  @include mq-gteq(medium) {
-    display: none !important;
-  }
+.visible{
+  @include visible;
 }
 
-.hidden-small {
-  @include mq-lt(small) {
-    display: none !important;
-  }
-}
 
-.hidden-medium {
-  @include mq-lt(medium) {
-    display: none !important;
-  }
-}
+// .shown-small {
+//   @include mq-gteq(small) {
+//     display: none !important;
+//   }
+// }
+
+// .shown-medium {
+//   @include mq-gteq(medium) {
+//     display: none !important;
+//   }
+// }
+
+// .hidden-small {
+//   @include mq-lt(small) {
+//     display: none !important;
+//   }
+// }
+
+// .hidden-medium {
+//   @include mq-lt(medium) {
+//     display: none !important;
+//   }
+// }
 
 .clearfix:after {
   content: " ";
