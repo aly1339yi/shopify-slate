@@ -28,8 +28,6 @@ $collection-refinement: (
 
 .collection-refinement-pillar{
 
-	border: 1px solid red;
-
 	height: list-get($collection-refinement,'height');
 	line-height: list-get($collection-refinement,'height');
 
@@ -59,7 +57,7 @@ $collection-refinement: (
 }
 
 .collection-sort-toggle{
-
+	border: 1px solid blue;
 }
 
 
@@ -75,7 +73,7 @@ $collection-refinement: (
 
 .collection-filter-toggle {
 	
-
+	border: 1px solid red;
 }
 
 .collection-filter-menu {
@@ -87,7 +85,7 @@ $collection-refinement: (
 	z-index: 1;
 
 	width: 200px;
-	padding: 10px 0;
+	padding: 15px 0;
 	border: 1px solid teal;
 
 	background-color: #fff;
@@ -143,11 +141,17 @@ $collection-refinement: (
 
 .collection-filter-reset-link{
 	padding: 0 20px;
+	border: 1px solid green;
 }
 
 
 .collection-current-tag-list{
-
+	li{
+		float: left;
+		a{
+			border: 1px solid orange;
+		}
+	}
 }
 
 .collection-current-tag{

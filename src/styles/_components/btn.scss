@@ -2,15 +2,16 @@
 
 	display: inline-block;
 
-	height: 40px;
-	line-height: 40px;
-	padding: 0 50px;
+	$height: 40px;
+	height: $height;
+	line-height: $height;
 
-	font-size: 14px;
+	padding: 0 50px;
+	border: 1px solid green;
 
 	cursor: pointer;
 	
-	html.device-no-mobile & {
+	html.mod-no-mobile & {
 		@include transition($duration:300ms);
 		&:hover{
 

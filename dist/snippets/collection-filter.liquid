@@ -79,7 +79,7 @@
 	<div class="collection-refinement-pillar collection-refinement-toggle collection-filter-toggle dropdown-toggle js-dropdown-click">size</div>
 	<ul class="collection-filter-menu dropdown-menu clearfix">
 
-		{% assign current_has_size_tag = true %}
+		{% assign current_has_size_tag = false %}
 		{% for tag in current_tags %}
 			{% if tag contains 'size-' %}
 				{% assign current_has_size_tag = true %}

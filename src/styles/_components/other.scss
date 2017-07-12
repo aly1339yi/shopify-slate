@@ -1,25 +1,87 @@
+/* dropdown */
 
+.dropdown-menu {
+    @include transition();
+    // @include invisible;
+}
+
+.dropdown {
+    position: relative;
+    &.open{
+        .dropdown-header {}
+
+        .dropdown-menu {
+            @include visible;
+        }
+    }
+}
+
+
+
+/* social list */
+
+.pagination-load-more-wrapper{
+    text-align: center;
+}
+
+
+
+
+/* social list */
+
+.social-list{
+
+    li{
+        
+        a{
+            display: block;
+            padding: 0 5px;
+            font-size: 30px;
+        }
+    }
+
+}
+
+
+
+/* video cover */
 
 .video-cover {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  /* The following will size the video to fit the full container. Not necessary, just nice.*/
-  min-width: 101%;
-  min-height: 101%;
-  @include transform(translate(-50%,-50%));
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    /* The following will size the video to fit the full container. Not necessary, just nice.*/
+    min-width: 101%;
+    min-height: 101%;
+    @include transform(translate(-50%,-50%));
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 
 #admin_bar_iframe{
-	display: none !important;
+    display: none !important;
 }
 #shopify-theme-controls{
-	display: none !important;
+    display: none !important;
 }
 .shopify-preview-bar{
-	display: none !important;
+    display: none !important;
 }
