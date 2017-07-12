@@ -25,10 +25,8 @@ $color: (
 
 
  /* =========================================================================
-   Font Size
+   Font Size (html font-size 10px)
    ========================================================================= */
-
-$font-size-normal   : 1.4rem;
 
 $font-size-xx-small : 0.9rem;
 
@@ -43,6 +41,10 @@ $font-size-large    : 1.4rem;
 $font-size-x-large  : 1.4rem;
 
 $font-size-xx-large : 1.4rem;
+
+
+$font-size-normal   : $font-size-medium;
+
 
 $font-size: (
 
@@ -74,7 +76,7 @@ $breakpoint-medium  : 768px;
 $breakpoint-large   : 992px;
 $breakpoint-x-large : 1200px;
 
-$breakpoint-nav     : 576px;
+$breakpoint-nav-bp     : $breakpoint-small;
 
 
 $breakpoint-range: (
@@ -87,7 +89,10 @@ $breakpoint-range: (
   'large-up'      '(min-width: #{$breakpoint-large})',
   'x-large-down'  '(max-width: #{$breakpoint-x-large - 1})',
   'x-large-up'    '(min-width: #{$breakpoint-x-large})',
-  
+
+  'nav-bp-down'  '(max-width: #{$breakpoint-nav-bp - 1})',
+  'nav-bp-up'    '(min-width: #{$breakpoint-nav-bp})',
+
   'small-medium'  '(min-width: #{$breakpoint-small})  and  (max-width: #{$breakpoint-medium - 1})',
   'medium-large'  '(min-width: #{$breakpoint-medium}) and  (max-width: #{$breakpoint-large - 1})',
   'large-x-large' '(min-width: #{$breakpoint-large})  and  (max-width: #{$breakpoint-x-large - 1})'
@@ -149,27 +154,17 @@ $z-index: (
    ========================================================================= */
 
 
-$navbar-banner-height: (
+$navbar-banner-height-desktop: 20px;
+$navbar-banner-height-mobile: 18px;
 
-  'desktop' 20px,
+$navbar-nav-height-desktop: 60px;
+$navbar-nav-height-mobile: 50px;
 
-  'mobile'  18px,
 
-  null
+$body-padding-top-desktop: $navbar-banner-height-desktop + $navbar-nav-height-desktop;
 
-);
+$body-padding-top-mobile: $navbar-banner-height-mobile + $navbar-nav-height-mobile;
 
-$navbar-nav-height: (
-
-  'desktop'           80px,
-
-  'desktop-condensed' 40px,
-
-  'mobile'            50px,
-
-  null
-
-);
 
 
 

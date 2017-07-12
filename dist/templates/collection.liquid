@@ -3,54 +3,84 @@
 
 
 
+	{% comment %}
+		if collection is not empty
+	{% endcomment %}
 
-
-	{% if collection.all_products.size > 0 %}
+	{% if collection.all_products_count > 0 %}
 	
+		{% include 'collection-refinement' %}
 
-	{% include 'collection-refinement' %}
+		{% comment %}
+			if collection after filter is not empty
+		{% endcomment %}
 
-	
-	{% paginate collection.products by settings.product_pagination_limit %}
+		{% if collection.products_count > 0 %}
+		
+		
+			{% paginate collection.products by settings.product_pagination_limit %}
 
-	<div class="collection-grid grid grid-uniform" id="pagination-load-more-target">
+			<div class="collection-grid grid grid-uniform" id="pagination-load-more-target">
 
-		{% for product in collection.products %}
-		{% if settings.hide_sold_out_products and product.available == false %}
+				{% for product in collection.products %}
+				{% if settings.hide_sold_out_products and product.available == false %}
+				{% else %}
+
+				<div class="collection-grid-item grid-item x-large-up-one-quarter large-x-large-one-third large-down-one-half">
+
+					{% include 'product-base-data', product: product %}
+
+					{% include 'product-card', product: product %}
+
+					{% include 'product-quick-shop', product: product %}
+
+				</div>
+
+				{% endif %}
+				{% endfor %}
+
+			</div>
+
+
+			{% capture product_load_more_btn_text %}{{ 'pagination.product_btn' | t }}{% endcapture %}
+
+			{% include 'pagination', namespace: 'product' , load_more_btn_text: product_load_more_btn_text %}
+
+			{% endpaginate %}
+
+
+		{% comment %}
+			if collection after filter is empty
+		{% endcomment %}
+
 		{% else %}
 
-		<div class="collection-grid-item grid-item x-large-up-one-quarter large-x-large-one-third large-down-one-half">
 
-			{% include 'product-base-data', product: product %}
+		<div class="collection-empty-notice empty-notice empty-notice-in-flow">
 
-			{% include 'product-card', product: product %}
-
-			{% include 'product-quick-shop', product: product %}
+			<h1 class="empty-notice-title">{{ 'collection.no_results_notice_html' | t }}</h1>
+			<div>
+		    <a href="{{ collection.url }}" class="empty-notice-link btn">{{ 'collection.remove_all_filters_btn_text' | t }}</a>
+			</div>
 
 		</div>
 
+
 		{% endif %}
-		{% endfor %}
-
-	</div>
 
 
-	{% capture product_load_more_btn_text %}{{ 'pagination.product_btn' | t }}{% endcapture %}
-
-	{% include 'pagination', namespace: 'product' , load_more_btn_text: product_load_more_btn_text %}
-
-	{% endpaginate %}
-
-
-
+	{% comment %}
+		if collection is empty
+	{% endcomment %}
 
 	{% else %}
 
-		<div class="collection-empty-notice empty-notice">
+		<div class="collection-empty-notice empty-notice empty-notice-in-flow">
 
 			<h1 class="empty-notice-title">{{ 'collection.empty_notice_title' | t }}</h1>
-
-		    <a href="{{ 'collection.empty_notice_cta_link' | t }}" class="empty-notice-link">{{ 'collection.empty_notice_cta' | t }}</a>
+			<div>
+		    <a href="{{ 'collection.empty_notice_cta_link' | t }}" class="empty-notice-link btn">{{ 'collection.empty_notice_cta' | t }}</a>
+			</div>
 
 		</div>
 

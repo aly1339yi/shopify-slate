@@ -55,6 +55,10 @@
 
         {% include 'header' %}
 
+        {% if template.name != 'cart' %}
+        {% include 'mini-cart' %}
+        {% endif %}
+
         <main class="main">
         {{ content_for_layout }}
         </main>

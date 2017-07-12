@@ -1,5 +1,5 @@
 // Cart.js
-// version: 0.4.0
+// version: 0.4.1
 // author: Gavin Ballard
 // license: MIT
 (function() {
@@ -1154,13 +1154,6 @@
     return el.style.display = value ? 'none' : '';
   };
 
-  Rivets["public"].binders['style-*'] = function(el, value) {
-    el.style.setProperty(this.args[0], value);
-  };
-
-
-
-
   Rivets["public"].binders.enabled = function(el, value) {
     return el.disabled = !value;
   };
@@ -2110,7 +2103,7 @@
           return id = item.value;
         } else if (item.name === 'quantity') {
           return quantity = item.value;
-        } else {
+        } else if (item.name.match(/^properties\[\w+\]$/)) {
           return properties[item.name] = item.value;
         }
       });
@@ -2167,64 +2160,6 @@
         return CartJS.Rivets.boundViews = [];
       }
     };
-
-
-//stdlib.js
-
-
-  /* logical functions */
-
-  rivets.formatters.or = function() {
-      for(var i = 0; i < arguments.length; i++) {
-          if(rivets.formatters.toBoolean(arguments[i])) {
-              return true;
-          }
-      }
-      return false;
-  };
-
-  rivets.formatters.and = function() {
-      for(var i = 0; i < arguments.length; i++) {
-          if(!rivets.formatters.toBoolean(arguments[i])) {
-              return false;
-          }
-      }
-
-      return true;
-  };
-
-  rivets.formatters.negate = function(target) {
-      return !rivets.formatters.toBoolean(target);
-  };
-
-  rivets.formatters.if = function(target, trueCase, falseCase) {
-      return rivets.formatters.toBoolean(target) ? trueCase : falseCase;
-  };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// end of stdlib.js
-
-
-
-
-
-
-
-
     rivets.formatters.eq = function(a, b) {
       return a === b;
     };
@@ -2252,8 +2187,14 @@
     rivets.formatters.minus = function(a, b) {
       return parseInt(a) - parseInt(b);
     };
-     rivets.formatters.times = function(a, b) {
-      return parseInt(a) * parseInt(b);
+    rivets.formatters.times = function(a, b) {
+      return a * b;
+    };
+    rivets.formatters.divided_by = function(a, b) {
+      return a / b;
+    };
+    rivets.formatters.modulo = function(a, b) {
+      return a % b;
     };
     rivets.formatters.prepend = function(a, b) {
       return b + a;
@@ -2313,10 +2254,6 @@
     rivets.formatters.moneyWithCurrency = rivets.formatters.money_with_currency;
     rivets.formatters.weightWithUnit = rivets.formatters.weight_with_unit;
     rivets.formatters.productImageSize = rivets.formatters.product_image_size;
-
-
-
-
   } else {
     CartJS.Rivets = {
       init: function() {},

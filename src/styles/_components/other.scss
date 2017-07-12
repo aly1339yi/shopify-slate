@@ -2,7 +2,7 @@
 
 .dropdown-menu {
     @include transition();
-    // @include invisible;
+    @include invisible;
 }
 
 .dropdown {
@@ -15,6 +15,31 @@
         }
     }
 }
+
+
+
+/* empty notice */
+
+.empty-notice{
+    text-align: center;
+}
+
+.empty-notice-in-flow{
+   padding: 80px 0; 
+}
+
+
+.empty-notice-title{
+    margin-bottom: 20px;
+
+}
+
+.empty-notice-link{
+
+}
+
+
+
 
 
 

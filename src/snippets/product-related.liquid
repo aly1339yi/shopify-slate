@@ -1,23 +1,17 @@
 
-<!-- grid -->
-
-<section class="related-products clearfix">
+<div class="related-products">
     
-    <div class="related-products-title">
-        <div class="display-table">
-            <div class="display-table-cell">
-                <div class="text-nowrap-ellipsis">These are cute too...</div>
-            </div>
-        </div>
-    </div>
+    <div class="related-products-title"></div>
 
-    <div class="related-products-grid clearfix">
+    <div class="related-products-grid grid grid-uniform">
 
-        {% for product in collection.products limit:4 %}
+        {% for product in collection.products limit: 3 %}
 
-        <div class="related-products-grid-item">
+        <div class="related-products-grid-item grid-item large-up-one-third large-down-one-half">
 
-            {% include 'product-card', item: product %}
+            {% include 'product-base-data', product: product %}
+
+            {% include 'product-card', product: product %}
             
         </div>
 
@@ -26,7 +20,7 @@
         
     </div>
 
-</section>
+</div>
 
 
 

@@ -1,5 +1,9 @@
 
+// =require vendor/jquery.min.js
+
 // =require vendor/rivets-cart.js
+// =require vendor/rivetsstdlib.js
+
 // =require vendor/shopify-money.js
 
 // =require vendor/jquery.easings.min.js

@@ -6,11 +6,11 @@
     "empty_notice_cta": "Shop all products",
     "empty_notice_cta_link": "\/",
 
-    "no_results_notice_html": "No products matched your selection.<br>Try removing some filters.",
 
+    "no_results_notice_html": "<p>No products matched your selection.</p><p>Try removing some filters.</p>",
     "remove_all_filters_btn_text": "Remove all filters",
 
-    "sort_btn": "Sort by"
+    "sort_btn_text": "Sort by"
     
     
   },
@@ -39,11 +39,34 @@
 
 
   "cart": {
-    "total_label": "Subtotal:",
-    "checkout_btn": "Checkout",
-    "continue_shopping_btn": "Continue Shopping",
-    "empty_cart_notice": "Your Bag is Empty"
+
+    "empty_notice_title": "Your Bag is Empty",
+    "empty_notice_cta": "Shop all products",
+    "empty_notice_cta_link": "\/",
+
+    "cart_title": "Pack Your Bag",
+    "total_label": "Subtotal",
+    "checkout_btn_text": "Checkout"
+    
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

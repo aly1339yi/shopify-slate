@@ -1,0 +1,166 @@
+<div class="cart-container container" data-cart-view="data-cart-view">
+
+
+    <div class="cart-empty-notice empty-notice empty-notice-in-flow" rv-unless="cart.item_count | gt 0">
+    	
+		<h1 class="empty-notice-title">{{ 'cart.empty_notice_title' | t }}</h1>
+		<div>
+	    <a href="{{ 'cart.empty_notice_cta_link' | t }}" class="empty-notice-link btn">{{ 'cart.empty_notice_cta' | t }}</a>
+		</div>
+
+    </div>
+
+
+	<div class="cart" rv-if="cart.item_count | gt 0">
+
+
+		{% comment %}
+			Title
+		{% endcomment %}
+
+		<div class="cart-title">{{ 'cart.cart_title' | t }}</div>
+
+
+		{% comment %}
+			Body
+		{% endcomment %}
+
+		<table class="cart-body">
+
+			<tr class="cart-item cart-body-row" rv-each-item="cart.items" rv-hide="item.handle | eq 'embroidery'">
+
+				{% comment %}
+					Column 1
+				{% endcomment %}
+
+				<td class="cart-body-cell">
+
+		            <div class="cart-item-image">
+			            <a rv-href="item.url">
+		                <img rv-src="item.image | product_image_size 'large'" rv-alt="item.title" class="block-fullwidth">
+			            </a>
+		            </div>
+
+				</td>
+
+				{% comment %}
+					Column 2
+				{% endcomment %}
+				
+				<td class="cart-body-cell">
+					
+		            <div class="cart-item-details">
+			            <div class="cart-item-title">
+			                <a rv-href="item.url" rv-text="item.product_title"></a>
+			            </div>
+
+			            
+						<div class="mini-cart-item-price" rv-text="item.line_price | money Currency.currentCurrency"></div>
+
+
+			            <ul class="cart-item-options" rv-unless="item.variant_options | array_first | includes 'Default'">
+			                <li rv-each-option="item.variant_options" rv-text="option"></li>
+			            </ul>
+
+
+			            <div class="cart-item-properties" rv-unless="item.propertyArray | empty">
+			                <div class="cart-item-properties-title">Embroidery</div>
+			                <ul class="cart-item-properties">
+			                    <li rv-each-property="item.propertyArray"><span>{property.name}: </span><span>{property.value}</span></li>
+			                </ul>
+			            </div>
+
+
+		            </div>
+
+				</td>
+
+				{% comment %}
+					Column 3
+				{% endcomment %}
+				
+				<td class="cart-body-cell">
+
+		            <div class="cart-item-quantity qty-selectors">
+
+						<span class="qty-selectors-btn qty-selectors-btn-minus" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | minus 1">&#150;</span>
+
+						<span class="qty-selectors-number" rv-text="item.quantity"></span>
+
+						<span class="qty-selectors-btn qty-selectors-btn-plus" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | plus 1">&#43;</span>
+
+		            </div>
+
+				</td>
+
+
+			</tr>
+
+
+
+		</table>
+
+
+		{% comment %}
+			Footer
+		{% endcomment %}
+
+
+		<table class="cart-footer">
+
+			<tr>
+
+				{% comment %}
+					Column 1
+				{% endcomment %}
+
+				<td class="cart-body-cell">
+
+					<div class="cart-total-title">{{ 'cart.total_label' | t }}</div>
+
+				</td>
+
+				{% comment %}
+					Column 2
+				{% endcomment %}
+
+				<td class="cart-body-cell">
+					
+					<div class="cart-total-price" rv-text="cart.total_price | money Currency.currentCurrency"></div>
+
+				</td>
+
+				{% comment %}
+					Column 3
+				{% endcomment %}
+
+				<td class="cart-body-cell">
+					
+			        <form action="/cart" method="post" class="cart-form">
+			            <button type="submit" name="checkout" value="Checkout" class="cart-checkout btn">{{ 'cart.checkout_btn_text' | t }}</button>
+			        </form>
+
+				</td>
+
+
+			</tr>
+
+
+		</table>
+
+
+
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>

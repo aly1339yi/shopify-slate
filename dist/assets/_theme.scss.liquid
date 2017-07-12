@@ -1338,10 +1338,8 @@ $color: (
 
 
  /* =========================================================================
-   Font Size
+   Font Size (html font-size 10px)
    ========================================================================= */
-
-$font-size-normal   : 1.4rem;
 
 $font-size-xx-small : 0.9rem;
 
@@ -1356,6 +1354,10 @@ $font-size-large    : 1.4rem;
 $font-size-x-large  : 1.4rem;
 
 $font-size-xx-large : 1.4rem;
+
+
+$font-size-normal   : $font-size-medium;
+
 
 $font-size: (
 
@@ -1387,7 +1389,7 @@ $breakpoint-medium  : 768px;
 $breakpoint-large   : 992px;
 $breakpoint-x-large : 1200px;
 
-$breakpoint-nav     : 576px;
+$breakpoint-nav-bp     : $breakpoint-small;
 
 
 $breakpoint-range: (
@@ -1400,7 +1402,10 @@ $breakpoint-range: (
   'large-up'      '(min-width: #{$breakpoint-large})',
   'x-large-down'  '(max-width: #{$breakpoint-x-large - 1})',
   'x-large-up'    '(min-width: #{$breakpoint-x-large})',
-  
+
+  'nav-bp-down'  '(max-width: #{$breakpoint-nav-bp - 1})',
+  'nav-bp-up'    '(min-width: #{$breakpoint-nav-bp})',
+
   'small-medium'  '(min-width: #{$breakpoint-small})  and  (max-width: #{$breakpoint-medium - 1})',
   'medium-large'  '(min-width: #{$breakpoint-medium}) and  (max-width: #{$breakpoint-large - 1})',
   'large-x-large' '(min-width: #{$breakpoint-large})  and  (max-width: #{$breakpoint-x-large - 1})'
@@ -1462,27 +1467,17 @@ $z-index: (
    ========================================================================= */
 
 
-$navbar-banner-height: (
+$navbar-banner-height-desktop: 20px;
+$navbar-banner-height-mobile: 18px;
 
-  'desktop' 20px,
+$navbar-nav-height-desktop: 60px;
+$navbar-nav-height-mobile: 50px;
 
-  'mobile'  18px,
 
-  null
+$body-padding-top-desktop: $navbar-banner-height-desktop + $navbar-nav-height-desktop;
 
-);
+$body-padding-top-mobile: $navbar-banner-height-mobile + $navbar-nav-height-mobile;
 
-$navbar-nav-height: (
-
-  'desktop'           80px,
-
-  'desktop-condensed' 40px,
-
-  'mobile'            50px,
-
-  null
-
-);
 
 
 
@@ -2359,7 +2354,13 @@ $navbar-nav-height: (
    Visual, Display, Box Model
    ========================================================================= */
 
- /* eg:large-up-display-none */
+/* 
+
+eg:
+
+large-up-display-none
+
+*/
 
 @mixin display-none-class($breakpoint: '') {
   .#{$breakpoint}-display-none{display:none !important;}
@@ -3064,6 +3065,7 @@ p {
 
 table {
     width: 100%;
+    border-spacing: 0;
 }
 
 ins {
@@ -3148,6 +3150,14 @@ iframe {
   Grid Columns Width Classes
 ========================================================================= */
 
+/* 
+
+eg:
+
+large-up-one-third 
+
+*/
+
 @mixin grid-column-generator($breakpoint: '') {
   /** Whole */
   .#{$breakpoint}one-whole { width: 100%; }
@@ -3214,6 +3224,14 @@ iframe {
 /* =========================================================================
   #Grid Columns Push Classes
 ========================================================================= */
+
+/* 
+
+eg:
+
+large-up-push-one-third
+
+*/
 
 @mixin grid-push-generator($breakpoint: '') {
   /* Halves */
@@ -3450,12 +3468,135 @@ body {
   padding: 0 (list-get($grid-gutter, 'normal') / 2);
 }
 
+
+.desktop-navbar-banner{
+	text-align: center;
+}
+
+
+
+.desktop-navbar {
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: list-get($z-index, navbar);
+
+}
+
+.desktop-navbar-banner {
+	height: $navbar-banner-height-desktop;
+	line-height: $navbar-banner-height-desktop;
+
+	text-align: center;
+}
+
+
+.desktop-navbar-nav {
+	position: relative;
+}
+
+
+
+.desktop-navbar-nav-logo {
+
+	$width: 240px;
+
+	position: absolute;
+	top: 0;
+	left: 50%;
+	right: 0;
+
+	width: $width;
+	margin-left: $width / -2;
+	height: $navbar-nav-height-desktop;
+	
+	overflow: hidden;
+
+	border: 1px solid red;
+
+	&:after,
+	&:before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-size: contain;
+
+		html.mod-no-mobile & {
+			@include transition();
+		}
+	}
+
+	&:before {
+		display: none;
+		background-image: url("{{ 'no_logo.png' | asset_url }}");
+	}
+
+	&:after {
+		background-image: url("{{ 'no_logo.png' | asset_url }}");
+	}
+
+	body.hero-image-dark &{
+		&:before{
+			opacity: 1;
+		}
+		&:after{
+			opacity: 0;
+		}
+	}
+
+	html.mod-no-mobile .desktop-navbar:hover &,
+	body.browser-scrolled &{
+		&:before{
+			opacity: 0;
+		}
+		&:after{
+			opacity: 1;
+		}
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .footer{
 	
 }
+
 .mini-cart-item-image{
 	width: 150px;
 }
+
+
+
 
  /* =========================================================================
    Royal Slider
@@ -3658,7 +3799,7 @@ body {
 
 .dropdown-menu {
     @include transition();
-    // @include invisible;
+    @include invisible;
 }
 
 .dropdown {
@@ -3671,6 +3812,31 @@ body {
         }
     }
 }
+
+
+
+/* empty notice */
+
+.empty-notice{
+    text-align: center;
+}
+
+.empty-notice-in-flow{
+   padding: 80px 0; 
+}
+
+
+.empty-notice-title{
+    margin-bottom: 20px;
+
+}
+
+.empty-notice-link{
+
+}
+
+
+
 
 
 
@@ -3743,6 +3909,12 @@ body {
 }
 
 
+
+
+
+.collection-empty-notice{
+
+}
 
 
 
@@ -3923,6 +4095,82 @@ $collection-refinement: (
 .collection-grid-item{
 	
 }
+
+
+
+
+.cart{
+	max-width: 800px;
+	margin: auto;
+
+}
+
+.cart-title{
+
+	margin-bottom: 20px;
+	text-align: center;
+
+}
+
+.cart-body{
+
+	// border: 1px solid red;
+
+}
+
+.cart-body-cell{
+
+	// border: 1px solid purple;
+    padding: 20px 0;
+
+	&:nth-child(1){
+
+		width: 250px;
+
+		@include screen('small-down') {
+			width: 120px;
+		}
+
+	}
+
+	&:nth-child(2){
+		padding-left: 20px;
+	}
+
+
+	&:nth-child(3){
+
+	}
+
+}
+
+.cart-item-quantity{
+	text-align: right;
+}
+
+
+.cart-footer{
+
+}
+
+.cart-total-title{
+	text-align: right;
+}
+
+.cart-total-price{
+
+}
+
+.cart-form{
+	text-align: right;
+}
+
+
+
+
+
+
+
 
 
 

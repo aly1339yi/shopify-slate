@@ -47,7 +47,13 @@
    Visual, Display, Box Model
    ========================================================================= */
 
- /* eg:large-up-display-none */
+/* 
+
+eg:
+
+large-up-display-none
+
+*/
 
 @mixin display-none-class($breakpoint: '') {
   .#{$breakpoint}-display-none{display:none !important;}

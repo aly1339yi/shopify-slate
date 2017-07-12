@@ -1,16 +1,124 @@
-<ul>
-	{% for link in linklists.main-menu.links %}
-	<li>
-		<a href="{{ link.url }}">{{ link.title }}</a>
-	</li>
-	{% endfor %}
-</ul>
+
+{% comment %}
+	Desktop
+{% endcomment %}
+
+<div class="desktop-navbar nav-bp-down-display-none">
+
+
+	{% if settings.top_banner_enable %}
+	<div class="desktop-navbar-banner" style="color:{{ settings.top_banner_text_color }}; background-color:{{ settings.top_banner_bkg_color}};">
+		{{ settings.top_banner_desktop_text }}
+	</div>
+	{% endif %}
+
+
+
+	<div class="desktop-navbar-nav clearfix">
+
+		{% comment %}
+			Left
+		{% endcomment %}
+
+		<ul class="desktop-navbar-nav-list-left desktop-navbar-nav-list clearfix">
+
+            {% for link in linklists.main-menu.links %}
+
+            	{% assign sub_linklist_handle = link.title | handle %}
+
+                {% if linklists[sub_linklist_handle] and linklists[sub_linklist_handle].links.size > 0 %}
+
+                    <li class="desktop-navbar-nav-dropdown dropdown js-dropdown-hover">
+                        <a href="{{ link.url }}" class="desktop-navbar-nav-dropdown-toggle dropdown-toggle js-dropdown-click">{{ link.title }}</span></a>
+                        <ul class="desktop-navbar-nav-dropdown-menu dropdown-menu">
+                            {% for sub_link in linklists[sub_linklist_handle].links %}
+  								<li><a href="{{ sub_link.url }}">{{ sub_link.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+
+                {% else %}
+
+                    <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+
+                {% endif %}
+
+            {% endfor %}
+		</ul>
+
+
+		{% comment %}
+			Right
+		{% endcomment %}
+
+
+		<ul class="desktop-navbar-nav-list-right desktop-navbar-nav-list clearfix">
+
+            <li>
+                <form action="/search" role="search" class="desktop-navbar-search">
+                    <input type="hidden" name="type" value="product">
+                    <input type="text" required autocomplete="off" name="q" class="desktop-navbar-search-input">
+                    <input type="submit" value="Search" class="desktop-navbar-search-submit">
+                </form>
+            </li>
+
+			{% if template != 'cart' %}
+
+				<li>
+					<span class="desktop-mini-cart-trigger">
+
+						<div class="desktop-mini-cart-icon" data-cart-view="data-cart-view" rv-class-mini-cart-empty="cart.item_count | eq 0"></div>
+						<div class="desktop-mini-cart-text">Bag</div>
+
+					</span>
+				</li>
+
+			{% endif %}
+
+		</ul>
+
+
+		{% comment %}
+			Logo
+		{% endcomment %}
+
+
+		<a href="/" class="desktop-navbar-nav-logo"></a>
+
+
+
+	</div>
+
+
+
+</div>
 
 
 
 
-{% unless template == 'cart' %}
 
-{% include 'mini-cart' %}
 
-{% endunless %}
+
+
+
+
+{% comment %}
+	Mobile
+{% endcomment %}
+
+
+<div class="mobile-navbar nav-bp-up-display-none">
+
+	{% if settings.top_banner_enable %}
+	<div class="desktop-navbar-banner" style="color:{{ settings.top_banner_text_color }}; background-color:{{ settings.top_banner_bkg_color}};">
+		{{ settings.top_banner_mobile_text }}
+	</div>
+	{% endif %}
+
+
+	<div>mobile nav</div>
+
+
+
+
+</div>
