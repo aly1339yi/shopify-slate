@@ -50,8 +50,10 @@
 }
 
 
-.cart-footer{
-
+.cart-body-cell{
+	&:nth-child(3){
+		text-align: right;
+	}
 }
 
 .cart-total-title{
@@ -60,10 +62,6 @@
 
 .cart-total-price{
 
-}
-
-.cart-form{
-	text-align: right;
 }
 
 

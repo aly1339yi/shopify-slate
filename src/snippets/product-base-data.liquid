@@ -1,3 +1,4 @@
+
 {% comment %}
     Settings
 {% endcomment %}
@@ -8,6 +9,7 @@
 
 {% assign product_card_image_size = "850x" %}
 {% assign product_quick_shop_image_size = "850x" %}
+
 
 
 {% comment %}
@@ -30,6 +32,15 @@
 {% endif %}
 
 
+
+{% comment %}
+    Get Options Length
+{% endcomment %}
+
+{% assign options_length = product.options | size %}
+
+
+
 {% comment %}
     Get Default Variant Option123
 {% endcomment %}
@@ -37,6 +48,7 @@
 {% assign default_option1 = default_variant.option1 %}
 {% assign default_option2 = default_variant.option2 %}
 {% assign default_option3 = default_variant.option3 %}
+
 
 
 {% comment %}
@@ -48,7 +60,129 @@
 
 
 {% comment %}
-    Generate Text for Add to Cart Button 
+    has Variant on Sale ?
+{% endcomment %}
+
+{% assign has_variant_on_sale = false %}
+
+{% for variant in product.variants %}
+    {% if variant.price < variant.compare_at_price %}
+        {% assign has_variant_on_sale = true %}
+        {% break %}
+    {% endif %}
+{% endfor %}
+
+
+
+{% comment %}
+    has Color Option?
+{% endcomment %}
+
+{% assign has_color_option = false %}
+
+{% for option in product.options %}
+    {% assign option_name_handle = option | handle %}
+    {% if option_name_handle == color_option_name_handle %}
+        {% assign has_color_option = true %}
+        {% break %}
+    {% endif %}
+{% endfor %}
+
+
+{% if has_color_option %}    
+
+    {% comment %}
+        has ONLY Color Option?
+    {% endcomment %}
+
+    {% assign has_only_color_option = false %}
+    {% if options_length == 1 %}
+        {% assign has_only_color_option = true %}
+    {% endif %}
+
+
+
+    {% comment %}
+        Get Default Color
+    {% endcomment %}
+
+    {% capture optionKey %}option{{ color_option_position }}{% endcapture %}
+
+    {% assign default_color = default_variant.[optionKey] %}
+
+
+
+    {% comment %}
+        Generate Swatch Bkg Image Src Array
+        [url,url,url]
+    {% endcomment %}
+
+    {% assign swatch_src_count  = 0 %}
+    {% assign swatch_srcs = "" %}
+
+    {% for image in product.images %}
+
+        {% assign alt_handle = image.alt | downcase %}
+
+        {% if alt_handle == color_swatch_alt_handle %}
+        
+            {% assign swatch_src_count = swatch_src_count | plus: 1 %}
+
+            {% capture swatch_srcs %}{{ swatch_srcs }}{% unless swatch_srcs == blank %},{% endunless %}{{ image.src | img_url: '25x', format: 'pjpg' }}{% endcapture %}
+
+        {% endif %}
+
+    {% endfor %}
+
+    {% assign swatch_src_array = swatch_srcs | split: "," %}
+
+
+
+    {% comment %}
+        Generate Color Images Count Array
+
+        [2,1,3,2,3]
+
+        NOT USED
+    {% endcomment %}
+
+    {% assign color_name = '' %}
+    {% assign single_color_images_count = 0 %}
+
+    {% assign color_images_count  = '' %}
+
+    {% for image in product.images %}
+
+        {% assign alt_handle = image.alt | downcase %}
+
+        {% if alt_handle != color_name and color_name != blank %}          
+
+        {% capture color_images_count %}{{ color_images_count }}{% unless color_images_count == blank %},{% endunless %}{{ single_color_images_count }}{% endcapture %}
+
+        {% assign single_color_images_count  = 1 %}
+
+        {% else %}
+
+            {% assign single_color_images_count = single_color_images_count | plus: 1 %}
+
+        {% endif %}
+
+        {% assign color_name = alt_handle %}
+        
+    {% endfor %}
+
+    {% assign color_images_count_array = color_images_count | split: "," %}
+
+
+
+
+{% endif %}
+
+
+
+
+{% comment %}
+    Generate Btn Text, disable/enable Add to Cart Button 
 {% endcomment %}
 
 {% capture choose_size_btn_text %}
@@ -64,10 +198,12 @@
     {{ 'product.sold_out_btn_text' | t }}
 {% endcapture %}
 
+
 {% assign default_btn_disabled = true %}
 {% assign default_btn_text = choose_size_btn_text %}
 
-{% if has_only_default_variant %}
+
+{% if has_only_default_variant or has_only_color_option %}
     
     {% if default_variant.available %}
 
@@ -119,7 +255,6 @@
     Generate Product Price Html
 {% endcomment %}
 
-
 {% capture product_price %}
 
 {% if default_variant.price < default_variant.compare_at_price %}
@@ -142,110 +277,11 @@
 
 
 
-{% comment %}
-    has Variant on Sale ?
-{% endcomment %}
-
-{% assign has_variant_on_sale = false %}
-
-{% for variant in product.variants %}
-    {% if variant.price < variant.compare_at_price %}
-        {% assign has_variant_on_sale = true %}
-        {% break %}
-    {% endif %}
-{% endfor %}
-
-
-
-{% comment %}
-    has Color Option?
-{% endcomment %}
-
-{% assign hasColorOption = false %}
-
-{% for option in product.options %}
-    {% assign option_name_handle = option | handle %}
-    {% if option_name_handle == color_option_name_handle %}
-        {% assign hasColorOption = true %}
-        {% break %}
-    {% endif %}
-{% endfor %}
-
-
-
-{% if hasColorOption %}
-    
-    {% comment %}
-        Generate Swatch Bkg Image Src Array
-        [url,url,url]
-    {% endcomment %}
-
-    {% assign swatch_src_count  = 0 %}
-    {% assign swatch_srcs = "" %}
-
-    {% for image in product.images %}
-
-        {% assign alt_handle = image.alt | downcase %}
-
-        {% if alt_handle == color_swatch_alt_handle %}
-        
-            {% assign swatch_src_count = swatch_src_count | plus: 1 %}
-
-            {% capture swatch_srcs %}{{ swatch_srcs }}{% unless swatch_srcs == blank %},{% endunless %}{{ image.src | img_url: '25x', format: 'pjpg' }}{% endcapture %}
-
-        {% endif %}
-
-    {% endfor %}
-
-    {% assign swatch_src_array = swatch_srcs | split: "," %}
 
 
 
 
-    {% comment %}
-        Generate Color Images Count Array
-        [2,1,3,2,3]
-    {% endcomment %}
 
-    {% assign color_name = '' %}
-    {% assign single_color_images_count = 0 %}
-
-    {% assign color_images_count  = '' %}
-
-    {% for image in product.images %}
-
-        {% assign alt_handle = image.alt | downcase %}
-
-        {% if alt_handle != color_name and color_name != blank %}          
-
-        {% capture color_images_count %}{{ color_images_count }}{% unless color_images_count == blank %},{% endunless %}{{ single_color_images_count }}{% endcapture %}
-
-        {% assign single_color_images_count  = 1 %}
-
-        {% else %}
-
-            {% assign single_color_images_count = single_color_images_count | plus: 1 %}
-
-        {% endif %}
-
-        {% assign color_name = alt_handle %}
-        
-    {% endfor %}
-
-    {% assign color_images_count_array = color_images_count | split: "," %}
-
-
-
-    {% comment %}
-        Get Default Color
-    {% endcomment %}
-
-    {% capture optionKey %}option{{ color_option_position }}{% endcapture %}
-
-    {% assign default_color = default_variant.[optionKey] %}
-
-
-{% endif %}
 
 
 

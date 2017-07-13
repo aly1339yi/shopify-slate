@@ -6,7 +6,7 @@
 
 	<div class="product-card-image-wrapper">
 
-		{% if hasColorOption %}
+		{% if has_color_option %}
 
 			{% assign color_name = "" %}
 
@@ -38,9 +38,9 @@
 
 		{% else %}
 
-			{% assign image_length = product.images | size %}
+			{% assign images_length = product.images | size %}
 
-			<img src="{{ product.images[0] | img_url: product_card_image_size, format: 'pjpg' }}" class="active product-card-image{% if image_length > 1 %} js-product-image-swap{% endif %}" {% if image_length > 1 %}data-swap-image-src="{{ product.images[1] | product_img_url: product_card_image_size, format: 'pjpg' }}{% endif %}">
+			<img src="{{ product.images[0] | img_url: product_card_image_size, format: 'pjpg' }}" class="active product-card-image{% if images_length > 1 %} js-product-image-swap{% endif %}" {% if images_length > 1 %}data-swap-image-src="{{ product.images[1] | product_img_url: product_card_image_size, format: 'pjpg' }}{% endif %}">
 
 		{% endif %}
 
