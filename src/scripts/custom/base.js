@@ -86,20 +86,6 @@
 
 
 
-   //MINICART
-
-   if ($('html.mod-no-mobile').length) {
-
-      $('.desktop-mini-cart-trigger').mouseenter(function() {
-         $('body').addClass('mini-cart-open');
-      });
-
-      $('.mini-cart').mouseleave(function() {
-         $('body').removeClass('mini-cart-open');
-      });
-
-   }
-
    // BODY CLASS
 
    $(document).on('click', '.js-body-add-class', function() {
@@ -110,7 +96,7 @@
       $('body').removeClass($(this).data('body-class'));
    });
 
-   $(document).on('click', '.js-body-class-toggle', function() {
+   $(document).on('click', '.js-body-toggle-class', function() {
       $('body').toggleClass($(this).data('body-class'));
    });
 

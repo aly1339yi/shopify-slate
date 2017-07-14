@@ -1,3 +1,6 @@
+/* =========================================================================
+	Desktop Navbar
+========================================================================= */
 
 
 .desktop-navbar-banner{
@@ -17,10 +20,12 @@
 }
 
 .desktop-navbar-banner {
+
 	height: $navbar-banner-height-desktop;
 	line-height: $navbar-banner-height-desktop;
 
 	text-align: center;
+
 }
 
 
@@ -32,7 +37,7 @@
 
 .desktop-navbar-nav-logo {
 
-	$width: 240px;
+	$width: 220px;
 
 	position: absolute;
 	top: 0;
@@ -41,7 +46,6 @@
 
 	width: $width;
 	margin-left: $width / -2;
-	height: $navbar-nav-height-desktop;
 	
 	overflow: hidden;
 
@@ -250,11 +254,187 @@ li.nav-list-level-2-item{
 
 
 
+/* =========================================================================
+	Mobile Navbar
+========================================================================= */
+
+.mobile-navbar-banner{
+	text-align: center;
+}
+
+
+.mobile-navbar {
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: list-get($z-index, navbar);
+
+}
+
+
+.mobile-navbar-header{
+	position: relative;
+	text-align: center;
+}
+
+
+
+.mobile-navbar-nav-pillar{
+	width: $navbar-nav-height-mobile;
+	height: $navbar-nav-height-mobile;
+	line-height: $navbar-nav-height-mobile;
+
+	border: 1px solid blue;
+}
+
+
+.mobile-nav-trigger{
+	float: left;
+	background: url("{{ 'hamburger_black.png' | asset_url }}") no-repeat center center;
+	background-size: 18px;
+}
+
+.mobile-mini-cart-switch{
+	float: right;
+}
+
+
+.mobile-navbar-nav-logo{
+
+	$width: 150px;
+
+	position: absolute;
+	top: 0;
+	left: 50%;
+	right: 0;
+
+	width: $width;
+	margin-left: $width / -2;
+	
+	overflow: hidden;
+
+	border: 1px solid red;
+
+	&:after,
+	&:before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-size: contain;
+
+		html.mod-no-mobile & {
+			@include transition();
+		}
+	}
+
+	&:before {
+		opacity: 0;
+		background-image: url("{{ 'no_logo_white.png' | asset_url }}");
+	}
+
+	&:after {
+		opacity: 1;
+		background-image: url("{{ 'no_logo_black.png' | asset_url }}");
+	}
+
+	body.hero-image-dark &{
+		&:before{
+			opacity: 1;
+		}
+		&:after{
+			opacity: 0;
+		}
+	}
+
+	html.mod-no-mobile .desktop-navbar:hover &,
+	body.browser-scrolled &{
+		&:before{
+			opacity: 0;
+		}
+		&:after{
+			opacity: 1;
+		}
+	}
+}
 
 
 
 
 
+
+.mobile-navbar-nav {
+
+	@include invisible;
+	body.mobile-nav-open & {
+		@include visible;
+	}
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	overflow-y: auto;
+	/* has to be scroll, not auto */
+	-webkit-overflow-scrolling: touch;
+
+	background-color: #fff;
+
+}
+
+
+
+
+.mobile-nav-close {
+	
+	float: right;
+
+	background: url("{{ 'cross_black.png' | asset_url }}") no-repeat center center;
+	background-size: 15px;
+}
+
+
+
+
+
+.nav-list-level-1-item{
+	.mobile-navbar-nav-list & {
+	
+		>a{
+			border: 1px solid blue;
+			padding: 20px 0;
+			text-align: center;
+			span{
+				border-bottom: 1px solid blue;
+			}
+		}
+
+	}
+}
+
+
+.nav-list-level-2-item{
+	.mobile-navbar-nav-list & {
+	
+		>a{
+			border: 1px solid red;
+			padding: 20px 0;
+			text-align: center;
+			span{
+				border-bottom: 1px solid red;
+			}
+		}
+
+	}
+}
 
 
 

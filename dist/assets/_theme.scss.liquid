@@ -1312,7 +1312,7 @@ img.rsImg {
 
 
 /* =========================================================================
-  Color
+    Color
 ========================================================================= */
 
 
@@ -1325,21 +1325,23 @@ $color-white  : #ffffff;
 
 $color: (
 
-  'primary'         $color-purple,
+    'primary'         $color-purple,
 
 
-  'bullet'          transparent,
+    'bullet'          transparent,
 
-  'bullet-selected' $color-black,
+    'bullet-selected' $color-black,
 
-  null
+    null
 
 );
 
 
- /* =========================================================================
-   Font Size (html font-size 10px)
-   ========================================================================= */
+
+/* =========================================================================
+    Font Size (html font-size 10px)
+========================================================================= */
+
 
 $font-size-xx-small : 0.9rem;
 
@@ -1361,28 +1363,29 @@ $font-size-normal   : $font-size-medium;
 
 $font-size: (
 
-  'body' $font-size-normal,
+    'body' $font-size-normal,
 
-  'h1'   1.3rem,
+    'h1'   1.3rem,
 
-  'h2'   1.4rem,
+    'h2'   1.4rem,
 
-  'h3'   1.8rem,
+    'h3'   1.8rem,
 
-  'h4'   2.4rem,
+    'h4'   2.4rem,
 
-  'h5'   3rem,
-  
-  'h6'   3rem,
+    'h5'   3rem,
+    
+    'h6'   3rem,
 
-  null
+    null
 
 );
 
 
- /* =========================================================================
-   Responsive
-   ========================================================================= */
+
+/* =========================================================================
+    Responsive
+========================================================================= */
 
 $breakpoint-small   : 576px;
 $breakpoint-medium  : 768px;
@@ -1394,77 +1397,77 @@ $breakpoint-nav-bp     : $breakpoint-small;
 
 $breakpoint-range: (
 
-  'small-down'    '(max-width: #{$breakpoint-small - 1})',
-  'small-up'      '(min-width: #{$breakpoint-small})',
-  'medium-down'   '(max-width: #{$breakpoint-medium - 1})',
-  'medium-up'     '(min-width: #{$breakpoint-medium})',
-  'large-down'    '(max-width: #{$breakpoint-large - 1})',
-  'large-up'      '(min-width: #{$breakpoint-large})',
-  'x-large-down'  '(max-width: #{$breakpoint-x-large - 1})',
-  'x-large-up'    '(min-width: #{$breakpoint-x-large})',
+    'small-down'    '(max-width: #{$breakpoint-small - 1})',
+    'small-up'      '(min-width: #{$breakpoint-small})',
+    'medium-down'   '(max-width: #{$breakpoint-medium - 1})',
+    'medium-up'     '(min-width: #{$breakpoint-medium})',
+    'large-down'    '(max-width: #{$breakpoint-large - 1})',
+    'large-up'      '(min-width: #{$breakpoint-large})',
+    'x-large-down'  '(max-width: #{$breakpoint-x-large - 1})',
+    'x-large-up'    '(min-width: #{$breakpoint-x-large})',
 
-  'nav-bp-down'  '(max-width: #{$breakpoint-nav-bp - 1})',
-  'nav-bp-up'    '(min-width: #{$breakpoint-nav-bp})',
+    'nav-bp-down'  '(max-width: #{$breakpoint-nav-bp - 1})',
+    'nav-bp-up'    '(min-width: #{$breakpoint-nav-bp})',
 
-  'small-medium'  '(min-width: #{$breakpoint-small})  and  (max-width: #{$breakpoint-medium - 1})',
-  'medium-large'  '(min-width: #{$breakpoint-medium}) and  (max-width: #{$breakpoint-large - 1})',
-  'large-x-large' '(min-width: #{$breakpoint-large})  and  (max-width: #{$breakpoint-x-large - 1})'
-  
-  null
+    'small-medium'  '(min-width: #{$breakpoint-small})  and  (max-width: #{$breakpoint-medium - 1})',
+    'medium-large'  '(min-width: #{$breakpoint-medium}) and  (max-width: #{$breakpoint-large - 1})',
+    'large-x-large' '(min-width: #{$breakpoint-large})  and  (max-width: #{$breakpoint-x-large - 1})'
+    
+    null
 
 
 );
 
 $breakpoint: (
 
-  'small'   576px,
-  'medium'  768px,
-  'large'   992px,
-  'x-large' 1200px,
+    'small'   576px,
+    'medium'  768px,
+    'large'   992px,
+    'x-large' 1200px,
 
-  'nav'     576px,
+    'nav'     576px,
 
-  null
+    null
 
 );
 
 
- /* =========================================================================
-   Grid
-   ========================================================================= */
+/* =========================================================================
+    Grid
+========================================================================= */
 
 
 $grid-gutter: (
 
-  'normal' 30px,
+'normal' 30px,
 
-  null
-  
+null
+    
 );
 
 
 
- /* =========================================================================
-   Z-Index
-   ========================================================================= */
+/* =========================================================================
+    Z-Index
+========================================================================= */
 
 $z-index: (
 
-  'navbar'             100,
+    'navbar'             100,
 
-  'fullscreen-overlay' 200,
+    'fullscreen-overlay' 200,
 
-  'mini-cart'          300,
+    'mini-cart'          300,
 
-  null
+    null
 
 
 );
 
 
- /* =========================================================================
-   Other
-   ========================================================================= */
+/* =========================================================================
+    Other
+========================================================================= */
 
 $navbar-nav-height-desktop: 60px;
 $navbar-nav-height-mobile: 50px;
@@ -3348,6 +3351,7 @@ large-up-push-one-third
 	display: inline-block;
 
 	$height: 40px;
+
 	height: $height;
 	line-height: $height;
 
@@ -3462,6 +3466,9 @@ body {
 .container{
     padding: 0 (list-get($grid-gutter, 'normal') / 2);
 }
+/* =========================================================================
+	Desktop Navbar
+========================================================================= */
 
 
 .desktop-navbar-banner{
@@ -3481,10 +3488,12 @@ body {
 }
 
 .desktop-navbar-banner {
+
 	height: $navbar-banner-height-desktop;
 	line-height: $navbar-banner-height-desktop;
 
 	text-align: center;
+
 }
 
 
@@ -3496,7 +3505,7 @@ body {
 
 .desktop-navbar-nav-logo {
 
-	$width: 240px;
+	$width: 220px;
 
 	position: absolute;
 	top: 0;
@@ -3505,7 +3514,6 @@ body {
 
 	width: $width;
 	margin-left: $width / -2;
-	height: $navbar-nav-height-desktop;
 	
 	overflow: hidden;
 
@@ -3714,11 +3722,187 @@ li.nav-list-level-2-item{
 
 
 
+/* =========================================================================
+	Mobile Navbar
+========================================================================= */
+
+.mobile-navbar-banner{
+	text-align: center;
+}
+
+
+.mobile-navbar {
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: list-get($z-index, navbar);
+
+}
+
+
+.mobile-navbar-header{
+	position: relative;
+	text-align: center;
+}
+
+
+
+.mobile-navbar-nav-pillar{
+	width: $navbar-nav-height-mobile;
+	height: $navbar-nav-height-mobile;
+	line-height: $navbar-nav-height-mobile;
+
+	border: 1px solid blue;
+}
+
+
+.mobile-nav-trigger{
+	float: left;
+	background: url("{{ 'hamburger_black.png' | asset_url }}") no-repeat center center;
+	background-size: 18px;
+}
+
+.mobile-mini-cart-switch{
+	float: right;
+}
+
+
+.mobile-navbar-nav-logo{
+
+	$width: 150px;
+
+	position: absolute;
+	top: 0;
+	left: 50%;
+	right: 0;
+
+	width: $width;
+	margin-left: $width / -2;
+	
+	overflow: hidden;
+
+	border: 1px solid red;
+
+	&:after,
+	&:before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-size: contain;
+
+		html.mod-no-mobile & {
+			@include transition();
+		}
+	}
+
+	&:before {
+		opacity: 0;
+		background-image: url("{{ 'no_logo_white.png' | asset_url }}");
+	}
+
+	&:after {
+		opacity: 1;
+		background-image: url("{{ 'no_logo_black.png' | asset_url }}");
+	}
+
+	body.hero-image-dark &{
+		&:before{
+			opacity: 1;
+		}
+		&:after{
+			opacity: 0;
+		}
+	}
+
+	html.mod-no-mobile .desktop-navbar:hover &,
+	body.browser-scrolled &{
+		&:before{
+			opacity: 0;
+		}
+		&:after{
+			opacity: 1;
+		}
+	}
+}
 
 
 
 
 
+
+.mobile-navbar-nav {
+
+	@include invisible;
+	body.mobile-nav-open & {
+		@include visible;
+	}
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	overflow-y: auto;
+	/* has to be scroll, not auto */
+	-webkit-overflow-scrolling: touch;
+
+	background-color: #fff;
+
+}
+
+
+
+
+.mobile-nav-close {
+	
+	float: right;
+
+	background: url("{{ 'cross_black.png' | asset_url }}") no-repeat center center;
+	background-size: 15px;
+}
+
+
+
+
+
+.nav-list-level-1-item{
+	.mobile-navbar-nav-list & {
+	
+		>a{
+			border: 1px solid blue;
+			padding: 20px 0;
+			text-align: center;
+			span{
+				border-bottom: 1px solid blue;
+			}
+		}
+
+	}
+}
+
+
+.nav-list-level-2-item{
+	.mobile-navbar-nav-list & {
+	
+		>a{
+			border: 1px solid red;
+			padding: 20px 0;
+			text-align: center;
+			span{
+				border-bottom: 1px solid red;
+			}
+		}
+
+	}
+}
 
 
 
@@ -3741,9 +3925,213 @@ li.nav-list-level-2-item{
 	
 }
 
-.mini-cart-item-image{
-	width: 150px;
+.mini-cart-overlay {
+	display: none;
+
+	body.mini-cart-open & {
+		display: block;
+	}
 }
+
+
+
+.mini-cart {
+
+	border: 1px solid purple;
+
+	@include invisible;
+
+	body.mini-cart-open & {
+		@include visible;
+	}
+
+	position: fixed;
+
+	bottom: 0;
+	right: 0;
+	z-index: list-get($z-index, 'mini-cart');
+
+    top: $navbar-nav-height-desktop;
+    @include screen(nav-bp-down) {
+    top: $navbar-nav-height-mobile;
+    }
+
+    body.navbar-banner-enable & {
+        top: $navbar-plus-banner-height-desktop;
+        @include screen(nav-bp-down) {
+        top: $navbar-plus-banner-height-mobile;
+        }
+    }
+
+	width: 350px;
+	@include screen(nav-bp-down) {
+		width: 300px;
+	}
+
+	background-color: #fff;
+
+
+	@include transition();
+}
+
+
+
+.mini-cart-header {
+
+	border: 1px solid red;
+
+	position: relative;
+	z-index: 1;
+}
+
+
+$mini-cart-header-height: 50px;
+
+.mini-cart-close {
+	float: left;
+	width: $mini-cart-header-height;
+	height: $mini-cart-header-height;
+
+	border: 1px solid green;
+
+	background: url("{{ 'cross_black.png' | asset_url }}") no-repeat center center;
+	background-size: 15px;
+
+	cursor: pointer;
+
+
+}
+
+
+.mini-cart-body {
+
+	$header-plus-footer-height: 180px;
+
+	padding: 20px;
+
+	max-height: calc(100vh - #{$header-plus-footer-height} - #{$navbar-nav-height-desktop});
+	@include screen(nav-bp-down) {
+		max-height: calc(100vh - #{$header-plus-footer-height} - #{$navbar-nav-height-mobile});
+	}
+	body.navbar-banner-enable & {
+		max-height: calc(100vh - #{$header-plus-footer-height} - #{$navbar-plus-banner-height-desktop});
+		@include screen(nav-bp-down) {
+			max-height: calc(100vh - #{$header-plus-footer-height} - #{$navbar-plus-banner-height-mobile});
+		}
+	}
+
+	overflow-y: auto;
+	/* has to be scroll, not auto */
+	-webkit-overflow-scrolling: touch;
+
+}
+
+
+
+.mini-cart-item{
+
+	position: relative;
+
+	&:not(:first-child) {
+		margin-top: 20px;
+	}
+
+}
+
+
+$mini-car-image-width-desktop: 160px;
+$mini-car-image-width-mobile: 120px;
+
+.mini-cart-item-image{
+	float: left;
+	width: $mini-car-image-width-desktop;
+
+	@include screen(nav-bp-down) {
+		width: $mini-car-image-width-mobile;
+	}
+
+}
+
+
+
+
+.mini-cart-item-details {
+	margin-left: $mini-car-image-width-desktop + 15px;
+	@include screen(nav-bp-down) {
+		margin-left: $mini-car-image-width-mobile + 15px;
+	}
+}
+
+
+.mini-cart-item-title {
+	a {
+
+	}
+}
+
+
+.mini-cart-item-price{
+
+}
+
+.mini-cart-item-options{
+	li{
+
+	}
+}
+
+.mini-cart-item-properties{
+
+}
+
+.mini-cart-item-quantity{
+
+}
+
+
+
+.mini-cart-footer{
+
+	padding: 0 20px;
+
+
+}
+
+
+.mini-cart-total{
+	
+	$height: 60px;
+    line-height: $height;
+    
+}
+
+
+.mini-cart-total-title{
+	float: left;
+	width: $mini-car-image-width-desktop;
+	@include screen(nav-bp-down) {
+		width: $mini-car-image-width-mobile;
+	}
+}
+
+.mini-cart-total-price{
+	padding-left: $mini-car-image-width-desktop + 15px;
+	@include screen(nav-bp-down) {
+		padding-left: $mini-car-image-width-mobile + 15px;
+	}
+}
+
+.mini-cart-checkout{
+	display: block;
+	text-align: center;
+}
+
+
+
+
+
+
+
 
 
 
@@ -3945,11 +4333,15 @@ li.nav-list-level-2-item{
 }
 
 
-/* dropdown */
+
+/* =========================================================================
+    Dropdown
+========================================================================= */
+
 
 .dropdown-menu {
     @include transition();
-    // @include invisible;
+    @include invisible;
 }
 
 .dropdown {
@@ -3964,8 +4356,9 @@ li.nav-list-level-2-item{
 }
 
 
-
-/* empty notice */
+/* =========================================================================
+    Empty Notice
+========================================================================= */
 
 .empty-notice{
     text-align: center;
@@ -3987,19 +4380,20 @@ li.nav-list-level-2-item{
 
 
 
+/* =========================================================================
+    Pagination
+========================================================================= */
 
-
-
-/* social list */
 
 .pagination-load-more-wrapper{
     text-align: center;
 }
 
 
+/* =========================================================================
+    Social List
+========================================================================= */
 
-
-/* social list */
 
 .social-list{
 
@@ -4014,9 +4408,10 @@ li.nav-list-level-2-item{
 
 }
 
+/* =========================================================================
+    Video Cover
+========================================================================= */
 
-
-/* video cover */
 
 .video-cover {
     position: absolute;
@@ -4029,6 +4424,22 @@ li.nav-list-level-2-item{
 }
 
 
+/* =========================================================================
+    Fullscreen Overlay
+========================================================================= */
+
+.fullscreen-overlay{
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: list-get($z-index, fullscreen-overlay);
+
+    background-color: rgba(0, 0, 0, 0.2);
+
+}
 
 
 
@@ -4036,15 +4447,9 @@ li.nav-list-level-2-item{
 
 
 
-
-
-
-
-
-
-
-
-
+/* =========================================================================
+    Shopify
+========================================================================= */
 
 
 

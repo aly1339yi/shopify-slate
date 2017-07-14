@@ -44,6 +44,7 @@
                 {% endif %}
 
             {% endfor %}
+
 		</ul>
 
 
@@ -56,7 +57,7 @@
             <li class="nav-list-level-1-item">
                 <form action="/search" role="search" class="desktop-navbar-search desktop-navbar-nav-pillar">
                     <input type="hidden" name="type" value="product">
-                    <input type="text" required autocomplete="off" name="q" class="desktop-navbar-search-input">
+                    <input type="text" autocomplete="off" name="q" class="desktop-navbar-search-input">
                     <input type="submit" value="Search" class="desktop-navbar-search-submit">
                 </form>
             </li>
@@ -64,7 +65,7 @@
 			{% if template != 'cart' %}
 
 			<li class="nav-list-level-1-item"">
-				<div class="desktop-mini-cart-trigger desktop-navbar-nav-pillar">
+				<div class="desktop-mini-cart-trigger desktop-navbar-nav-pillar js-body-toggle-class" data-body-class="mini-cart-open">
 					
 					<span class="desktop-mini-cart-text">Bag</span>
 					(<span class="desktop-mini-cart-count" data-cart-view="data-cart-view" rv-text="cart.item_count"></span>)
@@ -82,7 +83,7 @@
 		{% endcomment %}
 
 
-		<a href="/" class="desktop-navbar-nav-logo"></a>
+		<a href="/" class="desktop-navbar-nav-logo desktop-navbar-nav-pillar"></a>
 
 
 
@@ -109,15 +110,79 @@
 <div class="mobile-navbar nav-bp-up-display-none">
 
 	{% if settings.top_banner_enable %}
-	<div class="desktop-navbar-banner" style="color:{{ settings.top_banner_text_color }}; background-color:{{ settings.top_banner_bkg_color}};">
+	<div class="mobile-navbar-banner" style="color:{{ settings.top_banner_text_color }}; background-color:{{ settings.top_banner_bkg_color}};">
 		{{ settings.top_banner_mobile_text }}
 	</div>
 	{% endif %}
 
 
-	<div>mobile nav</div>
+	<div class="mobile-navbar-header clearfix">
 
+		<div class="mobile-navbar-nav-pillar mobile-nav-trigger js-body-add-class" data-body-class="mobile-nav-open"></div>
+
+		{% unless template == 'cart' %}
+
+		<div class="mobile-navbar-nav-pillar mobile-mini-cart-switch js-body-toggle-class" data-body-class="mini-cart-open" data-cart-view="data-cart-view" rv-text="cart.item_count"></div>
+
+		{% endunless %}
+
+
+		{% comment %}
+			Logo
+		{% endcomment %}
+
+		<a href="/" class="mobile-navbar-nav-logo mobile-navbar-nav-pillar"></a>
+
+	</div>
+
+
+	<div class="mobile-navbar-nav">
+
+		<div class="mobile-navbar-nav-header clearfix">
+			<div class="mobile-navbar-nav-pillar mobile-nav-close js-body-remove-class" data-body-class="mobile-nav-open"></div>
+		</div>
+
+
+		<ul class="mobile-navbar-nav-list">
+
+        {% for link in linklists.main-menu.links %}
+
+        	{% assign sub_linklist_handle = link.title | handle %}
+
+            {% if linklists[sub_linklist_handle] and linklists[sub_linklist_handle].links.size > 0 %}
+
+                <li class="nav-list-level-1-item">
+                    <a href="{{ link.url }}" class="display-block"><span>{{ link.title }}</span></a>
+                    <ul class="">
+                        {% for sub_link in linklists[sub_linklist_handle].links %}
+								<li class="nav-list-level-2-item"><a href="{{ sub_link.url }}" class="display-block"><span>{{ sub_link.title }}</span></a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+
+            {% else %}
+
+                <li class="nav-list-level-1-item"><a href="{{ link.url }}" class="display-block"><span>{{ link.title }}</span></a></li>
+
+            {% endif %}
+
+        {% endfor %}
+
+		</ul>
+
+
+
+	</div>
 
 
 
 </div>
+
+
+
+
+
+
+
+
+

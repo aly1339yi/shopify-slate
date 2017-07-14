@@ -1,7 +1,12 @@
+
+<div class="mini-cart-overlay fullscreen-overlay js-body-remove-class" data-body-class="mini-cart-open"></div>
+
+
+
 <div class="mini-cart" data-cart-view="data-cart-view">
 
-    <div class="mini-cart-header">
-        <div class="mini-cart-close"></div>
+    <div class="mini-cart-header clearfix">
+        <div class="mini-cart-close js-body-remove-class" data-body-class="mini-cart-open"></div>
     </div>
     
 
@@ -10,10 +15,9 @@
     </div>
 
 
-
     <div class="mini-cart-body" rv-if="cart.item_count | gt 0">
 
-        <div class="mini-cart-item" rv-each-item="cart.items" rv-hide="item.handle | eq 'embroidery'">
+        <div class="mini-cart-item clearfix" rv-each-item="cart.items" rv-hide="item.handle | eq 'embroidery'">
 
             <div class="mini-cart-item-image">
                 <a rv-href="item.url">
@@ -79,7 +83,7 @@
 
     <div class="mini-cart-footer" rv-if="cart.item_count | gt 0">
 
-        <div class="mini-cart-total">
+        <div class="mini-cart-total clearfix">
             <div class="mini-cart-total-title">{{ 'cart.total_label' | t }}</div>
             <div class="mini-cart-total-price" rv-text="cart.total_price | money Currency.currentCurrency"></div>
         </div>
