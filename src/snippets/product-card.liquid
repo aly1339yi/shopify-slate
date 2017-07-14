@@ -2,7 +2,7 @@
 
 <div class="product-card">
 
-	<a href="{{ product.url | within: collection }}">
+	<a href="{{ default_variant.url | within: collection }}" data-product-url="{{ product.url | within: collection }}" class="product-card-link">
 
 	<div class="product-card-image-wrapper">
 
@@ -23,7 +23,6 @@
 			    	{% assign has_swap_image = true %}	
 			    {% endif %}
 			    
-
 				<img src="{{ image.src | img_url: product_card_image_size, format: 'pjpg' }}" alt="{{ alt_handle }}"
 				class="product-card-image{% if has_swap_image %} js-product-image-swap{% endif %}{% if alt_handle == default_color %} active{% endif %}"
 				data-alt-handle="{{ alt_handle }}"
@@ -76,6 +75,7 @@
 					{% for value in option.values %}
 
 					<div class="product-option-value product-card-option-value js-product-card-option-value{% if value == default_option1 or value == default_option2 or value == default_option3 %} active-value{% endif %}{% if value == default_color %} selected-value{% endif %}"
+					data-color-option-position="{{ option.position }}"
 					data-product-option-value="{{ value }}"
 					{% if is_color_option %}
 					style="background:url({{ swatch_src_array[forloop.index0] }}) no-repeat center center; background-size: cover;"
@@ -97,6 +97,6 @@
 
 	</div>
 
-
+	<script class="product-json" type="application/json">{{ product | json }}</script> 
 	
 </div>

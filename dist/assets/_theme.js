@@ -3563,6 +3563,7 @@ function getVariantData($values, variants){
         if( variant.option1 == option1 && variant.option2 == option2 && variant.option3 == option3 ){
 
             variantData.id = variant.id;
+            variantData.url = variant.url;
             variantData.price = variant.price;
             variantData.compare_at_price = variant.compare_at_price;
             variantData.available = variant.available;
@@ -3576,7 +3577,23 @@ function getVariantData($values, variants){
 
 }
 
+function getVariantIDFromColor(color, position, variants){
 
+    var optionKey = 'option' + position;
+    var variantID = '';
+
+    $.each( variants, function( index, variant ) {
+
+        if( variant[optionKey] == color ){
+            variantID = variant.id;
+
+            return false;
+        }
+    });
+
+    return variantID;
+
+}
 
 function generateVariantPriceHtml (variant) {
 
@@ -3630,13 +3647,35 @@ $(document).on('click', '.js-product-card-option-value', function(){
 
     $this.addClass('selected-value active-value').siblings().removeClass('selected-value active-value');
 
-    var optionValue = $this.data('product-option-value');
+    var colorOptionValue = $this.data('product-option-value');
+
+    var colorOptionPosition = $this.data('color-option-position');
 
     var $card = $this.parents('.product-card');
 
+    var $productLink = $card.find('.product-card-link');
+
+    var productURL = $productLink.data('product-url');
+
     var $productImages = $card.find('.product-card-image');
 
-    updateVariantImage($productImages, optionValue);
+    var product= JSON.parse($card.find('.product-json').html());
+
+    var variants = product.variants;
+
+    // update variant image
+
+    updateVariantImage($productImages, colorOptionValue);
+
+    // update variant url base on color
+
+    var variantID = getVariantIDFromColor( colorOptionValue, colorOptionPosition, variants );
+
+    var variantURI = '?variant=' + variantID;
+
+    var productVariantURL = productURL + variantURI;
+
+    $productLink.attr('href', productVariantURL);
     
 });
 
