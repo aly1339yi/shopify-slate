@@ -3,9 +3,9 @@
   Sort
 {% endcomment %}
 
-<div class="collection-sort collection-refinement-item dropdown js-dropdown-hover">
-  <div class="collection-refinement-pillar collection-sort-toggle collection-refinement-toggle dropdown-toggle js-dropdown-click">{{ 'collection.sort_btn_text' | t }}</div>
-  <ul class="collection-filter-menu dropdown-menu clearfix">
+<div class="collection-refinement-item collection-sort dropdown js-dropdown-hover">
+  <div class="collection-refinement-pillar dropdown-toggle js-dropdown-click">{{ 'collection.sort_btn_text' | t }}</div>
+  <ul class="dropdown-menu clearfix">
     <li><a href="{{collection.url}}/?sort_by=created-descending">New Arrivals</a></li>
     <li><a href="{{collection.url}}/?sort_by=best-selling">Best Sellers</a></li>
     <li><a href="{{collection.url}}/?sort_by=price-descending">Price High to Low</a></li>

@@ -4,7 +4,6 @@
 }
 
 
-
 $collection-refinement: (
 
   'height'               50px,
@@ -39,106 +38,114 @@ $collection-refinement: (
 
 }
 
-.collection-refinement-toggle{
+.collection-refinement-item{
 
-	padding-left: list-get($collection-refinement,'toggle-padding-left');
-	padding-right: list-get($collection-refinement,'toggle-padding-right');
-	
-	cursor: pointer;
+	.dropdown-toggle{
 
-	// background-image: url();
-	background-repeat: no-repeat;
-	background-position: 95% 50%;
-	background-size: 8px;
+		padding-left: list-get($collection-refinement,'toggle-padding-left');
+		padding-right: list-get($collection-refinement,'toggle-padding-right');
+		
+		cursor: pointer;
 
-	text-transform: capitalize;
+		// background-image: url();
+		background-repeat: no-repeat;
+		background-position: 95% 50%;
+		background-size: 8px;
 
-	@include transition();
+		text-transform: capitalize;
+
+		@include transition();
+
+	}
+
+	&.open {
+		.dropdown-toggle {
+			// background-image: url();
+		}
+	}
 
 }
+
 
 
 .collection-sort{
 
-}
+	.dropdown-toggle{
+		border: 1px solid blue;
+	}
 
-.collection-sort-toggle{
-	border: 1px solid blue;
 }
 
 
 .collection-filter {
-
-	&.open {
-		.collection-filter-toggle {
-			// background-image: url();
-		}
-	}
-}
-
-
-.collection-filter-toggle {
 	
-	border: 1px solid red;
+	.dropdown-toggle{
+		border: 1px solid red;
+	}
+
 }
 
-.collection-filter-menu {
 
-	position: absolute;
-	top: list-get($collection-refinement,'height');
-	left: 0;
-	right: 0;
-	z-index: 1;
+.collection-refinement-item{
 
-	width: 200px;
-	padding: 15px 0;
-	border: 1px solid teal;
+	.dropdown-menu {
 
-	background-color: #fff;
+		position: absolute;
+		top: list-get($collection-refinement,'height');
+		left: 0;
+		right: 0;
+		z-index: 1;
 
-	// @include mq-lt(small) {
-	// 	width: 120px;
-	// }
+		width: 200px;
+		padding: 15px 0;
+		border: 1px solid teal;
 
-	li {
+		background-color: #fff;
 
-		@include screen('medium-up') {
+		// @include mq-lt(small) {
+		// 	width: 120px;
+		// }
 
-			@include at-least(6, 'li') {
-				float: left;
-				width: 50%;
+		li {
+
+			@include screen('medium-up') {
+
+				@include at-least(6, 'li') {
+					float: left;
+					width: 50%;
+				}
+
+				@include has-nth('n + 6', 'li') {
+					float: left;
+					width: 50%;
+				}
+
 			}
 
-			@include has-nth('n + 6', 'li') {
-				float: left;
-				width: 50%;
+
+			a {
+				display: block;
+				padding: 8px list-get($collection-refinement,'toggle-padding-left');
+				color: maroon;
+
+				html.mod-no-mobile & {
+					@include transition();
+
+					&:hover {
+						color: black;
+					}
+				}
 			}
 
-		}
-
-
-		a {
-			display: block;
-			padding: 8px list-get($collection-refinement,'toggle-padding-left');
-			color: maroon;
-
-			html.mod-no-mobile & {
-				@include transition();
-
-				&:hover {
-					color: black;
+			&.active {
+				a {
+					color: blue;
 				}
 			}
 		}
-
-		&.active {
-			a {
-				color: blue;
-			}
-		}
 	}
-}
 
+}
 
 
 .collection-filter-reset{
@@ -163,8 +170,6 @@ $collection-refinement: (
 .collection-current-tag{
 	padding: 0 10px;
 }
-
-
 
 
 

@@ -65,12 +65,13 @@
 	}
 
 	&:before {
-		display: none;
-		background-image: url("{{ 'no_logo.png' | asset_url }}");
+		opacity: 0;
+		background-image: url("{{ 'no_logo_white.png' | asset_url }}");
 	}
 
 	&:after {
-		background-image: url("{{ 'no_logo.png' | asset_url }}");
+		opacity: 1;
+		background-image: url("{{ 'no_logo_black.png' | asset_url }}");
 	}
 
 	body.hero-image-dark &{
@@ -93,6 +94,160 @@
 	}
 
 }
+
+
+
+$nav-list-item: (
+
+  'padding-left'  25px,
+
+  'padding-right' 30px,
+
+  null
+
+);
+
+
+.desktop-navbar-nav-pillar{
+	height: $navbar-nav-height-desktop;
+	line-height: $navbar-nav-height-desktop;
+
+	border: 1px solid blue;
+}
+
+
+ul.desktop-navbar-nav-list{
+
+}
+
+ul.desktop-navbar-nav-list-left{
+	float: left;
+}
+
+ul.desktop-navbar-nav-list-right{
+	float: right;
+}
+
+
+
+li.nav-list-level-1-item{
+	.desktop-navbar-nav-list & {
+
+		float: left;
+		
+		padding-left: list-get($nav-list-item,'padding-left');
+		padding-right: list-get($nav-list-item,'padding-right');
+
+		border: 1px solid red;
+		
+		>a{
+			
+			body.hero-image-dark &{
+				color: #fff;
+			}
+
+			html.mod-no-mobile .desktop-navbar:hover &,
+			body.browser-scrolled &{
+				color: #000;
+			}
+
+
+			span{
+				border-bottom: 1px solid red;
+			}
+			
+			
+		}
+	}
+}
+
+
+
+/*
+
+nav-dropdown -> nav-list-level-1-item
+
+*/
+
+li.desktop-navbar-nav-dropdown{
+
+}
+
+/*
+
+nav-dropdown-menu <-> nav-list-level-2 
+
+*/
+
+ul.desktop-navbar-nav-dropdown-menu {
+
+	position: absolute;
+	top: $navbar-nav-height-desktop;
+	left: 0;
+	right: 0;
+	z-index: 1;
+
+	width: 150px;
+	padding: 15px 0;
+	border: 1px solid teal;
+
+	background-color: #fff;
+	
+}
+
+
+
+li.nav-list-level-2-item{
+	.desktop-navbar-nav-list & {
+		
+		padding-left: list-get($nav-list-item,'padding-left');
+
+
+		>a{
+			padding: 8px 0;
+			span{
+				border-bottom: 1px solid blue;
+			}
+		}
+
+
+	}
+}
+
+
+
+
+
+.desktop-navbar-search-input {
+
+	width: 0;
+
+	line-height: 25px;
+
+	vertical-align: middle;
+	
+	border: 1px solid green !important;
+
+	@include transition();
+
+	.desktop-navbar-search.open & {
+		width: 150px;
+	}
+
+}
+
+
+
+.desktop-navbar-search-submit {
+	vertical-align: middle;
+	cursor: pointer;
+	@include transition();
+	.desktop-navbar-search.open & {
+
+	}
+}
+
+
 
 
 

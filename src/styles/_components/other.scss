@@ -2,7 +2,7 @@
 
 .dropdown-menu {
     @include transition();
-    @include invisible;
+    // @include invisible;
 }
 
 .dropdown {

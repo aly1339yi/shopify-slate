@@ -16,9 +16,9 @@
 
 {% if collection_has_color_tag %}
 
-<div class="collection-filter collection-color-filter collection-refinement-item dropdown js-dropdown-hover">
-	<div class="collection-refinement-pillar collection-refinement-toggle collection-filter-toggle dropdown-toggle js-dropdown-click">color</div>
-	<ul class="collection-filter-menu dropdown-menu clearfix">
+<div class="collection-refinement-item collection-filter collection-color-filter dropdown js-dropdown-hover">
+	<div class="collection-refinement-pillar dropdown-toggle js-dropdown-click">color</div>
+	<ul class="dropdown-menu clearfix">
 
 		{% assign current_has_color_tag = false %}
 		{% for tag in current_tags %}
@@ -75,9 +75,10 @@
 
 {% if collection_has_size_tag %}
 
-<div class="collection-filter collection-size-filter collection-refinement-item dropdown js-dropdown-hover">
-	<div class="collection-refinement-pillar collection-refinement-toggle collection-filter-toggle dropdown-toggle js-dropdown-click">size</div>
-	<ul class="collection-filter-menu dropdown-menu clearfix">
+
+<div class="collection-refinement-item collection-filter collection-size-filter dropdown js-dropdown-hover">
+	<div class="collection-refinement-pillar dropdown-toggle js-dropdown-click">size</div>
+	<ul class="dropdown-menu clearfix">
 
 		{% assign current_has_size_tag = false %}
 		{% for tag in current_tags %}

@@ -20,7 +20,7 @@
 			Left
 		{% endcomment %}
 
-		<ul class="desktop-navbar-nav-list-left desktop-navbar-nav-list clearfix">
+		<ul class="desktop-navbar-nav-list-left desktop-navbar-nav-list nav-list-level-1 clearfix">
 
             {% for link in linklists.main-menu.links %}
 
@@ -28,18 +28,18 @@
 
                 {% if linklists[sub_linklist_handle] and linklists[sub_linklist_handle].links.size > 0 %}
 
-                    <li class="desktop-navbar-nav-dropdown dropdown js-dropdown-hover">
-                        <a href="{{ link.url }}" class="desktop-navbar-nav-dropdown-toggle dropdown-toggle js-dropdown-click">{{ link.title }}</span></a>
-                        <ul class="desktop-navbar-nav-dropdown-menu dropdown-menu">
+                    <li class="nav-list-level-1-item desktop-navbar-nav-dropdown dropdown js-dropdown-hover">
+                        <a href="{{ link.url }}" class="desktop-navbar-nav-pillar desktop-navbar-nav-dropdown-toggle dropdown-toggle js-dropdown-click display-block"><span>{{ link.title }}</span></a>
+                        <ul class="nav-list-level-2 desktop-navbar-nav-dropdown-menu dropdown-menu">
                             {% for sub_link in linklists[sub_linklist_handle].links %}
-  								<li><a href="{{ sub_link.url }}">{{ sub_link.title }}</a></li>
+  								<li class="nav-list-level-2-item"><a href="{{ sub_link.url }}" class="display-block"><span>{{ sub_link.title }}</span></a></li>
                             {% endfor %}
                         </ul>
                     </li>
 
                 {% else %}
 
-                    <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                    <li class="nav-list-level-1-item"><a href="{{ link.url }}" class="desktop-navbar-nav-pillar display-block"><span>{{ link.title }}</span></a></li>
 
                 {% endif %}
 
@@ -51,11 +51,10 @@
 			Right
 		{% endcomment %}
 
+		<ul class="desktop-navbar-nav-list-right desktop-navbar-nav-list nav-list-level-1 clearfix">
 
-		<ul class="desktop-navbar-nav-list-right desktop-navbar-nav-list clearfix">
-
-            <li>
-                <form action="/search" role="search" class="desktop-navbar-search">
+            <li class="nav-list-level-1-item">
+                <form action="/search" role="search" class="desktop-navbar-search desktop-navbar-nav-pillar">
                     <input type="hidden" name="type" value="product">
                     <input type="text" required autocomplete="off" name="q" class="desktop-navbar-search-input">
                     <input type="submit" value="Search" class="desktop-navbar-search-submit">
@@ -64,14 +63,14 @@
 
 			{% if template != 'cart' %}
 
-				<li>
-					<span class="desktop-mini-cart-trigger">
-
-						<div class="desktop-mini-cart-icon" data-cart-view="data-cart-view" rv-class-mini-cart-empty="cart.item_count | eq 0"></div>
-						<div class="desktop-mini-cart-text">Bag</div>
-
-					</span>
-				</li>
+			<li class="nav-list-level-1-item"">
+				<div class="desktop-mini-cart-trigger desktop-navbar-nav-pillar">
+					
+					<span class="desktop-mini-cart-text">Bag</span>
+					(<span class="desktop-mini-cart-count" data-cart-view="data-cart-view" rv-text="cart.item_count"></span>)
+					
+				</div>
+			</li>
 
 			{% endif %}
 

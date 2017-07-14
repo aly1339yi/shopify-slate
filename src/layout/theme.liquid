@@ -47,7 +47,7 @@
 
 
     {% capture body_class %}
-        template-{{ template | handle }} template-name-{{ template.name | handle }}{% if template.suffix %} template-suffix-{{ template.suffix | handle }}{% endif %}
+        template-{{ template | handle }} template-name-{{ template.name | handle }}{% if template.suffix %} template-suffix-{{ template.suffix | handle }}{% endif %}{% if settings.top_banner_enable %} navbar-banner-enable{% endif %}
     {% endcapture %}
 
 
@@ -55,7 +55,7 @@
 
         {% include 'header' %}
 
-        {% if template.name != 'cart' %}
+        {% if template.name == 'cart' %}
         {% include 'mini-cart' %}
         {% endif %}
 
@@ -63,9 +63,9 @@
         {{ content_for_layout }}
         </main>
 
-        {% include 'footer' %}
+        {% comment %}% include 'footer' %}{% endcomment %}
 
-{% comment %}        {% include 'popup' %}{% endcomment %}
+        {% comment %}% include 'popup' %}{% endcomment %}
 
 
         <script src="{{ '_theme.js' | asset_url }}"></script>
