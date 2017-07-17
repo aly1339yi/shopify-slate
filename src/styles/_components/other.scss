@@ -102,28 +102,10 @@
     bottom: 0;
     z-index: list-get($z-index, fullscreen-overlay);
 
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.3);
 
 }
 
 
 
 
-
-
-
-/* =========================================================================
-    Shopify
-========================================================================= */
-
-
-
-// #admin_bar_iframe{
-//     display: none !important;
-// }
-// #shopify-theme-controls{
-//     display: none !important;
-// }
-// .shopify-preview-bar{
-//     display: none !important;
-// }

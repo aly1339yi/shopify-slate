@@ -2419,30 +2419,6 @@ large-up-display-none
 }
 
 
-// .shown-small {
-//   @include mq-gteq(small) {
-//     display: none !important;
-//   }
-// }
-
-// .shown-medium {
-//   @include mq-gteq(medium) {
-//     display: none !important;
-//   }
-// }
-
-// .hidden-small {
-//   @include mq-lt(small) {
-//     display: none !important;
-//   }
-// }
-
-// .hidden-medium {
-//   @include mq-lt(medium) {
-//     display: none !important;
-//   }
-// }
-
 .clearfix:after {
   content: " ";
   display: block;
@@ -3925,6 +3901,63 @@ li.nav-list-level-2-item{
 	
 }
 
+
+
+
+
+.footer-flex-container{
+
+
+	@include flexbox();
+	@include screen('medium-up') {
+		 @include flexflow(row wrap);
+		@include justify-content(space-between);
+		@include align-items(center);
+	}
+	@include screen('medium-down') {
+		 @include flexflow(column wrap);
+		@include align-items(center);
+	}
+
+
+
+}
+
+
+
+.footer-flex-item {
+	@include screen('medium-down') {
+		& + & {
+			margin-top: 10px;
+		}
+		&:nth-child(1){
+			order: 1;
+		}
+		&:nth-child(2){
+			order: 3;
+		}
+		&:nth-child(3){
+			order: 2;
+		}
+	}
+
+}
+
+
+
+
+.footer-nav-list{
+	li{
+		float: left;
+	}
+}
+
+.footer-social-list{
+	li{
+		float: left;
+	}	
+}
+
 .mini-cart-overlay {
 	display: none;
 
@@ -4135,7 +4168,53 @@ $mini-car-image-width-mobile: 120px;
 
 
 
+.popup {
+	
+	display: none;
+	padding: 0 15px;
+	
+}
 
+
+
+.popup-close {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	z-index: 1;
+
+	width: 60px;
+	height: 60px;
+	border: 1px solid yellow;
+
+	cursor: pointer;
+	background: url("{{ 'cross_black.png' | asset_url }}") no-repeat center center;
+	background-size: 30px;
+}
+
+
+
+
+.popup-box {
+
+	margin: auto;
+	background-color: rgba(255, 255, 255, 1);
+}
+
+
+
+
+
+
+.subscribe-popup {
+
+	.popup-box {
+		max-width: 800px;
+		padding: 80px 50px;
+	}
+
+
+}
  /* =========================================================================
    Royal Slider
    ========================================================================= */
@@ -4332,6 +4411,10 @@ $mini-car-image-width-mobile: 120px;
 	}	
 }
 
+/* =========================================================================
+    Royal Slider
+========================================================================= */
+
 .royalSlider{
 	width: 100%;
 }
@@ -4383,6 +4466,9 @@ $mini-car-image-width-mobile: 120px;
 */
 
 
+/* =========================================================================
+    Owl Carousel
+========================================================================= */
 
 
 
@@ -4392,6 +4478,25 @@ $mini-car-image-width-mobile: 120px;
 
 
 
+
+
+
+
+/* =========================================================================
+    Shopify
+========================================================================= */
+
+
+
+#admin_bar_iframe{
+    display: none !important;
+}
+#shopify-theme-controls{
+    display: none !important;
+}
+.shopify-preview-bar{
+    display: none !important;
+}
 
 
 /* =========================================================================
@@ -4497,7 +4602,7 @@ $mini-car-image-width-mobile: 120px;
     bottom: 0;
     z-index: list-get($z-index, fullscreen-overlay);
 
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.3);
 
 }
 
@@ -4505,23 +4610,6 @@ $mini-car-image-width-mobile: 120px;
 
 
 
-
-
-/* =========================================================================
-    Shopify
-========================================================================= */
-
-
-
-// #admin_bar_iframe{
-//     display: none !important;
-// }
-// #shopify-theme-controls{
-//     display: none !important;
-// }
-// .shopify-preview-bar{
-//     display: none !important;
-// }
 
 
 

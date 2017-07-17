@@ -62,9 +62,9 @@
         {{ content_for_layout }}
         </main>
 
-        {% comment %}% include 'footer' %}{% endcomment %}
+        {% include 'footer' %}
 
-        {% comment %}% include 'popup' %}{% endcomment %}
+        {% include 'popup' %}
 
 
         <script src="{{ '_theme.js' | asset_url }}"></script>

@@ -1,0 +1,47 @@
+.popup {
+	
+	display: none;
+	padding: 0 15px;
+	
+}
+
+
+
+.popup-close {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	z-index: 1;
+
+	width: 60px;
+	height: 60px;
+	border: 1px solid yellow;
+
+	cursor: pointer;
+	background: url("{{ 'cross_black.png' | asset_url }}") no-repeat center center;
+	background-size: 30px;
+}
+
+
+
+
+.popup-box {
+
+	margin: auto;
+	background-color: rgba(255, 255, 255, 1);
+}
+
+
+
+
+
+
+.subscribe-popup {
+
+	.popup-box {
+		max-width: 800px;
+		padding: 80px 50px;
+	}
+
+
+}

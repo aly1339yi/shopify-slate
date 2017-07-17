@@ -1,71 +1,86 @@
-<!-- email-signup-popup  -->
+
 {% comment %}
 
-<section class="subscribe-popup popup fullscreen-overlay js-element-fadeout" data-element-selector=".subscribe-popup">
+Email Subscribe Popup
+
+{% endcomment %}
+
+
+<div class="subscribe-popup popup fullscreen-overlay js-element-fadeout" data-element-selector=".subscribe-popup">
 
 	<div class="display-table">
-		<div class="display-table-cell">
+	<div class="display-table-cell">
 
-			<div class="popup-box js-stop-propagation">
-				<div class="popup-close js-element-fadeout" data-element-selector=".subscribe-popup"></div>
+	<div class="popup-close js-element-fadeout" data-element-selector=".subscribe-popup"></div>
 
+	<div class="popup-box js-stop-propagation">
 
-					<div class="popup-content">
+			<div class="popup-content">
 
+				<div class="subscribe-form-title">{{ settings.email-subscribe-popup-title }}</div>
 
+				<div class="subscribe-form-copy">{{ settings.email-subscribe-popup-copy }}</div>
 
-						<div class="subscribe-form-title">{{ settings.email-subscribe-popup-title }}</div>
-
-						<div class="subscribe-form-copy">{{ settings.email-subscribe-popup-copy }}</div>
-
-						<form action="//harmenco.us14.list-manage.com/subscribe/post-json?u=2f6efdd0d41a0aed5ed51d70b&id=ee5eec7ec4" autocomplete="off" method="post" name="mc-embedded-subscribe-form" class="subscribe-form subscribe-popup-subscribe-form clearfix">
+				<form action="" autocomplete="off" method="post" name="mc-embedded-subscribe-form" class="subscribe-form subscribe-popup-subscribe-form clearfix">
 
 
-							<input type="email" placeholder="EMAIL" name="EMAIL">
-							<button type="submit" value="subscribe" name="subscribe" class="subscribe-form-subscribe">sign up</button>
-							<div class="mc-response-wrapper">
-								<div class="mc-response"></div>
-							</div>
-						</form>
-
-
-
-
+					<input type="email" placeholder="EMAIL" name="EMAIL">
+					<button type="submit" value="subscribe" name="subscribe" class="subscribe-form-subscribe">sign up</button>
+					<div class="mc-response-wrapper">
+						<div class="mc-response"></div>
 					</div>
-
+				</form>
 
 			</div>
 
-		</div>
+
 	</div>
 
-</section>{% endcomment %}
+	</div>
+	</div>
+
+</div>
 
 
 
 
+{% comment %}
 
-<!-- size-guide-popup  -->
+Size Guide Popup
 
-<section class="size-guide-popup popup fullscreen-overlay js-element-fadeout" data-element-selector=".size-guide-popup">
+{% endcomment %}
+
+
+{% comment %}<div class="size-guide-popup popup fullscreen-overlay js-element-fadeout" data-element-selector=".size-guide-popup">
 
 
 	<div class="display-table">
-		<div class="display-table-cell">
+	<div class="display-table-cell">
 
-			<div class="popup-box">
-   				<img src="{{ settings.size_chart | img_url: '2048x' }}" class="size-guid-image img-fullwidth">
-			</div>
-
+		<div class="popup-box">
+				<img src="{{ settings.size_chart | img_url: '2048x' }}" class="size-guid-image img-fullwidth">
 		</div>
+
+	</div>
 	</div>
 
-</section>
+</div>{% endcomment %}
 
 
+{% comment %}
 
-<!-- product-image-popup  -->
-<section class="product-image-popup popup fullscreen-overlay js-element-fadeout" data-element-selector=".product-image-popup">
+Product Image Popup
+
+{% endcomment %}
+
+{% comment %}
+<div class="product-image-popup popup fullscreen-overlay js-element-fadeout" data-element-selector=".product-image-popup">
 	<div class="popup-close js-element-fadeout" data-element-selector=".product-image-popup"></div>
 	<img src="" class="img-fullwidth js-element-fadeout" data-element-selector=".product-image-popup">
-</section>
+</div>
+
+
+{% endcomment %}
+
+
+
