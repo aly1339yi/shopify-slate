@@ -42,7 +42,7 @@
 			</div>
 
 
-			{% capture product_load_more_btn_text %}{{ 'pagination.product_btn' | t }}{% endcapture %}
+			{% capture product_load_more_btn_text %}{{ 'pagination.collection_btn_text' | t }}{% endcapture %}
 
 			{% include 'pagination', namespace: 'product' , load_more_btn_text: product_load_more_btn_text %}
 
@@ -58,7 +58,7 @@
 
 		<div class="collection-empty-notice empty-notice empty-notice-in-flow">
 
-			<h1 class="empty-notice-title">{{ 'collection.no_results_notice_html' | t }}</h1>
+			<div class="empty-notice-title">{{ 'collection.no_results_notice_html' | t }}</div>
 			<div>
 		    <a href="{{ collection.url }}" class="empty-notice-link btn">{{ 'collection.remove_all_filters_btn_text' | t }}</a>
 			</div>
@@ -77,7 +77,7 @@
 
 		<div class="collection-empty-notice empty-notice empty-notice-in-flow">
 
-			<h1 class="empty-notice-title">{{ 'collection.empty_notice_title' | t }}</h1>
+			<div class="empty-notice-title">{{ 'collection.empty_notice_title' | t }}</div>
 			<div>
 		    <a href="{{ 'collection.empty_notice_cta_link' | t }}" class="empty-notice-link btn">{{ 'collection.empty_notice_cta' | t }}</a>
 			</div>

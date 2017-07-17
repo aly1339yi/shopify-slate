@@ -3,7 +3,7 @@
 
     <div class="cart-empty-notice empty-notice empty-notice-in-flow" rv-unless="cart.item_count | gt 0">
     	
-		<h1 class="empty-notice-title">{{ 'cart.empty_notice_title' | t }}</h1>
+		<div class="empty-notice-title">{{ 'cart.empty_notice_title' | t }}</div>
 		<div>
 	    <a href="{{ 'cart.empty_notice_cta_link' | t }}" class="empty-notice-link btn">{{ 'cart.empty_notice_cta' | t }}</a>
 		</div>

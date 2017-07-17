@@ -21,6 +21,9 @@
     "add_to_cart_btn_text": "Add to bag",
     "pre_order_btn_text": "Pre-order",
     "sold_out_btn_text": "Sold out",
+    "back_in_stock_btn_text": "Notify me",
+
+    "back_in_stock_title": "Get notified via email when back in stock",
 
     "quantity_label": "Quantity",
 
@@ -32,8 +35,9 @@
 
   "pagination": {
 
-    "product_btn": "More Styles",
-    "article_btn": "Load More"
+    "collection_btn_text": "More Styles",
+    "search_btn_text": "More Results",
+    "article_btn_text": "Load More"
 
   },
 
@@ -48,10 +52,23 @@
     "total_label": "Subtotal",
     "checkout_btn_text": "Checkout"
     
+  },
+
+
+
+  "search": {
+
+    "no_results_notice_html": "No results for \"{{ terms }}\"",
+
+    "results_for_html": "Search results of \"{{ terms }}\"",
+
+    "not_performed_title": "Search the store",
+
+    "submit_btn_text": "Search"
+
+
+    
   }
-
-
-
 
 
 

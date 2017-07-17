@@ -1,80 +1,92 @@
-{% paginate search.results by 10 %}
+{% capture search_form %}
 
-  <h1>
-    {% if search.performed %}
-      {% if search.results_count == 0 %}
-        {{ 'general.search.no_results_html' | t: terms: search.terms }}
-      {% else %}
-        {{ 'general.search.results_for_html' | t: terms: search.terms }}
-      {% endif %}
-    {% else %}
-      {{ 'general.search.title' | t }}
-    {% endif %}
-  </h1>
+<form action="/search" role="search" class="search-search">
+    <input type="hidden" name="type" value="product">
+    <input type="text" autocomplete="off" name="q" class="search-search-input">
+    <input type="submit" value="Search" class="search-search-submit">
+</form>
 
-  <form action="/search" method="get" role="search">
-    <label for="Search" class="label-hidden">
-      {{ 'general.search.placeholder' | t }}
-    </label>
-    <input type="search"
-           name="q"
-           id="Search"
-           value="{{ search.terms | escape }}"
-           placeholder="{{ 'general.search.placeholder' | t }}">
-    <button type="submit" class="btn">
-      {% include 'icon-search' %}
-      <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
-    </button>
-  </form>
+{% endcapture %}
 
 
+
+<div class="search-container container">
+
+ 
+
+ 
 {% if search.performed %}
-    <ul>
-      {% for item in search.results %}
-        <li>
-          {% if item.featured_image %}
-            <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
-              {{ item.featured_image.src | img_url: '240x240' | img_tag: item.featured_image.alt }}
-            </a>
-          {% endif %}
 
-          <h5>{{ item.title | link_to: item.url }}</h5>
+{% if search.results_count > 0 %}
 
-          {% if item.object_type == 'product' %}
-            <p>
-              {% if item.compare_at_price > item.price %}
-                {% if item.price_varies %}
-                  {% assign sale_price = item.price | money %}
-                  {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
-                {% else %}
-                  {{ 'products.product.on_sale' | t }}
-                  <span itemprop="price">{{ item.price | money }}</span>
-                {% endif %}
-                <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
-                <s>{{ item.compare_at_price | money }}</s>
-              {% else %}
-                {% if item.price_varies %}
-                  {% assign price = item.price | money %}
-                  <span itemprop="price">{{ 'products.product.from_text_html' | t: price: price }}</span>
-                {% else %}
-                  <span itemprop="price">{{ item.price | money }}</span>
-                {% endif %}
-              {% endif %}
-              {% unless item.available %}
-              {{ 'products.product.sold_out' | t }}
-              {% endunless %}
-            </p>
-          {% else %}
-            <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
-          {% endif %}
 
-        </li>
-      {% endfor %}
-    </ul>
+    <div>{{ 'search.results_for_html' | t: terms: search.terms }}</div>
 
-    {% if paginate.pages > 1 %}
-      {% include 'pagination' %}
-    {% endif %}
-  {% endif %}
 
-{% endpaginate %}
+    {% paginate search.results by settings.product_pagination_limit %}
+
+    <div class="search-grid grid grid-uniform" id="pagination-load-more-target">
+
+        {% for product in search.results %}
+        {% if settings.hide_sold_out_products and product.available == false %}
+        {% else %}
+
+        <div class="search-grid-item grid-item x-large-up-one-quarter large-x-large-one-third large-down-one-half">
+
+            {% include 'product-base-data', product: product %}
+
+            {% include 'product-card', product: product %}
+
+            {% include 'product-quick-shop', product: product %}
+
+        </div>
+
+        {% endif %}
+        {% endfor %}
+
+    </div>
+
+
+    {% capture product_load_more_btn_text %}{{ 'pagination.search_btn_text' | t }}{% endcapture %}
+
+    {% include 'pagination', namespace: 'product' , load_more_btn_text: product_load_more_btn_text %}
+
+    {% endpaginate %}
+
+
+
+{% else %}
+
+    <div class="search-empty-notice empty-notice empty-notice-in-flow">
+
+        <div>{{ 'search.no_results_notice_html' | t: terms: search.terms }}</div>
+
+        {{ search_form }}
+
+    </div>
+
+{% endif %}
+
+{% else %}
+
+    <div class="search-empty-notice empty-notice empty-notice-in-flow">
+
+        <div class="empty-notice-title">{{ 'search.not_performed_title' | t }}</div>
+
+        {{ search_form }}
+
+    </div>
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+</div>
