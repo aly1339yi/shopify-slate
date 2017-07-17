@@ -1,32 +1,129 @@
 
-    //////////////////////////////////////// HOMEPAGE PAGE /////////////////////////////////////
+// HOMEPAGE PAGE
 
-    if ($('.template-index').length) {
+if ($('.template-index').length) {
 
+
+}
+
+// END HOMEPAGE PAGE
+
+
+// COLLECTION PAGE
+
+
+if ($('.template-collection').length) {
+
+
+    $(".size-s").insertAfter($(".size-xs"));
+    $(".size-m").insertAfter($(".size-s"));
+    $(".size-l").insertAfter($(".size-m"));
+    $(".size-xl").insertAfter($(".size-l"));
+    $(".size-onesize").insertAfter($(".size-onesize").parent().children().last());
+
+
+}
+
+// END COLLECTION PAGE
+
+
+
+
+
+// PRODUCT PAGE
+
+if ($('.template-product').length) {
+
+    var desktopProductSliderData = null;
+    var mobileProductSliderData = null;
+
+    function desktopProductSliderInit(sliders) {
+
+        desktopProductSliderData = $('.desktop-product-shop-slider').royalSlider({
+
+            controlNavigation : 'none',
+            arrowsNav         : true,
+            arrowsNavAutoHide : false,
+            loop              : true,
+            transitionType    : 'fade',
+            addActiveClass    : true,
+            autoHeight        : true,
+
+            slides            : sliders
+
+        }).data('royalSlider');
+
+    }
+
+    function mobileProductSliderInit(sliders) {
+
+        mobileProductSliderData = $('.mobile-product-shop-slider').royalSlider({
+
+            controlNavigation : 'bullets',
+            arrowsNav         : false,
+            arrowsNavAutoHide : false,
+            loop              : true,
+            transitionType    : 'move',
+            addActiveClass    : true,
+            autoHeight        : true,
+
+            slides            : sliders
+
+        }).data('royalSlider');
 
     }
 
 
-    //////////////////////////////////////// COLLECTION PAGE /////////////////////////////////////
+    $('.desktop-product-shop-slider').waitForImages(function() {
 
-    if ($('.template-collection').length) {
+        desktopProductSliderInit(null);
+
+    });
+
+    $('.mobile-product-shop-slider').waitForImages(function() {
+
+        mobileProductSliderInit(null);
+
+    });
 
 
-		$(".size-s").insertAfter($(".size-xs"));
-		$(".size-m").insertAfter($(".size-s"));
-		$(".size-l").insertAfter($(".size-m"));
-		$(".size-xl").insertAfter($(".size-l"));
-		$(".size-onesize").insertAfter($(".size-onesize").parent().children().last());
-
-
-    }
-
-    //////////////////////////////////////// PRODUCT PAGE /////////////////////////////////////
-
-    if ($('.template-product').length) {
+}
 
 
 
-    }
+
+
+
+// END PRODUCT PAGE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

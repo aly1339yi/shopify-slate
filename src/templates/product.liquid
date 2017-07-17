@@ -1,0 +1,227 @@
+{% comment %}
+    Product Base Data
+{% endcomment %}
+{% include 'product-base-data', product: product %}
+
+
+{% comment %}
+    Is a Gift Card?
+{% endcomment %}
+{% if product.handle contains 'gift-card' %}
+    {% assign is_gift_card = true %}
+{% else %}
+    {% assign is_gift_card = false %}
+{% endif %}
+
+
+
+<div class="product-container container">
+	
+	<div class="product-shop">
+
+		<div class="product-shop-row row">
+			
+			<div class="product-shop-col col medium-up-seven-twelfths">
+				
+				<div class="product-shop-gallery">
+
+					{% comment %}
+					    Desktop Slider
+					{% endcomment %}
+
+					<div class="desktop-product-shop-slider-wrapper medium-down-display-none">
+					<div class="desktop-product-shop-slider product-shop-slider royalSlider rsDefault">
+						
+					{% for image in product.images %}
+					{% assign alt_handle = image.alt | downcase %}
+					{% if alt_handle == default_color %}
+
+					<div class="product-shop-slide">
+						<img src="{{ image.src | img_url: product_shop_image_size, format: 'pjpg' }}" alt="{{ alt_handle }}"
+						class="product-shop-image block-fullwidth"
+						data-alt-handle="{{ alt_handle }}"
+						>
+					</div>
+
+					{% endif %}
+					{% endfor %}
+
+					</div>
+					</div>
+
+					{% comment %}
+					    Mobile Slider
+					{% endcomment %}
+
+					<div class="mobile-product-shop-slider-wrapper medium-up-display-none">
+					<div class="mobile-product-shop-slider product-shop-slider royalSlider rsDefault">
+
+						{% for image in product.images %}
+						{% assign alt_handle = image.alt | downcase %}
+						{% if alt_handle == default_color %}
+
+						<div class="product-shop-slide">
+							<img src="{{ image.src | img_url: product_shop_image_size, format: 'pjpg' }}" alt="{{ alt_handle }}"
+							class="product-shop-image block-fullwidth"
+							data-alt-handle="{{ alt_handle }}"
+							>
+						</div>
+
+						{% endif %}
+						{% endfor %}
+
+					</div>
+					</div>
+
+
+					{% comment %}
+					    Product Images Data
+					{% endcomment %}
+
+					<div class="product-images-data display-none">
+
+						{% for image in product.images %}
+						{% assign alt_handle = image.alt | downcase %}
+						{% if alt_handle != color_swatch_alt_handle %}
+						
+						<div class="product-shop-slide" data-alt-handle="{{ alt_handle }}">
+						<img src="{{ image.src | img_url: product_shop_image_size, format: 'pjpg' }}" alt="{{ alt_handle }}"
+						data-alt-handle="{{ alt_handle }}"
+						>
+						</div>
+
+						{% endif %}
+						{% endfor %}
+
+					</div>
+
+				</div>
+
+			</div>
+
+		
+			<div class="product-shop-col col medium-up-five-twelfths">
+				
+				<div class="product-shop-details">
+
+			
+					<div class="product-shop-title">{{ product.title }}</div>
+
+					<div class="product-shop-price">{{ product_price }}</div>
+
+					<div class="product-shop-description">{{ product.description }}</div>
+
+
+					{% unless has_only_default_variant %}
+
+						<div class="product-options product-shop-options">
+
+						{% for option in product.options_with_values %}
+
+							{% assign is_color_option = false %}
+							{% assign option_name_handle = option.name | handle %}
+					        {% if option_name_handle == color_option_name_handle %}
+					            {% assign is_color_option = true %}
+					        {% endif %}
+
+							<div class="product-option product-shop-option">
+
+								<div class="product-option-name product-shop-option-name">{{ 'product.option_label' | t: option_name: option.name }}</div>
+
+								<div class="product-option-values product-shop-option-values">
+
+									{% for value in option.values %}
+
+									<div class="product-option-value product-shop-option-value js-product-shop-option-value{% if value == default_option1 or value == default_option2 or value == default_option3 %} active-value{% endif %}{% if value == default_color %} selected-value{% endif %}"
+									data-product-options-size="{{ product.options.size }}"
+									data-product-option-position="{{ option.position }}"
+									data-is-color-option-value="{{ is_color_option }}"
+									data-product-option-value="{{ value }}"
+									{% if is_color_option %}
+									style="background:url({{ swatch_src_array[forloop.index0] }}) no-repeat center center; background-size: cover;"
+									{% endif %}
+									>{{ value }}</div>
+
+									{% endfor %}
+
+								</div>
+
+
+							</div>
+
+						{% endfor %}
+
+						</div>
+
+					{% endunless %}
+
+
+					<button {% if default_btn_disabled %}disabled{% endif %}
+					type="button"
+					class="product-add-to-cart product-shop-add-to-cart js-product-add-to-cart btn" 
+					data-variant-id="{{ default_variant.id }}"
+					data-choose-size-btn-text="{{ choose_size_btn_text }}"
+					data-add-to-cart-btn-text="{{ add_to_cart_btn_text }}"
+					data-pre-order-btn-text="{{ pre_order_btn_text }}"
+					data-sold-out-btn-text="{{ sold_out_btn_text }}"
+					>{{ default_btn_text }}</button>
+
+
+	                <div class="product-bis">
+	                    <div class="product-bis-title">Get notified via email when back in stock</div>
+	                    <div class="product-bis-fields clearfix">
+	                        <input type="email" placeholder="Email" class="product-bis-email">
+	                        <button class="product-bis-submit"
+	                        data-product-id="{{ product.id }}"
+	                        data-variant-id="{{ default_variant.id }}"
+	                        data-btn-text="Notify me"
+	                        data-success-text="Success"
+	                        >Notify me</button>
+	                    </div>
+	                </div>
+
+
+				</div>
+
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+		</div>
+
+
+		<script class="product-json" type="application/json">{{ product | json }}</script> 
+
+	</div>
+
+
+
+	
+
+
+
+
+	
+
+	{% include "product-related" %}
+
+
+
+
+</div>
+
+
+
+
+
+
+{% include "product-schema" %}

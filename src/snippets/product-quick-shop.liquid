@@ -1,10 +1,10 @@
 <div class="product-quick-shop">
 	
-	<div class="row">
+	<div class="product-quick-shop-row row">
 
 		<div class="col one-third">
 			
-			<div class="product-quick-shop-image-wrapper">
+			<div class="product-quick-shop-images">
 
 			{% if has_color_option %}
 
@@ -102,7 +102,7 @@
 
 				<button {% if default_btn_disabled %}disabled{% endif %}
 				type="button"
-				class="product-add-to-cart product-quick-shop-add-to-cart js-product-quick-shop-add-to-cart btn" 
+				class="product-add-to-cart product-quick-shop-add-to-cart js-product-add-to-cart btn" 
 				data-variant-id="{{ default_variant.id }}"
 				data-choose-size-btn-text="{{ choose_size_btn_text }}"
 				data-add-to-cart-btn-text="{{ add_to_cart_btn_text }}"

@@ -1,0 +1,60 @@
+
+.royalSlider{
+	width: 100%;
+}
+
+
+/* Background */
+.rsDefault,
+.rsDefault .rsOverflow,
+.rsDefault .rsSlide,
+.rsDefault .rsVideoFrameHolder,
+.rsDefault .rsThumbs {
+	background: transparent;
+	color: #000;
+}
+
+
+.rsOverflow{
+	transition: none !important;
+}
+
+
+/*
+
+.rsDefault .rsBullets{
+	background: transparent;
+	width: auto;
+	right: 20px;
+	left: auto;
+}
+
+.rsDefault .rsBullet{
+    width: 20px;
+    height: 40px;
+	padding: 6px 0px 6px;
+}
+*/
+/*
+
+.rsDefault .rsBullet span{
+    width: 10px;
+    height: 10px;
+    background-color: list-get($bullet-color, default);
+	border: 2px solid list-get($bullet-color, selected);
+}
+
+.rsDefault .rsBullet.rsNavSelected span{
+	background-color: list-get($bullet-color, selected);
+}
+*/
+
+
+
+
+
+
+
+
+
+
