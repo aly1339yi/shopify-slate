@@ -1,9 +1,6 @@
 <footer class="footer">
 
 
-
-
-
 	<div class="footer-flex-container">
 
 
@@ -13,7 +10,7 @@
 
 				<form action="" autocomplete="off" method="post" name="mc-embedded-subscribe-form" class="subscribe-form footer-subscribe-form clearfix" novalidate>
 					<div class="subscribe-fields-wrapper clearfix">
-						<input type="email" placeholder="EMail" name="EMAIL">
+						<input type="email" placeholder="Email" name="EMAIL">
 						<button type="submit" value="subscribe" name="subscribe" class="subscribe-form-subscribe"></button>
 					</div>
 					<div class="mc-response-wrapper">
@@ -28,13 +25,13 @@
 
 		<div class="footer-flex-item">
 
-			<ul class="footer-nav-list clearfix">
+			<ul class="footer-nav-list nav-list-level-1 clearfix">
 
-				<!-- <li><a href="/blogs/press">Press</a></li> -->
-				<li><a href="/pages/return-policy">Return Policy</a></li>
-				<li><a href="/pages/contact-2017">Contact</a></li>
-				<li><a href="/pages/terms-and-condition">Terms and Conditions</a></li>
-				<li><a href="/pages/stockists-2017">Stockists</a></li>
+            {% for link in linklists.footer.links %}
+
+            	<li class="nav-list-level-1-item"><a href="{{ link.url }}" class="display-block"><span>{{ link.title }}</span></a></li>
+
+            {% endfor %}
 
 			</ul>
 

@@ -3948,15 +3948,34 @@ li.nav-list-level-2-item{
 
 .footer-nav-list{
 	li{
-		float: left;
+
+		@include screen('medium-up') {
+			float: left;
+		}
+
+
 	}
 }
+
+
+
+
 
 .footer-social-list{
 	li{
 		float: left;
 	}	
 }
+
+
+
+
+
+
+
+
+
+
 
 .mini-cart-overlay {
 	display: none;

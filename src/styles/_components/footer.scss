@@ -49,12 +49,30 @@
 
 .footer-nav-list{
 	li{
-		float: left;
+
+		@include screen('medium-up') {
+			float: left;
+		}
+
+
 	}
 }
+
+
+
+
 
 .footer-social-list{
 	li{
 		float: left;
 	}	
 }
+
+
+
+
+
+
+
+
+
