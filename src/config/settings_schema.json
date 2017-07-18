@@ -33,13 +33,13 @@
         "type": "text",
         "id": "top_banner_desktop_text",
         "label": "Desktop Top Banner Text",
-        "default": "Free Shipping"
+        "default": "Desktop Top Banner"
       },
       {
         "type": "text",
         "id": "top_banner_mobile_text",
         "label": "Mobile Top Banner Text",
-        "default": "Free Shipping"
+        "default": "Mobile Top Banner"
       },
       {
         "type": "color",
@@ -83,14 +83,14 @@
         "id": "product_pagination_limit",
         "label": "Product Pagination Limit",
         "info": "Shopify's maximum is 50",
-        "default": 24
+        "default": 4
       },
       {
         "type": "number",
         "id": "article_pagination_limit",
         "label": "Article Pagination Limit",
         "info": "Shopify's maximum is 50",
-        "default": 24
+        "default": 4
       }
 
     ]
