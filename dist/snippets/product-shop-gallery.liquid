@@ -1,0 +1,106 @@
+
+
+<div class="product-shop-gallery">
+
+	{% comment %}
+	    Desktop Slider
+	{% endcomment %}
+
+	<div class="desktop-product-shop-slider-wrapper medium-down-display-none-imp">
+	<div class="desktop-product-shop-slider product-shop-slider royalSlider rsDefault">
+		
+	{% if has_color_option %}
+
+		{% for image in product.images %}
+		{% assign alt_handle = image.alt | downcase %}
+		{% if alt_handle == default_color %}
+
+		<div class="product-shop-slide">
+			<img src="{{ image.src | img_url: product_shop_image_size, format: 'pjpg' }}" alt="{{ alt_handle }}"
+			class="product-shop-image block-fullwidth"
+			data-alt-handle="{{ alt_handle }}"
+			>
+		</div>
+
+		{% endif %}
+		{% endfor %}
+
+
+	{% else %}
+
+		{% for image in product.images %}
+		<div class="product-shop-slide">
+			<img src="{{ image.src | img_url: product_shop_image_size, format: 'pjpg' }}" alt="{{ alt_handle }}"
+			class="product-shop-image block-fullwidth"
+			data-alt-handle="{{ alt_handle }}"
+			>
+		</div>
+		{% endfor %}
+
+	{% endif %}
+
+	</div>
+	</div>
+
+	{% comment %}
+	    Mobile Slider
+	{% endcomment %}
+
+	<div class="mobile-product-shop-slider-wrapper medium-up-display-none-imp">
+	<div class="mobile-product-shop-slider product-shop-slider royalSlider rsDefault">
+
+	{% if has_color_option %}
+
+		{% for image in product.images %}
+		{% assign alt_handle = image.alt | downcase %}
+		{% if alt_handle == default_color %}
+
+		<div class="product-shop-slide">
+			<img src="{{ image.src | img_url: product_shop_image_size, format: 'pjpg' }}" alt="{{ alt_handle }}"
+			class="product-shop-image block-fullwidth"
+			data-alt-handle="{{ alt_handle }}"
+			>
+		</div>
+
+		{% endif %}
+		{% endfor %}
+
+	{% else %}
+
+		{% for image in product.images %}
+		<div class="product-shop-slide">
+			<img src="{{ image.src | img_url: product_shop_image_size, format: 'pjpg' }}" alt="{{ alt_handle }}"
+			class="product-shop-image block-fullwidth"
+			data-alt-handle="{{ alt_handle }}"
+			>
+		</div>
+		{% endfor %}
+
+	{% endif %}
+
+	</div>
+	</div>
+
+
+	{% comment %}
+	    Product Images Data
+	{% endcomment %}
+
+	<div class="product-images-data display-none-imp">
+
+		{% for image in product.images %}
+		{% assign alt_handle = image.alt | downcase %}
+		{% if alt_handle != color_swatch_alt_handle %}
+		
+		<div class="product-shop-slide" data-alt-handle="{{ alt_handle }}">
+		<img src="{{ image.src | img_url: product_shop_image_size, format: 'pjpg' }}" alt="{{ alt_handle }}"
+		data-alt-handle="{{ alt_handle }}"
+		>
+		</div>
+
+		{% endif %}
+		{% endfor %}
+
+	</div>
+
+</div>

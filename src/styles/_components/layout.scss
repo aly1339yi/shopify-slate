@@ -34,3 +34,23 @@ body {
 .container{
     padding: 0 (list-get($grid-gutter, 'normal') / 2);
 }
+
+
+.customer-form-container{
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid purple;
+}
+
+
+.customer-account-container{
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid purple;
+}
+
+
+
+

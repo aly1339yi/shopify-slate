@@ -2,7 +2,8 @@
   The data-label attributes on <td> elements are mobile-friendly
   helpers used for responsive-table labels
 {% endcomment %}
-
+<div class="customer-account-container container">
+    
 <h1>{{ 'customer.account.title' | t }}</h1>
 
 <p><a href="/account">{{ 'customer.account.return' | t }}</a></p>
@@ -94,3 +95,6 @@
 <p>{{ 'customer.order.fulfillment_status' | t }}: {{ order.fulfillment_status_label }}</p>
 
 {{ order.shipping_address | format_address }}
+
+
+</div>

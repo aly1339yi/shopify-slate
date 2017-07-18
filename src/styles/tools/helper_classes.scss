@@ -51,12 +51,23 @@
 
 eg:
 
-large-up-display-none
+large-up-display-none-imp
 
 */
 
+@mixin display-none-imp-class($breakpoint: '') {
+  .#{$breakpoint}-display-none-imp{display:none !important;}
+}
+
+@each $item in $breakpoint-range {
+  $item-key: nth($item, 1);
+  @include screen($range: $item-key) {
+    @include display-none-imp-class('#{$item-key}');
+  }
+}
+
 @mixin display-none-class($breakpoint: '') {
-  .#{$breakpoint}-display-none{display:none !important;}
+  .#{$breakpoint}-display-none{display:none;}
 }
 
 @each $item in $breakpoint-range {
@@ -67,8 +78,13 @@ large-up-display-none
 }
 
 
-.display-none{
+
+.display-none-imp{
   display: none !important;
+}
+
+.display-none{
+  display: none;
 }
 
 .display-block{

@@ -71,16 +71,15 @@
 
 
 
-
-
-
   "customer": {
+
     "account": {
       "title": "My Account",
       "details": "Account Details",
       "view_addresses": "View Addresses",
       "return": "Return to Account Details"
     },
+
     "activate_account": {
       "title": "Activate Account",
       "subtext": "Create your password to activate your account.",
@@ -89,6 +88,7 @@
       "submit": "Activate Account",
       "cancel": "Decline Invitation"
     },
+
     "addresses": {
       "title": "Your Addresses",
       "default": "Default",
@@ -112,6 +112,7 @@
       "delete": "Delete",
       "delete_confirm": "Are you sure you wish to delete this address?"
     },
+
     "login": {
       "title": "Login",
       "email": "Email",
@@ -119,9 +120,11 @@
       "forgot_password": "Forgot your password?",
       "sign_in": "Sign In",
       "cancel": "Return to Store",
+      "create_account": "Create account",
       "guest_title": "Continue as a guest",
       "guest_continue": "Continue"
     },
+
     "orders": {
       "title": "Order History",
       "order_number": "Order",
@@ -131,6 +134,7 @@
       "total": "Total",
       "none": "You haven't placed any orders yet."
     },
+
     "order": {
       "title": "Order {{ name }}",
       "date": "Placed on {{ date }}",
@@ -151,6 +155,7 @@
       "fulfilled_at": "Fulfilled {{ date }}",
       "subtotal": "Subtotal"
     },
+
     "recover_password": {
       "title": "Reset your password",
       "email": "Email",
@@ -159,6 +164,7 @@
       "subtext": "We will send you an email to reset your password.",
       "success": "We've sent you an email with a link to update your password."
     },
+
     "reset_password": {
       "title": "Reset account password",
       "subtext": "Enter a new password for {{ email }}",
@@ -166,6 +172,7 @@
       "password_confirm": "Confirm Password",
       "submit": "Reset Password"
     },
+
     "register": {
       "title": "Create Account",
       "first_name": "First Name",
@@ -175,6 +182,7 @@
       "submit": "Create",
       "cancel": "Return to Store"
     }
+
   }
 
 

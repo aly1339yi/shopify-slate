@@ -2360,12 +2360,23 @@ $navbar-plus-banner-height-mobile: $navbar-banner-height-mobile + $navbar-nav-he
 
 eg:
 
-large-up-display-none
+large-up-display-none-imp
 
 */
 
+@mixin display-none-imp-class($breakpoint: '') {
+  .#{$breakpoint}-display-none-imp{display:none !important;}
+}
+
+@each $item in $breakpoint-range {
+  $item-key: nth($item, 1);
+  @include screen($range: $item-key) {
+    @include display-none-imp-class('#{$item-key}');
+  }
+}
+
 @mixin display-none-class($breakpoint: '') {
-  .#{$breakpoint}-display-none{display:none !important;}
+  .#{$breakpoint}-display-none{display:none;}
 }
 
 @each $item in $breakpoint-range {
@@ -2376,8 +2387,13 @@ large-up-display-none
 }
 
 
-.display-none{
+
+.display-none-imp{
   display: none !important;
+}
+
+.display-none{
+  display: none;
 }
 
 .display-block{
@@ -3442,6 +3458,27 @@ body {
 .container{
     padding: 0 (list-get($grid-gutter, 'normal') / 2);
 }
+
+
+.customer-form-container{
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid purple;
+}
+
+
+.customer-account-container{
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid purple;
+}
+
+
+
+
+
 /* =========================================================================
 	Desktop Navbar
 ========================================================================= */
@@ -4507,15 +4544,19 @@ $mini-car-image-width-mobile: 120px;
 
 
 
-#admin_bar_iframe{
-    display: none !important;
-}
-#shopify-theme-controls{
-    display: none !important;
-}
-.shopify-preview-bar{
-    display: none !important;
-}
+// #admin_bar_iframe{
+//     display: none !important;
+// }
+// #shopify-theme-controls{
+//     display: none !important;
+// }
+// .shopify-preview-bar{
+//     display: none !important;
+// }
+
+
+
+
 
 
 /* =========================================================================
