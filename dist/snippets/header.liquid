@@ -54,6 +54,25 @@
 
 		<ul class="desktop-navbar-nav-list-right desktop-navbar-nav-list nav-list-level-1 clearfix">
 
+
+			{% if shop.customer_accounts_enabled %}
+				{% if customer %}
+
+					<li class="nav-list-level-1-item">
+						<a href="/account" class="desktop-navbar-nav-pillar display-block"><span>{{ 'customer.nav_account' | t }}</span></a>
+					</li>	
+				
+				{% else %}
+
+					<li class="nav-list-level-1-item">
+						<a href="/account/login" class="desktop-navbar-nav-pillar display-block"><span>{{ 'customer.nav_log_in' | t }}</span></a>
+					</li>
+
+				{% endif %}
+			{% endif %}
+
+
+
             <li class="nav-list-level-1-item">
                 <form action="/search" role="search" class="desktop-navbar-search desktop-navbar-nav-pillar">
                     <input type="hidden" name="type" value="product">
@@ -167,6 +186,27 @@
             {% endif %}
 
         {% endfor %}
+
+
+
+		{% if shop.customer_accounts_enabled %}
+			{% if customer %}
+
+				<li class="nav-list-level-1-item">
+					<a href="/account" class="display-block"><span>{{ 'customer.nav_account' | t }}</span></a>
+				</li>	
+			
+			{% else %}
+
+				<li class="nav-list-level-1-item">
+					<a href="/account/login" class="display-block"><span>{{ 'customer.nav_log_in' | t }}</span></a>
+				</li>
+
+			{% endif %}
+		{% endif %}
+
+
+
 
 		</ul>
 

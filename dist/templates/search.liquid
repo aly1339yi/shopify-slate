@@ -20,7 +20,7 @@
 {% if search.results_count > 0 %}
 
 
-    <div>{{ 'search.results_for_html' | t: terms: search.terms }}</div>
+    <h1>{{ 'search.results_for_html' | t: terms: search.terms }}</h1>
 
 
     {% paginate search.results by settings.product_pagination_limit %}
@@ -59,7 +59,7 @@
 
     <div class="search-empty-notice empty-notice empty-notice-in-flow">
 
-        <div>{{ 'search.no_results_notice_html' | t: terms: search.terms }}</div>
+        <h1>{{ 'search.no_results_notice_html' | t: terms: search.terms }}</h1>
 
         {{ search_form }}
 
@@ -71,7 +71,7 @@
 
     <div class="search-empty-notice empty-notice empty-notice-in-flow">
 
-        <div class="empty-notice-title">{{ 'search.not_performed_title' | t }}</div>
+        <h1 class="empty-notice-title">{{ 'search.not_performed_title' | t }}</h1>
 
         {{ search_form }}
 

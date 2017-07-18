@@ -37,8 +37,9 @@
 
     "collection_btn_text": "More Styles",
     "search_btn_text": "More Results",
-    "article_btn_text": "Load More"
-
+    "article_btn_text": "Load More",
+    "order_btn_text": "Load More",
+    "address_btn_text": "Load More"
   },
 
 
@@ -71,7 +72,21 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
   "customer": {
+
+    "nav_log_in": "Login",
+    "nav_account": "Account",
+    "log_out_btn_text": "Logout",
 
     "account": {
       "title": "My Account",
