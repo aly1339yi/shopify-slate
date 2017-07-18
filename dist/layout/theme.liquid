@@ -46,7 +46,11 @@
 
 
     {% capture body_class %}
-        template-{{ template | handle }} template-name-{{ template.name | handle }}{% if template.suffix %} template-suffix-{{ template.suffix | handle }}{% endif %}{% if settings.top_banner_enable %} navbar-banner-enable{% endif %}
+        template-{{ template | handle }}
+        template-name-{{ template.name | handle }}
+        {% if template.suffix %} template-suffix-{{ template.suffix | handle }}{% endif %}
+        {% if template.directory %}template-directory-{{ template.directory | handle }}{% endif %}
+        {% if settings.top_banner_enable %} navbar-banner-enable{% endif %}
     {% endcapture %}
 
 

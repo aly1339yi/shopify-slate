@@ -261,53 +261,59 @@ if (!$.cookie('site_visited')) {
     Customer
 ========================================================================= */
 
-
-$(document).on('click', '.js-rest-password-fadein', function() {
-
-    $('.recover-password-form').fadeIn(0);
-    $('.customer-login-form').fadeOut(0);
-
-});
-
-$(document).on('click', '.js-rest-password-fadeout', function() {
-
-    $('.recover-password-form').fadeOut(0);
-    $('.customer-login-form').fadeIn(0);
-
-});
+if ($('.template-directory-customers').length) {
 
 
+    $(document).on('click', '.js-rest-password-fadein', function() {
 
-// Initialize observers on address selectors, defined in shopify_common.js
-if (Shopify) {
-    new Shopify.CountryProvinceSelector('AddressCountryNew', 'AddressProvinceNew', {
-      hideElement: 'AddressProvinceContainerNew'
+        $('.recover-password-form').fadeIn(0);
+        $('.customer-login-form').fadeOut(0);
+
     });
-}
 
-// Initialize each edit form's country/province selector
-$('.address-country-option').each(function() {
-    var formId = $(this).data('form-id');
-    var countrySelector = 'AddressCountry_' + formId;
-    var provinceSelector = 'AddressProvince_' + formId;
-    var containerSelector = 'AddressProvinceContainer_' + formId;
+    $(document).on('click', '.js-rest-password-fadeout', function() {
 
-    new Shopify.CountryProvinceSelector(countrySelector, provinceSelector, {
-        hideElement: containerSelector
+        $('.recover-password-form').fadeOut(0);
+        $('.customer-login-form').fadeIn(0);
+
     });
-});
 
-$('.address-delete').on('click', function() {
-    var $el = $(this);
-    var formId = $el.data('form-id');
-    var confirmMessage = $el.data('confirm-message');
-    if (confirm(confirmMessage || 'Are you sure you wish to delete this address?')) {
-        Shopify.postLink('/account/addresses/' + formId, {parameters: {_method: 'delete'}});
+
+
+    // Initialize observers on address selectors, defined in shopify_common.js
+
+    if ($('.template-customers-addresses').length) {
+
+        new Shopify.CountryProvinceSelector('AddressCountryNew', 'AddressProvinceNew', {
+          hideElement: 'AddressProvinceContainerNew'
+        });
+   
+        // Initialize each edit form's country/province selector
+
+        $(document).on('click', '.address-country-option', function() {
+
+            var formId = $(this).data('form-id');
+            var countrySelector = 'AddressCountry_' + formId;
+            var provinceSelector = 'AddressProvince_' + formId;
+            var containerSelector = 'AddressProvinceContainer_' + formId;
+
+            new Shopify.CountryProvinceSelector(countrySelector, provinceSelector, {
+                hideElement: containerSelector
+            });
+        });
+
+        $(document).on('click', '.address-delete', function() {
+            var $el = $(this);
+            var formId = $el.data('form-id');
+            var confirmMessage = $el.data('confirm-message');
+            if (confirm(confirmMessage || 'Are you sure you wish to delete this address?')) {
+                Shopify.postLink('/account/addresses/' + formId, {parameters: {_method: 'delete'}});
+            }
+        });
+
     }
-});
 
-
-
+}
 
 
 
