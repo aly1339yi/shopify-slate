@@ -1,0 +1,113 @@
+{% capture recover_password_errors %}
+{% form 'recover_customer_password' %}
+    {% if form.errors %}
+    <div class="form-feedback form-error">{{ form.errors | default_errors }}</div>
+    {% endif %}
+
+    {% if form.posted_successfully? %}
+        <div class="form-feedback form-success">RESET EMAIL SENT</div>
+    {% endif %}
+{% endform %}
+{% endcapture %}
+
+        
+
+<div class="customer-login-form">
+       
+<h1 class="customer-title">{{ 'customer.login.title' | t }}</h1>
+
+{{ recover_password_errors }}
+
+{% form 'customer_login' %}
+
+    <input type="hidden" name="checkout_url" value="{{ redirect_url }}">
+
+    {% if form.errors %}
+    <div class="form-feedback form-error">{{ form.errors | default_errors }}</div>
+    {% endif %}
+
+
+    <div class="form-field">
+    <input type="text"
+     name="customer[email]"
+     id="CustomerEmail"
+     spellcheck="false"
+     autocomplete="off"
+     autocapitalize="off"
+     required
+     >
+    <label for="CustomerEmail">
+        {{ 'customer.login.email' | t }}
+    </label>
+    </div>
+
+    {% if form.password_needed %}
+    <div class="form-field">
+    <input type="password"
+    name="customer[password]"
+    id="CustomerPassword"
+    required
+    >
+    <label for="CustomerPassword">
+    {{ 'customer.login.password' | t }}
+    </label>
+    </div>
+
+
+    <div class="form-field form-field-no-border">
+    <span class="js-reset-password-fadein text-transform-initial hover-opacity">{{ 'customer.login.forgot_password' | t }}</span>
+     </div>
+
+    {% endif %}
+
+
+    <div class="form-field form-field-no-border">
+    <button type="submit" class="btn btn-solid">{{ 'customer.login.sign_in' | t }}</button>
+
+    <a href="/account/register" class="btn btn-solid">{{ 'customer.login.create_account' | t }}</a>
+    </div>
+
+
+{% endform %}
+
+
+</div>
+
+
+
+
+
+<div class="recover-password-form display-none">
+
+    <h1 class="customer-title">{{ 'customer.recover_password.title' | t }}</h1>
+
+    <div class="customer-notice">{{ 'customer.recover_password.subtext' | t }}</div>
+
+    {% form 'recover_customer_password' %}
+
+    <div class="form-field">
+    <input type="text"
+    name="email"
+    id="RecoverEmail"
+    spellcheck="false"
+    autocomplete="off"
+    autocapitalize="off"
+    required 
+    >
+    <label for="RecoverEmail">
+    {{ 'customer.recover_password.email' | t }}
+    </label>
+    </div>
+
+
+    <div class="form-field form-field-no-border">
+    <button type="submit" class="btn btn-solid">{{ 'customer.recover_password.submit' | t }}</button>
+    <button type="button" class="js-rest-password-fadeout btn btn-solid">{{ 'customer.recover_password.cancel' | t }}</button>
+    </div>
+
+        
+    {% endform %}
+
+</div>
+
+

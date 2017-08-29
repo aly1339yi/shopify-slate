@@ -2,12 +2,36 @@
 <div class="product-shop-details">
 
 
+	{% comment %}
+
+	Product Title
+
+	{% endcomment %}
+
 	<h1 class="product-shop-title">{{ product.title }}</h1>
+
+	{% comment %}
+
+	Product Price
+
+	{% endcomment %}
 
 	<div class="product-shop-price">{{ product_price }}</div>
 
+
+	{% comment %}
+
+	Product Description
+
+	{% endcomment %}
+
 	<div class="product-shop-description">{{ product.description }}</div>
 
+	{% comment %}
+
+	Product Options
+
+	{% endcomment %}
 
 	{% unless has_only_default_variant %}
 
@@ -29,15 +53,30 @@
 
 					{% for value in option.values %}
 
-					<div class="product-option-value product-shop-option-value js-product-shop-option-value{% if value == default_option1 or value == default_option2 or value == default_option3 %} active-value{% endif %}{% if value == default_color %} selected-value{% endif %}"
+					{% assign value_unavailable = false %}
+
+					{% if options_length == 1 %}
+
+					{% for variant in product.variants %}
+						{% if variant.option1 == value and variant.available == false %}
+							{% assign value_unavailable = true %}
+							{% break %}
+						{% endif %}
+					{% endfor %}
+
+					{% endif %}
+
+					<div class="product-option-value product-shop-option-value js-product-shop-option-value{% if value == default_option1 or value == default_option2 or value == default_option3 %} active-value{% endif %}{% if value == default_color %} selected-value{% endif %}{% if value_unavailable %} unavailable-value{% endif %}"
 					data-product-options-size="{{ product.options.size }}"
 					data-product-option-position="{{ option.position }}"
 					data-is-color-option-value="{{ is_color_option }}"
 					data-product-option-value="{{ value }}"
+					data-add-to-cart-js-class="{{ product_add_to_cart_js_class }}"
+					data-back-in-stock-js-class="{{ product_back_in_stock_js_class }}"
 					{% if is_color_option %}
 					style="background:url({{ swatch_src_array[forloop.index0] }}) no-repeat center center; background-size: cover;"
 					{% endif %}
-					>{{ value }}</div>
+					><span>{{ value }}</span></div>
 
 					{% endfor %}
 
@@ -53,29 +92,43 @@
 	{% endunless %}
 
 
-	<button {% if default_btn_disabled %}disabled{% endif %}
+	{% comment %}
+
+	Product Back In Stock Field
+
+	{% endcomment %}
+
+	<div class="product-shop-back-in-stock-field{% unless has_only_default_variant and default_variant.available %} display-none{% endunless %}">
+		<input
+		type="email"
+		placeholder="Enter Your Email"
+		{% if customer %}value="{{ customer.email }}"{% endif %}
+		class="product-shop-back-in-stock-email block-fullwidth">
+	</div>
+
+
+
+	{% comment %}
+
+	Product Button
+
+	{% endcomment %}
+
+
+	<button
 	type="button"
-	class="product-add-to-cart product-shop-add-to-cart js-product-add-to-cart btn" 
+	class="product-shop-add-to-cart {{ default_btn_js_class }} btn btn-solid block-fullwidth"
+	{% if default_btn_disabled %}disabled{% endif %}
+	data-product-id="{{ product.id }}"
 	data-variant-id="{{ default_variant.id }}"
-	data-choose-size-btn-text="{{ choose_size_btn_text }}"
 	data-add-to-cart-btn-text="{{ add_to_cart_btn_text }}"
 	data-pre-order-btn-text="{{ pre_order_btn_text }}"
 	data-sold-out-btn-text="{{ sold_out_btn_text }}"
 	>{{ default_btn_text }}</button>
 
 
-    <div class="product-bis">
-        <div class="product-bis-title">{{ 'product.back_in_stock_title' | t }}</div>
-        <div class="product-bis-fields clearfix">
-            <input type="email" placeholder="Email" class="product-bis-email">
-            <button class="product-bis-submit"
-            data-product-id="{{ product.id }}"
-            data-variant-id="{{ default_variant.id }}"
-            data-btn-text="Notify me"
-            data-success-text="Success"
-            >{{ 'product.back_in_stock_btn_text' | t }}</button>
-        </div>
-    </div>
+
+
 
 
 </div>

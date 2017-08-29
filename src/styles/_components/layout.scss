@@ -3,21 +3,37 @@
 
 body {
 
-	font-size: list-get($font-size, 'body');
-
-
+    // font-family: initial;
+    // font-weight: initial;
+    font-size: 1.4rem;
+    // letter-spacing: initial;
+    // text-transform: initial;
+    
+    color: $color-black;
+    
     padding-top: $navbar-nav-height-desktop;
-    @include screen(nav-bp-down) {
+    @include screen('nav-bp-down') {
     padding-top: $navbar-nav-height-mobile;
     }
 
     &.navbar-banner-enable {
         padding-top: $navbar-plus-banner-height-desktop;
-        @include screen(nav-bp-down) {
+        @include screen('nav-bp-down') {
         padding-top: $navbar-plus-banner-height-mobile;
         }
     }
 
+
+    &.template-index,
+    &.template-page-contact,
+    &.template-page-newsletter,
+    &.template-page-lookbook,
+
+    {   
+        @include screen('nav-bp-up') {
+            padding-top: 0;
+        }
+    }
 
 
 }
@@ -25,6 +41,19 @@ body {
 
 .main {
 
+    $desktop-footer-height: 225px;
+
+    min-height: calc(100vh - #{$navbar-nav-height-desktop} - #{$desktop-footer-height});
+    @include screen('nav-bp-down') {
+        min-height: calc(100vh - #{$navbar-nav-height-mobile});
+    }
+    body.navbar-banner-enable & {
+        min-height: calc(100vh - #{$navbar-plus-banner-height-desktop} - #{$desktop-footer-height});
+        @include screen('nav-bp-down') {
+            min-height: calc(100vh - #{$navbar-plus-banner-height-mobile});
+        }
+    }
+    
 }
 
 
@@ -32,25 +61,15 @@ body {
 
 
 .container{
-    padding: 0 (list-get($grid-gutter, 'normal') / 2);
+    padding-left: (list-get($grid-gutter, 'normal') / 2);
+    padding-right: (list-get($grid-gutter, 'normal') / 2);
 }
 
-
-.customer-form-container{
-    max-width: 450px;
-    margin-left: auto;
-    margin-right: auto;
-    border: 1px solid purple;
+.container-top-padding{
+    padding-top: 30px;
+    @include screen('medium-down') {
+        padding-top: 30px;
+    }
 }
-
-
-.customer-account-container{
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    border: 1px solid purple;
-}
-
-
 
 

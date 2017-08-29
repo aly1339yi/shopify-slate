@@ -1,15 +1,17 @@
 {
 
+
   "collection": {
 
     "empty_notice_title": "There are no products in this collection.",
     "empty_notice_cta": "Shop all products",
-    "empty_notice_cta_link": "\/",
+    "empty_notice_cta_link": "\/collections/all",
 
 
     "no_results_notice_html": "<p>No products matched your selection.</p><p>Try removing some filters.</p>",
     "remove_all_filters_btn_text": "Remove all filters",
 
+    "filter_btn_text": "Filter by",
     "sort_btn_text": "Sort by"
     
     
@@ -18,18 +20,23 @@
   "product": {
 
     "choose_size_btn_text": "Choose size",
+    "choose_amount_btn_text": "Choose amount",
     "add_to_cart_btn_text": "Add to bag",
     "pre_order_btn_text": "Pre-order",
-    "sold_out_btn_text": "Sold out",
-    "back_in_stock_btn_text": "Notify me",
+    "sold_out_btn_text": "Notify me when available",
 
-    "back_in_stock_title": "Get notified via email when back in stock",
 
     "quantity_label": "Quantity",
 
     "option_label": "Select {{ option_name }}",
 
-    "related_products_title": "You May Also Like"
+    "related_products_title_collection_html": "More {{ collection_title }}",
+
+    "related_products_title_general": "More Styles",
+
+    "back_to_collection_title_html": "Back<br>to<br>{{ collection_title }}",
+
+    "continue_shopping_title_html": "Continue shopping",
 
   },
 
@@ -50,8 +57,11 @@
     "empty_notice_cta_link": "\/",
 
     "cart_title": "Pack Your Bag",
-    "total_label": "Subtotal",
-    "checkout_btn_text": "Checkout"
+    "total_label": "Total",
+    
+    "mini_cart_checkout_btn_text": "Checkout",
+    "mini_cart_cart_btn_text": "View Bag",
+    "cart_checkout_btn_text": "Checkout"
     
   },
 
@@ -61,19 +71,27 @@
 
     "no_results_notice_html": "No results for \"{{ terms }}\"",
 
-    "results_for_html": "Search results of \"{{ terms }}\"",
+    "no_results_btn_text": "Search Again",
 
-    "not_performed_title": "Search the store",
 
-    "submit_btn_text": "Search"
+
+    "title_html": {
+      "one": "{{ count }} result for \"{{ terms }}\"",
+      "other": "{{ count }} results for \"{{ terms }}\""
+    },
+
+
+    "not_performed_title": "Search the store"
 
   },
 
 
 
 
+  "footer": {
 
-
+    "subscribe_title": "Join Our Newsletter"
+  },
 
 
 
@@ -194,8 +212,16 @@
       "last_name": "Last Name",
       "email": "Email",
       "password": "Password",
+      "subscribe": "Subscribe to our newsletter",
       "submit": "Create",
       "cancel": "Return to Store"
+
+    },
+
+    "checkout_indentity": {
+      "title": "Checkout as a guest",
+      "subtext_html": "You can proceed to check out without creating an account.<br>You'll have the option to create one later.",
+      "continue_btn_text": "continue"
     }
 
   }

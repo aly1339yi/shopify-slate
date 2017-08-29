@@ -20,6 +20,7 @@ if ($('.template-index').length) {
 
 if ($('.template-collection').length) {
 
+    tinysort('.js-size-sort',{data:'size-sort',order:'desc'});
 
     $(".size-s").insertAfter($(".size-xs"));
     $(".size-m").insertAfter($(".size-s"));
@@ -28,8 +29,24 @@ if ($('.template-collection').length) {
     $(".size-onesize").insertAfter($(".size-onesize").parent().children().last());
 
 
-}
+    $(document).on('click', '.js-sort-cookie', function() {
+        $this = $(this);
+        sortKeyWord = $this.text();
+        $.cookie('collection_sort_keyword', sortKeyWord, {
+            expires: 7,
+            path: '/'
+        });
+    });
 
+    var collectionSortKeyword = $.cookie('collection_sort_keyword');
+    if(collectionSortKeyword && $.urlParam('sort_by')){
+        $('#sort-key-word').text(' (' + collectionSortKeyword + ')');
+    }
+
+
+
+
+}
 
 /* =========================================================================
     Product Page

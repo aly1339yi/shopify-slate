@@ -1,0 +1,125 @@
+
+
+
+
+
+
+
+{{ '' | asset_url }}
+
+
+{{  | img_url: '1200x', format: 'pjpg' }}
+
+
+{% capture image_src %}
+{{  | img_url: '1500x', format: 'pjpg' }}
+{% endcapture %}
+
+<div class="namespace-image" style="background-image: url({{ image_src }});"></div>
+
+
+
+{% include 'product-card', product: product, product: product  %}
+
+{% section 'section' %}
+
+{{ section.settings. }}
+
+
+{% for block in section.blocks %}
+
+{{ block.settings. }}
+
+{% endfor %}
+
+
+
+{{ '' | t: terms:  }}
+
+
+
+{% schema %}
+{
+
+    "name": "Stores Page",
+
+    "class": "stores-page-section",
+
+    "settings":[
+
+        {
+            "type":"image_picker",
+            "id":"image",
+            "label":"Image",
+            "info":"1920 X 1165"
+        }
+
+    ],
+
+    "blocks":[
+
+
+        {
+            "type":"store",
+            "name":"store",
+
+            "settings":[
+                {
+                    "type":"text",
+                    "id":"country",
+                    "label":"Country"
+                },
+                {
+                    "type":"text",
+                    "id":"city",
+                    "label":"City"
+                },
+                {
+                    "type":"text",
+                    "id":"url",
+                    "label":"Map URL"
+                },				
+                {
+                    "type":"richtext",
+                    "id":"text",
+                    "label":"Info"
+                }
+
+
+            ]
+
+        }
+
+
+    ],
+
+
+    "presets": [
+      {
+        "category": "Stores Page",
+        "name": "New"
+      }
+    ]
+
+
+}
+
+
+{% endschema %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

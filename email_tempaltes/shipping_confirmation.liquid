@@ -1,0 +1,292 @@
+{% capture email_title %}Shipping Confirmation{% endcapture %}
+{% capture email_body %}
+
+{% endcapture %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{{ email_title }}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+
+      @font-face {
+      font-family: 'CentraleSansRegular';
+      src: url('https://cdn.shopify.com/s/files/1/2172/3321/files/CentraleSansRegular.eot?4434068821241664819');
+      src: url('https://cdn.shopify.com/s/files/1/2172/3321/files/CentraleSansRegular.eot?4434068821241664819') format('embedded-opentype'),
+      url('https://cdn.shopify.com/s/files/1/2172/3321/files/CentraleSansRegular.woff2?4434068821241664819') format('woff2'),
+      url('https://cdn.shopify.com/s/files/1/2172/3321/files/CentraleSansRegular.woff?4434068821241664819') format('woff'),
+      url('https://cdn.shopify.com/s/files/1/2172/3321/files/CentraleSansRegular.ttf?4434068821241664819') format('truetype'),
+      url('https://cdn.shopify.com/s/files/1/2172/3321/files/CentraleSansRegular.svg?4434068821241664819#CentraleSansRegular') format('svg');
+      }
+
+      @font-face {
+      font-family: 'CentraleSansMedium';
+      src: url('https://cdn.shopify.com/s/files/1/2172/3321/files/CentraleSansMedium.eot?8163409915392125424');
+      src: url('https://cdn.shopify.com/s/files/1/2172/3321/files/CentraleSansMedium.eot?8163409915392125424') format('embedded-opentype'),
+      url('https://cdn.shopify.com/s/files/1/2172/3321/files/CentraleSansMedium.woff2?8163409915392125424') format('woff2'),
+      url('https://cdn.shopify.com/s/files/1/2172/3321/files/CentraleSansMedium.woff?8163409915392125424') format('woff'),
+      url('https://cdn.shopify.com/s/files/1/2172/3321/files/CentraleSansMedium.ttf?8163409915392125424') format('truetype'),
+      url('https://cdn.shopify.com/s/files/1/2172/3321/files/CentraleSansMedium.svg?8163409915392125424#CentraleSansMedium') format('svg');
+      }
+
+
+ 
+      *,
+      *:after,
+      *:before {
+          margin: 0;
+          padding: 0;
+          -webkit-box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          box-sizing: border-box;
+      }
+
+      .body {
+          font-family: 'CentraleSansMedium';
+          font-size: 12px;
+          line-height: 1.42857143;
+          text-transform: uppercase;
+          word-wrap: break-word;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          text-rendering: optimizeLegibility;
+          text-size-adjust: 100%;
+          color: #000;
+
+          max-width: 640px !important;
+          padding-left: 15px !important;
+          padding-right: 15px !important;
+          margin: auto !important;
+          
+      }
+
+      img{
+        display: block;
+        width: 100%;
+      }
+
+
+      a {
+          color: inherit;
+          text-decoration: none;
+      }
+
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+          margin: 0;
+          padding: 0;
+          border: 0;
+          font-size: 100%;
+          font: inherit;
+          vertical-align: baseline;
+      }
+
+      p {
+          margin: 0;
+          padding: 0;
+      }
+
+      table {
+          width: 100%;
+          border-spacing: 0;
+      }
+
+
+      th {
+          font-weight: inherit;
+          text-align: left;
+      }
+
+      td{
+        vertical-align: top;
+      }
+
+
+      .btn{
+        display: block;
+        max-width: 400px;
+        margin: auto;
+        padding: 15px 50px 10px 50px;
+        background-color: #000;
+        color: #fff;
+        text-align: center;
+      }
+    
+    .spacer{
+      display: none;
+    }
+
+
+    .section{
+      margin-bottom: 30px;
+    }
+    .email-body__cell{
+      text-align: center;
+    }
+
+    .order-info__cell{
+      text-align: center;
+    }  
+
+    .order-info__address-cell{
+      width: 40%;
+    }
+
+    .order-info__number-cell{
+      width: 30%;
+    }
+
+    .order-info__date-cell{
+      width: 30%;
+    }
+
+
+
+    .order-list__cell{
+      padding-bottom: 20px;
+    }
+
+    .order-list__product-image-cell{
+      width: 200px;
+    }
+
+    .order-list__product-description-cell{
+      padding-left: 15px;
+    }
+
+
+    .subtotal-line__title{
+      width: 200px;
+    }
+
+    .subtotal-line__value{
+      padding-left: 15px;
+    }
+
+    .social_cell{
+      text-align: center;
+    }
+    .social_cell a{
+      display: inline-block;
+      width: 15px;
+      margin: 30px 10px 20px;
+    }
+
+    </style>
+  </head>
+  <body>
+    <table class="body">
+      <tr>
+        <td>
+
+          <table class="section">
+            <tr>
+              <td class="">
+                <img src="https://cdn.shopify.com/s/files/1/2172/3321/files/shipping_confirmation.jpg?13924616492811208405" width="100%">
+              </td>
+            </tr>
+          </table>
+
+
+          <table class="section">
+            <tr>
+              <td class="order-info__cell">
+
+                <table>
+                  <tr>
+                    <td>
+                        <h4>Tracking #</h4>
+                        <p>{{fulfillment.tracking_numbers}}</p>
+
+                    </td>
+                    <td>
+                        <h4>Order Number #</h4>
+                        <p>{{ order_name }}</p>
+                    </td>
+                  </tr>
+                </table>
+
+              </td>
+
+            </tr>
+          </table>
+
+
+
+          <table class="section">
+            <tr>
+              <td class="email-body__cell">
+                  <a href="{{fulfillment.tracking_urls}}" class="btn">track your order</a>
+              </td>
+            </tr>
+          </table>
+
+
+
+          <table class="section">
+            {% for line in line_items %}
+            <tr>
+              <td class="order-list__cell">
+                <table>
+                  <td class="order-list__product-image-cell" style="">
+                    {% if line.image %}
+                    <img src="{{ line | img_url: '150x' }}" align="left" class="order-list__product-image"/>
+                    {% endif %}
+                  </td>
+                  <td class="order-list__product-description-cell" style="">
+                    {% if line.product.title %}
+                    {% assign line_title = line.product.title %}
+                    {% else %}
+                    {% assign line_title = line.title %}
+                    {% endif %}
+                    {% if line.quantity < line.quantity %}
+                    {% capture line_display %} {{ line.quantity }} of {{ line.quantity }} {% endcapture %}
+                    {% else %}
+                    {% assign line_display = line.quantity  %}
+                    {% endif %}
+                    <span class="order-list__item-title">{{ line_title }}</span><br/>
+                    {% if line.variant.title != 'Default Title' %}
+                    <span class="order-list__item-variant">{{ line.variant.title }}</span>
+                    <p class="order-list__item-qty">{{ line_display }}</p>
+                    {% endif %}
+                    {% if line.original_line_price != line.line_price %}
+                    <del class="order-list__item-original-price">{{ line.original_line_price | money }}</del>
+                    {% endif %}
+                    <p class="order-list__item-price">{{ line.line_price | money }}</p>
+                  </td>
+
+                </table>
+              </td>
+            </tr>
+            {% endfor %}
+          </table>
+
+          <table class="section">
+            <tr>
+              <td class="social_cell">
+                <a href="https://www.facebook.com/patbobrand/">
+                  <img src="https://cdn.shopify.com/s/files/1/2172/3321/files/facebook-logo.png?14345928622906201742">
+                </a>
+                <a href="https://www.instagram.com/patbo_us/">
+                  <img src="https://cdn.shopify.com/s/files/1/2172/3321/files/instagram-symbol.png?14345928622906201742">
+                </a>
+              </td>
+            </tr>
+          </table>
+
+
+          <img src="{{ 'notifications/spacer.png' | shopify_asset_url }}" class="spacer" height="1" />
+
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

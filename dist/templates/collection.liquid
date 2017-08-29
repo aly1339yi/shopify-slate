@@ -1,93 +1,92 @@
 <div class="collection-container container">
 
 
-<div class="collection">
-
-	{% comment %}
-		if collection is not empty
-	{% endcomment %}
-
-	{% if collection.all_products_count > 0 %}
-	
-		{% include 'collection-refinement' %}
+	<div class="collection">
 
 		{% comment %}
-			if collection after filter is not empty
+			if collection is not empty
 		{% endcomment %}
 
-		{% if collection.products_count > 0 %}
+		{% if collection.all_products_count > 0 %}
 		
-		
-			{% paginate collection.products by settings.product_pagination_limit %}
+			{% include 'collection-refinement' %}
 
-			<div class="collection-grid grid grid-uniform" id="pagination-load-more-target">
+			{% comment %}
+				if collection after filter is not empty
+			{% endcomment %}
 
-				{% for product in collection.products %}
-				{% if settings.hide_sold_out_products and product.available == false %}
-				{% else %}
+			{% if collection.products_count > 0 %}
+			
+			
+				{% paginate collection.products by settings.product_pagination_limit %}
 
-				<div class="collection-grid-item grid-item x-large-up-one-quarter large-x-large-one-third large-down-one-half">
+				<div class="collection-grid grid grid-uniform" id="pagination-load-more-target">
 
-					{% include 'product-base-data', product: product %}
+					{% for product in collection.products %}
+					{% if settings.hide_sold_out_products and product.available == false %}
+					{% else %}
 
-					{% include 'product-card', product: product %}
+					<div class="collection-grid-item grid-item medium-down-one-half medium-large-one-third large-x-large-one-third x-large-up-one-quarter">
 
-					{% include 'product-quick-shop', product: product %}
+						{% include 'product-base-data', product: product %}
+
+						{% include 'product-card', product: product %}
+
+						{% include 'product-quick-shop', product: product %}
+
+					</div>
+
+					{% endif %}
+					{% endfor %}
 
 				</div>
 
-				{% endif %}
-				{% endfor %}
+				{% capture product_load_more_btn_text %}{{ 'pagination.collection_btn_text' | t }}{% endcapture %}
+
+				{% include 'pagination', namespace: 'product' , load_more_btn_text: product_load_more_btn_text %}
+
+				{% endpaginate %}
+
+
+			{% comment %}
+				if collection after filter is empty
+			{% endcomment %}
+
+			{% else %}
+
+
+			<div class="collection-empty-notice empty-notice empty-notice-in-flow">
+
+				<div class="empty-notice-title">{{ 'collection.no_results_notice_html' | t }}</div>
+				<div>
+			    <a href="{{ collection.url }}" class="empty-notice-link btn btn-solid">{{ 'collection.remove_all_filters_btn_text' | t }}</a>
+				</div>
 
 			</div>
 
 
-			{% capture product_load_more_btn_text %}{{ 'pagination.collection_btn_text' | t }}{% endcapture %}
-
-			{% include 'pagination', namespace: 'product' , load_more_btn_text: product_load_more_btn_text %}
-
-			{% endpaginate %}
+			{% endif %}
 
 
 		{% comment %}
-			if collection after filter is empty
+			if collection is empty
 		{% endcomment %}
 
 		{% else %}
 
+			<div class="collection-empty-notice empty-notice empty-notice-in-flow">
 
-		<div class="collection-empty-notice empty-notice empty-notice-in-flow">
+				<h1 class="empty-notice-title">{{ 'collection.empty_notice_title' | t }}</h1>
+				<div>
+			    <a href="{{ 'collection.empty_notice_cta_link' | t }}" class="empty-notice-link btn btn-solid">{{ 'collection.empty_notice_cta' | t }}</a>
+				</div>
 
-			<div class="empty-notice-title">{{ 'collection.no_results_notice_html' | t }}</div>
-			<div>
-		    <a href="{{ collection.url }}" class="empty-notice-link btn">{{ 'collection.remove_all_filters_btn_text' | t }}</a>
 			</div>
-
-		</div>
-
 
 		{% endif %}
 
 
-	{% comment %}
-		if collection is empty
-	{% endcomment %}
-
-	{% else %}
-
-		<div class="collection-empty-notice empty-notice empty-notice-in-flow">
-
-			<h1 class="empty-notice-title">{{ 'collection.empty_notice_title' | t }}</h1>
-			<div>
-		    <a href="{{ 'collection.empty_notice_cta_link' | t }}" class="empty-notice-link btn">{{ 'collection.empty_notice_cta' | t }}</a>
-			</div>
-
-		</div>
-
-	{% endif %}
-
-
-</div>
+	</div>
 
 
 </div>

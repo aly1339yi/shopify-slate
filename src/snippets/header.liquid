@@ -20,7 +20,7 @@
 			Left
 		{% endcomment %}
 
-		<ul class="desktop-navbar-nav-list-left desktop-navbar-nav-list nav-list-level-1 clearfix">
+		<ul class="desktop-navbar-nav-list desktop-navbar-nav-list nav-list-level-1 float-left clearfix">
 
             {% for link in linklists.main-menu.links %}
 
@@ -32,14 +32,18 @@
                         <a href="{{ link.url }}" class="desktop-navbar-nav-pillar desktop-navbar-nav-dropdown-toggle dropdown-toggle js-dropdown-click display-block"><span>{{ link.title }}</span></a>
                         <ul class="nav-list-level-2 desktop-navbar-nav-dropdown-menu dropdown-menu">
                             {% for sub_link in linklists[sub_linklist_handle].links %}
-  								<li class="nav-list-level-2-item"><a href="{{ sub_link.url }}" class="display-block"><span>{{ sub_link.title }}</span></a></li>
+  								<li class="nav-list-level-2-item">
+  								<a href="{{ sub_link.url }}" class="display-block"><span>{{ sub_link.title }}</span></a>
+  								</li>
                             {% endfor %}
                         </ul>
                     </li>
 
                 {% else %}
 
-                    <li class="nav-list-level-1-item"><a href="{{ link.url }}" class="desktop-navbar-nav-pillar display-block"><span>{{ link.title }}</span></a></li>
+                    <li class="nav-list-level-1-item">
+                    <a href="{{ link.url }}" class="desktop-navbar-nav-pillar display-block"><span>{{ link.title }}</span></a>
+                    </li>
 
                 {% endif %}
 
@@ -52,24 +56,7 @@
 			Right
 		{% endcomment %}
 
-		<ul class="desktop-navbar-nav-list-right desktop-navbar-nav-list nav-list-level-1 clearfix">
-
-
-			{% if shop.customer_accounts_enabled %}
-				{% if customer %}
-
-					<li class="nav-list-level-1-item">
-						<a href="/account" class="desktop-navbar-nav-pillar display-block"><span>{{ 'customer.nav_account' | t }}</span></a>
-					</li>	
-				
-				{% else %}
-
-					<li class="nav-list-level-1-item">
-						<a href="/account/login" class="desktop-navbar-nav-pillar display-block"><span>{{ 'customer.nav_log_in' | t }}</span></a>
-					</li>
-
-				{% endif %}
-			{% endif %}
+		<ul class="desktop-navbar-nav-list desktop-navbar-nav-list nav-list-level-1 float-right clearfix">
 
 
 
@@ -81,13 +68,27 @@
                 </form>
             </li>
 
+
+			{% if shop.customer_accounts_enabled %}
+			<li class="nav-list-level-1-item">
+				{% if customer %}
+					<a href="/account" class="desktop-navbar-nav-pillar display-block"><span>{{ 'customer.nav_account' | t }}</span></a>
+				{% else %}
+					<a href="/account/login" class="desktop-navbar-nav-pillar display-block"><span>{{ 'customer.nav_log_in' | t }}</span></a>
+				{% endif %}
+				</li>
+			{% endif %}
+
+
+
+
 			{% if template != 'cart' %}
 
 			<li class="nav-list-level-1-item"">
-				<div class="desktop-mini-cart-trigger desktop-navbar-nav-pillar js-body-toggle-class" data-body-class="mini-cart-open">
+				<div class="desktop-mini-cart-trigger desktop-navbar-nav-pillar js-body-add-class" data-body-class="mini-cart-open">
 					
 					<span class="desktop-mini-cart-text">Bag</span>
-					(<span class="desktop-mini-cart-count" data-cart-view="data-cart-view" rv-text="cart.item_count"></span>)
+					<span class="desktop-mini-cart-count" data-cart-view="data-cart-view" rv-text="cart.item_count"></span>
 					
 				</div>
 			</li>
@@ -135,14 +136,17 @@
 	{% endif %}
 
 
-	<div class="mobile-navbar-header clearfix">
+	<div class="mobile-navbar-header">
 
-		<div class="mobile-navbar-nav-pillar mobile-nav-trigger js-body-add-class" data-body-class="mobile-nav-open"></div>
+		<div class="mobile-navbar-header-pillar mobile-nav-trigger js-body-toggle-class" data-body-class="mobile-nav-open"></div>
 
 		{% unless template == 'cart' %}
-
-		<div class="mobile-navbar-nav-pillar mobile-mini-cart-switch js-body-toggle-class" data-body-class="mini-cart-open" data-cart-view="data-cart-view" rv-text="cart.item_count"></div>
-
+			<div class="mobile-navbar-nav-pillar mobile-mini-cart-trigger js-body-add-class" data-body-class="mini-cart-open">
+				
+				<span class="mobile-mini-cart-text">Bag</span>
+				<span class="mobile-mini-cart-count" data-cart-view="data-cart-view" rv-text="cart.item_count"></span>
+				
+			</div>
 		{% endunless %}
 
 
@@ -150,19 +154,15 @@
 			Logo
 		{% endcomment %}
 
-		<a href="/" class="mobile-navbar-nav-logo mobile-navbar-nav-pillar"></a>
+		<a href="/" class="mobile-navbar-nav-logo mobile-navbar-header-pillar"></a>
 
 	</div>
 
+	<div class="mobile-navbar-nav-overlay display-none js-body-remove-class" data-body-class="mobile-nav-open"></div>
 
 	<div class="mobile-navbar-nav">
 
-		<div class="mobile-navbar-nav-header clearfix">
-			<div class="mobile-navbar-nav-pillar mobile-nav-close js-body-remove-class" data-body-class="mobile-nav-open"></div>
-		</div>
-
-
-		<ul class="mobile-navbar-nav-list">
+		<ul class="mobile-navbar-nav-list nav-list-level-1">
 
         {% for link in linklists.main-menu.links %}
 
@@ -171,46 +171,42 @@
             {% if linklists[sub_linklist_handle] and linklists[sub_linklist_handle].links.size > 0 %}
 
                 <li class="nav-list-level-1-item">
-                    <a href="{{ link.url }}" class="display-block"><span>{{ link.title }}</span></a>
-                    <ul class="">
-                        {% for sub_link in linklists[sub_linklist_handle].links %}
-								<li class="nav-list-level-2-item"><a href="{{ sub_link.url }}" class="display-block"><span>{{ sub_link.title }}</span></a></li>
-                        {% endfor %}
-                    </ul>
+
+                    <div class="next-level-trigger mobile-navbar-nav-pillar display-block">{{ link.title }}</div>
+
+                    <div class="nav-list-level-2-wrapper">
+	                    <div class="prev-level-trigger mobile-navbar-nav-pillar">{{ link.title }}</div>
+	                    <ul class="nav-list-level-2">
+	                        {% for sub_link in linklists[sub_linklist_handle].links %}
+								<li class="nav-list-level-2-item">
+									<a href="{{ sub_link.url }}" class="mobile-navbar-nav-pillar display-block">{{ sub_link.title }}</a>
+								</li>
+	                        {% endfor %}
+	                    </ul>
+                    </div>
+
                 </li>
 
             {% else %}
 
-                <li class="nav-list-level-1-item"><a href="{{ link.url }}" class="display-block"><span>{{ link.title }}</span></a></li>
+                <li class="nav-list-level-1-item">
+                	<a href="{{ link.url }}" class="mobile-navbar-nav-pillar display-block">{{ link.title }}</a>
+                </li>
 
             {% endif %}
 
         {% endfor %}
 
-
-
-		{% if shop.customer_accounts_enabled %}
-			{% if customer %}
-
-				<li class="nav-list-level-1-item">
-					<a href="/account" class="display-block"><span>{{ 'customer.nav_account' | t }}</span></a>
-				</li>	
-			
-			{% else %}
-
-				<li class="nav-list-level-1-item">
-					<a href="/account/login" class="display-block"><span>{{ 'customer.nav_log_in' | t }}</span></a>
-				</li>
-
-			{% endif %}
-		{% endif %}
-
-
-
-
 		</ul>
 
 
+		<div class="mobile-navbar-nav-bottom">
+			
+			<div class="text-align-center">
+			{% include 'social-list', namespace: 'mobile-navbar-nav', type: 'view' %}
+			</div>
+
+		</div>
 
 	</div>
 

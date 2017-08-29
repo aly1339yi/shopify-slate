@@ -6,41 +6,17 @@ Email Subscribe Popup
 {% endcomment %}
 
 
-<div class="subscribe-popup popup fullscreen-overlay js-element-fadeout" data-element-selector=".subscribe-popup">
+<div class="subscribe-popup display-none">
 
-	<div class="display-table">
-	<div class="display-table-cell">
+	<div class="popup-close popup-close-right js-element-fadeout" data-element-selector=".subscribe-popup"></div>
 
-	<div class="popup-close js-element-fadeout" data-element-selector=".subscribe-popup"></div>
+	<div class="subscribe-popup-title">{{ settings.subscribe-pop-title }}</div>
 
-	<div class="popup-box js-stop-propagation">
+	<div class="subscribe-popup-text">{{ settings.subscribe-pop-text }}</div>
 
-			<div class="popup-content">
-
-				<div class="subscribe-form-title">{{ settings.email-subscribe-popup-title }}</div>
-
-				<div class="subscribe-form-copy">{{ settings.email-subscribe-popup-copy }}</div>
-
-				<form action="" autocomplete="off" method="post" name="mc-embedded-subscribe-form" class="subscribe-form subscribe-popup-subscribe-form clearfix">
-
-
-					<input type="email" placeholder="EMAIL" name="EMAIL">
-					<button type="submit" value="subscribe" name="subscribe" class="subscribe-form-subscribe">sign up</button>
-					<div class="mc-response-wrapper">
-						<div class="mc-response"></div>
-					</div>
-				</form>
-
-			</div>
-
-
-	</div>
-
-	</div>
-	</div>
+	{% include 'subscribe-form', namespace: 'subscribe-popup' %}
 
 </div>
-
 
 
 
@@ -51,36 +27,103 @@ Size Guide Popup
 {% endcomment %}
 
 
-{% comment %}<div class="size-guide-popup popup fullscreen-overlay js-element-fadeout" data-element-selector=".size-guide-popup">
+<div class="size-guide-popup fullscreen-overlay display-none js-element-fadeout" data-element-selector=".size-guide-popup">
 
 
 	<div class="display-table">
 	<div class="display-table-cell">
 
 		<div class="popup-box">
-				<img src="{{ settings.size_chart | img_url: '2048x' }}" class="size-guid-image img-fullwidth">
+
+			<div class="popup-close popup-close-right js-element-fadeout" data-element-selector=".size-guide-popup"></div>
+
+			<div class="size-guide-title">Clothing Size Chart <span>(Product is based on US size)</span></div>
+
+			<table class="size-guide-table responsive-table">
+
+		        <thead>
+			        <tr>
+			            <th>PRODUCT SIZE</th>
+			            <th>US</th>
+			            <th>FR</th>
+			            <th>IT</th>
+			            <th>AU</th>
+			            <th>UK</th>
+			            <th>EU</th>
+			        </tr>
+		        </thead>
+
+
+			    <tbody>
+
+			        <tr class="responsive-table-row">
+			            <td data-label="PRODUCT SIZE">4</td>
+			            <td data-label="US">US 4</td>
+			            <td data-label="FR">FR 36</td>
+			            <td data-label="IT">IT 40</td>
+			            <td data-label="AU">AU 8</td>
+			            <td data-label="UK">UK 8</td>
+			            <td data-label="EU">EU 34</td>
+			        </tr>
+			        <tr class="responsive-table-row">
+			            <td data-label="PRODUCT SIZE">6</td>
+			            <td data-label="US">US 6</td>
+			            <td data-label="FR">FR 38</td>
+			            <td data-label="IT">IT 42</td>
+			            <td data-label="AU">AU 10</td>
+			            <td data-label="UK">UK 10</td>
+			            <td data-label="EU">EU 36</td>
+			        </tr>
+			        <tr class="responsive-table-row">
+			            <td data-label="PRODUCT SIZE">8</td>
+			            <td data-label="US">US 8</td>
+			            <td data-label="FR">FR 40</td>
+			            <td data-label="IT">IT 44</td>
+			            <td data-label="AU">AU 12</td>
+			            <td data-label="UK">UK 12</td>
+			            <td data-label="EU">EU 38</td>
+			        </tr>
+			        <tr class="responsive-table-row">
+			            <td data-label="PRODUCT SIZE">10</td>
+			            <td data-label="US">US 10</td>
+			            <td data-label="FR">FR 42</td>
+			            <td data-label="IT">IT 46</td>
+			            <td data-label="AU">AU 14</td>
+			            <td data-label="UK">UK 14</td>
+			            <td data-label="EU">EU 40</td>
+			        </tr>
+			        <tr class="responsive-table-row">
+			            <td data-label="PRODUCT SIZE">12</td>
+			            <td data-label="US">US 12</td>
+			            <td data-label="FR">FR 44</td>
+			            <td data-label="IT">IT 48</td>
+			            <td data-label="AU">AU 16</td>
+			            <td data-label="UK">UK 16</td>
+			            <td data-label="EU">EU 42</td>
+			        </tr>
+			    </tbody>
+			</table>
+		
 		</div>
 
 	</div>
 	</div>
 
-</div>{% endcomment %}
-
-
-{% comment %}
-
-Product Image Popup
-
-{% endcomment %}
-
-{% comment %}
-<div class="product-image-popup popup fullscreen-overlay js-element-fadeout" data-element-selector=".product-image-popup">
-	<div class="popup-close js-element-fadeout" data-element-selector=".product-image-popup"></div>
-	<img src="" class="img-fullwidth js-element-fadeout" data-element-selector=".product-image-popup">
 </div>
 
 
+
+
+{% comment %}
+
+	Browser Scroller
+
 {% endcomment %}
+
+<div class="browser-scroller js-browser-scroller display-none"></div>
+
+
+
 
 
 

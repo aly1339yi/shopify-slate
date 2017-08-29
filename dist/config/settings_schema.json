@@ -1,7 +1,7 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Start",
+    "theme_name": "Slate",
     "theme_version": "1.0",
     "theme_author": "Black & Black Creative",
     "theme_documentation_url": "http://blackandblackcreative.com",
@@ -15,7 +15,7 @@
         "type": "image_picker",
         "id": "favicon",
         "label": "Favicon image",
-        "info": "Will be scaled down to 32 x 32px"
+        "info": "minimum 32 x 32"
       }
     ]
   },
@@ -57,18 +57,26 @@
   },
 
   {
-    "name": "Collection",
+    "name": "Navbar",
     "settings": [
 
+
       {
-        "type": "header",
-        "content": "Hide Sold Out Products"
-      },
-      {
-        "type": "checkbox",
-        "id": "hide_sold_out_products",
-        "label": "Enable",
-        "default": false
+          "type": "select",
+          "id": "navbar_style_class",
+          "options": [
+              { "value": "navbar-black-txt-transparent-bkg", "label": "Black Text, Transparent Background"},
+              { "value": "navbar-white-txt-transparent-bkg", "label": "White Text, Transparent Background"},
+
+              { "value": "navbar-black-txt-semi-transparent-bkg", "label": "Black Text, Semi Transparent Background"},
+              { "value": "navbar-white-txt-semi-transparent-bkg", "label": "White Text, Semi Transparent Background"},
+
+              { "value": "navbar-black-txt-white-bkg", "label": "Black Text, White Background"},
+              { "value": "navbar-white-txt-black-bkg", "label": "White Text, Black Background"}
+
+          ],
+
+          "label": "Navbar Style"
       }
 
     ]
@@ -76,8 +84,67 @@
 
 
   {
+    "name": "Email Subscribe Popup",
+    "settings": [
+      {
+        "type": "text",
+        "id": "subscribe-pop-title",
+        "label": "Title"
+      },
+      {
+        "type": "richtext",
+        "id": "subscribe-pop-text",
+        "label": "Text"
+      }
+
+    ]
+  },
+
+
+  {
+    "name": "Size Guide",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "size_guide",
+        "label": "Size Guide"
+      }
+    ]
+  },
+
+  {
+    "name": "Collection",
+    "settings": [
+
+      {
+        "type": "checkbox",
+        "id": "hide_sold_out_products",
+        "label": "Hide Sold Out Products",
+        "default": false
+      }
+
+    ]
+  },
+
+
+
+  {
     "name": "Pagination",
     "settings": [
+
+
+      {
+       "type": "radio",
+       "id": "pagination_style_class",
+       "options": [
+          { "value": "pagination-style-btn", "label": "Load More Button"},
+          { "value": "pagination-style-scroll", "label": "Infinite Scroll"}
+       ],
+       "default":  "pagination-style-btn",
+       "label": "Pagination Style"
+      },
+
+
       {
         "type": "number",
         "id": "product_pagination_limit",

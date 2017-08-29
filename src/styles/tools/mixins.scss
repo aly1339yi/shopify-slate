@@ -4,11 +4,11 @@
 
 @function list-get($list, $key) {
    @each $item in $list{
-    $item-key: nth($item, 1);
-    $item-value: nth($item, 2);
-    @if $item-key == $key {
-       @return $item-value;
-    }
+  $item-key: nth($item, 1);
+  $item-value: nth($item, 2);
+  @if $item-key == $key {
+     @return $item-value;
+  }
   }
 }
 
@@ -20,14 +20,14 @@
 
 @mixin mq-lt($value) {
    @if type-of($value) == number{
-    @media only screen and (max-width: $value - 1) {
-       @content;
-    }
+  @media only screen and (max-width: $value - 1) {
+     @content;
+  }
   }
   @else {
-     @media only screen and (max-width: list-get($breakpoint, $value) - 1){
-      @content;
-    }
+   @media only screen and (max-width: list-get($breakpoint, $value) - 1){
+    @content;
+  }
   }
 }
 
@@ -35,14 +35,14 @@
 
 @mixin mq-gteq($value) {
    @if type-of($value) == number{
-    @media only screen and (min-width: $value ) {
-       @content;
-    }
+  @media only screen and (min-width: $value ) {
+     @content;
+  }
   }
   @else {
-     @media only screen and (min-width: list-get($breakpoint, $value)){
-      @content;
-    }
+   @media only screen and (min-width: list-get($breakpoint, $value)){
+    @content;
+  }
   }
 }
 
@@ -52,26 +52,26 @@
 @mixin screen($range:null, $min:null, $max:null) {
 
   @if ($range){
-    @media only screen and #{list-get($breakpoint-range, $range)}{
-      @content;
-    }
+  @media only screen and #{list-get($breakpoint-range, $range)}{
+    @content;
+  }
   }
 
   @else{
-    $query: "only screen and all" !default;
+  $query: "only screen and all" !default;
 
-    @if $min and $max {
-      $query: "only screen and (min-width: #{$min}) and (max-width: #{$max})";
-    }
-    @else if $min {
-      $query: "only screen and (min-width: #{$min})"; 
-    }
-    @else if $max {
-      $query: "only screen and (max-width: #{$max})";  
-    }
-    @media #{$query} { 
-      @content;
-    }
+  @if $min and $max {
+    $query: "only screen and (min-width: #{$min}) and (max-width: #{$max})";
+  }
+  @else if $min {
+    $query: "only screen and (min-width: #{$min})"; 
+  }
+  @else if $max {
+    $query: "only screen and (max-width: #{$max})";  
+  }
+  @media #{$query} { 
+    @content;
+  }
 
   }
 
@@ -109,32 +109,13 @@
 
 
 /* ========================================================================
-   Input Placeholder
-   ========================================================================= */
-
-@mixin input-placeholder {
-  &::-webkit-input-placeholder {
-    @content
-  }
-  &:-moz-placeholder {
-    @content
-  }
-  &::-moz-placeholder {
-    @content
-  }
-  &:-ms-input-placeholder {
-    @content
-  }
-}
-
-/* ========================================================================
    Quantity Query
    ========================================================================= */
 
 @mixin has-nth($expression, $element: '*') {
   &:nth-last-child(#{$expression}):first-child,
   &:nth-last-child(#{$expression}):first-child ~ #{$element} {
-    @content;
+  @content;
   }
 }
 
@@ -148,9 +129,10 @@
 @mixin at-most($quantity, $element: '*') {
   &:nth-last-child(-n + #{$quantity}):first-child,
    &:nth-last-child(-n + #{$quantity}):first-child ~ #{$element} {
-     @content;
+   @content;
    }
 }
+
 
 /* ========================================================================
    Vendor Prefix
@@ -178,11 +160,103 @@
    @include css3-prefix( 'transform', $params);
 }
 
-@mixin rotate($deg: 0, $m11: 0, $m12: 0, $m21: 0, $m22: 0) {
-   @include css3-prefix( 'transform', rotate($deg + deg));
-  filter: progid:DXImageTransform.Microsoft.Matrix( M11=#{$m11}, M12=#{$m12}, M21=#{$m21}, M22=#{$m22}, sizingMethod= 'auto expand');
-  zoom: 1;
+
+/* ========================================================================
+   Overlay
+   ========================================================================= */
+
+@mixin overlay($position) {
+  position: $position;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
+
+@mixin fullscreen-overlay{
+
+    @include overlay(fixed);
+
+    z-index:list-get($z-index, 'fullscreen-overlay');
+
+    background-color: rgba(#000, 0.4);
+    
+    overflow: auto;
+}
+
+
+/* ========================================================================
+   Hover
+   ========================================================================= */
+
+
+@mixin hover-opacity {
+
+  cursor: pointer;
+
+  html.mod-no-mobile & {
+    
+    @include transition($property:opacity);
+    &:hover{
+      opacity: 0.4;
+    }
+  }
+  
+}
+
+
+@mixin hover-underline {
+
+  cursor: pointer;
+
+  html.mod-no-mobile & {
+    
+    span{
+      border-bottom: 1px solid transparent;
+      @include transition($property:border);
+    }
+
+    &:hover span{
+      border-bottom: 1px solid #000;
+    }
+  }
+
+}
+
+/* ========================================================================
+   Image Ratio
+   ========================================================================= */
+
+
+@mixin ratio($ratio) {
+
+  position: relative;
+
+  padding-top: percentage(1 / $ratio);
+
+}
+
+
+
+/* ========================================================================
+   Input Placeholder
+   ========================================================================= */
+
+@mixin input-placeholder {
+  &::-webkit-input-placeholder {
+  @content
+  }
+  &:-moz-placeholder {
+  @content
+  }
+  &::-moz-placeholder {
+  @content
+  }
+  &:-ms-input-placeholder {
+  @content
+  }
+}
+
 
 
 /* ========================================================================
@@ -192,36 +266,59 @@
 
 /* invisible */
 @mixin invisible{
-    opacity: 0;
-    visibility: hidden;
+  opacity: 0;
+  visibility: hidden;
 }
 
 
 /* visible */
 @mixin visible{
-    opacity: 1;
-    visibility: visible;
+  opacity: 1;
+  visibility: visible;
 }
 
 
 /* max-width */
 
-@mixin max-width($width){
+@mixin max-width($width, $align:null){
+
   max-width: $width;
-  margin-left: auto;
-  margin-right: auto;
+
+  @if ($align){
+
+    @if ($align == 'center') {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @else if ($align == 'right') {
+      margin-left: auto;
+      margin-right: 0;
+    }
+
+  }
+
 }
 
 
 /* clearfix */
 
-@mixin clearfix() {
+@mixin clearfix{
   &:after {
-    content: " ";
-    display: block;
-    clear: both;
+  content: " ";
+  display: block;
+  clear: both;
   }
 }
+
+
+/* overflow auto */
+
+@mixin overflow-y-auto{
+  overflow-y: auto;
+  /* has to be scroll, not auto */
+  -webkit-overflow-scrolling: touch;
+}
+
 
 
 /* text nowrap ellipsis */
@@ -231,6 +328,26 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+
+@mixin list-hover-style {
+
+    html.mod-no-mobile &{
+        &:hover a{
+            color: $color-grey !important;
+        }
+
+        a{
+            cursor: pointer;
+            @include transition($property:color);
+            &:hover{
+                color: $color-black !important;
+            }
+        }
+    }
+
+}
+
 
 
 

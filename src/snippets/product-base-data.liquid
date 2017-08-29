@@ -7,9 +7,12 @@
 {% assign color_swatch_alt_handle = 'swatch' %}
 {% assign color_option_position = 1 %}
 
-{% assign product_card_image_size = "850x" %}
-{% assign product_quick_shop_image_size = "850x" %}
-{% assign product_shop_image_size = "1280x" %}
+{% assign product_card_image_size = '600x' %}
+{% assign product_quick_shop_image_size = '600x' %}
+{% assign product_shop_image_size = '1200x' %}
+
+{% assign product_add_to_cart_js_class = 'js-product-add-to-cart' %}
+{% assign product_back_in_stock_js_class = 'js-product-back-in-stock-submit' %}
 
 
 {% comment %}
@@ -108,7 +111,7 @@
 
     {% capture optionKey %}option{{ color_option_position }}{% endcapture %}
 
-    {% assign default_color = default_variant.[optionKey] %}
+    {% assign default_color = default_variant[optionKey] %}
 
 
 
@@ -179,36 +182,55 @@
 {% endif %}
 
 
+{% comment %}
+    Is a Gift Card?
+{% endcomment %}
+{% if product.handle contains 'gift-card' %}
+    {% assign is_gift_card = true %}
+{% else %}
+    {% assign is_gift_card = false %}
+{% endif %}
+
 
 
 {% comment %}
     Generate Btn Text, disable/enable Add to Cart Button 
 {% endcomment %}
 
-{% capture choose_size_btn_text %}
-    {{ 'product.choose_size_btn_text' | t }}
-{% endcapture %}
-{% capture add_to_cart_btn_text %}
-    {{ 'product.add_to_cart_btn_text' | t }}
-{% endcapture %}
-{% capture pre_order_btn_text %}
-    {{ 'product.pre_order_btn_text' | t }}
-{% endcapture %}
-{% capture sold_out_btn_text %}
-    {{ 'product.sold_out_btn_text' | t }}
-{% endcapture %}
+{%- capture choose_btn_text -%}
+{%- if is_gift_card -%}
+    {{- 'product.choose_amount_btn_text' | t -}}
+{%- else -%}
+    {{- 'product.choose_size_btn_text' | t -}}
+{%- endif -%}
+{%- endcapture -%}
+
+{%- capture add_to_cart_btn_text -%}
+    {{- 'product.add_to_cart_btn_text' | t -}}
+{%- endcapture -%}
+
+{%- capture pre_order_btn_text -%}
+    {{- 'product.pre_order_btn_text' | t -}}
+{%- endcapture -%}
+
+{%- capture sold_out_btn_text -%}
+    {{- 'product.sold_out_btn_text' | t -}}
+{%- endcapture -%}
 
 
 {% assign default_btn_disabled = true %}
-{% assign default_btn_text = choose_size_btn_text %}
+{% assign default_btn_text = choose_btn_text %}
+{% assign default_btn_js_class = '' %}
 
 
 {% if has_only_default_variant or has_only_color_option %}
     
+    {% assign default_btn_disabled = false %}
+
     {% if default_variant.available %}
 
-        {% assign default_btn_disabled = false %}
-        
+        {% assign default_btn_js_class = product_add_to_cart_js_class %}
+
         {% if default_variant.inventory_quantity > 0 %}
             {% assign default_btn_text = add_to_cart_btn_text %}
         {% else %}
@@ -216,6 +238,8 @@
         {% endif %}
 
     {% else %}
+
+            {% assign default_btn_js_class = product_back_in_stock_js_class %}
 
             {% assign default_btn_text = sold_out_btn_text %}
 
@@ -233,13 +257,13 @@
 
 {% if has_variant_on_sale %}
 
-    <del class="product-price product-price-compare-at">
+    <span class="product-price product-price-compare-at">
         {{ product.compare_at_price_max | money }}
-    </del>
+    </span>
 
-    <ins class="product-price product-price-on-sale">
+    <span class="product-price product-price-on-sale">
         {% if product.price_varies %}From {% endif %}{{ product.price_min | money }}
-    </ins>
+    </span>
 
 {% else %}
 
@@ -259,13 +283,13 @@
 
 {% if default_variant.price < default_variant.compare_at_price %}
 
-    <del class="product-price product-price-compare-at">
+    <span class="product-price product-price-compare-at">
         {{ default_variant.compare_at_price | money }}
-    </del>
+    </span>
 
-    <ins class="product-price product-price-on-sale">
+    <span class="product-price product-price-on-sale">
         {{ default_variant.price | money }}
-    </ins>
+    </span>
 
 {% else %}
 
@@ -274,14 +298,5 @@
 {% endif %}
 
 {% endcapture %}
-
-
-
-
-
-
-
-
-
 
 

@@ -1,23 +1,23 @@
 
-<div class="mini-cart-overlay fullscreen-overlay js-body-remove-class" data-body-class="mini-cart-open"></div>
+<div class="mini-cart-overlay fullscreen-overlay display-none cursor-pointer js-body-remove-class" data-body-class="mini-cart-open"></div>
 
 
 
 <div class="mini-cart" data-cart-view="data-cart-view">
 
-    <div class="mini-cart-header clearfix">
-        <div class="mini-cart-close js-body-remove-class" data-body-class="mini-cart-open"></div>
-    </div>
-    
 
-    <div class="mini-cart-empty" rv-unless="cart.item_count | gt 0">
-        <div>{{ 'cart.empty_notice_title' | t }}</div>
+    <div class="mini-cart-empty-notice empty-notice" rv-unless="cart.item_count | gt 0">
+        <div class="display-table">
+            <div class="display-table-cell">
+                <div>{{ 'cart.empty_notice_title' | t }}</div>
+            </div>
+        </div>
     </div>
 
 
     <div class="mini-cart-body" rv-if="cart.item_count | gt 0">
 
-        <div class="mini-cart-item clearfix" rv-each-item="cart.items" rv-hide="item.handle | eq 'embroidery'">
+        <div class="mini-cart-item" rv-each-item="cart.items" rv-hide="item.handle | eq 'embroidery'">
 
             <div class="mini-cart-item-image">
                 <a rv-href="item.url">
@@ -31,7 +31,7 @@
                     Item title
                 {% endcomment %}
                 <div class="mini-cart-item-title">
-                    <a rv-href="item.url" rv-text="item.product_title"></a>
+                    <a class="" rv-href="item.url" rv-text="item.product_title"></a>
                 </div>
 
                 {% comment %}
@@ -62,7 +62,9 @@
                 {% comment %}
                     Item quantity
                 {% endcomment %}
-                <div class="mini-cart-item-quantity qty-selectors">
+                <div class="mini-cart-item-quantity qty-selectors small-down-display-none-imp">
+                        
+                    <span class="qty-selectors-label">qty:</span>
 
                     <span class="qty-selectors-btn qty-selectors-btn-minus" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | minus 1">&#150;</span>
 
@@ -73,6 +75,9 @@
                 </div>
 
                 
+                <div class="mini-cart-item-remove small-down-display-none-imp" rv-data-cart-remove="index | plus 1">remove</div>
+               
+
 
             </div>
          
@@ -83,12 +88,27 @@
 
     <div class="mini-cart-footer" rv-if="cart.item_count | gt 0">
 
-        <div class="mini-cart-total clearfix">
+        <div class="mini-cart-total">
+            <hr>
             <div class="mini-cart-total-title">{{ 'cart.total_label' | t }}</div>
             <div class="mini-cart-total-price" rv-text="cart.total_price | money Currency.currentCurrency"></div>
         </div>
 
-        <a href="/cart" class="mini-cart-checkout btn">{{ 'cart.checkout_btn_text' | t }}</a>
+
+        {%- capture checkout_url -%}
+        {%- if customer -%}
+        /checkout
+        {%- else -%}
+        /pages/checkout-identity
+        {%- endif -%}
+        {%- endcapture -%}
+
+
+        <a href="{{ checkout_url }}" class="mini-cart-checkout btn btn-solid">{{ 'cart.mini_cart_checkout_btn_text' | t }}</a>
+
+
+        <a href="/cart" class="mini-cart-view-cart">{{ 'cart.mini_cart_cart_btn_text' | t }}</a>
+
 
     </div>
 

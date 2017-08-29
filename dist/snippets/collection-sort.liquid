@@ -3,12 +3,13 @@
   Sort
 {% endcomment %}
 
+
 <div class="collection-refinement-item collection-sort dropdown js-dropdown-hover">
-	<div class="collection-refinement-pillar dropdown-toggle js-dropdown-click">{{ 'collection.sort_btn_text' | t }}</div>
-	<ul class="dropdown-menu clearfix">
-		<li><a href="{{collection.url}}/?sort_by=created-descending">New Arrivals</a></li>
-		<li><a href="{{collection.url}}/?sort_by=best-selling">Best Sellers</a></li>
-		<li><a href="{{collection.url}}/?sort_by=price-descending">Price High to Low</a></li>
-		<li><a href="{{collection.url}}/?sort_by=price-ascending">Price Low to High</a></li>
+	<div class="collection-refinement-pillar dropdown-toggle js-dropdown-toggle">{{ 'collection.sort_btn_text' | t }}<span id="sort-key-word"></span></div>
+	<ul class="dropdown-menu">
+		<li><a href="{{collection.url}}?sort_by=created-descending" class="js-sort-cookie">New Arrivals</a></li>
+		<li><a href="{{collection.url}}?sort_by=best-selling" class="js-sort-cookie">Best Sellers</a></li>
+		<li><a href="{{collection.url}}?sort_by=price-descending" class="js-sort-cookie">Price High to Low</a></li>
+		<li><a href="{{collection.url}}?sort_by=price-ascending" class="js-sort-cookie">Price Low to High</a></li>
 	</ul>
 </div>

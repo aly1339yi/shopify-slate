@@ -1,11 +1,10 @@
 <div class="customer-account-container container">
     
+    <h1 class="customer-title">{{ 'customer.account.title' | t }}</h1>
 
-    <h1>{{ 'customer.account.title' | t }}</h1>
+    <div class="customer-account-section">
 
-    <div class="customer-accounts-orders">
-
-        <h2>{{ 'customer.orders.title' | t }}</h2>
+        <h2 class="customer-subtitle">{{ 'customer.orders.title' | t }}</h2>
 
         {% paginate customer.orders by 20 %}
         {% if customer.orders.size != 0 %}
@@ -53,23 +52,18 @@
 
 
 
-    <div class="customer-accounts-details">
+    <div class="customer-account-section">
 
-        <h2>{{ 'customer.account.details' | t }}</h2>
+        <h2 class="customer-subtitle">{{ 'customer.account.details' | t }}</h2>
 
-        <div>
-        {{ customer.default_address | format_address }}
-        </div>
+        <div>{{ customer.default_address | format_address }}</div>
 
-        <div>
-        <a href="/account/addresses" class="btn">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a>
-        </div>
+    </div>
+    
+    <div>
+    <a href="/account/addresses" class="btn btn-solid">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a>
 
-        <div>
-        <a href="/account/logout" class="btn">{{ 'customer.log_out_btn_text' | t }}</a>
-        </div>
-
-
+    <a href="/account/logout" class="btn btn-solid">{{ 'customer.log_out_btn_text' | t }}</a>
     </div>
 
 

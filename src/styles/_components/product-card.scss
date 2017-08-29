@@ -1,6 +1,76 @@
+
+
+
+
 .product-card-image{
 	display: none;
 	&.active{
 		display: initial;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+.product-card-canvas{
+
+	@include ratio(1/1.25);
+	font-size: 1.4rem;
+}
+
+
+
+.product-card-image{
+
+	@include overlay(absolute);
+
+	background-repeat: no-repeat;
+	background-position: center top;
+	background-size: cover;
+
+
+	&:nth-child(2){
+		html.mod-no-mobile &{
+
+			@include transition();
+			&:hover{
+				opacity: 0;
+			}
+			
+		}
+	}
+
+}
+
+.product-card-details{
+	margin-top: 15px;
+}
+
+
+.product-card-label{
+	margin-bottom: 5px;
+}
+
+
+.product-card-title{
+	margin-bottom: 5px;
+
+	font-size: 1.2rem;	
+
+}
+
+.product-card-price{
+
+}
+
+
+

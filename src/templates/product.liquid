@@ -4,14 +4,6 @@
 {% include 'product-base-data', product: product %}
 
 
-{% comment %}
-    Is a Gift Card?
-{% endcomment %}
-{% if product.handle contains 'gift-card' %}
-    {% assign is_gift_card = true %}
-{% else %}
-    {% assign is_gift_card = false %}
-{% endif %}
 
 
 
@@ -42,7 +34,13 @@
 	</div>
 
 
-	{% include "product-related" %}
+	{% unless is_gift_card %}
+		
+		<div class="product-bottom">
+			{% include "product-related" %}
+		</div>
+	
+	{% endunless %}
 	
 
 </div>

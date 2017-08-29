@@ -1,0 +1,31 @@
+
+
+.search-title{
+
+	margin-bottom: 30px;
+	padding: 10px 0 6px;
+
+	font-size: 1rem;
+	text-align: center;
+	
+	background-color: #eee;
+
+}
+
+
+.search-grid{
+	@extend .collection-grid;
+}
+
+
+.search-grid-item{
+	@extend .collection-grid-item;
+}
+
+
+
+
+
+
+
+

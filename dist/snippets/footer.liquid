@@ -1,61 +1,31 @@
 <footer class="footer">
 
+	<div class="footer-subscribe">
+		
+		<div class="footer-subscribe-title">{{ 'footer.subscribe_title' | t }}</div>
 
-	<div class="footer-flex-container">
-
-
-		<div class="footer-flex-item">
-
-			<div class="footer-subscribe">
-
-				<form action="" autocomplete="off" method="post" name="mc-embedded-subscribe-form" class="subscribe-form footer-subscribe-form clearfix" novalidate>
-					<div class="subscribe-fields-wrapper clearfix">
-						<input type="email" placeholder="Email" name="EMAIL">
-						<button type="submit" value="subscribe" name="subscribe" class="subscribe-form-subscribe"></button>
-					</div>
-					<div class="mc-response-wrapper">
-						<div class="mc-response"></div>
-					</div>
-				</form>
-
-			</div>
-
-		</div>
-
-
-		<div class="footer-flex-item">
-
-			<ul class="footer-nav-list nav-list-level-1 clearfix">
-
-            {% for link in linklists.footer.links %}
-
-            	<li class="nav-list-level-1-item"><a href="{{ link.url }}" class="display-block"><span>{{ link.title }}</span></a></li>
-
-            {% endfor %}
-
-			</ul>
-
-		</div>
-
-
-		<div class="footer-flex-item">
-
-			<ul class="footer-social-list social-list clearfix">
-
-				<li><a href="" target="_blank" class="socicon-instagram"></a></li>
-				<li><a href="" target="_blank" class="socicon-facebook"></a></li>
-				<li><a href="" target="_blank" class="socicon-twitter"></a></li>
-				<li><a href="" target="_blank" class="socicon-pinterest"></a></li>
-
-			</ul>
-
-		</div>
-
-
-
-
+		{% include 'subscribe-form', namespace: 'footer' %}
 
 	</div>
 
+
+	<ul class="footer-nav-list">
+
+    {% for link in linklists.footer.links %}
+
+    	<li class="">
+    	<a href="{{ link.url }}" class="footer-nav-pillar display-block"><span>{{ link.title }}</span></a>
+    	</li>
+
+    {% endfor %}
+
+	</ul>
+
+
+	{% include 'social-list', namespace: 'footer', type: 'view' %}
+
+
+
+	<div>&copy;{{ 'now' | date: "%Y" }}</div>
 
 </footer>

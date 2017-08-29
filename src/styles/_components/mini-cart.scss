@@ -1,6 +1,8 @@
 
 .mini-cart-overlay {
-	display: none;
+
+	z-index:list-get($z-index, 'mini-cart');
+	background-color: rgba(#000, 0.6);
 
 	body.mini-cart-open & {
 		display: block;
@@ -9,9 +11,21 @@
 
 
 
-.mini-cart {
+.mini-cart-empty-notice{
 
-	border: 1px solid purple;
+	@include overlay(absolute);
+
+	font-size: 2rem;
+
+}
+
+
+
+
+$mini-cart-width-desktop: 400px;
+$mini-cart-width-mobile: 300px;
+
+.mini-cart {
 
 	@include invisible;
 
@@ -24,79 +38,52 @@
 	bottom: 0;
 	right: 0;
 	z-index: list-get($z-index, 'mini-cart');
+	@include transform(translateZ(0));
 
     top: $navbar-nav-height-desktop;
-    @include screen(nav-bp-down) {
+    @include screen('nav-bp-down') {
     top: $navbar-nav-height-mobile;
     }
 
     body.navbar-banner-enable & {
         top: $navbar-plus-banner-height-desktop;
-        @include screen(nav-bp-down) {
+        @include screen('nav-bp-down') {
         top: $navbar-plus-banner-height-mobile;
         }
     }
 
-	width: 350px;
-	@include screen(nav-bp-down) {
-		width: 300px;
+	@include screen('small-up') {
+		width: $mini-cart-width-desktop;
+	}
+	@include screen('small-down') {
+		left: 50px;
 	}
 
 	background-color: #fff;
-
 
 	@include transition();
 }
 
 
 
-.mini-cart-header {
-
-	border: 1px solid red;
-
-	position: relative;
-	z-index: 1;
-}
-
-
-$mini-cart-header-height: 50px;
-
-.mini-cart-close {
-	float: left;
-	width: $mini-cart-header-height;
-	height: $mini-cart-header-height;
-
-	border: 1px solid green;
-
-	background: url("{{ 'cross_black.png' | asset_url }}") no-repeat center center;
-	background-size: 15px;
-
-	cursor: pointer;
-
-
-}
-
-
 .mini-cart-body {
 
-	$header-plus-footer-height: 180px;
+	$header-plus-footer-height: 150px;
 
-	padding: 20px;
+	padding: 20px 20px 30px;
 
 	max-height: calc(100vh - #{$header-plus-footer-height} - #{$navbar-nav-height-desktop});
-	@include screen(nav-bp-down) {
+	@include screen('nav-bp-down') {
 		max-height: calc(100vh - #{$header-plus-footer-height} - #{$navbar-nav-height-mobile});
 	}
 	body.navbar-banner-enable & {
 		max-height: calc(100vh - #{$header-plus-footer-height} - #{$navbar-plus-banner-height-desktop});
-		@include screen(nav-bp-down) {
+		@include screen('nav-bp-down') {
 			max-height: calc(100vh - #{$header-plus-footer-height} - #{$navbar-plus-banner-height-mobile});
 		}
 	}
 
-	overflow-y: auto;
-	/* has to be scroll, not auto */
-	-webkit-overflow-scrolling: touch;
+	@include overflow-y-auto;
 
 }
 
@@ -104,23 +91,26 @@ $mini-cart-header-height: 50px;
 
 .mini-cart-item{
 
+	@include clearfix;
+
 	position: relative;
+	font-size: 1.4rem;
 
 	&:not(:first-child) {
-		margin-top: 20px;
+		margin-top: 30px;
 	}
 
 }
 
 
-$mini-car-image-width-desktop: 160px;
+$mini-car-image-width-desktop: 150px;
 $mini-car-image-width-mobile: 120px;
 
 .mini-cart-item-image{
 	float: left;
 	width: $mini-car-image-width-desktop;
 
-	@include screen(nav-bp-down) {
+	@include screen('nav-bp-down') {
 		width: $mini-car-image-width-mobile;
 	}
 
@@ -131,24 +121,29 @@ $mini-car-image-width-mobile: 120px;
 
 .mini-cart-item-details {
 	margin-left: $mini-car-image-width-desktop + 15px;
-	@include screen(nav-bp-down) {
+	@include screen('nav-bp-down') {
 		margin-left: $mini-car-image-width-mobile + 15px;
 	}
 }
 
 
 .mini-cart-item-title {
-	a {
-
-	}
+	margin-bottom: 5px;
 }
 
 
 .mini-cart-item-price{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+
+	
+
 
 }
 
 .mini-cart-item-options{
+	
 	li{
 
 	}
@@ -159,48 +154,77 @@ $mini-car-image-width-mobile: 120px;
 }
 
 .mini-cart-item-quantity{
+	
+}
 
+
+.mini-cart-item-remove{
+    font-size: 1.4rem;
+    color: #bbb;
+    @include hover-opacity;
 }
 
 
 
 .mini-cart-footer{
-
 	padding: 0 20px;
-
-
 }
 
 
 .mini-cart-total{
 	
-	$height: 60px;
-    line-height: $height;
+	@include clearfix;
+
+	$local-height: 60px;
+	height: $local-height;
+    line-height: $local-height + 2px;
     
+	hr{
+		border: none;
+		border-top: 1px solid #eee;
+	}
+	
 }
 
 
 .mini-cart-total-title{
 	float: left;
 	width: $mini-car-image-width-desktop;
-	@include screen(nav-bp-down) {
+	@include screen('nav-bp-down') {
 		width: $mini-car-image-width-mobile;
 	}
+	font-size: 1.4rem;
+	
 }
 
 .mini-cart-total-price{
 	padding-left: $mini-car-image-width-desktop + 15px;
-	@include screen(nav-bp-down) {
+	@include screen('nav-bp-down') {
 		padding-left: $mini-car-image-width-mobile + 15px;
 	}
+	font-size: 1.4rem;
+	text-align: right;
 }
 
 .mini-cart-checkout{
 	display: block;
+	width: 100%;
 	text-align: center;
+
+	font-size: 1.4rem;
+
 }
 
+.mini-cart-view-cart{
+	display: block;
+	text-align: center;
+	padding: 15px 0 13px;
+	
+	font-size: 1.4rem;
 
+	
+
+}
 
 
 

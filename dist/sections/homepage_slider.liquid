@@ -1,0 +1,319 @@
+{% if section.settings.enable %}
+
+<div class="homepage-slider-section-container homepage-section-container">
+
+
+    <div class="desktop-homepage-slider-wrapper royalSlider-wrapper homepage-fullheight-container small-down-display-none-imp">
+
+        <div class="desktop-homepage-slider homepage-slider royalSlider rsDefault">
+
+            {% for block in section.blocks %}
+            {% if block.settings.enable %}
+
+            <div class="homepage-slider-slide"
+            data-body-class="{{block.settings.navbar_style_class_by_slider}}"
+            data-slider-class="{{block.settings.slide_tone_class}}"
+            {{ block.shopify_attributes }}
+            >
+
+                {%- capture image_src -%}
+                {{- block.settings.desktop_image | img_url: '1920x', format: 'pjpg' -}}
+                {%- endcapture -%}
+
+                {% if block.settings.video_url == blank %}
+                    <a href="{{ block.settings.url }}">
+                    <img class="rsImg {{ block.settings.image_focus_class }}" src="{{ image_src }}">
+                    </a>
+                {% else %}
+                    <img class="rsImg {{ block.settings.image_focus_class }}" src="{{ image_src }}" data-rsVideo="{{ block.settings.video_url }}">
+                {% endif %}
+                
+
+                {% if block.settings.title_text != blank or block.settings.button_text != blank %}
+                
+                <div class="homepage-slider-slide-copy {{ block.settings.copy_position_class }}">
+
+                    {% if block.settings.title_text != blank %}
+                    <div class="homepage-slider-slide-title" style="color:{{ block.settings.title_color }}">{{ block.settings.title_text }}</div>  
+                    {% endif %}
+
+                    {% if block.settings.button_text != blank %}
+                    <a href="{{ block.settings.url }}" class="homepage-slider-slide-btn btn {{ block.settings.button_style_class }}">{{ block.settings.button_text }}</a>
+                    {% endif %}
+                    
+                </div>
+
+                {% endif %}
+
+               
+
+            </div>
+
+            {% endif %}
+            {% endfor %}
+
+        </div>
+
+
+        <div class="homepage-section-indicator-bar js-scroll-down-window-height display-none"></div>
+
+
+    </div>
+
+
+    <div class="mobile-homepage-slider-wrapper royalSlider-wrapper homepage-fullheight-container small-up-display-none-imp">
+
+        <div class="mobile-homepage-slider homepage-slider royalSlider rsDefault">
+
+            {% for block in section.blocks %}
+            {% if block.settings.enable %}
+
+            <div class="mobile-homepage-slide"
+            data-slider-class="{{block.settings.slide_tone_class}}"
+            {{ block.shopify_attributes }}
+            >
+            
+                <a href="{{ block.settings.url }}">
+                {%- capture image_src -%}
+                {{- block.settings.mobile_image | img_url: '1080x', format: 'pjpg' -}}
+                {%- endcapture -%}
+                
+                <img class="rsImg" src="{{ image_src }}">
+
+                {% if block.settings.title_text != blank or block.settings.button_text != blank %}
+                
+                <div class="mobile-homepage-slide-copy">
+
+                    {% if block.settings.title_text != blank %}
+                    <div class="mobile-homepage-slide-title">{{ block.settings.title_text }}</div>  
+                    {% endif %}
+                    {% if block.settings.button_text != blank %}
+                    <div class="mobile-homepage-slide-subtitle">Shop Now</div>
+                    {% endif %}
+                    
+                </div>
+
+                {% endif %}
+
+                </a>
+
+            </div>
+
+            {% endif %}
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+{% endif %}
+
+
+{% schema %}
+{
+
+    "name": "Homepage Slider Section",
+
+    "class": "homepage-slider-section homepage-section",
+
+
+    "settings":[
+
+        {
+          "type": "checkbox",
+          "id": "enable",
+          "label": "Section Enable"
+        }
+
+    ],
+
+
+    "blocks":[
+
+
+        {
+            "type":"slide",
+            "name":"Slide",
+
+            "settings":[
+
+
+                {
+                    "type": "header",
+                    "content": "Media"
+                },
+
+
+                {
+                    "type":"image_picker",
+                    "id":"desktop_image",
+                    "label":"Desktop Slide Image",
+                    "info":"1920 X 1080"
+                },
+
+                {
+                    "type":"image_picker",
+                    "id":"mobile_image",
+                    "label":"Mobile Slide Image",
+                    "info":"1080 X 1920"
+                },
+                {
+                    "id": "video_url",
+                    "type": "url",
+                    "label": "Video URL"
+                },
+
+                {
+                    "type": "radio",
+                    "id": "slide_tone_class",
+                    "options": [
+                        { "value": "slider-tone-dark", "label": "Dark"},
+                        { "value": "slider-tone-light", "label": "Light"}
+                    ],
+                    "default":  "slider-tone-dark",
+                    "label": "Slide Dark or Light?"
+                },
+
+                {
+                    "type": "select",
+                    "id": "navbar_style_class_by_slider",
+                    "options": [
+                        { "value": "navbar-by-slider-black-txt-transparent-bkg", "label": "Black Text, Transparent Background"},
+                        { "value": "navbar-by-slider-white-txt-transparent-bkg", "label": "White Text, Transparent Background"},
+
+                        { "value": "navbar-by-slider-black-txt-semi-transparent-bkg", "label": "Black Text, Semi Transparent Background"},
+                        { "value": "navbar-by-slider-white-txt-semi-transparent-bkg", "label": "White Text, Semi Transparent Background"},
+
+                        { "value": "navbar-by-slider-black-txt-white-bkg", "label": "Black Text, White Background"},
+                        { "value": "navbar-by-slider-white-txt-black-bkg", "label": "White Text, Black Background"}
+
+                    ],
+                    "default":  "navbar-by-slider-white-txt-transparent-bkg",
+                    "label": "Navbar Style by Slider"
+                },
+
+                {
+                     "type": "select",
+                     "id": "image_focus_class",
+                     "options": [
+                        { "value": "rsImg-focus-left-top", "label": "Left Top"},
+                        { "value": "rsImg-focus-left-center", "label": "Left Center"},
+                        { "value": "rsImg-focus-left-bottom", "label": "Left Bottom"},
+                        { "value": "rsImg-focus-center-top", "label": "Center Top"},
+                        { "value": "rsImg-focus-center-center", "label": "Center Center"},
+                        { "value": "rsImg-focus-center-bottom", "label": "center bottom"},
+                        { "value": "rsImg-focus-right-top", "label": "Right Top"},
+                        { "value": "rsImg-focus-right-center", "label": "Right Center"},
+                        { "value": "rsImg-focus-right-bottom", "label": "Right Bottom"}
+                     ],
+                     "default":  "rsImg-focus-center-top",
+                     "label": "Slide Image Focus"
+                },
+
+                {
+                    "type": "header",
+                    "content": "Text"
+                },
+
+                {
+                    "type":"text",
+                    "id":"title_text",
+                    "label":"Slider Title Text"
+                },
+
+                {
+                    "type": "radio",
+                    "id": "title_color",
+                    "options": [
+                        { "value": "#000", "label": "Black"},
+                        { "value": "#fff", "label": "White"}
+                    ],
+                    "default":  "#000",
+                    "label": "Slider Title Color"
+                },
+
+                {
+                    "type":"text",
+                    "id":"button_text",
+                    "label":"Slider Button Text"
+                },
+
+                {
+                    "type": "radio",
+                    "id": "button_style_class",
+                    "options": [
+                        { "value": "btn-solid", "label": "Solid Black"},
+                        { "value": "btn-outline-black", "label": "Outline Black"},
+                        { "value": "btn-outline-white", "label": "Outline white"}
+                    ],
+                    "default":  "btn-solid",
+                    "label": "Slider Button Style"
+                },
+
+                {
+                     "type": "select",
+                     "id": "copy_position_class",
+                     "options": [
+                        { "value": "position-left-top", "label": "Left Top"},
+                        { "value": "position-left-center", "label": "Left Center"},
+                        { "value": "position-left-bottom", "label": "Left Bottom"},
+                        { "value": "position-center-top", "label": "Center Top"},
+                        { "value": "position-center-center", "label": "Center Center"},
+                        { "value": "position-center-bottom", "label": "center bottom"},
+                        { "value": "position-right-top", "label": "Right Top"},
+                        { "value": "position-right-center", "label": "Right Center"},
+                        { "value": "position-right-bottom", "label": "Right Bottom"}
+                     ],
+                     "default":  "position-left-bottom",
+                     "label": "Slider Copy Position"
+                },
+
+                {
+                    "type": "header",
+                    "content": "Link"
+                },
+
+                {
+                    "type":"url",
+                    "id":"url",
+                    "label":"Slide URL"
+                },
+
+                {
+                    "type": "header",
+                    "content": "Enable"
+                },
+                
+                {
+                    "type":"checkbox",
+                    "id":"enable",
+                    "label":"Slide Enable"
+                }
+
+
+
+            ]
+
+        }
+
+
+    ],
+
+
+    "presets": [
+      {
+        "category": "Homepage Slider Section",
+        "name": "New"
+      }
+    ]
+
+
+}
+
+
+{% endschema %}
+

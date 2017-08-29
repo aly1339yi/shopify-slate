@@ -4,7 +4,7 @@
 
 	<a href="{{ default_variant.url | within: collection }}" data-product-url="{{ product.url | within: collection }}" class="product-card-link">
 
-	<div class="product-card-image-wrapper">
+
 
 		{% if has_color_option %}
 
@@ -23,11 +23,38 @@
 			    	{% assign has_swap_image = true %}	
 			    {% endif %}
 			    
-				<img src="{{ image.src | img_url: product_card_image_size, format: 'pjpg' }}" alt="{{ alt_handle }}"
+{% comment %}				<img src="{{ image.src | img_url: product_card_image_size, format: 'pjpg' }}" alt="{{ alt_handle }}"
 				class="product-card-image{% if has_swap_image %} js-product-image-swap{% endif %}{% if alt_handle == default_color %} active{% endif %}"
 				data-alt-handle="{{ alt_handle }}"
 				{% if has_swap_image %}data-swap-image-src="{{ product.images[next_index] | product_img_url: product_card_image_size, format: 'pjpg' }}"{% endif %}
 				>
+{% endcomment %}
+
+				{%- capture image_src_0 -%}
+					{{- image.src | img_url: product_card_image_size, format: 'pjpg' -}}
+				{%- endcapture -%}
+
+				{% if has_swap_image > 1 %}
+
+				{%- capture image_src_1 -%}
+					{{- product.images[next_index] | img_url: product_card_image_size, format: 'pjpg' -}}
+				{%- endcapture -%}
+
+				{% endif %}
+
+				<div class="{% if alt_handle == default_color %} active{% endif %}">
+
+					<div class="product-card-canvas" data-alt-handle="{{ alt_handle }}">
+						
+						{% if has_swap_image %}
+						<div class="product-card-image" style="background-image: url({{ image_src_1 }});"></div>
+						{% endif %}
+						<div class="product-card-image" style="background-image: url({{ image_src_0 }});"></div>
+
+					</div>
+
+				</div>
+
 
 		  		{% assign color_name = alt_handle %}
 
@@ -36,18 +63,39 @@
 			{% endfor %}
 
 		{% else %}
+	
+
 
 			{% assign images_length = product.images | size %}
 
-			<img src="{{ product.images[0] | img_url: product_card_image_size, format: 'pjpg' }}" class="active product-card-image{% if images_length > 1 %} js-product-image-swap{% endif %}" {% if images_length > 1 %}data-swap-image-src="{{ product.images[1] | product_img_url: product_card_image_size, format: 'pjpg' }}{% endif %}">
+			{%- capture image_src_0 -%}
+				{{- product.images[0] | img_url: product_card_image_size, format: 'pjpg' -}}
+			{%- endcapture -%}
+
+			{% if images_length > 1 %}
+
+			{%- capture image_src_1 -%}
+				{{- product.images[1] | img_url: product_card_image_size, format: 'pjpg' -}}
+			{%- endcapture -%}
+
+			{% endif %}
+
+			<div class="product-card-canvas">
+				
+				{% if images_length > 1 %}
+				<div class="product-card-image" style="background-image: url({{ image_src_1 }});"></div>
+				{% endif %}
+				<div class="product-card-image" style="background-image: url({{ image_src_0 }});"></div>
+
+			</div>
+
+
 
 		{% endif %}
 
 
 
 
-
-	</div>
 	</a>
 
 	<div class="product-card-details">

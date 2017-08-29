@@ -1,154 +1,252 @@
-
-
 {% comment %}
-	Color Filter
+
+	Has Color Tag ?
+
 {% endcomment %}
 
 
 {% assign collection_has_color_tag = false %}
 {% for tag in collection.all_tags %}
 	{% if tag contains 'color-' %}
+
 		{% assign collection_has_color_tag = true %}
+
 		{%break%}
 	{% endif %}
 {% endfor %}
 
 
-{% if collection_has_color_tag %}
-
-<div class="collection-refinement-item collection-filter collection-color-filter dropdown js-dropdown-hover">
-	<div class="collection-refinement-pillar dropdown-toggle js-dropdown-click">color</div>
-	<ul class="dropdown-menu clearfix">
-
-		{% assign current_has_color_tag = false %}
-		{% for tag in current_tags %}
-			{% if tag contains 'color-' %}
-				{% assign current_has_color_tag = true %}
-			{%break%}
-			{% endif %}
-		{% endfor %}
-
-	    {% for tag in collection.all_tags %}
-			{% if tag contains 'color-' %}
-			{% assign tag_array = tag | split: '-' %}
-			{% assign color_name = tag_array[1] %}
-			{% assign color_hex = tag_array[2] %}
-			{% if current_tags contains tag %}
-			<li class="active {{tag}}">
-			  {{ color_name | capitalize | link_to_remove_tag: tag }}
-			</li>
-			{% else %}
-				{% if current_has_color_tag %}
-					<li class="{{tag}}">
-					{{ color_name | capitalize | link_to_tag: tag }}
-					</li>
-				{% else %}
-					<li class="{{tag}}">
-					{{ color_name | capitalize | link_to_add_tag: tag }}
-					</li>
-				{% endif %}
-			{% endif %}
-	    {% endif %}
-	    {% endfor %}
-	</ul>
-
-</div>
-
-{% endif %}
-
-
-
-
 {% comment %}
-	Size Filter
-{% endcomment %}
 
+	Has Size Tag ?
+
+{% endcomment %}
 
 
 {% assign collection_has_size_tag = false %}
 {% for tag in collection.all_tags %}
 	{% if tag contains 'size-' %}
+
 		{% assign collection_has_size_tag = true %}
-	{%break%}
+
+		{%break%}
 	{% endif %}
 {% endfor %}
 
-{% if collection_has_size_tag %}
+
+{% comment %}
+
+	Has Selected Color Tag ?
+
+{% endcomment %}
 
 
-<div class="collection-refinement-item collection-filter collection-size-filter dropdown js-dropdown-hover">
-	<div class="collection-refinement-pillar dropdown-toggle js-dropdown-click">size</div>
-	<ul class="dropdown-menu clearfix">
+{% assign current_has_color_tag = false %}
+{% for tag in current_tags %}
+	{% if tag contains 'color-' %}
 
-		{% assign current_has_size_tag = false %}
+		{% assign current_has_color_tag = true %}
+		{% assign tag_array = tag | split: '-' %}
+		{% assign tag_name = tag_array[1] %}
+		{% assign current_color_tag_name = tag_name %}
+
+		{%break%}
+	{% endif %}
+{% endfor %}
+
+
+{% comment %}
+
+	Has Selected Size Tag ?
+
+{% endcomment %}
+
+
+{% assign current_has_size_tag = false %}
+{% for tag in current_tags %}
+	{% if tag contains 'size-' %}
+
+		{% assign current_has_size_tag = true %}
+		{% assign tag_array = tag | split: '-' %}
+		{% assign tag_name = tag_array[1] %}
+		{% assign current_size_tag_name = tag_name %}
+
+		{%break%}
+	{% endif %}
+{% endfor %}
+
+
+{% comment %}
+
+	Need Filter ?
+
+{% endcomment %}
+
+
+{% assign collection_has_filter = false %}
+{% if collection_has_color_tag or collection_has_size_tag %}
+	{% assign collection_has_filter = true %}
+{% endif %}
+
+
+{% comment %}
+
+	Color Filter Btn Text
+
+{% endcomment %}
+
+
+{%- capture color_filter_btn_text -%}
+	color
+	{%- if current_has_color_tag -%}
+	<span> ({{ current_color_tag_name }})</span>
+	{%- endif -%}
+{%- endcapture -%}
+
+
+{% comment %}
+
+	Size Filter Btn Text
+
+{% endcomment %}
+
+
+{%- capture size_filter_btn_text -%}
+	size
+	{%- if current_has_size_tag -%}
+	<span> ({{ current_size_tag_name }})</span>
+	{%- endif -%}
+{%- endcapture -%}
+
+
+
+
+{% if collection_has_filter %}
+	
+
+	<div class="collection-refinement-item collection-refinement-item-placeholder collection-refinement-pillar">
+	<span>{{ 'collection.filter_btn_text' | t }}</span>
+	</div>
+
+
+	{% comment %}
+		Color Filter
+	{% endcomment %}
+
+
+	{% if collection_has_color_tag %}
+
+	<div class="collection-refinement-item collection-filter collection-color-filter dropdown js-dropdown-hover">
+		<div class="collection-refinement-pillar dropdown-toggle js-dropdown-toggle">{{color_filter_btn_text}}</div>
+		<ul class="dropdown-menu">
+
+		    {% for tag in collection.all_tags %}
+				{% if tag contains 'color-' %}
+				{% assign tag_array = tag | split: '-' %}
+				{% assign color_name = tag_array[1] %}
+				{% assign color_hex = tag_array[2] %}
+				{% if current_tags contains tag %}
+				<li class="active {{tag}}">
+				  {{ color_name | capitalize | link_to_remove_tag: tag }}
+				</li>
+				{% else %}
+					{% if current_has_color_tag %}
+						<li class="{{tag}}">
+						{{ color_name | capitalize | link_to_tag: tag }}
+						</li>
+					{% else %}
+						<li class="{{tag}}">
+						{{ color_name | capitalize | link_to_add_tag: tag }}
+						</li>
+					{% endif %}
+				{% endif %}
+		    {% endif %}
+		    {% endfor %}
+		</ul>
+
+	</div>
+
+	{% endif %}
+
+
+
+
+	{% comment %}
+		Size Filter
+	{% endcomment %}
+
+	{% if collection_has_size_tag %}
+
+
+	<div class="collection-refinement-item collection-filter collection-size-filter dropdown js-dropdown-hover">
+		<div class="collection-refinement-pillar dropdown-toggle js-dropdown-toggle">{{size_filter_btn_text}}</div>
+		<ul class="dropdown-menu">
+
+		    {% for tag in collection.all_tags %}
+				{% if tag contains 'size-' %}
+				{% if current_tags contains tag %}
+				<li class="{{tag}} active js-size-sort" data-size-sort="{{tag}}">
+				  {{ tag | remove: "size-" | upcase | link_to_remove_tag: tag }}
+				</li>
+				{% else %}
+					{% if current_has_size_tag %}
+						<li class="{{tag}} js-size-sort" data-size-sort="{{tag}}">
+						{{ tag | remove: "size-" | upcase | link_to_tag: tag }}
+						</li>
+					{% else %}
+						<li class="{{tag}} js-size-sort" data-size-sort="{{tag}}">
+						{{ tag | remove: "size-" | upcase | link_to_add_tag: tag }}
+						</li>
+					{% endif %}
+				{% endif %}
+		    {% endif %}
+		    {% endfor %}
+		</ul>
+
+	</div>
+
+	{% endif %}
+
+
+	{% comment %}
+		Current Tags
+	{% endcomment %}
+
+
+	{% if current_tags %}
+
+	<ul class="collection-current-tag-list collection-refinement-item clearfix">
+
 		{% for tag in current_tags %}
-			{% if tag contains 'size-' %}
-				{% assign current_has_size_tag = true %}
-			{%break%}
-			{% endif %}
+		{% assign tag_array = tag | split: '-' %}
+		{% assign tag_name = tag_array[1] %}
+		<li>
+			{{ tag_name | link_to_remove_tag: tag | replace: 'title=', 'class="collection-refinement-pillar collection-current-tag display-block"'}}
+		</li>
+
 		{% endfor %}
 
-	    {% for tag in collection.all_tags %}
-			{% if tag contains 'size-' %}
-			{% if current_tags contains tag %}
-			<li class="active {{tag}}">
-			  {{ tag | remove: "size-" | upcase | link_to_remove_tag: tag }}
-			</li>
-			{% else %}
-				{% if current_has_size_tag %}
-					<li class="{{tag}}">
-					{{ tag | remove: "size-" | upcase | link_to_tag: tag }}
-					</li>
-				{% else %}
-					<li class="{{tag}}">
-					{{ tag | remove: "size-" | upcase | link_to_add_tag: tag }}
-					</li>
-				{% endif %}
-			{% endif %}
-	    {% endif %}
-	    {% endfor %}
 	</ul>
 
-</div>
-
-{% endif %}
+	{% endif %}
 
 
+	{% comment %}
+		Reset Filter
+	{% endcomment %}
 
-{% comment %}
-	Current Tags
-{% endcomment %}
+	
+	{% if current_tags %}
 
+	<div class="collection-refinement-item collection-filter-reset small-down-display-none-imp">
+		<a href="{{ collection.url }}" class="collection-refinement-pillar collection-filter-reset-link display-block">reset</a>
+	</div>
+	
+	{% endif %}
+	
 
-{% if current_tags %}
-
-<ul class="collection-current-tag-list collection-refinement-item clearfix">
-
-	{% for tag in current_tags %}
-	{% assign tag_array = tag | split: '-' %}
-	{% assign tag_name = tag_array[1] %}
-	<li>
-		{{ tag_name | link_to_remove_tag: tag | replace: 'title=', 'class="collection-refinement-pillar collection-current-tag display-block"'}}
-	</li>
-
-	{% endfor %}
-
-</ul>
-
-{% endif %}
 
 
 
-{% comment %}
-	Reset Filter
-{% endcomment %}
-
-
-{% if current_tags %}
-<div class="collection-refinement-item collection-filter-reset">
-	<a href="{{ collection.url }}" class="collection-refinement-pillar collection-filter-reset-link display-block">reset</a>
-</div>
 {% endif %}
-
-
 

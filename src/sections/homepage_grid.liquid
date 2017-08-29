@@ -1,0 +1,116 @@
+{% if section.settings.enable %}
+
+
+<div class="homepage-grid-section-container homepage-section-container">
+
+	<div class="collection-grid grid grid-uniform" id="pagination-load-more-target">
+
+		{% for block in section.blocks %}
+
+		{% assign product = all_products[block.settings.product] %}
+
+		<div class="collection-grid-item grid-item large-down-one-half large-x-large-one-third x-large-up-one-quarter">
+
+			{% include 'product-base-data', product: product %}
+
+			{% include 'product-card', product: product %}
+
+			{% include 'product-quick-shop', product: product %}
+
+		</div>
+
+
+		{% endfor %}
+
+	</div>
+
+
+</div>
+
+
+{% endif %}
+
+
+
+
+{% schema %}
+{
+
+    "name": "Homepage Grid Section",
+
+    "class": "homepage-grid-section homepage-section",
+
+    "settings":[
+
+        {
+          "type": "checkbox",
+          "id": "enable",
+          "default": true,
+          "label": "Section Enable"
+        } 
+
+
+    ],
+
+
+    "blocks":[
+
+
+        {
+            "type":"grid-item",
+            "name":"Grid Item",
+
+            "settings":[
+
+
+                {
+                    "type": "header",
+                    "content": "Link"
+                },
+
+                {
+                    "type":"product",
+                    "id":"product",
+                    "label":"Product"
+                },
+
+                {
+                    "type":"text",
+                    "id":"product_color",
+                    "label":"Product Color"
+                },
+
+                {
+                    "type": "header",
+                    "content": "Enable"
+                },
+                
+                {
+                    "type":"checkbox",
+                    "id":"enable",
+                    "default": true,
+                    "label":"Grid Item Enable"
+                }
+
+
+
+            ]
+
+        }
+
+
+    ],
+
+
+    "presets": [
+      {
+        "category": "Homepage Grid Section",
+        "name": "New"
+      }
+    ]
+
+
+}
+
+
+{% endschema %}

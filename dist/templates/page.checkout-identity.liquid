@@ -1,0 +1,28 @@
+<div class="checkout-indentity-container container">
+
+	<div class="row">
+
+		<div class="checkout-indentity-col col one-whole small-up-five-tenths">
+			
+			{% include 'login-form', redirect_url: '/checkout' %}
+
+		</div>
+
+		<div class="checkout-indentity-col col one-whole small-up-five-tenths">
+
+			<div>
+				
+				<h1 class="customer-title">{{ 'customer.checkout_indentity.title' | t }}</h1>
+				<div class="customer-notice">{{ 'customer.checkout_indentity.subtext_html' | t }}</div>
+
+				<div>
+				<a href="/checkout" class="btn btn-solid">{{ 'customer.checkout_indentity.continue_btn_text' | t }}</a>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>

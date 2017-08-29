@@ -131,7 +131,7 @@ function generateVariantPriceHtml (variant) {
     var compareAtPriceFormatted = Shopify.formatMoney(compareAtPrice);
 
     if(price < compareAtPrice){
-        priceHtml = '<del class="product-price product-price-compare-at">'+ priceFormatted +'</del><ins class="product-price product-price-on-sale">' + compareAtPriceFormatted + '</ins>'
+        priceHtml = '<span class="product-price product-price-compare-at">'+ priceFormatted +'</span><span class="product-price product-price-on-sale">' + compareAtPriceFormatted + '</span>'
     }
     else{
         priceHtml = '<span class="product-price">'+ priceFormatted +'</span>';
@@ -149,7 +149,7 @@ function generateVariantPriceHtml (variant) {
 
 function getAddToCartBtnStatus (variant) {
 
-    var btnStatus = 'data-choose-size-btn-text';
+    var btnStatus = '';
 
     if(variant.available){
         if(variant.inventory_quantity > 0){
@@ -240,7 +240,7 @@ $(document).on('click', '.js-product-quick-shop-option-value', function(){
 
     var $price = $quickShop.find('.product-quick-shop-price');
 
-    var $addToCartBtn = $quickShop.find('.product-add-to-cart');
+    var $addToCartBtn = $quickShop.find('.product-quick-shop-add-to-cart');
 
     var product= JSON.parse($quickShop.find('.product-json').html());
 
@@ -317,6 +317,10 @@ $(document).on('click', '.js-product-shop-option-value', function(){
 
     var optionsSize = $this.data('product-options-size');
 
+    var addToCartJSClass = $this.data('add-to-cart-js-class');
+
+    var backInStockJSClass = $this.data('back-in-stock-js-class');
+
     var $shop = $this.parents('.product-shop');
 
     var $productSlides = $('.product-images-data').children('.product-shop-slide');
@@ -327,9 +331,9 @@ $(document).on('click', '.js-product-shop-option-value', function(){
 
     var $price = $shop.find('.product-shop-price');
 
-    var $addToCartBtn = $shop.find('.product-add-to-cart');
+    var $backInStockField = $shop.find('.product-shop-back-in-stock-field');
 
-    var $bisSubmitBtn = $shop.find('.product-bis-submit');
+    var $addToCartBtn = $shop.find('.product-shop-add-to-cart');
 
     var product= JSON.parse($shop.find('.product-json').html());
 
@@ -353,8 +357,6 @@ $(document).on('click', '.js-product-shop-option-value', function(){
 
         $addToCartBtn.attr('data-variant-id', variantData.id);
 
-        $bisSubmitBtn.attr('data-variant-id', variantData.id);
-
         // update variant price
 
         var variantPriceHtml = generateVariantPriceHtml(variantData);
@@ -370,17 +372,20 @@ $(document).on('click', '.js-product-shop-option-value', function(){
         var btnStatus = getAddToCartBtnStatus(variantData);
         var btnText = $addToCartBtn.data(btnStatus+'-btn-text');
 
-        $addToCartBtn.text(btnText);
+        $addToCartBtn.text(btnText).removeAttr('disabled');
 
         switch (btnStatus) {
             case 'add-to-cart':
-                $addToCartBtn.removeAttr('disabled');
+                $backInStockField.fadeOut(0);
+                $addToCartBtn.removeClass( backInStockJSClass ).addClass( addToCartJSClass );
                 break;
             case 'pre-order':
-                $addToCartBtn.removeAttr('disabled');
+                $backInStockField.fadeOut(0);
+                $addToCartBtn.removeClass( backInStockJSClass ).addClass( addToCartJSClass );
                 break;
             case 'sold-out':
-                $addToCartBtn.attr('disabled', 'disabled');
+                $backInStockField.fadeIn(300);
+                $addToCartBtn.removeClass( addToCartJSClass ).addClass( backInStockJSClass );
                 break;
         }
 
@@ -408,11 +413,11 @@ $(document).on('click', '.js-product-add-to-cart', function(){
         setTimeout(function(){
             $('body').addClass('mini-cart-open');
 
-            setTimeout(function(){
-            $('body').removeClass('mini-cart-open');
-            }, 2000);
+            // setTimeout(function(){
+            // $('body').removeClass('mini-cart-open');
+            // }, 2000);
 
-        }, 200);
+        }, 300);
 
     },
 
@@ -434,7 +439,7 @@ $(document).on('click', '.js-product-add-to-cart', function(){
 
 $(document).on('cart.requestComplete', function(event, data) {
 
-
+    //console.log(data);
 
 
 });
@@ -445,16 +450,53 @@ $(document).on('cart.requestComplete', function(event, data) {
 ========================================================================= */
 
 
-$(document).on('click', '.product-bis-submit',function() {
+$(document).on('click', '.js-product-back-in-stock-submit',function() {
 
-    var email = $('.product-bis-email').val();
+    var $this = $(this);
 
-    var productID = $(this).attr('data-product-id');
+    var $emailInput = $('.product-shop-back-in-stock-email');
 
-    var variantID = $(this).attr('data-variant-id');
+    var email = $emailInput.val();
+
+    var productID = $this.attr('data-product-id');
+
+    var variantID = $this.attr('data-variant-id');
+
 
     BIS.create(email, variantID, productID).then(function(data) {
-        $('.product-bis-submit').text($('.product-bis-submit').data('success-text'));
+
+        var msg = '';
+
+        if (data.status == 'OK') {
+
+          msg = 'success'; 
+        }
+
+        else {
+
+            //console.log(data.errors);
+
+            var error = '';
+
+            for (var k in data.errors) {
+                error += (k + " " + data.errors[k].join());
+            }
+            
+            if (error.indexOf("already") >= 0){
+                msg = 'success'; 
+            }
+            else if (error.indexOf("invalid") >= 0){
+                msg = 'invalid email'; 
+            }
+            else{
+                msg = 'error'; 
+            }
+
+        }
+
+        $this.text(msg);
+
+
     });
 
 });

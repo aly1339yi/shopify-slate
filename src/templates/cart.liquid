@@ -1,11 +1,11 @@
-<div class="cart-container container" data-cart-view="data-cart-view">
+<div class="cart-container container container-top-padding" data-cart-view="data-cart-view">
 
 
     <div class="cart-empty-notice empty-notice empty-notice-in-flow" rv-unless="cart.item_count | gt 0">
     	
 		<h1 class="empty-notice-title">{{ 'cart.empty_notice_title' | t }}</h1>
 		<div>
-	    <a href="{{ 'cart.empty_notice_cta_link' | t }}" class="empty-notice-link btn">{{ 'cart.empty_notice_cta' | t }}</a>
+	    <a href="{{ 'cart.empty_notice_cta_link' | t }}" class="empty-notice-link btn btn-solid">{{ 'cart.empty_notice_cta' | t }}</a>
 		</div>
 
     </div>
@@ -33,7 +33,7 @@
 					Column 1
 				{% endcomment %}
 
-				<td class="cart-body-cell">
+				<td class="cart-cell cart-body-cell">
 
 		            <div class="cart-item-image">
 			            <a rv-href="item.url">
@@ -47,7 +47,7 @@
 					Column 2
 				{% endcomment %}
 				
-				<td class="cart-body-cell">
+				<td class="cart-cell cart-body-cell">
 					
 		            <div class="cart-item-details">
 			            <div class="cart-item-title">
@@ -55,7 +55,7 @@
 			            </div>
 
 			            
-						<div class="mini-cart-item-price" rv-text="item.line_price | money Currency.currentCurrency"></div>
+						<div class="cart-item-price" rv-text="item.line_price | money Currency.currentCurrency"></div>
 
 
 			            <ul class="cart-item-options" rv-unless="item.variant_options | array_first | includes 'Default'">
@@ -79,7 +79,7 @@
 					Column 3
 				{% endcomment %}
 				
-				<td class="cart-body-cell">
+				<td class="cart-cell cart-body-cell">
 
 		            <div class="cart-item-quantity qty-selectors">
 
@@ -90,6 +90,8 @@
 						<span class="qty-selectors-btn qty-selectors-btn-plus" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | plus 1">&#43;</span>
 
 		            </div>
+
+		            <div class="cart-item-remove" rv-data-cart-remove="index | plus 1">remove</div>
 
 				</td>
 
@@ -108,13 +110,13 @@
 
 		<table class="cart-footer">
 
-			<tr>
+			<tr class="cart-footer-row">
 
 				{% comment %}
 					Column 1
 				{% endcomment %}
 
-				<td class="cart-body-cell">
+				<td class="cart-cell cart-footer-cell">
 
 					<div class="cart-total-title">{{ 'cart.total_label' | t }}</div>
 
@@ -124,7 +126,7 @@
 					Column 2
 				{% endcomment %}
 
-				<td class="cart-body-cell">
+				<td class="cart-cell cart-footer-cell">
 					
 					<div class="cart-total-price" rv-text="cart.total_price | money Currency.currentCurrency"></div>
 
@@ -134,9 +136,17 @@
 					Column 3
 				{% endcomment %}
 
-				<td class="cart-body-cell">
+				<td class="cart-cell cart-footer-cell">
 					
-					<a href="/checkout" class="cart-checkout btn">{{ 'cart.checkout_btn_text' | t }}</a>
+			        {%- capture checkout_url -%}
+			        {%- if customer -%}
+			        /checkout
+			        {%- else -%}
+			        /pages/checkout-identity
+			        {%- endif -%}
+			        {%- endcapture -%}
+
+					<a href="{{ checkout_url }}" class="cart-checkout btn btn-solid block-fullwidth">{{ 'cart.cart_checkout_btn_text' | t }}</a>
 
 				</td>
 

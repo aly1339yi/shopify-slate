@@ -1,14 +1,12 @@
 
 <div class="customer-account-container container">
         
-    <h1>{{ 'customer.account.title' | t }}</h1>
+    <h1 class="customer-title">{{ 'customer.account.title' | t }}</h1>
 
-    <div><a href="/account" class="btn">{{ 'customer.account.return' | t }}</a></div>
-
-
-    <h2>{{ 'customer.order.title' | t: name: order.name }}</h2>
-
-    <div>{{ 'customer.order.date' | t: date: order.created_at | date: "%B %d, %Y %I:%M%p" }}</div>
+    <div class="customer-order-section">
+        <h2 class="customer-order-title">{{ 'customer.order.title' | t: name: order.name }}</h2>
+        <div class="customer-order-title">{{ 'customer.order.date' | t: date: order.created_at | date: "%B %d, %Y %I:%M%p" }}</div>
+    </div>
 
     {% if order.cancelled %}
         {%- assign cancelled_at = order.cancelled_at | date: "%B %d, %Y %I:%M%p" -%}
@@ -16,7 +14,7 @@
         <div>{{ 'customer.order.cancelled_reason' | t: reason: order.cancel_reason }}</div>
     {% endif %}
 
-
+    <div class="customer-order-section">
     <table class="responsive-table customer-order-product-table customer-table">
         <thead>
             <tr>
@@ -52,52 +50,57 @@
         </tbody>
         <tfoot>
             <tr class="responsive-table-row">
-                <td colspan="4" class="small--hide">{{ 'customer.order.subtotal' | t }}</td>
+                <td colspan="4" class="medium-down-display-none-imp">{{ 'customer.order.subtotal' | t }}</td>
                 <td data-label="{{ 'customer.order.subtotal' | t }}">{{ order.subtotal_price | money }}</td>
             </tr>
 
             {% for discount in order.discounts %}
                 <tr>
-                    <td colspan="4" class="small--hide">{{ discount.code }} {{ 'customer.order.discount' | t }}</td>
+                    <td colspan="4" class="medium-down-display-none-imp">{{ discount.code }} {{ 'customer.order.discount' | t }}</td>
                     <td data-label="{{ 'customer.order.discount' | t }}">{{ discount.savings | money }}</td>
                 </tr>
             {% endfor %}
 
             {% for shipping_method in order.shipping_methods %}
                 <tr>
-                    <td colspan="4" class="small--hide">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})</td>
+                    <td colspan="4" class="medium-down-display-none-imp">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})</td>
                     <td data-label="{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})">{{ shipping_method.price | money }}</td>
                 </tr>
             {% endfor %}
 
             {% for tax_line in order.tax_lines %}
                 <tr>
-                    <td colspan="4" class="small--hide">{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)</td>
+                    <td colspan="4" class="medium-down-display-none-imp">{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)</td>
                     <td data-label="{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)">{{ tax_line.price | money }}</td>
                 </tr>
             {% endfor %}
 
             <tr>
-                <td colspan="4" class="small--hide">{{ 'customer.order.total' | t }}</td>
+                <td colspan="4" class="medium-down-display-none-imp">{{ 'customer.order.total' | t }}</td>
                 <td data-label="{{ 'customer.order.total' | t }}">{{ order.total_price | money }} {{ order.currency }}</td>
             </tr>
         </tfoot>
     </table>
+    </div>
 
+    <div class="customer-order-section">
 
+    <div class="customer-order-title">{{ 'customer.order.payment_status' | t }}: {{ order.financial_status_label }}</div>
+    <div class="customer-order-title">{{ 'customer.order.fulfillment_status' | t }}: {{ order.fulfillment_status_label }}</div>
+    </div>
 
-
-    <h3>{{ 'customer.order.billing_address' | t }}</h3>
-
-    <div>{{ 'customer.order.payment_status' | t }}: {{ order.financial_status_label }}</div>
+    <div class="customer-order-section">
+    <h3 class="customer-order-title">{{ 'customer.order.billing_address' | t }}</h3>
 
     {{ order.billing_address | format_address }}
 
-    <h3>{{ 'customer.order.shipping_address' | t }}</h3>
-
-    <div>{{ 'customer.order.fulfillment_status' | t }}: {{ order.fulfillment_status_label }}</div>
+    <h3 class="customer-order-title">{{ 'customer.order.shipping_address' | t }}</h3>
 
     {{ order.shipping_address | format_address }}
+    </div>
 
+    <div class="customer-order-section">
+    <div><a href="/account" class="btn btn-solid">{{ 'customer.account.return' | t }}</a></div>
+    </div>
 
 </div>

@@ -1,37 +1,38 @@
-
-@import url('vendor/royalslider.css');
-@import url('vendor/rs-default.css');
-@import url('vendor/socicon.scss');
-
-
 @import url('settings/variables.scss.liquid');
 @import url('settings/fonts.scss');
 
 
+@import url('vendor/royalslider.css');
+@import url('vendor/rs-default.css');
+@import url('vendor/owl.carousel.min.css');
+@import url('vendor/owl.theme.default.min.css');
+@import url('vendor/socicon.scss');
+@import url('vendor/plyr.css');
+
+@import url('_components/vendor-override.scss');
+
+
 @import url('tools/mixins.scss');
 @import url('tools/helper_classes.scss');
-
 
 @import url('global/normalize.scss');
 @import url('global/base.scss');
 
 
 @import url('_components/grid.scss');
-@import url('_components/btn.scss');
-@import url('_components/rte.scss');
 @import url('_components/table.scss');
+@import url('_components/other.scss');
+
+
 @import url('_components/layout.scss');
 @import url('_components/header.scss');
 @import url('_components/footer.scss');
+@import url('_components/search-bar.scss');
 @import url('_components/mini-cart.scss');
 @import url('_components/popup.scss');
 @import url('_components/slider-carousel.scss');
 @import url('_components/product-card.scss');
 @import url('_components/product-quick-shop.scss');
-@import url('_components/vendor-override.scss');
-
-@import url('_components/other.scss');
-
 
 
 @import url('_templates/_index.scss');

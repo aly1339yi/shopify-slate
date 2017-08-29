@@ -3,8 +3,13 @@
     Dropdown
 ========================================================================= */
 
+.dropdown-toggle{
+    
+    cursor: pointer;
+}
 
 .dropdown-menu {
+    @include clearfix;
     @include transition();
     @include invisible;
 }
@@ -35,7 +40,11 @@
 
 
 .empty-notice-title{
-    margin-bottom: 20px;
+
+    margin-bottom: 50px;
+
+    font-size: 2rem;
+    
 
 }
 
@@ -54,6 +63,12 @@
     text-align: center;
 }
 
+.pagination-style-scroll{
+    opacity: 0;
+}
+
+
+
 
 /* =========================================================================
     Social List
@@ -61,13 +76,15 @@
 
 
 .social-list{
-
+    @include clearfix;
     li{
-        
+        float: left;
         a{
             display: block;
-            padding: 0 5px;
-            font-size: 30px;
+            padding: 0 8px;
+            font-size: 1.8rem;
+
+            @include hover-opacity;
         }
     }
 
@@ -83,28 +100,400 @@
     left: 50%;
     top: 50%;
     /* The following will size the video to fit the full container. Not necessary, just nice.*/
+    max-width: none;
     min-width: 101%;
     min-height: 101%;
     @include transform(translate(-50%,-50%));
 }
 
 
+
+
 /* =========================================================================
-    Fullscreen Overlay
+    Tab
 ========================================================================= */
 
-.fullscreen-overlay{
 
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: list-get($z-index, fullscreen-overlay);
-
-    background-color: rgba(0, 0, 0, 0.3);
+.tab{
 
 }
+
+.tab-label{
+    float: left;
+    padding-bottom: 10px;
+    font-size: 1.4rem;
+    color: $color-grey;
+    cursor: pointer;
+
+    & + &{
+        margin-left: 30px;
+    }
+
+    &.active{
+        color: $color-black;
+    }
+}
+
+.tab-content{
+    font-size: 1.4rem;
+    text-transform: initial;
+}
+
+/* =========================================================================
+    Btn
+========================================================================= */
+
+
+.ripple {
+    
+    position: relative;
+    overflow: hidden;
+
+    span{
+        position: absolute;
+        display: block;
+        -webkit-border-radius: 100%;
+        border-radius: 100%;
+        width: 0;
+        height: 0;
+
+        html.mod-no-mobile &{
+           background-color: rgba(#000, 0.2); 
+        }
+
+        html.mod-mobile &{
+            background-color: rgba(#fff, 0.8);
+        }
+
+    }
+}
+
+
+
+.btn{
+
+
+    @extend .ripple; 
+
+    display: inline-block;
+
+    padding: 15px 50px 15px 50px;
+    border: 1px solid #000;
+
+    text-align: center;
+    text-transform: uppercase;
+    
+    cursor: pointer;
+
+}
+
+
+.btn-solid{
+
+    background-color: #000;
+    color: #fff;
+
+    html.mod-no-mobile &:not(:disabled) {
+        @include transition();
+        &:hover{
+            background-color: transparent;
+            color: #000;
+        }
+    }
+
+}
+
+
+.btn-outline-black{
+    
+    border: 1px solid #000;
+    color: #000;
+
+    @include hover-opacity;
+
+    // html.mod-no-mobile &:not(:disabled) {
+    //     @include transition();
+    //     &:hover{
+            
+    //     }
+    // }
+
+}
+
+.btn-outline-white{
+    
+    border: 1px solid #fff;
+    color: #fff;
+
+    @include hover-opacity;
+
+    // html.mod-no-mobile &:not(:disabled) {
+    //     @include transition();
+    //     &:hover{
+            
+    //     }
+    // }
+
+}
+
+/* =========================================================================
+    Checkbox
+========================================================================= */
+
+.checkbox-style {
+
+  position: relative;
+
+  label {
+
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid #000;
+    background: #fff;
+
+    &:after {
+        content: '';
+        width: 9px;
+        height: 5px;
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        border: 2px solid #000;
+        border-top: none;
+        border-right: none;
+        background: transparent;
+        opacity: 0;
+        transform: rotate(-45deg);
+    }
+
+  }
+
+  input[type=checkbox] {
+    visibility: hidden;
+    &:checked + label:after {
+        opacity: 1;
+    }
+  }   
+   
+}
+
+
+/* =========================================================================
+    Billboard
+========================================================================= */
+
+
+.billboard{
+
+    height: 100vh;
+
+    min-height: 900px;
+
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+
+
+}
+
+
+
+/* =========================================================================
+    rte
+========================================================================= */
+
+.ta{
+
+    font-weight: 400;
+    text-transform: initial;
+    line-height: 1.6;
+}
+
+
+.rte{
+
+    font-weight: 400;
+    text-transform: initial;
+    line-height: 1.6;
+
+
+    h1,h2,h3,h4,h5,h6{
+        font-weight: 500;
+    }
+
+
+    h1 { font-size: 3rem; }
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.8rem; }
+    h4 { font-size: 1.6rem; }
+    h5 { font-size: 1.4rem; }
+    h6 { font-size: 1.2rem; }
+
+
+    ul{
+        list-style: initial;
+        list-style: decimal;
+        padding-left: 20px;
+    }
+
+    i,
+    em
+    {
+        font-style: italic;
+    }
+
+    u,
+    a{
+
+        text-decoration: underline;
+    }
+    a{
+        @include hover-opacity;
+    }
+
+    b,
+    strong{
+        font-weight: 500;
+    }
+
+
+}
+
+/* =========================================================================
+    Qty Selector Btn
+========================================================================= */
+
+.qty-selectors{
+    span{
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+}
+
+.qty-selectors-label{
+    margin-right: 5px;
+}
+
+.qty-selectors-number{
+    
+}
+
+.qty-selectors-btn{
+
+    font-size: 1.4rem;
+
+    @include hover-opacity;
+}
+
+.qty-selectors-btn-minus{
+    padding: 10px 10px 10px 0;
+}
+
+.qty-selectors-btn-plus{
+    padding: 10px 0 10px 10px;
+}
+
+
+
+
+
+/* =========================================================================
+    Price
+========================================================================= */
+
+.product-price{
+    font-size: 1.4rem;
+}
+
+
+.product-price-compare-at{
+
+    position: relative;
+    margin-right: 5px;
+
+    &:after{
+        content: '';
+        position: absolute;
+        top: 0.7rem;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background-color: #000;
+    }
+}
+
+.product-price-on-sale{
+    color: list-get($color,'warning');
+}
+
+
+/* =========================================================================
+    Overlay
+========================================================================= */
+
+
+.fullscreen-overlay{
+    @include fullscreen-overlay;
+}
+
+
+/* =========================================================================
+    Popup
+========================================================================= */
+
+
+.popup {
+    
+}
+
+
+.popup-close {
+    position: absolute;
+    
+    top: 0;
+    z-index: 1;
+
+    width: 30px;
+    height: 30px;
+
+    background: url("{{ 'icon_cross_black.svg' | asset_url }}") no-repeat center center;
+    background-size: 25px;
+
+    @include screen('small-down') {
+        width: 50px;
+        height: 50px;  
+        background-size: 40px;
+    }
+
+    @include hover-opacity;
+}
+
+.popup-close-left {
+    left: 0;
+}
+
+.popup-close-right {
+    right: 0;
+}
+
+.popup-box {
+
+    position: relative;
+
+    background-color: #fff;
+}
+
+
+
+
+
+
+
 
 
 

@@ -1,0 +1,29 @@
+
+@include screen('small-down') {
+	
+}
+
+@include transition();
+
+@include transform(translateX(0));
+
+@include ratio(3/2);
+
+@include overlay(absolute);
+
+@include max-width(1000px,'center');
+
+list-get($color,'black');
+
+%selector{
+
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+
+}
+
+
+html.mod-no-mobile &{
+	
+}

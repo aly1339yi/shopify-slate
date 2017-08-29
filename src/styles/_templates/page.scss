@@ -1,3 +1,27 @@
-.page-max-width{
-	@include max-width(1200px);
+/* =========================================================================
+    Static
+========================================================================= */
+
+
+
+.static-container{
+	@include max-width(800px,'center');
 }
+
+
+.static-title{
+	padding: 30px 0;
+	font-size: 3rem;
+	text-align: center;
+}
+
+
+.static-content{
+	font-size: 1.4rem;
+	h3{
+	    margin-top: 20px;
+	    margin-bottom: 20px;
+	}
+}
+
+

@@ -1,27 +1,27 @@
 <div class="breadcrumb">
 
 
-  <a href="{{ shop.url }}" title="{{ shop.name | escape }}" itemprop="url">
-    <span itemprop="title">home</span>
-  </a>
-
-
-  {% if collection %}
-  <span class="arrow-space">&nbsp;&#124;&nbsp;</span>
-    <a href="{{ collection.url }}" title="{{ collection.title | escape }}" itemprop="url">
-      <span itemprop="title">{{ collection.title | downcase }}</span>
+    <a href="{{ shop.url }}" title="{{ shop.name | escape }}" itemprop="url">
+        <span itemprop="title">home</span>
     </a>
-  {% endif %}
 
 
-  {% if product %}
+    {% if collection %}
     <span class="arrow-space">&nbsp;&#124;&nbsp;</span>
-    <span itemprop="title">{{ product.title | downcase }}</span>
+        <a href="{{ collection.url }}" title="{{ collection.title | escape }}" itemprop="url">
+            <span itemprop="title">{{ collection.title | downcase }}</span>
+        </a>
+    {% endif %}
 
-  {% endif %}
+
+    {% if product %}
+        <span class="arrow-space">&nbsp;&#124;&nbsp;</span>
+        <span itemprop="title">{{ product.title | downcase }}</span>
+
+    {% endif %}
 
 
-  
+    
 
 
 

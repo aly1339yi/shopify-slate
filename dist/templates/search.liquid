@@ -1,18 +1,5 @@
-{% capture search_form %}
-
-<form action="/search" role="search" class="search-search">
-    <input type="hidden" name="type" value="product">
-    <input type="text" autocomplete="off" name="q" class="search-search-input">
-    <input type="submit" value="Search" class="search-search-submit">
-</form>
-
-{% endcapture %}
-
-
 
 <div class="search-container container">
-
- 
 
  
 {% if search.performed %}
@@ -20,7 +7,7 @@
 {% if search.results_count > 0 %}
 
 
-    <h1>{{ 'search.results_for_html' | t: terms: search.terms }}</h1>
+    <h1 class="search-title">{{ 'search.title_html' | t: count: search.results_count, terms: search.terms }}</h1>
 
 
     {% paginate search.results by settings.product_pagination_limit %}
@@ -36,8 +23,6 @@
             {% include 'product-base-data', product: product %}
 
             {% include 'product-card', product: product %}
-
-            {% include 'product-quick-shop', product: product %}
 
         </div>
 
@@ -59,9 +44,9 @@
 
     <div class="search-empty-notice empty-notice empty-notice-in-flow">
 
-        <h1>{{ 'search.no_results_notice_html' | t: terms: search.terms }}</h1>
+        <h1 class="empty-notice-title">{{ 'search.no_results_notice_html' | t: terms: search.terms }}</h1>
 
-        {{ search_form }}
+        <div class="js-body-add-class btn btn-solid" data-body-class="search-bar-open">{{ 'search.no_results_btn_text' | t }}</div>
 
     </div>
 
@@ -73,7 +58,7 @@
 
         <h1 class="empty-notice-title">{{ 'search.not_performed_title' | t }}</h1>
 
-        {{ search_form }}
+        <div class="js-body-add-class btn btn-solid" data-body-class="search-bar-open">{{ 'search.no_results_btn_text' | t }}</div>
 
     </div>
 

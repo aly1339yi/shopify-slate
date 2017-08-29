@@ -8,7 +8,7 @@
     box-sizing: border-box;
 }
 
-*:not(input)::selection {
+*:not(input):not(textarea)::selection {
     background-color: transparent;
 }
 
@@ -31,30 +31,47 @@ body {
     color: #000;
 }
 
-button,
+
+
+
 input,
+textarea,
 select,
-textarea {
+button{
+    -moz-appearance: none;
+    -webkit-appearance: none;
     appearance: none;
+   
+    border: none;
+    border-radius: 0;
+    outline: none;
+    box-shadow: none;    
+    background: none;
+
     font: inherit;
     color: inherit;
-    background: none;
-    border-radius: 0;
-    border: none;
-    text-transform: inherit;
+    letter-spacing: inherit;
+    word-spacing: inherit;
+
     text-align: inherit;
-}
+} 
+
 
 button,
-input,
-input:focus,
-textarea:focus {
-    box-shadow: none;
-    outline: none;
-    border: none;
-    border-radius: 0;
-    letter-spacing: inherit;
+select{
+    text-transform: inherit;
 }
+
+
+
+input,
+textarea{
+    @include input-placeholder {
+        color: $color-black;
+        text-transform: uppercase;
+    }
+}
+
 
 input:focus::-webkit-input-placeholder {
     color: transparent !important;
@@ -85,23 +102,15 @@ input[type="search"] {
     -webkit-appearance: none;
 }
 
-select,
-select:focus {
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
-    border: none;
-    box-shadow: none;
-    outline: none;
-    border-radius: 0;
+input[type="submit"],
+button,
+a{
+    cursor: pointer;
 }
 
-select::-ms-expand {
-    display: none;
-}
 
 a {
-    color: black;
+    color: inherit;
     text-decoration: none;
 }
 
@@ -138,7 +147,7 @@ table {
 
 
 th {
-    font-weight: normal;
+    font-weight: inherit;
     text-align: left;
 }
 
@@ -150,7 +159,7 @@ ins {
 img,
 object,
 video {
-    max-width: 100%;
+    // max-width: 100%;
     height: auto;
     vertical-align: middle;
     border: none;

@@ -1,6 +1,6 @@
 {% if paginate.pages > 1 %}
 
-<div class="pagination {{ namespace }}-pagination">
+<div class="pagination {{ namespace }}-pagination {{ settings.pagination_style_class }}">
     
 {% comment %}
 
@@ -28,11 +28,11 @@
 
 {% endcomment %}
 
-  <div class="pagination-load-more-wrapper">
+    <div class="pagination-load-more-wrapper">
 
-    <a href="{{ paginate.next.url }}" class="pagination-load-more btn js-pagination-load-more">{{ load_more_btn_text }}</a>
+        <a href="{{ paginate.next.url }}" class="pagination-load-more btn btn-solid js-pagination-load-more">{{ load_more_btn_text }}</a>
 
-  </div>
+    </div>
 
 
 

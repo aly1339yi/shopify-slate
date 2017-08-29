@@ -2,22 +2,26 @@
     Color
 ========================================================================= */
 
+$color-black   : #333333;
 
-$color-purple : #5c6ac4;
+$color-white   : #fff;
 
-$color-black  : #000000;
+$color-grey    : #aaa;
 
-$color-white  : #ffffff;
+$color-red     : #ff4040;
+
+$color-primary : $color-black;
 
 
 $color: (
 
-    'primary'         $color-purple,
-
+    'primary'         $color-black,
 
     'bullet'          transparent,
 
-    'bullet-selected' $color-black,
+    'bullet-selected' #000,
+
+    'warning'         $color-red,
 
     null
 
@@ -30,39 +34,39 @@ $color: (
 ========================================================================= */
 
 
-$font-size-xx-small : 0.9rem;
+$font-size-xx-small : 1.0em;
 
-$font-size-x-small  : 1.0rem;
+$font-size-x-small  : 1.2rem;
 
-$font-size-small    : 1.2rem;
+$font-size-small    : 1.4rem;
 
-$font-size-medium   : 1.4rem;
+$font-size-medium   : 1.6rem;
 
-$font-size-large    : 1.4rem;
+$font-size-large    : 1.8rem;
 
-$font-size-x-large  : 1.4rem;
+$font-size-x-large  : 2.0rem;
 
-$font-size-xx-large : 1.4rem;
+$font-size-xx-large : 3.0rem;
 
 
-$font-size-normal   : $font-size-medium;
+$font-size-normal   : $font-size-small;
 
 
 $font-size: (
 
     'body' $font-size-normal,
 
-    'h1'   1.3rem,
+    'h6'   1.3rem,
 
-    'h2'   1.4rem,
+    'h5'   1.4rem,
 
-    'h3'   1.8rem,
+    'h4'   1.8rem,
 
-    'h4'   2.4rem,
+    'h3'   2.4rem,
 
-    'h5'   3rem,
+    'h2'   3rem,
     
-    'h6'   3rem,
+    'h1'   3rem,
 
     null
 
@@ -74,16 +78,19 @@ $font-size: (
     Responsive
 ========================================================================= */
 
-$breakpoint-small   : 576px;
-$breakpoint-medium  : 768px;
-$breakpoint-large   : 992px;
-$breakpoint-x-large : 1200px;
+$breakpoint-x-small : 576px;
+$breakpoint-small   : 768px;
+$breakpoint-medium  : 992px;
+$breakpoint-large   : 1200px;
+$breakpoint-x-large : 1400px;
 
-$breakpoint-nav-bp     : $breakpoint-small;
+$breakpoint-nav-bp  : $breakpoint-medium;
 
 
 $breakpoint-range: (
 
+    'x-small-down'  '(max-width: #{$breakpoint-x-small - 1})',
+    'x-small-up'    '(min-width: #{$breakpoint-x-small})',
     'small-down'    '(max-width: #{$breakpoint-small - 1})',
     'small-up'      '(min-width: #{$breakpoint-small})',
     'medium-down'   '(max-width: #{$breakpoint-medium - 1})',
@@ -93,26 +100,28 @@ $breakpoint-range: (
     'x-large-down'  '(max-width: #{$breakpoint-x-large - 1})',
     'x-large-up'    '(min-width: #{$breakpoint-x-large})',
 
-    'nav-bp-down'  '(max-width: #{$breakpoint-nav-bp - 1})',
-    'nav-bp-up'    '(min-width: #{$breakpoint-nav-bp})',
+    'nav-bp-down'   '(max-width: #{$breakpoint-nav-bp - 1})',
+    'nav-bp-up'     '(min-width: #{$breakpoint-nav-bp})',
 
-    'small-medium'  '(min-width: #{$breakpoint-small})  and  (max-width: #{$breakpoint-medium - 1})',
-    'medium-large'  '(min-width: #{$breakpoint-medium}) and  (max-width: #{$breakpoint-large - 1})',
-    'large-x-large' '(min-width: #{$breakpoint-large})  and  (max-width: #{$breakpoint-x-large - 1})'
+    'x-small-small' '(min-width: #{$breakpoint-x-small}) and (max-width: #{$breakpoint-small - 1})',
+    'small-medium'  '(min-width: #{$breakpoint-small}) and (max-width: #{$breakpoint-medium - 1})',
+    'medium-large'  '(min-width: #{$breakpoint-medium}) and (max-width: #{$breakpoint-large - 1})',
+    'large-x-large' '(min-width: #{$breakpoint-large}) and (max-width: #{$breakpoint-x-large - 1})'
     
     null
 
-
 );
+
 
 $breakpoint: (
 
-    'small'   576px,
-    'medium'  768px,
-    'large'   992px,
-    'x-large' 1200px,
+    'x-small' 576px,
+    'small'   768px,
+    'medium'  992px,
+    'large'   1200px,
+    'x-large' 1400px,
 
-    'nav'     576px,
+    'nav'     768px,
 
     null
 
@@ -127,6 +136,10 @@ $breakpoint: (
 $grid-gutter: (
 
 'normal' 30px,
+
+'medium' 20px,
+
+'small' 10px,
 
 null
     
@@ -162,10 +175,32 @@ $navbar-nav-height-mobile: 50px;
 $navbar-banner-height-desktop: 20px;
 $navbar-banner-height-mobile: 18px;
 
+$search-bar-height-desktop: 70px;
+$search-bar-height-mobile: 50px;
+
+
 
 $navbar-plus-banner-height-desktop: $navbar-banner-height-desktop + $navbar-nav-height-desktop;
 
 $navbar-plus-banner-height-mobile: $navbar-banner-height-mobile + $navbar-nav-height-mobile;
+
+
+
+$search-plus-navbar-height-desktop: $search-bar-height-desktop + $navbar-nav-height-desktop;
+
+$search-plus-navbar-height-mobile: $search-bar-height-mobile + $navbar-nav-height-mobile;
+
+
+
+$search-plus-navbar-plus-banner-height-desktop: $search-bar-height-desktop + $navbar-banner-height-desktop + $navbar-nav-height-desktop;
+
+$search-plus-navbar-plus-banner-height-mobile: $search-bar-height-mobile + $navbar-banner-height-mobile + $navbar-nav-height-mobile;
+
+
+
+
+
+
 
 
 

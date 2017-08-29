@@ -5,16 +5,17 @@
 .grid{
   
   @include clearfix();
-  margin: 0 list-get($grid-gutter, 'normal') / -2;
+
+  // margin: 0 (list-get($grid-gutter, 'normal') / -2);
   
 }
 
 .grid-item {
 
   float: left;
-  width: 100%;
-  padding: 0 (list-get($grid-gutter, 'normal') / 2);
-  margin-bottom: list-get($grid-gutter, 'normal');
+  
+  // padding: 0 (list-get($grid-gutter, 'normal') / 2);
+  // margin-bottom: list-get($grid-gutter, 'normal');
 
 }
 
@@ -42,16 +43,23 @@
 
     @include clearfix();
 
-    >.flex-item{
-      float: left;
-    }
-
   }
 
 }
 
+.flex-align-center{
+  @include align-items(center);
+}
+
+
+
 .flex-item{
 
+  html.mod-no-flexbox &{
+
+    float: left;
+
+  }
 
 }
 
