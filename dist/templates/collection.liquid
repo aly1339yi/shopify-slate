@@ -28,9 +28,19 @@
 
 					<div class="collection-grid-item grid-item medium-down-one-half medium-large-one-third large-x-large-one-third x-large-up-one-quarter">
 
-						{% include 'product-base-data', product: product %}
+					{% comment %}
+						
+					{% endcomment %}
+
+						{% include 'product-base-data', product: product, first_is_default_variant: true %}
 
 						{% include 'product-card', product: product %}
+
+					{% comment %}
+						
+					{% endcomment %}
+
+						{% include 'product-base-data', product: product %}
 
 						{% include 'product-quick-shop', product: product %}
 

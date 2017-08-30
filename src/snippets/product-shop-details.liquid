@@ -1,4 +1,5 @@
 
+
 <div class="product-shop-details">
 
 
@@ -92,13 +93,25 @@
 	{% endunless %}
 
 
+
+	{% comment %}
+
+	Product Size Guide
+
+	{% endcomment %}
+
+	<div class="product-size-guide js-element-fadein" data-element-selector=".size-guide-popup">Size Guide</div>
+
+
+
+
 	{% comment %}
 
 	Product Back In Stock Field
 
 	{% endcomment %}
 
-	<div class="product-back-in-stock-field product-shop-back-in-stock-field{% unless has_only_default_variant and default_variant.available %} display-none{% endunless %}">
+	<div class="product-back-in-stock-field product-shop-back-in-stock-field{% if default_variant.available %} display-none{% endif %}">
 		<input
 		type="email"
 		placeholder="Enter Your Email"

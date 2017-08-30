@@ -16,14 +16,35 @@
 
 
 {% comment %}
+    Get Selected or First Available Variant
+{% endcomment %}
+
+{% assign selected_or_first_available_variant = product.selected_or_first_available_variant %}
+
+
+{% comment %}
+    Get First Variant
+{% endcomment %}
+
+{% assign first_variant = product.variants[0] %}
+
+
+{% comment %}
     Get Default Variant
 
     If product has variant on sale, get the most expensive one ????
 {% endcomment %}
 
-{% assign default_variant = product.selected_or_first_available_variant %}
+{% assign default_variant = selected_or_first_available_variant %}
 
-{% if has_variant_on_sale %}
+{% if first_is_default_variant %}
+
+    {% assign default_variant = first_variant %}
+
+{% endif %}
+
+
+{% comment %}{% if has_variant_on_sale %}
     
     {% for variant in product.variants %}
         {% if variant.compare_at_price == variant.compare_at_price_max %}
@@ -32,7 +53,7 @@
         {% endif %}
     {% endfor %}
 
-{% endif %}
+{% endif %}{% endcomment %}
 
 
 

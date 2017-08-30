@@ -372,6 +372,10 @@ $(document).on('click', '.js-product-shop-option-value', function(){
 
         $price.html(variantPriceHtml);
 
+        // update url
+
+        window.history.replaceState({}, document.title, "?variant=" + variantData.id);
+
     }
 
     if($selectedValues.length == optionsSize ){

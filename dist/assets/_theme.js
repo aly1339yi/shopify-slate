@@ -4149,35 +4149,15 @@ if ($('.template-product').length) {
 
     }
 
-
-    $('.desktop-product-shop-slider').waitForImages(function() {
-
         desktopProductSliderInit(null);
 
-    });
-
-    $('.mobile-product-shop-slider').waitForImages(function() {
 
         mobileProductSliderInit(null);
 
-    });
+
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -4572,6 +4552,10 @@ $(document).on('click', '.js-product-shop-option-value', function(){
         var variantPriceHtml = generateVariantPriceHtml(variantData);
 
         $price.html(variantPriceHtml);
+
+        // update url
+
+        window.history.replaceState({}, document.title, "?variant=" + variantData.id);
 
     }
 

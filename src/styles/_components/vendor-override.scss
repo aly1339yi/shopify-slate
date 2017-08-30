@@ -5,6 +5,7 @@
 
 .royalSlider{
 	width: 100%;
+	height: auto;
 }
 
 
@@ -15,7 +16,7 @@
 .rsDefault .rsVideoFrameHolder,
 .rsDefault .rsThumbs {
 	background: transparent;
-	color: #000;
+	color: $color-black;
 }
 
 
@@ -23,36 +24,9 @@
 	transition: none !important;
 }
 
-
-/*
-
-.rsDefault .rsBullets{
-	background: transparent;
-	width: auto;
-	right: 20px;
-	left: auto;
+.rsActiveSlide{
+    z-index: auto;
 }
-
-.rsDefault .rsBullet{
-    width: 20px;
-    height: 40px;
-	padding: 6px 0px 6px;
-}
-*/
-/*
-
-.rsDefault .rsBullet span{
-    width: 10px;
-    height: 10px;
-    background-color: list-get($bullet-color, default);
-	border: 2px solid list-get($bullet-color, selected);
-}
-
-.rsDefault .rsBullet.rsNavSelected span{
-	background-color: list-get($bullet-color, selected);
-}
-*/
-
 
 /* =========================================================================
     Owl Carousel
@@ -63,6 +37,35 @@
 
 
 
+
+
+
+
+
+
+/* =========================================================================
+    plyr
+========================================================================= */
+
+
+.plyr__progress--played, .plyr__volume--display{
+	color: $color-black;
+}
+
+.plyr--video .plyr__controls button.tab-focus:focus, .plyr--video .plyr__controls button:hover{
+	background-color: $color-black;
+}
+
+
+.plyr input[type=range]:active::-webkit-slider-thumb {
+    background: $color-black;
+}
+.plyr input[type=range]:active::-moz-range-thumb {
+    background: $color-black;
+}
+.plyr input[type=range]:active::-ms-thumb {
+    background: $color-black;
+}
 
 
 

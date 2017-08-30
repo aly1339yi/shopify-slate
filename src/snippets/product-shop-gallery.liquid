@@ -93,7 +93,7 @@
 		{% if alt_handle != color_swatch_alt_handle %}
 		
 		<div class="product-shop-slide" data-alt-handle="{{ alt_handle }}">
-		<img src="{{ image.src | img_url: product_shop_image_size, format: 'pjpg' }}" alt="{{ alt_handle }}"
+		<img src="{{ image.src | img_url: product_shop_image_size, format: 'pjpg' }}" alt="{{ alt_handle }}" class="product-shop-image block-fullwidth"
 		data-alt-handle="{{ alt_handle }}"
 		>
 		</div>

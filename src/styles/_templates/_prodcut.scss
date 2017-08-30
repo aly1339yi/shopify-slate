@@ -1,4 +1,9 @@
 
+/* ========================================================================
+   Product Gallery
+   ========================================================================= */
+
+
 .product-shop-gallery{
 
 	border: 1px solid purple;
@@ -12,8 +17,180 @@
 
 
 
+
+/* ========================================================================
+   Product Details
+   ========================================================================= */
+
 .product-shop-details{
 
 	border: 1px solid purple;
 
 }
+
+
+
+.product-shop-title{
+
+	margin-bottom: 15px;
+
+	font-size: 1.4rem;	
+
+}
+
+
+.product-shop-price{
+	margin-bottom: 15px;
+}
+
+
+.product-shop-description{
+	margin-bottom: 15px;
+}
+
+
+.product-shop-options{
+	margin-bottom: 15px;
+}
+
+
+
+.product-shop-option{
+	& + &{
+		margin-top: 10px;
+	}
+}
+
+.product-shop-option-name{
+
+	margin-bottom: 5px;
+}
+
+.product-shop-option-values{
+	@include clearfix;
+}
+
+.product-shop-option-value{
+
+	float: left;
+
+	margin-right: 15px;
+	margin-bottom: 10px;
+	padding: 8px 10px 8px 10px;
+
+	cursor: pointer;
+
+	outline: 2px solid transparent;
+	border: 2px solid transparent;
+
+	@include transition($duration:300ms);
+
+	span{
+		
+		@include transition($duration:300ms);
+	}
+
+	// hover
+	html.mod-no-mobile & {
+	&:not(.selected-value):hover{
+		span{
+			
+		}
+	}
+	}
+
+	&.active-value{
+
+		outline: 2px solid red;
+
+		span{
+
+		}
+
+	}
+	
+	&.selected-value{
+
+		border: 2px solid green;
+
+		span{
+
+		}
+		
+	}
+
+	&.unavailable-value {
+	
+		span{
+
+			position: relative;
+
+			&:after{
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 0;
+				right: 0;
+				height: 2px;
+				background-color: $color-black;
+			}
+
+		}
+		
+	}
+}
+
+
+
+
+.product-size-guide{
+
+	margin-bottom: 10px;
+
+	cursor: pointer;
+
+}
+
+
+.product-shop-back-in-stock-field{
+	margin-bottom: 15px;
+	border-bottom: 1px solid #000;
+}
+
+.product-shop-back-in-stock-email{
+	height: 30px;
+	font-size: 1.4rem;
+}
+
+
+
+.product-shop-add-to-cart{
+
+
+}
+
+	
+
+
+
+
+/* ========================================================================
+   Product Related
+   ========================================================================= */
+
+.related-products-title{
+
+	padding: 40px 0 35px;
+
+	text-align: center;
+}
+
+.related-products-grid{
+	@extend .collection-grid;
+}
+
+
+.related-products-grid-item{
+	@extend .collection-grid-item;
+}
+

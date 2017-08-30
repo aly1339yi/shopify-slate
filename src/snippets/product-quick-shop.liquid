@@ -1,3 +1,5 @@
+
+
 <div class="product-quick-shop">
 	
 	<div class="product-quick-shop-row row">
@@ -181,7 +183,7 @@
 				{% endcomment %}
 
 
-				<div class="product-back-in-stock-field product-quick-shop-back-in-stock-field{% unless has_only_default_variant and default_variant.available %} display-none{% endunless %}">
+				<div class="product-back-in-stock-field product-quick-shop-back-in-stock-field{% if default_variant.available %} display-none{% endif %}">
 					<input
 					type="email"
 					placeholder="Enter Your Email"

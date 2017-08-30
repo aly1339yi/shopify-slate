@@ -94,35 +94,15 @@ if ($('.template-product').length) {
 
     }
 
-
-    $('.desktop-product-shop-slider').waitForImages(function() {
-
         desktopProductSliderInit(null);
 
-    });
-
-    $('.mobile-product-shop-slider').waitForImages(function() {
 
         mobileProductSliderInit(null);
 
-    });
+
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

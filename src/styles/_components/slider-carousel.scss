@@ -1,88 +1,166 @@
+ 
+$slider-carousel-nav-width: 80px;
+
+$slider-carousel-icon-size: 80px;
+
+$slider-carousel-translateX: 10px;
+
  /* =========================================================================
    Royal Slider
    ========================================================================= */
 
-.royalSlider{
-	width: 100%;
-}
 
-
-.rsDefault,
-.rsDefault .rsOverflow,
-.rsDefault .rsSlide,
-.rsDefault .rsVideoFrameHolder,
-.rsDefault .rsThumbs {
-	background: transparent;
-	color: #000;
-}
-
-
-.rsOverflow{
-	transition: none !important;
-}
 
 
 .rsDefault .rsBullets{
 	background: transparent;
 	width: auto;
-	right: 20px;
-	left: auto;
+	left: 22px;
+	right: auto;	
 }
 
 
 .rsDefault .rsBullet{
-    width: 20px;
-    height: 40px;
+    width: 22px;
+    height: 30px;
 	padding: 6px 0px 6px;
 }
 
 .rsDefault .rsBullet span{
-    width: 10px;
-    height: 10px;
+
+	$local-width: 8px;
+
+    width: $local-width;
+    height: $local-width;
+
     background-color: transparent;
-	border: 2px solid list-get($color, bullet);
+	border: 1px solid #fff;
+
+	.slider-tone-dark &{
+
+	    background-color: transparent;
+		border: 1px solid #fff;
+
+	}
+	.slider-tone-light &{
+
+	    background-color: list-get($color, 'bullet');
+		border: 1px solid list-get($color, 'bullet-selected');
+
+	}
+
+
 }
 
 .rsDefault .rsBullet.rsNavSelected span{
-	background-color: list-get($color, bullet-selected);
+	
+	background-color: #fff;
+
+	.slider-tone-dark &{
+
+		background-color: #fff;
+
+	}
+	.slider-tone-light &{
+
+		background-color: list-get($color, 'bullet-selected');
+		
+	}
+
 }
 
 
 
 
-.rsImg-focus-left-top{
-	margin-left: 0 !important;
-	margin-top: 0 !important;
-}
-.rsImg-focus-left-center{
-	margin-left: 0 !important;
-}
-.rsImg-focus-left-bottom{
-	margin-left: 0 !important;
-	margin-bottom: 0 !important;
-}
+.rsDefault .rsArrow {
+    width: $slider-carousel-nav-width;
 
-.rsImg-focus-center-top{
-	margin-top: 0 !important;
-}
-.rsImg-focus-center-center{
+	.no-arrowsNav &{
+		display: none !important;
+	}
 
 }
-.rsImg-focus-center-bottom{
-	margin-bottom: 0 !important;
+
+.rsDefault .rsArrowIcn {
+	left: 0;
+	right: 0;
+	width: $slider-carousel-nav-width;
+	height: $slider-carousel-nav-width;
+	margin: -($slider-carousel-nav-width / 2) 0 0;
+
 }
 
-.rsImg-focus-right-top{
-	margin-right: 0 !important;
-	margin-top: 0 !important;
+.rsDefault.rsHor .rsArrowLeft{
+	left: 0;
 }
-.rsImg-focus-right-center{
-	margin-right: 0 !important;
+
+.rsDefault .rsArrowIcn{
+
+	background-color: transparent;
+	background-repeat: no-repeat;
+    background-size: $slider-carousel-icon-size;
+
+	&:hover{
+		background-color: transparent;
+	}
 }
-.rsImg-focus-right-bottom{
-	margin-right: 0 !important;
-	margin-bottom: 0 !important;
+
+
+
+.rsDefault.rsHor .rsArrowLeft .rsArrowIcn {
+
+	background-position: right center;
+	background-image: url("{{ 'icon_arrow_left_black.svg' | asset_url }}");
+
+	.slider-tone-dark &{
+		background-image: url("{{ 'icon_arrow_left_white.svg' | asset_url }}");
+	}
+	.slider-tone-light &{
+		background-image: url("{{ 'icon_arrow_left_black.svg' | asset_url }}");
+	}
+	
+	html.mod-no-mobile & {
+		@include transition();
+		&:hover{
+			@include transform(translateX( - $slider-carousel-translateX ));
+			// background-image: url("{{ 'icon_arrow_left_black.svg' | asset_url }}");
+		}
+	}
+
+
+
 }
+
+.rsDefault.rsHor .rsArrowRight{
+	right: 0;
+}
+
+.rsDefault.rsHor .rsArrowRight .rsArrowIcn {
+
+	background-position: left center;
+	background-image: url("{{ 'icon_arrow_right_black.svg' | asset_url }}");
+
+	.slider-tone-dark &{
+		background-image: url("{{ 'icon_arrow_right_white.svg' | asset_url }}");
+	}
+	.slider-tone-light &{
+		background-image: url("{{ 'icon_arrow_right_black.svg' | asset_url }}");
+	}
+	
+	html.mod-no-mobile & {
+		@include transition();
+		&:hover{
+			@include transform(translateX( $slider-carousel-translateX ));
+			//background-image: url("{{ 'icon_arrow_right_black.svg' | asset_url }}");
+		}
+	}
+}
+
+
+
+
+
+
 
 
 
@@ -95,19 +173,35 @@
 }
 
 .owl-carousel{
-	@include screen(medium-up){
-	width: calc(100% - 120px);
-	margin: auto;
-	}
+
 }
+
+
+
+
+.owl-theme .owl-dots .owl-dot span{
+    width: 8px;
+    height: 8px;
+    background-color: #fff;
+    border: 1px solid $color-black;
+}
+
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span{
+	background-color: $color-black;
+}
+
+
+
+
 
 .owl-carousel-nav{
     position: absolute;
     top: 0;
     bottom: 0;
     z-index: 1;
-    width: 60px;
+    width: $slider-carousel-nav-width;
     cursor: pointer;
+
 }
 
 .owl-carousel-nav-prev{
@@ -117,27 +211,34 @@
 	right: 0;
 }
 
-
 .owl-carousel-nav-icon{
 	position: absolute;
 	top: 50%;
     left: 50%;
     right: 0;
-    width: 50px;
-    height: 50px;
-    margin: -25px 0 0 -25px;
+    width: $slider-carousel-nav-width;
+    height: $slider-carousel-nav-width;
+
+    margin-top: - $slider-carousel-nav-width / 2;
+    margin-left: - $slider-carousel-nav-width / 2;
+    
     overflow: hidden;
-	cursor: pointer;
+
+	background-repeat: no-repeat;
+	
+	background-size: $slider-carousel-icon-size;
+
 }
 
 
 .owl-carousel-nav-icon-prev{
-	background: url( {{ '' | asset_url }} ) no-repeat center center;
-	background-size: 20px;
-	html.device-no-mobile & {
-		@include transition($duration:300ms);
+	background-image: url("{{ 'icon_arrow_left_black.svg' | asset_url }}");
+	background-position: right center;
+	html.mod-no-mobile & {
+		@include transition();
 		&:hover{
-			@include transform(translateX(-5px));
+			@include transform(translateX( - $slider-carousel-translateX ));
+			//background-image: url("{{ 'icon_arrow_left_black.svg' | asset_url }}");
 		}
 	}
 }
@@ -145,12 +246,18 @@
 
 
 .owl-carousel-nav-icon-next{
-	background: url( {{ '' | asset_url }} ) no-repeat center center;
-	background-size: 20px;
-	html.device-no-mobile & {
-		@include transition($duration:300ms);
+	background-image: url("{{ 'icon_arrow_right_black.svg' | asset_url }}");
+	background-position: left center;
+	html.mod-no-mobile & {
+		@include transition();
 		&:hover{
-			@include transform(translateX(5px));
+			@include transform(translateX( $slider-carousel-translateX ));
+			//background-image: url("{{ 'icon_arrow_right_black.svg' | asset_url }}");
 		}
 	}	
 }
+
+
+
+
+

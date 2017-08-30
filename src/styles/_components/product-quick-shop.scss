@@ -1,4 +1,10 @@
 
+/* ========================================================================
+   Product Images
+   ========================================================================= */
+
+
+
 .product-quick-shop-image-group{
 	display: none;
 	&.active{
@@ -31,27 +37,157 @@
 
 
 
-.product-option-value{
+
+/* ========================================================================
+   Product Details
+   ========================================================================= */
+
+
+
+.product-quick-shop-details{
+	margin-top: 15px;
+}
+
+
+
+.product-quick-shop-title{
+
+	margin-bottom: 15px;
+
+	font-size: 1.4rem;	
+
+}
+
+
+.product-quick-shop-price{
+	margin-bottom: 15px;
+}
+
+
+.product-quick-shop-description{
+	margin-bottom: 15px;
+}
+
+
+.product-quick-shop-options{
+	margin-bottom: 15px;
+}
+
+
+
+.product-quick-shop-option{
+	& + &{
+		margin-top: 10px;
+	}
+}
+
+.product-quick-shop-option-name{
+
+	margin-bottom: 5px;
+}
+
+.product-quick-shop-option-values{
+	@include clearfix;
+}
+
+
+
+
+.product-quick-shop-option-value{
+
+	float: left;
+
+	margin-right: 15px;
+	margin-bottom: 10px;
+	padding: 8px 10px 8px 10px;
 
 	cursor: pointer;
 
+	outline: 2px solid transparent;
+	border: 2px solid transparent;
+
+	@include transition($duration:300ms);
+
+	span{
+		
+		@include transition($duration:300ms);
+	}
+
+	// hover
+	html.mod-no-mobile & {
 	&:not(.selected-value):hover{
-		opacity: 0.5;
+		span{
+			
+		}
+	}
 	}
 
 	&.active-value{
+
 		outline: 2px solid red;
-	}
 
+		span{
+
+		}
+
+	}
+	
 	&.selected-value{
+
 		border: 2px solid green;
+
+		span{
+
+		}
+		
 	}
 
-	&.unavailable-value{
-		opacity: 0.2;
+	&.unavailable-value {
+	
+		span{
+
+			position: relative;
+
+			&:after{
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 0;
+				right: 0;
+				height: 2px;
+				background-color: $color-black;
+			}
+
+		}
+		
 	}
+}
+
+
+
+
+.product-quick-shop-back-in-stock-field{
+
+	margin-bottom: 15px;
+
+	border-bottom: 1px solid #000;
+
+}
+
+.product-quick-shop-back-in-stock-email{
+	height: 30px;
+	font-size: 1.4rem;
+}
+
+
+.product-quick-shop-add-to-cart{
 
 
 }
+
+	
+
+
+
 
 

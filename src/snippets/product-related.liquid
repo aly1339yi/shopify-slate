@@ -1,13 +1,64 @@
+{% comment %}
+
+	Get Related Products
+
+{% endcomment %}
+
+{% assign related_products_limit = 4 %}
+
+
+{% assign related_products = all_products %}
+
+
+{%- capture related_products_title -%}
+
+    {{- 'product.related_products_title_general' | t -}}
+
+{%- endcapture -%}
+
+
+
+{% if collection %}
+	
+	{% assign related_products = collection.products %}	
+
+	{%- capture related_products_title -%}
+
+	    {{- 'product.related_products_title_collection_html' | t: collection_title: collection.title -}}
+	    
+	{%- endcapture -%}
+
+
+{% else %}
+
+	{% for collection in product.collections %}
+
+		{% unless collection.handle contains 'keyword' %}
+
+			{% assign related_products = collection.products %}
+
+			{% break %}
+
+		{% endunless %}
+
+	{% endfor %}
+
+{% endif %}
+
+
+
+
 
 <div class="related-products">
+
     
-    <div class="related-products-title"></div>
+    <div class="related-products-title">{{ related_products_title }}</div>
 
     <div class="related-products-grid grid grid-uniform">
 
-        {% for product in collection.products limit: 3 %}
+        {% for product in related_products | sort_by: 'best-selling' limit: related_products_limit %}
 
-        <div class="related-products-grid-item grid-item large-up-one-third large-down-one-half">
+        <div class="related-products-grid-item grid-item medium-up-one-quarter medium-down-one-half">
 
             {% include 'product-base-data', product: product %}
 
@@ -19,6 +70,7 @@
 
         
     </div>
+    
 
 </div>
 

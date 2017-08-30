@@ -2824,6 +2824,7 @@ img.rsImg {
 
 .royalSlider{
 	width: 100%;
+	height: auto;
 }
 
 
@@ -2834,7 +2835,7 @@ img.rsImg {
 .rsDefault .rsVideoFrameHolder,
 .rsDefault .rsThumbs {
 	background: transparent;
-	color: #000;
+	color: $color-black;
 }
 
 
@@ -2842,36 +2843,9 @@ img.rsImg {
 	transition: none !important;
 }
 
-
-/*
-
-.rsDefault .rsBullets{
-	background: transparent;
-	width: auto;
-	right: 20px;
-	left: auto;
+.rsActiveSlide{
+    z-index: auto;
 }
-
-.rsDefault .rsBullet{
-    width: 20px;
-    height: 40px;
-	padding: 6px 0px 6px;
-}
-*/
-/*
-
-.rsDefault .rsBullet span{
-    width: 10px;
-    height: 10px;
-    background-color: list-get($bullet-color, default);
-	border: 2px solid list-get($bullet-color, selected);
-}
-
-.rsDefault .rsBullet.rsNavSelected span{
-	background-color: list-get($bullet-color, selected);
-}
-*/
-
 
 /* =========================================================================
     Owl Carousel
@@ -2882,6 +2856,35 @@ img.rsImg {
 
 
 
+
+
+
+
+
+
+/* =========================================================================
+    plyr
+========================================================================= */
+
+
+.plyr__progress--played, .plyr__volume--display{
+	color: $color-black;
+}
+
+.plyr--video .plyr__controls button.tab-focus:focus, .plyr--video .plyr__controls button:hover{
+	background-color: $color-black;
+}
+
+
+.plyr input[type=range]:active::-webkit-slider-thumb {
+    background: $color-black;
+}
+.plyr input[type=range]:active::-moz-range-thumb {
+    background: $color-black;
+}
+.plyr input[type=range]:active::-ms-thumb {
+    background: $color-black;
+}
 
 
 
@@ -4501,7 +4504,7 @@ large-up-push-one-third
             top: 0;
             left: 0;
             right: 0;
-            border-bottom: 1px solid #000;
+            border-bottom: 1px solid $color-black;
         }
     }
 
@@ -5659,7 +5662,7 @@ ul.desktop-navbar-nav-dropdown-menu {
 
 .mobile-navbar-nav-pillar{
 
-    padding: 15px 20px 5px;
+    padding: 15px 20px 15px;
 	
 	font-size: 1.4rem;
     
@@ -6293,91 +6296,169 @@ $mini-car-image-width-mobile: 120px;
 
 
 }
+ 
+$slider-carousel-nav-width: 80px;
+
+$slider-carousel-icon-size: 80px;
+
+$slider-carousel-translateX: 10px;
+
  /* =========================================================================
    Royal Slider
    ========================================================================= */
 
-.royalSlider{
-	width: 100%;
-}
 
-
-.rsDefault,
-.rsDefault .rsOverflow,
-.rsDefault .rsSlide,
-.rsDefault .rsVideoFrameHolder,
-.rsDefault .rsThumbs {
-	background: transparent;
-	color: #000;
-}
-
-
-.rsOverflow{
-	transition: none !important;
-}
 
 
 .rsDefault .rsBullets{
 	background: transparent;
 	width: auto;
-	right: 20px;
-	left: auto;
+	left: 22px;
+	right: auto;	
 }
 
 
 .rsDefault .rsBullet{
-    width: 20px;
-    height: 40px;
+    width: 22px;
+    height: 30px;
 	padding: 6px 0px 6px;
 }
 
 .rsDefault .rsBullet span{
-    width: 10px;
-    height: 10px;
+
+	$local-width: 8px;
+
+    width: $local-width;
+    height: $local-width;
+
     background-color: transparent;
-	border: 2px solid list-get($color, bullet);
+	border: 1px solid #fff;
+
+	.slider-tone-dark &{
+
+	    background-color: transparent;
+		border: 1px solid #fff;
+
+	}
+	.slider-tone-light &{
+
+	    background-color: list-get($color, 'bullet');
+		border: 1px solid list-get($color, 'bullet-selected');
+
+	}
+
+
 }
 
 .rsDefault .rsBullet.rsNavSelected span{
-	background-color: list-get($color, bullet-selected);
+	
+	background-color: #fff;
+
+	.slider-tone-dark &{
+
+		background-color: #fff;
+
+	}
+	.slider-tone-light &{
+
+		background-color: list-get($color, 'bullet-selected');
+		
+	}
+
 }
 
 
 
 
-.rsImg-focus-left-top{
-	margin-left: 0 !important;
-	margin-top: 0 !important;
-}
-.rsImg-focus-left-center{
-	margin-left: 0 !important;
-}
-.rsImg-focus-left-bottom{
-	margin-left: 0 !important;
-	margin-bottom: 0 !important;
-}
+.rsDefault .rsArrow {
+    width: $slider-carousel-nav-width;
 
-.rsImg-focus-center-top{
-	margin-top: 0 !important;
-}
-.rsImg-focus-center-center{
+	.no-arrowsNav &{
+		display: none !important;
+	}
 
 }
-.rsImg-focus-center-bottom{
-	margin-bottom: 0 !important;
+
+.rsDefault .rsArrowIcn {
+	left: 0;
+	right: 0;
+	width: $slider-carousel-nav-width;
+	height: $slider-carousel-nav-width;
+	margin: -($slider-carousel-nav-width / 2) 0 0;
+
 }
 
-.rsImg-focus-right-top{
-	margin-right: 0 !important;
-	margin-top: 0 !important;
+.rsDefault.rsHor .rsArrowLeft{
+	left: 0;
 }
-.rsImg-focus-right-center{
-	margin-right: 0 !important;
+
+.rsDefault .rsArrowIcn{
+
+	background-color: transparent;
+	background-repeat: no-repeat;
+    background-size: $slider-carousel-icon-size;
+
+	&:hover{
+		background-color: transparent;
+	}
 }
-.rsImg-focus-right-bottom{
-	margin-right: 0 !important;
-	margin-bottom: 0 !important;
+
+
+
+.rsDefault.rsHor .rsArrowLeft .rsArrowIcn {
+
+	background-position: right center;
+	background-image: url("{{ 'icon_arrow_left_black.svg' | asset_url }}");
+
+	.slider-tone-dark &{
+		background-image: url("{{ 'icon_arrow_left_white.svg' | asset_url }}");
+	}
+	.slider-tone-light &{
+		background-image: url("{{ 'icon_arrow_left_black.svg' | asset_url }}");
+	}
+	
+	html.mod-no-mobile & {
+		@include transition();
+		&:hover{
+			@include transform(translateX( - $slider-carousel-translateX ));
+			// background-image: url("{{ 'icon_arrow_left_black.svg' | asset_url }}");
+		}
+	}
+
+
+
 }
+
+.rsDefault.rsHor .rsArrowRight{
+	right: 0;
+}
+
+.rsDefault.rsHor .rsArrowRight .rsArrowIcn {
+
+	background-position: left center;
+	background-image: url("{{ 'icon_arrow_right_black.svg' | asset_url }}");
+
+	.slider-tone-dark &{
+		background-image: url("{{ 'icon_arrow_right_white.svg' | asset_url }}");
+	}
+	.slider-tone-light &{
+		background-image: url("{{ 'icon_arrow_right_black.svg' | asset_url }}");
+	}
+	
+	html.mod-no-mobile & {
+		@include transition();
+		&:hover{
+			@include transform(translateX( $slider-carousel-translateX ));
+			//background-image: url("{{ 'icon_arrow_right_black.svg' | asset_url }}");
+		}
+	}
+}
+
+
+
+
+
+
 
 
 
@@ -6390,19 +6471,35 @@ $mini-car-image-width-mobile: 120px;
 }
 
 .owl-carousel{
-	@include screen(medium-up){
-	width: calc(100% - 120px);
-	margin: auto;
-	}
+
 }
+
+
+
+
+.owl-theme .owl-dots .owl-dot span{
+    width: 8px;
+    height: 8px;
+    background-color: #fff;
+    border: 1px solid $color-black;
+}
+
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span{
+	background-color: $color-black;
+}
+
+
+
+
 
 .owl-carousel-nav{
     position: absolute;
     top: 0;
     bottom: 0;
     z-index: 1;
-    width: 60px;
+    width: $slider-carousel-nav-width;
     cursor: pointer;
+
 }
 
 .owl-carousel-nav-prev{
@@ -6412,27 +6509,34 @@ $mini-car-image-width-mobile: 120px;
 	right: 0;
 }
 
-
 .owl-carousel-nav-icon{
 	position: absolute;
 	top: 50%;
     left: 50%;
     right: 0;
-    width: 50px;
-    height: 50px;
-    margin: -25px 0 0 -25px;
+    width: $slider-carousel-nav-width;
+    height: $slider-carousel-nav-width;
+
+    margin-top: - $slider-carousel-nav-width / 2;
+    margin-left: - $slider-carousel-nav-width / 2;
+    
     overflow: hidden;
-	cursor: pointer;
+
+	background-repeat: no-repeat;
+	
+	background-size: $slider-carousel-icon-size;
+
 }
 
 
 .owl-carousel-nav-icon-prev{
-	background: url( {{ '' | asset_url }} ) no-repeat center center;
-	background-size: 20px;
-	html.device-no-mobile & {
-		@include transition($duration:300ms);
+	background-image: url("{{ 'icon_arrow_left_black.svg' | asset_url }}");
+	background-position: right center;
+	html.mod-no-mobile & {
+		@include transition();
 		&:hover{
-			@include transform(translateX(-5px));
+			@include transform(translateX( - $slider-carousel-translateX ));
+			//background-image: url("{{ 'icon_arrow_left_black.svg' | asset_url }}");
 		}
 	}
 }
@@ -6440,17 +6544,25 @@ $mini-car-image-width-mobile: 120px;
 
 
 .owl-carousel-nav-icon-next{
-	background: url( {{ '' | asset_url }} ) no-repeat center center;
-	background-size: 20px;
-	html.device-no-mobile & {
-		@include transition($duration:300ms);
+	background-image: url("{{ 'icon_arrow_right_black.svg' | asset_url }}");
+	background-position: left center;
+	html.mod-no-mobile & {
+		@include transition();
 		&:hover{
-			@include transform(translateX(5px));
+			@include transform(translateX( $slider-carousel-translateX ));
+			//background-image: url("{{ 'icon_arrow_right_black.svg' | asset_url }}");
 		}
 	}	
 }
 
 
+
+
+
+
+/* ========================================================================
+   Product Gallery
+   ========================================================================= */
 
 .product-card-image-group{
 	display: none;
@@ -6490,8 +6602,16 @@ $mini-car-image-width-mobile: 120px;
 
 }
 
-.product-card-details{
 
+/* ========================================================================
+   Product Details
+   ========================================================================= */
+
+
+
+
+.product-card-details{
+	margin-top: 15px;
 }
 
 
@@ -6499,14 +6619,116 @@ $mini-car-image-width-mobile: 120px;
 
 .product-card-title{
 
+	margin-bottom: 15px;
 
 }
 
 .product-card-price{
+	margin-bottom: 15px;
+}
+
+
+
+.product-card-options{
 
 }
 
 
+
+.product-card-option{
+	& + &{
+		margin-top: 10px;
+	}
+}
+
+.product-card-option-name{
+
+	margin-bottom: 5px;
+}
+
+.product-card-option-values{
+	@include clearfix;
+}
+
+.product-card-option-value{
+
+	float: left;
+
+	margin-right: 15px;
+	margin-bottom: 10px;
+	padding: 8px 10px 8px 10px;
+
+	cursor: pointer;
+
+	outline: 2px solid transparent;
+	border: 2px solid transparent;
+
+	@include transition($duration:300ms);
+
+	span{
+
+		@include transition($duration:300ms);
+
+	}
+
+	// hover
+	html.mod-no-mobile & {
+	&:not(.selected-value):hover{
+		span{
+			
+		}
+	}
+	}
+
+	&.active-value{
+
+		outline: 2px solid red;
+
+		span{
+
+		}
+
+	}
+	
+	&.selected-value{
+
+		border: 2px solid green;
+
+		span{
+
+		}
+		
+	}
+
+	&.unavailable-value {
+	
+		span{
+
+			position: relative;
+
+			&:after{
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 0;
+				right: 0;
+				height: 2px;
+				background-color: $color-black;
+			}
+
+		}
+		
+	}
+}
+
+
+
+
+
+
+/* ========================================================================
+   Product Images
+   ========================================================================= */
 
 
 
@@ -6542,28 +6764,158 @@ $mini-car-image-width-mobile: 120px;
 
 
 
-.product-option-value{
+
+/* ========================================================================
+   Product Details
+   ========================================================================= */
+
+
+
+.product-quick-shop-details{
+	margin-top: 15px;
+}
+
+
+
+.product-quick-shop-title{
+
+	margin-bottom: 15px;
+
+	font-size: 1.4rem;	
+
+}
+
+
+.product-quick-shop-price{
+	margin-bottom: 15px;
+}
+
+
+.product-quick-shop-description{
+	margin-bottom: 15px;
+}
+
+
+.product-quick-shop-options{
+	margin-bottom: 15px;
+}
+
+
+
+.product-quick-shop-option{
+	& + &{
+		margin-top: 10px;
+	}
+}
+
+.product-quick-shop-option-name{
+
+	margin-bottom: 5px;
+}
+
+.product-quick-shop-option-values{
+	@include clearfix;
+}
+
+
+
+
+.product-quick-shop-option-value{
+
+	float: left;
+
+	margin-right: 15px;
+	margin-bottom: 10px;
+	padding: 8px 10px 8px 10px;
 
 	cursor: pointer;
 
+	outline: 2px solid transparent;
+	border: 2px solid transparent;
+
+	@include transition($duration:300ms);
+
+	span{
+		
+		@include transition($duration:300ms);
+	}
+
+	// hover
+	html.mod-no-mobile & {
 	&:not(.selected-value):hover{
-		opacity: 0.5;
+		span{
+			
+		}
+	}
 	}
 
 	&.active-value{
+
 		outline: 2px solid red;
-	}
 
+		span{
+
+		}
+
+	}
+	
 	&.selected-value{
+
 		border: 2px solid green;
+
+		span{
+
+		}
+		
 	}
 
-	&.unavailable-value{
-		opacity: 0.2;
+	&.unavailable-value {
+	
+		span{
+
+			position: relative;
+
+			&:after{
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 0;
+				right: 0;
+				height: 2px;
+				background-color: $color-black;
+			}
+
+		}
+		
 	}
+}
+
+
+
+
+.product-quick-shop-back-in-stock-field{
+
+	margin-bottom: 15px;
+
+	border-bottom: 1px solid #000;
+
+}
+
+.product-quick-shop-back-in-stock-email{
+	height: 30px;
+	font-size: 1.4rem;
+}
+
+
+.product-quick-shop-add-to-cart{
 
 
 }
+
+	
+
+
+
 
 
 
@@ -6761,6 +7113,11 @@ $collection-refinement: (
 
 
 
+/* ========================================================================
+   Product Gallery
+   ========================================================================= */
+
+
 .product-shop-gallery{
 
 	border: 1px solid purple;
@@ -6774,11 +7131,184 @@ $collection-refinement: (
 
 
 
+
+/* ========================================================================
+   Product Details
+   ========================================================================= */
+
 .product-shop-details{
 
 	border: 1px solid purple;
 
 }
+
+
+
+.product-shop-title{
+
+	margin-bottom: 15px;
+
+	font-size: 1.4rem;	
+
+}
+
+
+.product-shop-price{
+	margin-bottom: 15px;
+}
+
+
+.product-shop-description{
+	margin-bottom: 15px;
+}
+
+
+.product-shop-options{
+	margin-bottom: 15px;
+}
+
+
+
+.product-shop-option{
+	& + &{
+		margin-top: 10px;
+	}
+}
+
+.product-shop-option-name{
+
+	margin-bottom: 5px;
+}
+
+.product-shop-option-values{
+	@include clearfix;
+}
+
+.product-shop-option-value{
+
+	float: left;
+
+	margin-right: 15px;
+	margin-bottom: 10px;
+	padding: 8px 10px 8px 10px;
+
+	cursor: pointer;
+
+	outline: 2px solid transparent;
+	border: 2px solid transparent;
+
+	@include transition($duration:300ms);
+
+	span{
+		
+		@include transition($duration:300ms);
+	}
+
+	// hover
+	html.mod-no-mobile & {
+	&:not(.selected-value):hover{
+		span{
+			
+		}
+	}
+	}
+
+	&.active-value{
+
+		outline: 2px solid red;
+
+		span{
+
+		}
+
+	}
+	
+	&.selected-value{
+
+		border: 2px solid green;
+
+		span{
+
+		}
+		
+	}
+
+	&.unavailable-value {
+	
+		span{
+
+			position: relative;
+
+			&:after{
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 0;
+				right: 0;
+				height: 2px;
+				background-color: $color-black;
+			}
+
+		}
+		
+	}
+}
+
+
+
+
+.product-size-guide{
+
+	margin-bottom: 10px;
+
+	cursor: pointer;
+
+}
+
+
+.product-shop-back-in-stock-field{
+	margin-bottom: 15px;
+	border-bottom: 1px solid #000;
+}
+
+.product-shop-back-in-stock-email{
+	height: 30px;
+	font-size: 1.4rem;
+}
+
+
+
+.product-shop-add-to-cart{
+
+
+}
+
+	
+
+
+
+
+/* ========================================================================
+   Product Related
+   ========================================================================= */
+
+.related-products-title{
+
+	padding: 40px 0 35px;
+
+	text-align: center;
+}
+
+.related-products-grid{
+	@extend .collection-grid;
+}
+
+
+.related-products-grid-item{
+	@extend .collection-grid-item;
+}
+
+
 
 
 
