@@ -4389,7 +4389,7 @@ $(document).on('click', '.js-product-card-option-value', function(){
 
     var productURL = $productLink.data('product-url');
 
-    var $productImages = $card.find('.product-card-image');
+    var $productImages = $card.find('.product-card-image-group');
 
     var product= JSON.parse($card.find('.product-json').html());
 
@@ -4431,9 +4431,13 @@ $(document).on('click', '.js-product-quick-shop-option-value', function(){
 
     var optionsSize = $this.data('product-options-size');
 
+    var addToCartJSClass = $this.data('add-to-cart-js-class');
+
+    var backInStockJSClass = $this.data('back-in-stock-js-class');
+
     var $quickShop = $this.parents('.product-quick-shop');
 
-    var $productImages = $quickShop.find('.product-quick-shop-image');
+    var $productImages = $quickShop.find('.product-quick-shop-image-group');
 
     var $activeValues = $quickShop.find('.active-value');
 
@@ -4441,7 +4445,9 @@ $(document).on('click', '.js-product-quick-shop-option-value', function(){
 
     var $price = $quickShop.find('.product-quick-shop-price');
 
-    var $addToCartBtn = $quickShop.find('.product-quick-shop-add-to-cart');
+    var $backInStockField = $quickShop.find('.product-back-in-stock-field');
+
+    var $addToCartBtn = $quickShop.find('.product-add-to-cart');
 
     var product= JSON.parse($quickShop.find('.product-json').html());
 
@@ -4479,17 +4485,20 @@ $(document).on('click', '.js-product-quick-shop-option-value', function(){
         var btnStatus = getAddToCartBtnStatus(variantData);
         var btnText = $addToCartBtn.data(btnStatus+'-btn-text');
 
-        $addToCartBtn.text(btnText);
+        $addToCartBtn.text(btnText).removeAttr('disabled');
 
         switch (btnStatus) {
             case 'add-to-cart':
-                $addToCartBtn.removeAttr('disabled');
+                $backInStockField.fadeOut(0);
+                $addToCartBtn.removeClass( backInStockJSClass ).addClass( addToCartJSClass );
                 break;
             case 'pre-order':
-                $addToCartBtn.removeAttr('disabled');
+                $backInStockField.fadeOut(0);
+                $addToCartBtn.removeClass( backInStockJSClass ).addClass( addToCartJSClass );
                 break;
             case 'sold-out':
-                $addToCartBtn.attr('disabled', 'disabled');
+                $backInStockField.fadeIn(300);
+                $addToCartBtn.removeClass( addToCartJSClass ).addClass( backInStockJSClass );
                 break;
         }
 
@@ -4532,9 +4541,9 @@ $(document).on('click', '.js-product-shop-option-value', function(){
 
     var $price = $shop.find('.product-shop-price');
 
-    var $backInStockField = $shop.find('.product-shop-back-in-stock-field');
+    var $backInStockField = $shop.find('.product-back-in-stock-field');
 
-    var $addToCartBtn = $shop.find('.product-shop-add-to-cart');
+    var $addToCartBtn = $shop.find('.product-add-to-cart');
 
     var product= JSON.parse($shop.find('.product-json').html());
 

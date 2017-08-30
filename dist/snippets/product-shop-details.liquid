@@ -53,30 +53,30 @@
 
 					{% for value in option.values %}
 
-					{% assign value_unavailable = false %}
+						{% assign value_unavailable = false %}
 
-					{% if options_length == 1 %}
+						{% if options_length == 1 %}
 
-					{% for variant in product.variants %}
-						{% if variant.option1 == value and variant.available == false %}
-							{% assign value_unavailable = true %}
-							{% break %}
+						{% for variant in product.variants %}
+							{% if variant.option1 == value and variant.available == false %}
+								{% assign value_unavailable = true %}
+								{% break %}
+							{% endif %}
+						{% endfor %}
+
 						{% endif %}
-					{% endfor %}
 
-					{% endif %}
-
-					<div class="product-option-value product-shop-option-value js-product-shop-option-value{% if value == default_option1 or value == default_option2 or value == default_option3 %} active-value{% endif %}{% if value == default_color %} selected-value{% endif %}{% if value_unavailable %} unavailable-value{% endif %}"
-					data-product-options-size="{{ product.options.size }}"
-					data-product-option-position="{{ option.position }}"
-					data-is-color-option-value="{{ is_color_option }}"
-					data-product-option-value="{{ value }}"
-					data-add-to-cart-js-class="{{ product_add_to_cart_js_class }}"
-					data-back-in-stock-js-class="{{ product_back_in_stock_js_class }}"
-					{% if is_color_option %}
-					style="background:url({{ swatch_src_array[forloop.index0] }}) no-repeat center center; background-size: cover;"
-					{% endif %}
-					><span>{{ value }}</span></div>
+						<div class="product-option-value product-shop-option-value js-product-shop-option-value{% if value == default_option1 or value == default_option2 or value == default_option3 %} active-value{% endif %}{% if value == default_color %} selected-value{% endif %}{% if value_unavailable %} unavailable-value{% endif %}"
+						data-product-options-size="{{ product.options.size }}"
+						data-product-option-position="{{ option.position }}"
+						data-is-color-option-value="{{ is_color_option }}"
+						data-product-option-value="{{ value }}"
+						data-add-to-cart-js-class="{{ product_add_to_cart_js_class }}"
+						data-back-in-stock-js-class="{{ product_back_in_stock_js_class }}"
+						{% if is_color_option %}
+						style="background:url({{ swatch_src_array[forloop.index0] }}) no-repeat center center; background-size: cover;"
+						{% endif %}
+						><span>{{ value }}</span></div>
 
 					{% endfor %}
 
@@ -98,7 +98,7 @@
 
 	{% endcomment %}
 
-	<div class="product-shop-back-in-stock-field{% unless has_only_default_variant and default_variant.available %} display-none{% endunless %}">
+	<div class="product-back-in-stock-field product-shop-back-in-stock-field{% unless has_only_default_variant and default_variant.available %} display-none{% endunless %}">
 		<input
 		type="email"
 		placeholder="Enter Your Email"
@@ -117,7 +117,7 @@
 
 	<button
 	type="button"
-	class="product-shop-add-to-cart {{ default_btn_js_class }} btn btn-solid block-fullwidth"
+	class="product-add-to-cart product-shop-add-to-cart {{ default_btn_js_class }} btn btn-solid block-fullwidth"
 	{% if default_btn_disabled %}disabled{% endif %}
 	data-product-id="{{ product.id }}"
 	data-variant-id="{{ default_variant.id }}"

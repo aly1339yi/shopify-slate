@@ -2,10 +2,8 @@
 	
 	<div class="product-quick-shop-row row">
 
-		<div class="col one-third">
+		<div class="col one-whole">
 			
-			<div class="product-quick-shop-images">
-
 			{% if has_color_option %}
 
 				{% assign color_name = "" %}
@@ -16,22 +14,44 @@
 				    
 				    {% if alt_handle != color_name and alt_handle != color_swatch_alt_handle %}
 
-					{% assign next_index = forloop.index0 | plus: 1 %}
-				    {% assign next_alt_handle = product.images[next_index].alt | downcase %}
-				    {% assign has_swap_image = false %}
-				    {% if next_alt_handle == alt_handle %}
-				    	{% assign has_swap_image = true %}	
-				    {% endif %}
+						{% assign next_index = forloop.index0 | plus: 1 %}
+					    {% assign next_alt_handle = product.images[next_index].alt | downcase %}
+					    {% assign has_swap_image = false %}
+					    {% if next_alt_handle == alt_handle %}
+					    	{% assign has_swap_image = true %}	
+					    {% endif %}
+					    
 
-					<img src="{{ image.src | img_url: product_quick_shop_image_size, format: 'pjpg' }}" alt="{{ alt_handle }}"
-					class="product-quick-shop-image{% if has_swap_image %} js-product-image-swap{% endif %}{% if alt_handle == default_color %} active{% endif %}"
-					data-alt-handle="{{ alt_handle }}"
-					{% if has_swap_image %}data-swap-image-src="{{ product.images[next_index] | product_img_url: product_quick_shop_image_size, format: 'pjpg' }}"{% endif %}
-					>
+						{%- capture image_src_0 -%}
+							{{- image.src | img_url: product_card_image_size, format: 'pjpg' -}}
+						{%- endcapture -%}
 
-			  		{% assign color_name = alt_handle %}
+						{% if has_swap_image %}
 
-				  {% endif %}
+						{%- capture image_src_1 -%}
+							{{- product.images[next_index] | img_url: product_card_image_size, format: 'pjpg' -}}
+						{%- endcapture -%}
+
+						{% endif %}
+
+						<div class="product-quick-shop-image-group{% if alt_handle == default_color %} active{% endif %}" data-alt-handle="{{ alt_handle }}">
+
+							<div class="product-card-canvas">
+								
+								{% if has_swap_image %}
+								<div class="product-quick-shop-image" style="background-image: url({{ image_src_1 }});"></div>
+								{% endif %}
+								<div class="product-quick-shop-image" style="background-image: url({{ image_src_0 }});"></div>
+
+							</div>
+
+						</div>
+
+
+				  		{% assign color_name = alt_handle %}
+
+
+				  	{% endif %}
 
 				{% endfor %}
 
@@ -39,72 +59,150 @@
 
 				{% assign images_length = product.images | size %}
 
-				<img src="{{ product.images[0] | img_url: product_quick_shop_image_size, format: 'pjpg' }}" class="active product-quick-shop-image{% if images_length > 1 %} js-product-image-swap{% endif %}" {% if images_length > 1 %}data-swap-image-src="{{ product.images[1] | product_img_url: product_quick_shop_image_size, format: 'pjpg' }}{% endif %}">
+				{%- capture image_src_0 -%}
+					{{- product.images[0] | img_url: product_card_image_size, format: 'pjpg' -}}
+				{%- endcapture -%}
+
+				{% if images_length > 1 %}
+
+				{%- capture image_src_1 -%}
+					{{- product.images[1] | img_url: product_card_image_size, format: 'pjpg' -}}
+				{%- endcapture -%}
+
+				{% endif %}
+
+				<div class="product-card-canvas">
+					
+					{% if images_length > 1 %}
+					<div class="product-quick-shop-image" style="background-image: url({{ image_src_1 }});"></div>
+					{% endif %}
+					<div class="product-quick-shop-image" style="background-image: url({{ image_src_0 }});"></div>
+
+				</div>
 
 			{% endif %}
 
 
-			</div>
-
 		</div>
 
-		<div class="col two-thirds">
+		<div class="col one-whole">
 			
 			<div class="product-quick-shop-details">
 
+				{% comment %}
+
+				Product Title
+
+				{% endcomment %}
 
 				<div class="product-quick-shop-title">{{ product.title }}</div>
 
+
+				{% comment %}
+
+				Product Price
+
+				{% endcomment %}
+
+
 				<div class="product-quick-shop-price">{{ product_price }}</div>
+
+
+				{% comment %}
+
+				Product Options
+
+				{% endcomment %}
+
 
 				{% unless has_only_default_variant %}
 
-				<div class="product-options product-quick-shop-options">
+					<div class="product-options product-quick-shop-options">
 
-				{% for option in product.options_with_values %}
+					{% for option in product.options_with_values %}
 
-					{% assign is_color_option = false %}
-					{% assign option_name_handle = option.name | handle %}
-			        {% if option_name_handle == color_option_name_handle %}
-			            {% assign is_color_option = true %}
-			        {% endif %}
+						{% assign is_color_option = false %}
+						{% assign option_name_handle = option.name | handle %}
+				        {% if option_name_handle == color_option_name_handle %}
+				            {% assign is_color_option = true %}
+				        {% endif %}
 
-					<div class="product-option product-quick-shop-option">
+						<div class="product-option product-quick-shop-option">
 
-						<div class="product-option-name product-quick-shop-option-name">{{ 'product.option_label' | t: option_name: option.name }}</div>
+							<div class="product-option-name product-quick-shop-option-name">{{ 'product.option_label' | t: option_name: option.name }}</div>
 
-						<div class="product-option-values product-quick-shop-option-values">
+							<div class="product-option-values product-quick-shop-option-values">
 
-							{% for value in option.values %}
+								{% for value in option.values %}
 
-							<div class="product-option-value product-quick-shop-option-value js-product-quick-shop-option-value{% if value == default_option1 or value == default_option2 or value == default_option3 %} active-value{% endif %}{% if value == default_color %} selected-value{% endif %}"
-							data-product-options-size="{{ product.options.size }}"
-							data-product-option-position="{{ option.position }}"
-							data-is-color-option-value="{{ is_color_option }}"
-							data-product-option-value="{{ value }}"
-							{% if is_color_option %}
-							style="background:url({{ swatch_src_array[forloop.index0] }}) no-repeat center center; background-size: cover;"
-							{% endif %}
-							>{{ value }}</div>
+									{% assign value_unavailable = false %}
 
-							{% endfor %}
+									{% if options_length == 1 %}
+
+										{% for variant in product.variants %}
+											{% if variant.option1 == value and variant.available == false %}
+												{% assign value_unavailable = true %}
+												{% break %}
+											{% endif %}
+										{% endfor %}
+
+									{% endif %}
+
+									<div class="product-option-value product-quick-shop-option-value js-product-quick-shop-option-value{% if value == default_option1 or value == default_option2 or value == default_option3 %} active-value{% endif %}{% if value == default_color %} selected-value{% endif %}{% if value_unavailable %} unavailable-value{% endif %}"
+									data-product-options-size="{{ product.options.size }}"
+									data-product-option-position="{{ option.position }}"
+									data-is-color-option-value="{{ is_color_option }}"
+									data-product-option-value="{{ value }}"
+									data-add-to-cart-js-class="{{ product_add_to_cart_js_class }}"
+									data-back-in-stock-js-class="{{ product_back_in_stock_js_class }}"
+									{% if is_color_option %}
+									style="background:url({{ swatch_src_array[forloop.index0] }}) no-repeat center center; background-size: cover;"
+									{% endif %}
+									><span>{{ value }}</span></div>
+
+								{% endfor %}
+
+							</div>
+
 
 						</div>
 
+					{% endfor %}
 
 					</div>
 
-				{% endfor %}
-
-				</div>
-
 				{% endunless %}
 
-				<button {% if default_btn_disabled %}disabled{% endif %}
+
+				{% comment %}
+
+				Product Back In Stock Field
+
+				{% endcomment %}
+
+
+				<div class="product-back-in-stock-field product-quick-shop-back-in-stock-field{% unless has_only_default_variant and default_variant.available %} display-none{% endunless %}">
+					<input
+					type="email"
+					placeholder="Enter Your Email"
+					{% if customer %}value="{{ customer.email }}"{% endif %}
+					class="product-quick-shop-back-in-stock-email block-fullwidth">
+				</div>
+
+
+				{% comment %}
+
+				Product Button
+
+				{% endcomment %}
+
+
+				<button
 				type="button"
-				class="product-add-to-cart product-quick-shop-add-to-cart js-product-add-to-cart btn" 
+				class="product-add-to-cart product-shop-add-to-cart product-quick-shop-add-to-cart {{ default_btn_js_class }} btn btn-solid block-fullwidth"
+				{% if default_btn_disabled %}disabled{% endif %}
+				data-product-id="{{ product.id }}"
 				data-variant-id="{{ default_variant.id }}"
-				data-choose-size-btn-text="{{ choose_size_btn_text }}"
 				data-add-to-cart-btn-text="{{ add_to_cart_btn_text }}"
 				data-pre-order-btn-text="{{ pre_order_btn_text }}"
 				data-sold-out-btn-text="{{ sold_out_btn_text }}"

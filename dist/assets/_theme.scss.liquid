@@ -4513,9 +4513,43 @@ large-up-push-one-third
     Dropdown
 ========================================================================= */
 
+
+.dropdown {
+    position: relative;
+    &.open{
+        .dropdown-toggle {
+            
+        }
+
+        .dropdown-menu {
+            @include visible;
+        }
+    }
+}
+
+
+
 .dropdown-toggle{
     
     cursor: pointer;
+
+    &:after{
+
+        content: '';
+        //border: 1px solid red;
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        margin-left: 5px;
+        vertical-align: middle;
+
+        background-image: url("{{ 'icon_dropdown_arrow_black.svg' | asset_url }}");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 25px;
+
+    }
+
 }
 
 .dropdown-menu {
@@ -4524,16 +4558,6 @@ large-up-push-one-third
     @include invisible;
 }
 
-.dropdown {
-    position: relative;
-    &.open{
-        .dropdown-header {}
-
-        .dropdown-menu {
-            @include visible;
-        }
-    }
-}
 
 
 /* =========================================================================
@@ -6428,9 +6452,7 @@ $mini-car-image-width-mobile: 120px;
 
 
 
-
-
-.product-card-image{
+.product-card-image-group{
 	display: none;
 	&.active{
 		display: initial;
@@ -6439,20 +6461,9 @@ $mini-car-image-width-mobile: 120px;
 
 
 
-
-
-
-
-
-
-
-
-
-
 .product-card-canvas{
 
-	@include ratio(1/1.25);
-	font-size: 1.4rem;
+	@include ratio(1/1);
 }
 
 
@@ -6480,19 +6491,14 @@ $mini-car-image-width-mobile: 120px;
 }
 
 .product-card-details{
-	margin-top: 15px;
+
 }
 
 
-.product-card-label{
-	margin-bottom: 5px;
-}
 
 
 .product-card-title{
-	margin-bottom: 5px;
 
-	font-size: 1.2rem;	
 
 }
 
@@ -6504,24 +6510,41 @@ $mini-car-image-width-mobile: 120px;
 
 
 
+.product-quick-shop-image-group{
+	display: none;
+	&.active{
+		display: initial;
+	}
+}
 
 
 .product-quick-shop-image{
-	&.active{
-		border: 1px solid green;
+
+	@include overlay(absolute);
+
+	background-repeat: no-repeat;
+	background-position: center top;
+	background-size: cover;
+
+
+	&:nth-child(2){
+		html.mod-no-mobile &{
+
+			@include transition();
+			&:hover{
+				opacity: 0;
+			}
+			
+		}
 	}
+
 }
 
 
 
 .product-option-value{
 
-
-
-	
-
 	cursor: pointer;
-
 
 	&:not(.selected-value):hover{
 		opacity: 0.5;
@@ -6530,17 +6553,35 @@ $mini-car-image-width-mobile: 120px;
 	&.active-value{
 		outline: 2px solid red;
 	}
+
 	&.selected-value{
 		border: 2px solid green;
-	}	
+	}
+
+	&.unavailable-value{
+		opacity: 0.2;
+	}
+
+
 }
 
 
+
+
+
+
+/* ========================================================================
+   Collection
+   ========================================================================= */
 
 
 .collection-empty-notice{
 
 }
+
+/* ========================================================================
+   Collection Refinement
+   ========================================================================= */
 
 
 $collection-refinement: (
@@ -6557,17 +6598,9 @@ $collection-refinement: (
 
 .collection-refinement{
 
+	@include clearfix;
+
 	border: 1px solid purple;
-}
-
-
-.collection-refinement-item{
-
-	float: left;
-
-	& + & {
-
-	}
 }
 
 .collection-refinement-pillar{
@@ -6577,31 +6610,69 @@ $collection-refinement: (
 
 }
 
+
+
 .collection-refinement-item{
+
+	float: left;
+
+	& + & {
+
+	}
 
 	.dropdown-toggle{
 
 		padding-left: list-get($collection-refinement,'toggle-padding-left');
 		padding-right: list-get($collection-refinement,'toggle-padding-right');
 		
-		cursor: pointer;
-
-		// background-image: url();
-		background-repeat: no-repeat;
-		background-position: 95% 50%;
-		background-size: 8px;
-
-		text-transform: capitalize;
-
-		@include transition();
+		span{
+			color: $color-grey;
+			// @include screen('small-down') {
+			// 	display: none !important;
+			// }
+		}
 
 	}
 
 	&.open {
 		.dropdown-toggle {
-			// background-image: url();
+
 		}
 	}
+
+
+	.dropdown-menu {
+
+		position: absolute;
+		top: list-get($collection-refinement,'height');
+		left: 0;
+
+		z-index: 1;
+
+		
+		padding-bottom: 15px;
+
+		background-color: #fff;
+
+		@include screen('small-down') {
+			width: 100px;
+		}
+
+		li {
+
+			padding: 8px list-get($collection-refinement,'toggle-padding-left');
+
+			&.active {
+				a {
+
+				}
+			}
+
+		}
+
+
+	}
+
 
 }
 
@@ -6611,6 +6682,10 @@ $collection-refinement: (
 
 	.dropdown-toggle{
 		border: 1px solid blue;
+	}
+	
+	.dropdown-menu{
+		width: 200px;
 	}
 
 }
@@ -6622,80 +6697,11 @@ $collection-refinement: (
 		border: 1px solid red;
 	}
 
-}
-
-
-.collection-refinement-item{
-
-	.dropdown-menu {
-
-		position: absolute;
-		top: list-get($collection-refinement,'height');
-		left: 0;
-		right: 0;
-		z-index: 1;
-
+	.dropdown-menu{
 		width: 200px;
-		padding: 15px 0;
-		border: 1px solid teal;
-
-		background-color: #fff;
-
-		// @include mq-lt(small) {
-		// 	width: 120px;
-		// }
-
-		li {
-
-			@include screen('medium-up') {
-
-				@include at-least(6, 'li') {
-					float: left;
-					width: 50%;
-				}
-
-				@include has-nth('n + 6', 'li') {
-					float: left;
-					width: 50%;
-				}
-
-			}
-
-
-			a {
-				display: block;
-				padding: 8px list-get($collection-refinement,'toggle-padding-left');
-				color: maroon;
-
-				html.mod-no-mobile & {
-					@include transition();
-
-					&:hover {
-						color: black;
-					}
-				}
-			}
-
-			&.active {
-				a {
-					color: blue;
-				}
-			}
-		}
 	}
 
 }
-
-
-.collection-filter-reset{
-	
-}
-
-.collection-filter-reset-link{
-	padding: 0 20px;
-	border: 1px solid green;
-}
-
 
 .collection-current-tag-list{
 	li{
@@ -6707,7 +6713,16 @@ $collection-refinement: (
 }
 
 .collection-current-tag{
-	padding: 0 10px;
+	padding: 0 5px;
+}
+
+.collection-filter-reset{
+	
+}
+
+.collection-filter-reset-link{
+	padding: 0 20px;
+	border: 1px solid green;
 }
 
 
@@ -6715,24 +6730,33 @@ $collection-refinement: (
 
 
 
-
+/* ========================================================================
+   Collection Grid
+   ========================================================================= */
 
 
 .collection-grid{
+	
+	margin: 0 (list-get($grid-gutter, 'normal') / -2);
+
+	@include screen('x-small-down') {
+		margin: 0 (list-get($grid-gutter, 'small') / -2);
+	}
 
 }
 
 
 .collection-grid-item{
-	
+
+	border: 1px solid black;
+
+	padding: 0 (list-get($grid-gutter, 'normal') / 2);
+	margin-bottom: list-get($grid-gutter, 'normal');
+	@include screen('x-small-down') {
+		padding: 0 (list-get($grid-gutter, 'small') / 2);
+		margin-bottom: list-get($grid-gutter, 'small');
+	}
 }
-
-
-
-
-
-
-
 
 
 
@@ -6747,28 +6771,6 @@ $collection-refinement: (
 .desktop-product-shop-slider{
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

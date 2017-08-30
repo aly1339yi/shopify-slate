@@ -1,10 +1,7 @@
 
-
 <div class="product-card">
 
 	<a href="{{ default_variant.url | within: collection }}" data-product-url="{{ product.url | within: collection }}" class="product-card-link">
-
-
 
 		{% if has_color_option %}
 
@@ -16,55 +13,47 @@
 			    
 			    {% if alt_handle != color_name and alt_handle != color_swatch_alt_handle %}
 
-				{% assign next_index = forloop.index0 | plus: 1 %}
-			    {% assign next_alt_handle = product.images[next_index].alt | downcase %}
-			    {% assign has_swap_image = false %}
-			    {% if next_alt_handle == alt_handle %}
-			    	{% assign has_swap_image = true %}	
-			    {% endif %}
-			    
-{% comment %}				<img src="{{ image.src | img_url: product_card_image_size, format: 'pjpg' }}" alt="{{ alt_handle }}"
-				class="product-card-image{% if has_swap_image %} js-product-image-swap{% endif %}{% if alt_handle == default_color %} active{% endif %}"
-				data-alt-handle="{{ alt_handle }}"
-				{% if has_swap_image %}data-swap-image-src="{{ product.images[next_index] | product_img_url: product_card_image_size, format: 'pjpg' }}"{% endif %}
-				>
-{% endcomment %}
+					{% assign next_index = forloop.index0 | plus: 1 %}
+				    {% assign next_alt_handle = product.images[next_index].alt | downcase %}
+				    {% assign has_swap_image = false %}
+				    {% if next_alt_handle == alt_handle %}
+				    	{% assign has_swap_image = true %}	
+				    {% endif %}
+				    
 
-				{%- capture image_src_0 -%}
-					{{- image.src | img_url: product_card_image_size, format: 'pjpg' -}}
-				{%- endcapture -%}
+					{%- capture image_src_0 -%}
+						{{- image.src | img_url: product_card_image_size, format: 'pjpg' -}}
+					{%- endcapture -%}
 
-				{% if has_swap_image > 1 %}
+					{% if has_swap_image %}
 
-				{%- capture image_src_1 -%}
-					{{- product.images[next_index] | img_url: product_card_image_size, format: 'pjpg' -}}
-				{%- endcapture -%}
+					{%- capture image_src_1 -%}
+						{{- product.images[next_index] | img_url: product_card_image_size, format: 'pjpg' -}}
+					{%- endcapture -%}
 
-				{% endif %}
+					{% endif %}
 
-				<div class="{% if alt_handle == default_color %} active{% endif %}">
+					<div class="product-card-image-group{% if alt_handle == default_color %} active{% endif %}" data-alt-handle="{{ alt_handle }}">
 
-					<div class="product-card-canvas" data-alt-handle="{{ alt_handle }}">
-						
-						{% if has_swap_image %}
-						<div class="product-card-image" style="background-image: url({{ image_src_1 }});"></div>
-						{% endif %}
-						<div class="product-card-image" style="background-image: url({{ image_src_0 }});"></div>
+						<div class="product-card-canvas">
+							
+							{% if has_swap_image %}
+							<div class="product-card-image" style="background-image: url({{ image_src_1 }});"></div>
+							{% endif %}
+							<div class="product-card-image" style="background-image: url({{ image_src_0 }});"></div>
+
+						</div>
 
 					</div>
 
-				</div>
 
-
-		  		{% assign color_name = alt_handle %}
+			  		{% assign color_name = alt_handle %}
 
 			  {% endif %}
 
 			{% endfor %}
 
 		{% else %}
-	
-
 
 			{% assign images_length = product.images | size %}
 
@@ -92,9 +81,6 @@
 
 
 		{% endif %}
-
-
-
 
 	</a>
 

@@ -3,9 +3,43 @@
     Dropdown
 ========================================================================= */
 
+
+.dropdown {
+    position: relative;
+    &.open{
+        .dropdown-toggle {
+            
+        }
+
+        .dropdown-menu {
+            @include visible;
+        }
+    }
+}
+
+
+
 .dropdown-toggle{
     
     cursor: pointer;
+
+    &:after{
+
+        content: '';
+        //border: 1px solid red;
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        margin-left: 5px;
+        vertical-align: middle;
+
+        background-image: url("{{ 'icon_dropdown_arrow_black.svg' | asset_url }}");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 25px;
+
+    }
+
 }
 
 .dropdown-menu {
@@ -14,16 +48,6 @@
     @include invisible;
 }
 
-.dropdown {
-    position: relative;
-    &.open{
-        .dropdown-header {}
-
-        .dropdown-menu {
-            @include visible;
-        }
-    }
-}
 
 
 /* =========================================================================

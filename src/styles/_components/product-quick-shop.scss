@@ -1,22 +1,39 @@
 
+.product-quick-shop-image-group{
+	display: none;
+	&.active{
+		display: initial;
+	}
+}
 
 
 .product-quick-shop-image{
-	&.active{
-		border: 1px solid green;
+
+	@include overlay(absolute);
+
+	background-repeat: no-repeat;
+	background-position: center top;
+	background-size: cover;
+
+
+	&:nth-child(2){
+		html.mod-no-mobile &{
+
+			@include transition();
+			&:hover{
+				opacity: 0;
+			}
+			
+		}
 	}
+
 }
 
 
 
 .product-option-value{
 
-
-
-	
-
 	cursor: pointer;
-
 
 	&:not(.selected-value):hover{
 		opacity: 0.5;
@@ -25,7 +42,16 @@
 	&.active-value{
 		outline: 2px solid red;
 	}
+
 	&.selected-value{
 		border: 2px solid green;
-	}	
+	}
+
+	&.unavailable-value{
+		opacity: 0.2;
+	}
+
+
 }
+
+

@@ -1,8 +1,6 @@
 
 
-
-
-.product-card-image{
+.product-card-image-group{
 	display: none;
 	&.active{
 		display: initial;
@@ -11,20 +9,9 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
 .product-card-canvas{
 
-	@include ratio(1/1.25);
-	font-size: 1.4rem;
+	@include ratio(1/1);
 }
 
 
@@ -52,19 +39,14 @@
 }
 
 .product-card-details{
-	margin-top: 15px;
+
 }
 
 
-.product-card-label{
-	margin-bottom: 5px;
-}
 
 
 .product-card-title{
-	margin-bottom: 5px;
 
-	font-size: 1.2rem;	
 
 }
 
