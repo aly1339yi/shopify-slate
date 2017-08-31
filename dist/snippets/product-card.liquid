@@ -10,12 +10,12 @@
 
 			{% for image in product.images %}
 
-			    {% assign alt_handle = image.alt | downcase %}
+			    {% assign alt_handle = image.alt %}
 			    
 			    {% if alt_handle != color_name and alt_handle != color_swatch_alt_handle %}
 
 					{% assign next_index = forloop.index0 | plus: 1 %}
-				    {% assign next_alt_handle = product.images[next_index].alt | downcase %}
+				    {% assign next_alt_handle = product.images[next_index].alt %}
 				    {% assign has_swap_image = false %}
 				    {% if next_alt_handle == alt_handle %}
 				    	{% assign has_swap_image = true %}	

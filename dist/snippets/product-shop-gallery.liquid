@@ -12,7 +12,7 @@
 	{% if has_color_option %}
 
 		{% for image in product.images %}
-		{% assign alt_handle = image.alt | downcase %}
+		{% assign alt_handle = image.alt %}
 		{% if alt_handle == default_color %}
 
 		<div class="product-shop-slide">
@@ -52,7 +52,7 @@
 	{% if has_color_option %}
 
 		{% for image in product.images %}
-		{% assign alt_handle = image.alt | downcase %}
+		{% assign alt_handle = image.alt %}
 		{% if alt_handle == default_color %}
 
 		<div class="product-shop-slide">
@@ -89,7 +89,7 @@
 	<div class="product-images-data display-none-imp">
 
 		{% for image in product.images %}
-		{% assign alt_handle = image.alt | downcase %}
+		{% assign alt_handle = image.alt %}
 		{% if alt_handle != color_swatch_alt_handle %}
 		
 		<div class="product-shop-slide" data-alt-handle="{{ alt_handle }}">

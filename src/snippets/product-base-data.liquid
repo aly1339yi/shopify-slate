@@ -146,7 +146,7 @@
 
     {% for image in product.images %}
 
-        {% assign alt_handle = image.alt | downcase %}
+        {% assign alt_handle = image.alt %}
 
         {% if alt_handle == color_swatch_alt_handle %}
         
@@ -177,7 +177,7 @@
 
     {% for image in product.images %}
 
-        {% assign alt_handle = image.alt | downcase %}
+        {% assign alt_handle = image.alt %}
 
         {% if alt_handle != color_name and color_name != blank %}          
 
