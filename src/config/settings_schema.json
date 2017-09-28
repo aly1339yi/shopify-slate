@@ -92,7 +92,7 @@
         "default": "Email Subscribe Popup Title"
       },
       {
-        "type": "richtext",
+        "type": "textarea",
         "id": "subscribe-pop-text",
         "label": "Text",
         "default": "Email Subscribe Popup Text"
@@ -142,7 +142,7 @@
           { "value": "pagination-style-scroll", "label": "Infinite Scroll"}
        ],
        "label": "Pagination Style",
-       "default":  "pagination-style-btn",
+       "default":  "pagination-style-btn"
       },
 
 
