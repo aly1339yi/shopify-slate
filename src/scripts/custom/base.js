@@ -130,9 +130,12 @@ $(document).on('click', '.js-body-scroll-to-element', function() {
 function setHeight100vh() {
     $('.height-100vh').height($(window).height());
 }
+
 if (!Modernizr.cssvhunit) {
+
     setHeight100vh();
-    $(window).resize($.debounce(250, setHeight100vh));
+
+    $(window).on('resize', _.debounce(setHeight100vh, 250, {'leading': false,'trailing': true}));
 }
 
  /* =========================================================================
@@ -363,22 +366,21 @@ $(document).on('click', '.js-pagination-load-more', function(event) {
 
 if ($('html.mod-no-mobile').length && $('.pagination-style-scroll').length) {
 
-    $(window).scroll($.throttle(250, function() {
+
+    $(window).on('scroll', _.throttle(function(){
 
         var limit = 3 * $(window).height();
-        if ($(document).height() - $('body').scrollTop() < limit) {
+        if ($(document).height() - $(window).scrollTop() < limit) {
             if(!paginationIsLoading){
                 paginationIsLoading = true;
                 $('.pagination-load-more').trigger('click');
             }
         }
 
-    }));
+    }, 250, {'leading': true,'trailing': true}));
+
 
 }
-
-
-
 
 
 
