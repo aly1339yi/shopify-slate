@@ -11,7 +11,7 @@
 // =require vendor/jquery.royalslider.min.js
 // =require vendor/owl.carousel.min.js
 // =require vendor/lodash.custom.min.js
-// =require vendor/jquery.cookie.js
+// =require vendor/js.cookie.js
 // =require vendor/jquery.fitvids.js
 // =require vendor/jquery.sticky-kit.min.js
 // =require vendor/tinysort.min.js

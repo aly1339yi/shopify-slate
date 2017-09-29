@@ -421,12 +421,11 @@ $(document).on('click', '.js-product-image-fullscreen', function() {
     Email Subscribe Popup
 ========================================================================= */
 
-if (!$.cookie('site_visited')) {
+
+
+if (!Cookies.get('site_visited')) {
     $('.subscribe-popup').fadeIn();
-    $.cookie('site_visited', 'true', {
-         expires: 7,
-         path: '/'
-    });
+    Cookies.set('site_visited', 'true', { expires: 7 });
 }
 
 
