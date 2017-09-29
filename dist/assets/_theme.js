@@ -4140,18 +4140,14 @@ if ($('.template-collection').length) {
     $(document).on('click', '.js-sort-cookie', function() {
         $this = $(this);
         sortKeyWord = $this.text();
-        $.cookie('collection_sort_keyword', sortKeyWord, {
-            expires: 7,
-            path: '/'
-        });
+        Cookies.set('collection_sort_keyword', 'sortKeyWord', { expires: 7 });
     });
 
-    var collectionSortKeyword = $.cookie('collection_sort_keyword');
+    var collectionSortKeyword = Cookies.get('collection_sort_keyword');
+
     if(collectionSortKeyword && $.urlParam('sort_by')){
         $('#sort-key-word').text(' (' + collectionSortKeyword + ')');
     }
-
-
 
 
 }
